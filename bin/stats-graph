@@ -1,0 +1,48 @@
+#!/bin/bash
+
+# Graphs from stats for eth0
+# from rrdtool db
+# 20160524/SDAA
+
+#set -x
+
+RRD=~/rrd/eth0.rrd
+RRDIMG=~/rrd
+WWWIMG=/var/www/html/images
+
+rrdtool graph ${RRDIMG}/rasp1-hour.png --start -3600 --width 600 \
+            DEF:inoctets=${RRD}:input:AVERAGE \
+	    DEF:outoctets=${RRD}:output:AVERAGE \
+	    VDEF:inputmax=inoctets,MAXIMUM \
+	    VDEF:inputavg=inoctets,AVERAGE \
+            VDEF:inputmin=inoctets,MINIMUM \
+	    VDEF:inputpct=inoctets,95,PERCENT \
+	    VDEF:outputmax=outoctets,MAXIMUM \
+	    VDEF:outputavg=outoctets,AVERAGE \
+	    VDEF:outputmin=outoctets,MINIMUM \
+	    VDEF:outputpct=outoctets,95,PERCENT \
+	    CDEF:inputbits=inoctets,8,* \
+	    CDEF:outputbits=outoctets,8,* \
+	    COMMENT:"             " \
+	    COMMENT:"Maximum      " \
+	    COMMENT:"Average      " \
+	    COMMENT:"Minimum      " \
+	    COMMENT:"95 percentile\l" \
+	    AREA:inputbits#00FF00:"In traffic" \
+	    GPRINT:inputmax:"%8.2lf%Sbps" \
+	    GPRINT:inputavg:"%8.2lf%Sbps" \
+	    GPRINT:inputmin:"%8.2lf%Sbps" \
+	    GPRINT:inputpct:"%8.2lf%Sbps\l" \
+	    LINE1:outputbits#0000FF:"Out traffic" \
+	    GPRINT:outputmax:"%8.2lf%Sbps" \
+	    GPRINT:outputavg:"%8.2lf%Sbps" \
+	    GPRINT:outputmin:"%8.2lf%Sbps" \
+	    GPRINT:outputpct:"%8.2lf%Sbps\l" >/dev/null
+			    
+rrdtool graph ${RRDIMG}/rasp1-day.png --start -86400 --width 400\
+            DEF:inoctets=${RRD}:input:AVERAGE \
+	    DEF:outoctets=${RRD}:output:AVERAGE \
+	    AREA:inoctets#00FF00:"In traffic " \
+	    LINE1:outoctets#0000FF:"Out traffic" >/dev/null
+
+sudo cp ${RRDIMG}/*.png ${WWWIMG}
