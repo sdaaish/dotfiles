@@ -1,0 +1,14 @@
+#!/in/bash
+
+# File for testing bash stuff
+# 20160525/SDAA
+
+usage(){
+	echo "Usage: $0 <param1> <param2>"
+	exit 1
+}
+
+if [ -z $1 ];then
+    usage
+
+fi

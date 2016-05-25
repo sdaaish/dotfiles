@@ -6,11 +6,25 @@
 
 #set -x
 
-RRD=~/rrd/eth0.rrd
+usage(){
+	echo "Usage: $0 <hostname> <interface>"
+	exit 1
+}
+
+if [ ${#*} != 2 ];then
+    usage
+fi
+
+HOST=$1
+INTERFACE=$2
+RRD=~/rrd/${HOST}-${INTERFACE}.rrd
 RRDIMG=~/rrd
 WWWIMG=/var/www/html/images
 
-rrdtool graph ${RRDIMG}/rasp1-hour.png --start -3600 --width 600 \
+if [ -f ${RRD} ];then
+    for arg in 1h 1d 1w 4w 1y
+    do
+	rrdtool graph ${RRDIMG}/${HOST}-${INTERFACE}-${arg}.png --start -${arg} --width 600 \
             DEF:inoctets=${RRD}:input:AVERAGE \
 	    DEF:outoctets=${RRD}:output:AVERAGE \
 	    VDEF:inputmax=inoctets,MAXIMUM \
@@ -38,11 +52,10 @@ rrdtool graph ${RRDIMG}/rasp1-hour.png --start -3600 --width 600 \
 	    GPRINT:outputavg:"%8.2lf%Sbps" \
 	    GPRINT:outputmin:"%8.2lf%Sbps" \
 	    GPRINT:outputpct:"%8.2lf%Sbps\l" >/dev/null
-			    
-rrdtool graph ${RRDIMG}/rasp1-day.png --start -86400 --width 400\
-            DEF:inoctets=${RRD}:input:AVERAGE \
-	    DEF:outoctets=${RRD}:output:AVERAGE \
-	    AREA:inoctets#00FF00:"In traffic " \
-	    LINE1:outoctets#0000FF:"Out traffic" >/dev/null
-
-sudo cp ${RRDIMG}/*.png ${WWWIMG}
+    done
+    # Copy the files to web
+    cp ${RRDIMG}/*.png ${WWWIMG}
+else
+    echo "File does not exist ${RRD}"
+    exit 2
+fi

@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# File for testing bash stuff
+# 20160525/SDAA
+
+usage(){
+	echo "Usage: $0 <param1> <param2>"
+	exit 1
+}
+
+if [ ${#*} != 2 ];then
+    usage
+fi
+
+myArray=(${*})
+echo "* ${*}"
+echo "# ${#*}"
+echo "#@ ${#@}"
+echo "myArray ${myArray[0]}"
+echo "\${0} ${0} \${1} ${1}"
+
+for i in ${myArray[@]};do
+    echo "In the loop $i"
+done
+    
+for i in ${*};do
+    echo "In the other loop $i"
+ done
+    

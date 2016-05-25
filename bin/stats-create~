@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Interface stats with rrdtool.
+# Updates the db. Run every 60 secs
+# 20160524/SDAA
+
+usage(){
+	echo "Usage: $0 <hostname> <interface>"
+	exit 1
+}
+
+if [ ${#*} != 2 ];then
+    usage
+fi
+
+HOST=$1
+INTERFACE=$2
+RRD=~/rrd/${HOST}-${INTERFACE}.rrd
+
+rrdtool create ~/tmp/eth0.rrd --step 60 \
+DS:input:DERIVE:120:0:125000000  \
+DS:output:DERIVE:120:0:125000000  \
+RRA:MIN:0:360:2880              \
+RRA:MIN:0:30:2880               \
+RRA:MIN:0:7:2880                \
+RRA:AVERAGE:0:360:2880          \
+RRA:AVERAGE:0:30:2880           \
+RRA:AVERAGE:0:7:2880            \
+RRA:AVERAGE:0:1:2880            \
+RRA:MAX:0:360:2880              \
+RRA:MAX:0:30:2880               \
+RRA:MAX:0:7:2880
