@@ -1,3 +1,11 @@
+# load shell dotfiles
+for file in ~/.bash_{exports,aliases,functions,private};do
+    if [ -r ${file};then
+	   source ${file}
+       fi
+done
+	 unset file
+	 
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
