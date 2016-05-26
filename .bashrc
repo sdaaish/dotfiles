@@ -1,6 +1,6 @@
 # load shell dotfiles
 for file in ~/.bash_{exports,aliases,functions,private};do
-    if [ -r ${file};then
+    if [ -r ${file} ];then
 	   source ${file}
        fi
 done
