@@ -16,8 +16,6 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  )
-(set-frame-height (selected-frame) 60)
-(set-frame-width (selected-frame) 120)
 (transient-mark-mode t)
 (show-paren-mode 1)
 (setq inhibit-splash-screen t)
