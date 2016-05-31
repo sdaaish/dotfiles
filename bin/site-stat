@@ -1,0 +1,39 @@
+#!/bin/bash
+
+#
+##@(#)$Id$
+#
+
+#set -x
+
+usage(){
+        echo "Usage: $0 <site-address>"
+        exit 1
+}
+
+if [ ${#*} != 1 ];then
+    usage
+fi
+
+SITE=$1
+TDIR=${SITE##*//}.$$
+TMPFILE=x.$$
+DATE=$(date '+%Y-%m-%d %H:%M:%S')
+
+#echo -e "\nLaddar hem ${SITE} ...\n"
+if [ -x /usr/bin/time ];then
+	/usr/bin/time --format="%E" wget -e robots=off -P ${TDIR} --quiet -p "${SITE}" 2>${TMPFILE}
+	TIME=$(<${TMPFILE})
+else
+	echo "The command \"time\" doesn't exist"
+	exit 2
+fi
+
+#echo -e -n "Storlek         : "
+SIZE=$(du -sh --apparent-size ${TDIR}| awk '{print $1}')
+echo -e "${DATE}\tDir-size: ${SIZE}\tDownload-time: ${TIME}"
+#ls -laR ${TDIR}
+
+## Cleanup
+#rm -rf ${TDIR}
+#rm -f ${TMPFILE}
