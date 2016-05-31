@@ -35,5 +35,5 @@ echo -e "${DATE}\tDir-size: ${SIZE}\tDownload-time: ${TIME}"
 #ls -laR ${TDIR}
 
 ## Cleanup
-#rm -rf ${TDIR}
-#rm -f ${TMPFILE}
+rm -rf ${TDIR}
+rm -f ${TMPFILE}
