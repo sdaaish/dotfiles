@@ -19,3 +19,6 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
+# Git stuff
+alias gts='git status -sb'
+

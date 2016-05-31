@@ -23,8 +23,8 @@
 (setq inhibit-splash-screen t)
 (setq-default line-spacing 1)       
 ;; language
-(set-input-mode t nil 'iso)
-(standard-display-8bit 160 255)
+;;(set-input-mode t nil 'iso)
+;;(standard-display-8bit 160 255)
 
 (autoload 'tidy-buffer "tidy" "Run Tidy HTML parser on current buffer" t)
 (autoload 'tidy-parse-config-file "tidy" "Parse the `tidy-config-file'" t)
