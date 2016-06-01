@@ -21,4 +21,6 @@ fi
 
 # Git stuff
 alias gts='git status -sb'
+alias ci='git commit'
+alias co='git checkout'
 
