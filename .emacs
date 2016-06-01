@@ -80,7 +80,7 @@
 
 ;;Package settings
 (setq package-check-signature nil)	;;Fix for marmalade repo
-(setq package-archives '(("org"		. "http://orgmode.org/elpa/"
-			  "gnu"		. "http://elpa.gnu.org/packages/")
+(setq package-archives '(("org"		. "http://orgmode.org/elpa/")
+			 ("gnu"		. "http://elpa.gnu.org/packages/")
 			 ("marmalade"	. "https://marmalade-repo.org/packages/")))
 
