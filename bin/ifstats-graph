@@ -28,14 +28,14 @@ if [ -f ${RRD} ];then
 	rrdtool graph ${RRDIMG}/${HOST}-${INTERFACE}-${arg}.png --start -${arg} --width 600 \
             DEF:inoctets=${RRD}:input:AVERAGE \
 	    DEF:outoctets=${RRD}:output:AVERAGE \
-	    VDEF:inputmax=inoctets,MAXIMUM \
-	    VDEF:inputavg=inoctets,AVERAGE \
-            VDEF:inputmin=inoctets,MINIMUM \
-	    VDEF:inputpct=inoctets,95,PERCENT \
-	    VDEF:outputmax=outoctets,MAXIMUM \
-	    VDEF:outputavg=outoctets,AVERAGE \
-	    VDEF:outputmin=outoctets,MINIMUM \
-	    VDEF:outputpct=outoctets,95,PERCENT \
+	    VDEF:inputmax=inputbits,MAXIMUM \
+	    VDEF:inputavg=inputbits,AVERAGE \
+            VDEF:inputmin=inputbits,MINIMUM \
+	    VDEF:inputpct=inputbits,95,PERCENT \
+	    VDEF:outputmax=outputbits,MAXIMUM \
+	    VDEF:outputavg=outputbits,AVERAGE \
+	    VDEF:outputmin=outputbits,MINIMUM \
+	    VDEF:outputpct=outputbits,95,PERCENT \
 	    CDEF:inputbits=inoctets,8,* \
 	    CDEF:outputbits=outoctets,8,* \
 	    COMMENT:"             " \
