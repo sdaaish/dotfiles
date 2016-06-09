@@ -28,6 +28,8 @@ if [ -f ${RRD} ];then
 	rrdtool graph ${RRDIMG}/${HOST}-${INTERFACE}-${arg}.png --start -${arg} --width 600 \
             DEF:inoctets=${RRD}:input:AVERAGE \
 	    DEF:outoctets=${RRD}:output:AVERAGE \
+	    CDEF:inputbits=inoctets,8,* \
+	    CDEF:outputbits=outoctets,8,* \
 	    VDEF:inputmax=inputbits,MAXIMUM \
 	    VDEF:inputavg=inputbits,AVERAGE \
             VDEF:inputmin=inputbits,MINIMUM \
@@ -36,14 +38,12 @@ if [ -f ${RRD} ];then
 	    VDEF:outputavg=outputbits,AVERAGE \
 	    VDEF:outputmin=outputbits,MINIMUM \
 	    VDEF:outputpct=outputbits,95,PERCENT \
-	    CDEF:inputbits=inoctets,8,* \
-	    CDEF:outputbits=outoctets,8,* \
-	    COMMENT:"             " \
+	    COMMENT:"               " \
 	    COMMENT:"Maximum      " \
 	    COMMENT:"Average      " \
-	    COMMENT:"Minimum      " \
+	    COMMENT:"Minimum     " \
 	    COMMENT:"95 percentile\l" \
-	    AREA:inputbits#00FF00:"In traffic" \
+	    AREA:inputbits#00FF00:"In traffic " \
 	    GPRINT:inputmax:"%8.2lf%Sbps" \
 	    GPRINT:inputavg:"%8.2lf%Sbps" \
 	    GPRINT:inputmin:"%8.2lf%Sbps" \

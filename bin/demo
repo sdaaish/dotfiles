@@ -26,4 +26,10 @@ done
 for i in ${*};do
     echo "In the other loop $i"
  done
-    
+
+#Test av select
+PS3="Svara på frågan: "
+select value in 1 2 3 4;do
+    [[ -n $value ]] && echo "You selected: ${value}" && break
+    echo "Select a number [1-4]."
+done

@@ -42,6 +42,9 @@
 ;;(set-input-mode t nil 'iso)
 ;;(standard-display-8bit 160 255)
 
+;;Themes
+(load-theme 'tango-dark)
+
 ;; Tidy settings
 (autoload 'tidy-buffer "tidy" "Run Tidy HTML parser on current buffer" t)
 (autoload 'tidy-parse-config-file "tidy" "Parse the `tidy-config-file'" t)
