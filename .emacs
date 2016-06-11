@@ -4,6 +4,14 @@
 ;;
 (message "Reading configuration file...")
 
+;;Package settings
+(setq package-check-signature nil)	;;Fix for marmalade repo
+(setq package-archives '(("org"		. "http://orgmode.org/elpa/")
+			 ("gnu"		. "https://elpa.gnu.org/packages/")
+                         ("melpa"       . "https://melpa.org/packages")
+			 ("marmalade"	. "https://marmalade-repo.org/packages/")))
+
+
 ;; Loads settings from this directory
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
@@ -80,10 +88,4 @@
 (require 'saveplace)
 (setq-default save-place t)
 (setq save-place-file (expand-file-name ".places" user-emacs-directory))
-
-;;Package settings
-(setq package-check-signature nil)	;;Fix for marmalade repo
-(setq package-archives '(("org"		. "http://orgmode.org/elpa/")
-			 ("gnu"		. "http://elpa.gnu.org/packages/")
-			 ("marmalade"	. "https://marmalade-repo.org/packages/")))
 
