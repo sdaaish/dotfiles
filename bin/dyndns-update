@@ -4,31 +4,33 @@
 # For tunnelbroker
 # From https://dns.he.net/
 
+#set -x
+
 # Read password and domain from ~/etc/dyndns.conf
-domain=
-password=
-<--
-http://[your domain name]:[your password]@dyn.dns.he.net/nic/update?hostname=[your domain name]
+conf() {
+    source $1
+    #echo "$domain $password"
+    ipv4=$(ifconfig eth0| awk  '/inet addr/{print $2}'|sed 's/addr://')
+    ipv6=$(ifconfig eth0| awk  '/inet6 addr/ && /Global/{print $3}'|sed 's/addr://'|sed 's/\/64//')
+}
 
-Autodetect my IPv4/IPv6 address:
-% curl -4 "http://${domain}:${password}@dyn.dns.he.net/nic/update?hostname=${domain}"
-% curl -6 "http://${domain}:${password}@dyn.dns.he.net/nic/update?hostname=${domain}"
+usage(){
+	echo "Usage: $0 <param1>"
+	exit 1
+}
 
-Specify my IPv4/IPv6 address:
-% curl "http://${domain}:${password}@dyn.dns.he.net/nic/update?hostname=${domain}&myip=192.168.0.1"
-% curl "http://${domain}:${password}@dyn.dns.he.net/nic/update?hostname=${domain}&myip=2001:db8:beef:cafe::1"
+if [ ${#*} != 1 ];then
+    usage
+else
+    conf $1
+fi
 
+#http://[your domain name]:[your password]@dyn.dns.he.net/nic/update?hostname=[your domain name]
+#Authentication and Updating using a POST
+#Update ipv4 address
+curl -k "https://dyn.dns.he.net/nic/update" -d "hostname=${domain}" -d "password=${password}" -d "myip=$ipv4"
 
-Here are a couple more examples that allow sending the password in the URL
-
-Note: The username is also the hostname. The password is sent using 'password='. This skips HTTP basic auth.
-
-Authentication and Updating using GET
-% curl "https://dyn.dns.he.net/nic/update?hostname=${domain}&password=${password}&myip=192.168.0.1"
-% curl "https://dyn.dns.he.net/nic/update?hostname=${domain}&password=${password}&myip=2001:db8:beef:cafe::1"
-
-Authentication and Updating using a POST
-% curl "https://dyn.dns.he.net/nic/update" -d "hostname=${domain}" -d "password=${password}" -d "myip=192.168.0.1"
-% curl "https://dyn.dns.he.net/nic/update" -d "hostname=${domain}" -d "password=${password}" -d "myip=2001:db8:beef:cafe::1"
-
--->
+#Update ipv6 address
+for addr6 in ${ipv6};do
+    curl -k "https://dyn.dns.he.net/nic/update" -d "hostname=${domain}" -d "password=${password}" -d "myip=$addr6"
+done
