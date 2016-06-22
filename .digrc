@@ -1,1 +1,9 @@
-@google-public-dns-a.google.com
+# Options for dig
++nostats
++nocomments
++nocmd
++noquestion
++recurse
+
+#@resolver1.opendns.com
+#@google-public-dns-a.google.com

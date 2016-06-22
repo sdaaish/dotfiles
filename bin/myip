@@ -1,0 +1,8 @@
+#!/bin/bash
+#
+## Check my ip through resolver
+#
+
+# Options for dig
+dig +nostats +nocomments +nocmd  +noquestion +recurse myip.opendns.com @resolver1.opendns.com ${*}
+
