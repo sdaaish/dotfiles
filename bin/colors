@@ -2,6 +2,10 @@
 
 #Show the different colors available
 
+#Just for show...
+i=0
+while ((( i < 10 )));do printf "This is i: $((++i)) and $i\n"; done
+
 echo -e "Foreground colors"
 for effect in 0 1;do
     for i in {30..37};do

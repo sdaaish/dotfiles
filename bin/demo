@@ -33,3 +33,9 @@ select value in 1 2 3 4;do
     [[ -n $value ]] && echo "You selected: ${value}" && break
     echo "Select a number [1-4]."
 done
+
+#Looping
+i=0
+while ((( i < 10 )));do
+    printf "This is i: ${i} $((i++)) and ${((++i))\n"
+done
