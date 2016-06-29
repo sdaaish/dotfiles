@@ -16,17 +16,17 @@ install : dot bin emacs
 dot :
 	@for file in $(DOT_FILES); do \
 	[ ! -h $(DESTDIR)/$${file} ] && ln -fs $(SRCDIR)/$${file} $(DESTDIR)/$${file} && \
-	echo "\033[32m$${file}\033[0m" || echo "\033[1;30m$${file}\033[0m"; done
+	printf "\033[32m$${file}\033[0m\n" || printf "\033[1;30m$${file}\033[0m\n"; done
 
 bin :	$(DESTDIR)/bin
 	@for file in $(BIN_FILES); do \
 	[ ! -h $(DESTDIR)/bin/$${file} ] && ln -fs $(SRCDIR)/bin/$${file} $(DESTDIR)/bin/$${file} && \
-	echo "\033[32mbin/$${file}\033[0m" || echo "\033[1;30mbin/$${file}\033[0m"; done
+	printf "\033[32mbin/$${file}\033[0m\n" || printf "\033[1;30mbin/$${file}\033[0m\n"; done
 
 emacs :	$(DESTDIR)/.emacs.d
 	@for file in $(EMACS_FILES); do [ ! -h $(DESTDIR)/.emacs.d/$${file} ] && \
 	ln -fs $(SRCDIR)/.emacs.d/$${file} $(DESTDIR)/.emacs.d/$${file} && \
-	echo "\033[32mbin/$${file}\033[0m" || echo "\033[1;30mbin/$${file}\033[0m"; done
+	printf "\033[32mbin/$${file}\033[0m\n" || printf "\033[1;30mbin/$${file}\033[0m\n"; done
 
 $(DESTDIR)/bin :
 	@mkdir -p $(DESTDIR)/bin
