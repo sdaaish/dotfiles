@@ -7,7 +7,7 @@
 #set -x
 
 usage(){
-        echo "Usage: $0 <site-address>"
+        printf "Usage: $0 <site-address>\n"
         exit 1
 }
 
@@ -20,18 +20,18 @@ TDIR=${SITE##*//}.$$
 TMPFILE=x.$$
 DATE=$(date '+%Y-%m-%d %H:%M:%S')
 
-#echo -e "\nLaddar hem ${SITE} ...\n"
+#printf -e "\nLaddar hem ${SITE} ...\n\n"
 if [ -x /usr/bin/time ];then
 	/usr/bin/time --format="%E" wget -e robots=off -P ${TDIR} --quiet -p "${SITE}" 2>${TMPFILE}
 	TIME=$(<${TMPFILE})
 else
-	echo "The command \"time\" doesn't exist"
+	printf "\033[31mThe command \"time\" doesn't exist\033[0m\n"
 	exit 2
 fi
 
-#echo -e -n "Storlek         : "
+#printf -e -n "Storlek         : \n"
 SIZE=$(du -sh --apparent-size ${TDIR}| awk '{print $1}')
-echo -e "${DATE}\tDir-size: ${SIZE}\tDownload-time: ${TIME}"
+printf -e "${DATE}\tDir-size: ${SIZE}\tDownload-time: ${TIME}\n"
 #ls -laR ${TDIR}
 
 ## Cleanup
