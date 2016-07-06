@@ -1,39 +1,15 @@
 #!/bin/bash
 
 #Show the different colors available
+# References:
+#http://misc.flogisoft.com/bash/tip_colors_and_formatting
+#http://www.ibm.com/developerworks/linux/library/l-tip-prompt/
 
 #Just for show...
-i=0
-while ((( i < 10 )));do printf "This is i: $((++i)) and $i\n"; done
+#i=0
+#while ((( i < 10 )));do printf "This is i: $((++i)) and $i\n"; done
 
-printf "Foreground colors\n"
-for effect in 0 1;do
-    for i in {30..37};do
-        printf "\033[$effect;${i}mNumber $effect;$i has this color\033[0m\n"
 
-    done
-done
-
-printf "\nBackground colors\n"
-for effect in 0 1;do
-    for i in {40..47};do
-      printf "\033[$effect;${i}mNumber $effect;$i has this color\033[0m\n"
-    done
-done
-
-printf "\nForeground extra colors\n"
-for effect in 0 1;do
-    for i in {90..97};do
-      printf "\033[$effect;${i}mNumber $effect;$i has this color\033[0m\n"
-    done
-done
-
-printf "\nBackground extra colors\n"
-for effect in 0 1;do
-    for i in {100..107};do
-      printf "\033[1;30;$effect;${i}mNumber $effect;$i has this color\033[0m\n"
-    done
-done
 
 printf "\nText effects\n"
 for i in 0 1 4 5 7 8;do
@@ -43,12 +19,26 @@ done
 printf "\nAll the colors\n"
 for fgclr in {30..37};do
     for bgclr in {40..47};do
-        printf "\033[${fgclr};${bgclr}mSome text with $fgclr;$bgclr\033[0m\n"
+        printf "\033[${fgclr};${bgclr}m Normal $fgclr;$bgclr  \033[0m"
     done
+    printf "\n"
+    for bgclr in {40..47};do
+        printf "\033[${fgclr};${bgclr};1m BOLD   $fgclr;$bgclr  \033[0m"
+    done
+    printf "\n"
 done
+#for fgclr in {90..97};do
+#    for bgclr in {100..107};do
+#        printf "\033[${fgclr};${bgclr}mSome text with $fgclr;$bgclr\033[0m\n"
+#    done
+#done
 for fgclr in {90..97};do
-    for bgclr in {100..107};do
-        printf "\033[${fgclr};${bgclr}mSome text with $fgclr;$bgclr\033[0m\n"
+    for effect in 0 1;do
+	for bgclr in {100..107};do
+            printf "\033[${effect};${fgclr};${bgclr}m Normal $effect;$fgclr;$bgclr \033[0m"
+        done
+	printf "\n"
     done
 done
+
 
