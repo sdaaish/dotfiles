@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Show the different colors available
+# References:
+# http://misc.flogisoft.com/bash/tip_colors_and_formatting
+# http://www.ibm.com/developerworks/linux/library/l-tip-prompt/
+
+# 20160707/SDAA
+
+#Background
+for bgclr in {40..47} 49 {100..107} ; do
+    #Foreground
+    for fgclr in {30..37} 39 {90..97} ; do
+	#Formatting
+	for effect in 0 1 2 4 5 7 ; do
+		#Print the result
+		printf "\e[${effect};${bgclr};${fgclr}m ^[${effect};${bgclr};${fgclr}m \e[0m"
+		done
+	printf "\n"
+	done
+done
+
+exit 0
+
