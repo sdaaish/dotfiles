@@ -6,6 +6,8 @@ alias llt='ls -ltra'
 alias llh='ls -lah'
 
 alias cd..='cd ..'
+alias ..='cd ..'
+alias ...='cd ../..'
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
