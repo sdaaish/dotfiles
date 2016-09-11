@@ -33,4 +33,5 @@ curl -k "https://dyn.dns.he.net/nic/update" -d "hostname=${domain}" -d "password
 #Update ipv6 address
 for addr6 in ${ipv6};do
     curl -k "https://dyn.dns.he.net/nic/update" -d "hostname=${domain}" -d "password=${password}" -d "myip=$addr6"
+    printf "\n"
 done
