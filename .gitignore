@@ -1,7 +1,8 @@
-# Editor temps #
+# Editor files #
 ################
 \#*\#
 *~
+.*~
 
 # Files #
 #########
@@ -29,12 +30,18 @@ TODO.txt
 *.rar
 *.tar
 *.zip
+*.tgz
 
 # Logs and databases #
 ######################
 *.log
 *.sql
 *.sqlite
+
+# Vagrant stuff #
+#################
+.vagrant/**
+private_key
 
 # OS generated files #
 ######################
