@@ -16,6 +16,7 @@ TODO.txt
 *.dll
 *.exe
 *.o
+*.a
 *.so
 
 # Packages #
