@@ -1,3 +1,4 @@
+
 export EDITOR=emacs
 
 # http://askubuntu.com/questions/466198/how-do-i-change-the-color-for-directories-with-ls-in-the-console
@@ -28,4 +29,3 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 if [ -d "$HOME/bin" ];then
     PATH="$HOME/bin:/sbin:/usr/sbin:$PATH"
 fi
-B
