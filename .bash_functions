@@ -2,7 +2,7 @@
 ## A place for all the functions
 #
 apc() {
-      apt-get search ${*}
+      apt-cache search ${*}
 }
 
 apd() {
