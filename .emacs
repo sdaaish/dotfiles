@@ -5,6 +5,17 @@
 (message "Reading configuration file...")
 
 ;;Package settings
+;; Marmalade cert issue
+;; From https://github.com/nicferrier/elmarmalade/issues/55
+;; Certificate pinning https://blogs.fsfe.org/jens.lechtenboerger/2014/03/23/certificate-pinning-for-gnu-emacs/
+(if (fboundp 'gnutls-available-p)
+    (fmakunbound 'gnutls-available-p))
+(setq tls-program '("gnutls-cli --tofu -p %p %h")
+      imap-ssl-program '("gnutls-cli --tofu -p %p %s")
+      smtpmail-stream-type 'starttls
+      starttls-extra-arguments '("--tofu")
+      )
+
 (setq package-check-signature nil)	;;Fix for marmalade repo
 (setq package-archives '(("org"		. "http://orgmode.org/elpa/")
 			 ("gnu"		. "https://elpa.gnu.org/packages/")
