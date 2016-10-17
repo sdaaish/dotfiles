@@ -1,6 +1,14 @@
 #
 ## A place for all the functions
 #
+apc() {
+      apt-get search ${*}
+}
+
+apd() {
+    sudo bash -c  "apt-get update ; apt-get upgrade"
+}
+      
 cx() {
      chmod a+x ${*}
      }
