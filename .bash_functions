@@ -2,7 +2,13 @@
 ## A place for all the functions
 #
 apc() {
-      apt-cache search ${*}
+      if [ ${#*} != 0 ]
+      then
+            apt-cache search ${*}
+      else
+	printf "Searches for available packages.\n"
+	printf "Usage: apc <1 or more args>\n"
+      fi
 }
 
 apd() {
@@ -28,4 +34,12 @@ man() {
           LESS_TERMCAP_ue=$(printf "\e[0m") \
           LESS_TERMCAP_us=$(printf "\e[1;31m") \
           man "$@"
+}
+
+src() {
+      . ~/.bashrc
+      }
+
+ssa() {
+      eval $(ssh-agent -s)
 }
