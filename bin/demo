@@ -3,6 +3,8 @@
 # File for testing bash stuff
 # 20160525/SDAA
 
+#set -x
+
 usage(){
 	echo "Usage: $0 <param1> <param2>"
 	exit 1
@@ -25,7 +27,7 @@ done
     
 for i in ${*};do
     echo "In the other loop $i"
- done
+done
 
 #Test av select
 PS3="Svara på frågan: "
@@ -37,5 +39,18 @@ done
 #Looping
 i=0
 while ((( i < 10 )));do
-    printf "This is i: ${i} $((i++)) and ${((++i))\n"
+    printf "This is i: Before \${i}=${i} \$((i++))=$((i++)) i=${i}\n \
+     and \$((++i))=$((++i)) after \${i}=${i}\n"
 done
+
+#
+## Read line by line
+tmpfile=$(mktemp tmp.XXXXX)
+printf "Line 1\nLine 2\nLine 3\n" > ${tmpfile}
+while IFS= read -r line
+    do
+            printf "${line}\n"
+    done < ${tmpfile}
+
+#Cleanup
+#rm -f ${tmpfile}
