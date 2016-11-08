@@ -12,7 +12,7 @@ apc() {
 }
 
 apd() {
-    sudo bash -c  "apt-get update ; apt-get upgrade"
+    sudo bash -c  "apt-get update ; apt-get upgrade -y"
 }
       
 cx() {
