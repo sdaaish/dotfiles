@@ -1,13 +1,14 @@
 #Alias file
 
 alias l='less'
-alias ll='ls -la'
-alias llt='ls -ltra'
+alias ll='ls -lAhG'
+alias llt='ls -ltrah'
 alias llh='ls -lah'
 
 alias cd..='cd ..'
 alias ..='cd ..'
 alias ...='cd ../..'
+alias cdh='cd /mnt/c/Users/Stig'
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
