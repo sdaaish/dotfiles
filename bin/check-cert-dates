@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Checks a servers certificate for expire-date
+# Inspiration from http://www.shellhacks.com/en/HowTo-Check-SSL-Certificate-Expiration-Date-from-the-Linux-Shell
+
+# 2016-12-13/SDAA
+
+server=$1
+
+# Subs
+usage(){
+        printf "Usage: $0 <site-address>\n"
+        exit 1
+}
+
+# main
+if [ ${#*} != 1 ];then
+	usage
+    else
+	openssl s_client -connect ${server}:443 </dev/null 2>/dev/null| openssl x509 -noout -dates
+fi
