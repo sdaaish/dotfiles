@@ -28,7 +28,7 @@ cvsloc() {
 }
 
 check-etckeeper() {
-    sudo -c "etckeeper unclean || etckeeper commit"
+    sudo bash -c "etckeeper unclean || etckeeper commit"
 }
 
 #
