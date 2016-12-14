@@ -2,44 +2,44 @@
 [Markdown cheat-sheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
 
 #### Testing and documenting stuff
-  *awk-demo
-  *demo
-  *
+  awk-demo
+  demo
+  
 ####Check for certificates
-  *check-cert-dates
-  *check-cert-expired
-  *
+  check-cert-dates
+  check-cert-expired
+  
 check-ip.sh
 check-rfc-172.16-12.sh
 check-ssh-algo
 
 #### Test colors
-  *colors
-  *colors-16
-  *colors-256
+  colors
+  colors-16
+  colors-256
 
 #### Update HE.NET ddns
-  *dyndns-update
+  dyndns-update
 
 #### Initial git configuration
-  *git-config
+  git-config
 
 #### Create stats for interfaces for RRD
-  *ifstats-create
-  *ifstats-graph
-  *ifstats-update
+  ifstats-create
+  ifstats-graph
+  ifstats-update
 
 #### Reverselookup subnet
-  *iplookup
+  iplookup
 
-  *myip
-  *myip-google
+  myip
+  myip-google
 
-  *README.md
+  README.md
 
 #### Check a sites 1-page performance
-  *site-stat
+  site-stat
 
 
-  *ssh-auths.sh
-  *ssh-check.sh
+  ssh-auths.sh
+  ssh-check.sh
