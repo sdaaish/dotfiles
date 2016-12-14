@@ -15,13 +15,22 @@ apd() {
     sudo bash -c  "apt-get update ; apt-get upgrade -y"
 }
       
+cdr() {
+      cd ~/repos
+}
+      
 cx() {
      chmod a+x ${*}
      }
 
 cvsloc() {
-         export CVSROOT=:fork:$HOME/cvsroot/CVSROOT
-         }
+    export CVSROOT=:fork:$HOME/cvsroot/CVSROOT
+}
+
+check-etckeeper() {
+    sudo -c "etckeeper unclean || etckeeper commit"
+}
+
 #
 ## From http://www.cyberciti.biz/faq/linux-unix-colored-man-pages-with-less-command/
 man() {
