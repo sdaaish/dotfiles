@@ -16,8 +16,8 @@ if [ ${#*} != 1 ];then
 fi
 
 SITE=$1
-TDIR=${SITE##*//}.$$
-TMPFILE=x.$$
+TDIR=$(mktemp -d X.XXXXXX)
+TMPFILE=$(mktemp x.XXXXXX)
 DATE=$(date '+%Y-%m-%d %H:%M:%S')
 
 #printf -e "\nLaddar hem ${SITE} ...\n\n"
@@ -29,9 +29,8 @@ else
 	exit 2
 fi
 
-#printf -e -n "Storlek         : \n"
 SIZE=$(du -sh --apparent-size ${TDIR}| awk '{print $1}')
-printf -e "${DATE}\tDir-size: ${SIZE}\tDownload-time: ${TIME}\n"
+printf "${DATE}\tDir-size: ${SIZE}\tDownload-time: ${TIME}\n"
 #ls -laR ${TDIR}
 
 ## Cleanup
