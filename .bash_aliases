@@ -1,10 +1,13 @@
-#Alias file
+#
+# Alias file
 
+# List alias
 alias l='less'
 alias ll='ls -lAhG'
 alias llt='ls -ltrah'
 alias llh='ls -lah'
 
+# Change dir
 alias cd..='cd ..'
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -23,8 +26,11 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # Git stuff
+alias ci='git commit'
+alias co='git checkout'
+alias gtd='git diff'
+alias gtr='git log --graph'
 alias gts='git status -sb'
 alias gtp='git push && git pull'
 alias ci='git commit'
 alias co='git checkout'
-
