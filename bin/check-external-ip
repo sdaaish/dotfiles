@@ -9,4 +9,5 @@ echo "IPify.org"
 curl -s https://api.ipify.org/?format=json| grep -i IP
 
 # Akamai
+printf "Akamai\n"
 curl -s http://whatismyip.akamai.com/
