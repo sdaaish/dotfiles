@@ -1,6 +1,8 @@
 #
-# Useful link: https://github.com/thomd/dotfiles/blob/master/.gitconfig
-#
+# Useful links:
+#       https://github.com/thomd/dotfiles/blob/master/.gitconfig
+#       https://github.com/jalcine/gitrc/blob/master/home/.gitconfig
+
 [push]
 	default = simple
 [core]
@@ -14,6 +16,7 @@
 	last = log -1 HEAD
 	unstage = reset HEAD --
 
+#
 # Include local or personal stuff from this file
 # ie.
  # [user]
@@ -22,3 +25,4 @@
 
 [include]
         path = ~/.gitconfig.local
+
