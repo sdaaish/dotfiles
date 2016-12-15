@@ -1,0 +1,24 @@
+#
+# Useful link: https://github.com/thomd/dotfiles/blob/master/.gitconfig
+#
+[push]
+	default = simple
+[core]
+	excludesfile = ~/.gitignore
+	editor = emacs
+[alias]
+	co = checkout
+	st = status
+	ci = commit
+	br = branch
+	last = log -1 HEAD
+	unstage = reset HEAD --
+
+# Include local or personal stuff from this file
+# ie.
+ # [user]
+ #	email = my@adress
+ #	name = My Name
+
+[include]
+        path = ~/.gitconfig.local
