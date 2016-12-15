@@ -1,5 +1,6 @@
 #
 ## Makefile that links stuff from repo to homedir
+## Example from https://github.com/thomd/dotfiles/blob/master/Makefile
 #
 ## 20160526/SDAA
 #
