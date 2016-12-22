@@ -6,7 +6,7 @@
 [push]
 	default = simple
 [core]
-	excludesfile = ~/.gitignore
+	excludesFile = /home/sdaa/.gitignore
 	editor = emacs
 [alias]
 	co = checkout
