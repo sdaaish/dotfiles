@@ -54,3 +54,9 @@ private_key
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Local OS stuff
+####################
+settings/
+.settings/
+etc/
