@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# Installs useful stuff via apt-get
+# 20161223/SDAA
+
+
+##
+dev() {
+    Do stuff
+}
+
+##
+main-menu(){
+	clear
+	printf '%s\n' "Install dev-stuff (1)"
+	printf '%s\n' "Install network-tools(2)"
+	printf '%s\n' "Install security-tools(3)"
+	printf '%s\n' "Press Q|q to exit"
+	printf '%s' "Select option (1-3): "
+	read answer
+	case ${answer} in
+	     1) lista=build-essentials git make python-pip html2text;;
+     	     2) lista=whois bind9-utils traceroute tcpdump hping3;;
+     	     3) lista=ufw sshguard;;
+     	     Q|q) exit;;
+     	     *) ;;
+	esac
+}
+
+##
+while true
+do
+     main-menu
+done
