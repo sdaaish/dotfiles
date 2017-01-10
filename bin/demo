@@ -52,5 +52,14 @@ while IFS= read -r line
             printf "${line}\n"
     done < ${tmpfile}
 
+#
+## Test variable settings
+for i in 1 2 3 4;do
+    config+=( "$i" )
+    printf '%s\n' "Var ${config}"
+    printf '%s\n' "Num ${config[@]}"
+done
+
+
 #Cleanup
 #rm -f ${tmpfile}
