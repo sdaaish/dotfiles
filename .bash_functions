@@ -45,6 +45,25 @@ man() {
           man "$@"
 }
 
+# Get Beta1 of BBK
+get-bbk() {
+	  #Set download URL's
+	  AMD='http://beta1.bredbandskollen.se/download/bbk_cli_linux_amd64'
+	  ARM='http://beta1.bredbandskollen.se/download/bbk_cli_linux_arm'
+
+	  if [[ $(uname -a|grep x86_64) ]]
+	  then
+		wget -O ~/bin/bbk ${AMD}
+	  elif [[ $(uname -a|grep armv7l) ]]
+	  then
+		wget -O ~/bin/bbk ${ARM}
+	  else
+	  	printf "No supported arch\n"
+	  fi
+
+	chmod a+x ~/bin/bbk
+}
+
 src() {
       . ~/.bashrc
       }
