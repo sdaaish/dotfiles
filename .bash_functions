@@ -14,11 +14,11 @@ apc() {
 apd() {
     sudo bash -c  "apt-get update ; apt-get upgrade -y"
 }
-      
+
 cdr() {
       cd ~/repos
 }
-      
+
 cx() {
      chmod a+x ${*}
      }
@@ -70,4 +70,9 @@ src() {
 
 ssa() {
       eval $(ssh-agent -s)
+}
+# Grep - green
+sc-services() {
+  export GREP_COLOR='1;32'
+  systemctl list-units --type=service | grep --color -E "active running|$"
 }
