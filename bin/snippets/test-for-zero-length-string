@@ -1,8 +1,12 @@
- #!/bin/bash
- # by Dennis Williamson
- # 2010-10-06, revised 2010-11-10
- # for http://stackoverflow.com/questions/3869072/test-for-non-zero-length-string-in-bash-n-var-or-var
- # designed to fit an 80 character terminal
+#!/bin/bash
+
+# Modified scrip, have added colors
+# 2017-01-27/SDAA
+
+# Original by Dennis Williamson
+# 2010-10-06, revised 2010-11-10
+# for http://stackoverflow.com/questions/3869072/test-for-non-zero-length-string-in-bash-n-var-or-var
+# designed to fit an 80 character terminal
 
  dw=5    # description column width
  w=6     # table column width
