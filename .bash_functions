@@ -64,6 +64,12 @@ get-bbk() {
 	chmod a+x ~/bin/bbk
 }
 
+# Base16 script to change lxss colors
+# from https://github.com/chriskempson/base16-shell
+get-base16() {
+	 git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell
+	 }
+	 
 src() {
       . ~/.bashrc
       }
