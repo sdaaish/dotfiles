@@ -77,8 +77,21 @@ src() {
 ssa() {
       eval $(ssh-agent -s)
 }
+
 # Grep - green
 sc-services() {
   export GREP_COLOR='1;32'
   systemctl list-units --type=service | grep --color -E "active running|$"
+}
+
+# Update repos
+update-repos(){
+    SRCDIR="${HOME}/repos"
+
+    # git repositories
+    for D in $(find $SRCDIR -type d -name '\.git'); do
+	git -C $(dirname $D) config --get remote.origin.url
+	git -C $(dirname $D) pull
+	echo
+    done
 }
