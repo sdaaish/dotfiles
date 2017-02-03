@@ -10,7 +10,9 @@
 	    do
 		if [ $(which iplookup) ]
 		then
-		    iplookup 172.$j.$i.1
+		    iplookup 10.$j.$i.1
+		else
+		    printf "iplookup not installed"
 		fi
 	    done
         done
