@@ -31,3 +31,12 @@ if [ -d "$HOME/bin" ];then
 fi
 
 export GOPATH=~/golang
+
+# Git stuff, from git-prompt and git-completion
+# https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh
+export GIT_PS1_SHOWDIRTYSTATE=true
+export GIT_PS1_SHOWSTASHSTATE=true
+export GIT_PS1_SHOWUNTRACKEDFILES=true
+export GIT_PS1_SHOWUPSTREAM=true
+export GIT_PS1_SHOWCOLORHINTS=true
+#export GIT_PS1_HIDE_IF_PWD_IGNORED
