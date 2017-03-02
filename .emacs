@@ -8,20 +8,21 @@
 ;; Marmalade cert issue
 ;; From https://github.com/nicferrier/elmarmalade/issues/55
 ;; Certificate pinning https://blogs.fsfe.org/jens.lechtenboerger/2014/03/23/certificate-pinning-for-gnu-emacs/
-(if (fboundp 'gnutls-available-p)
-    (fmakunbound 'gnutls-available-p))
-(setq tls-program '("gnutls-cli --tofu -p %p %h")
-      imap-ssl-program '("gnutls-cli --tofu -p %p %s")
-      smtpmail-stream-type 'starttls
-      starttls-extra-arguments '("--tofu")
-      )
+;;(if (fboundp 'gnutls-available-p)
+;;    (fmakunbound 'gnutls-available-p))
+;;(setq tls-program '("gnutls-cli --tofu -p %p %h")
+;;      imap-ssl-program '("gnutls-cli --tofu -p %p %s")
+;;      smtpmail-stream-type 'starttls
+;;      starttls-extra-arguments '("--tofu")
+;;      )
 
+(require 'package)
 (setq package-check-signature nil)	;;Fix for marmalade repo
 (setq package-archives '(("org"		. "http://orgmode.org/elpa/")
 			 ("gnu"		. "https://elpa.gnu.org/packages/")
-                         ("melpa"       . "https://melpa.org/packages")
-			 ("marmalade"	. "https://marmalade-repo.org/packages/")))
-
+                         ("melpa-stable"       . "https://stable.melpa.org/packages")
+                         ("melpa"       . "https://melpa.org/packages")))
+(package-initialize)
 
 ;; Loads settings from this directory
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
@@ -39,7 +40,9 @@
 ;;No beep
 (setq visible-bell t)
 
-;; Show numbers
+;; Customization
+(tool-bar-mode -1)
+(menu-bar-mode -1)
 (line-number-mode t)
 (column-number-mode t)
 (transient-mark-mode t)
