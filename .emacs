@@ -18,11 +18,17 @@
 
 (require 'package)
 (setq package-check-signature nil)	;;Fix for marmalade repo
-(setq package-archives '(("org"		. "http://orgmode.org/elpa/")
-			 ("gnu"		. "https://elpa.gnu.org/packages/")
-                         ("melpa-stable"       . "https://stable.melpa.org/packages")
-                         ("melpa"       . "https://melpa.org/packages")))
+(setq package-archives nil)
+(setq package-archives '(("org"			. "http://orgmode.org/elpa/")
+			 ("gnu" 		. "https://elpa.gnu.org/packages/")
+                         ("melpa-stable"        . "https://stable.melpa.org/packages")
+                         ("melpa"		. "https://melpa.org/packages")))
 (package-initialize)
+(unless (and (file-exists-p (concat user-emacs-directory "elpa/archives/gnu"))
+	     (file-exists-p (concat user-emacs-directory "elpa/archives/melpa"))
+	     (file-exists-p (concat user-emacs-directory "elpa/archives/melpa-stable"))
+	     (file-exists-p (concat user-emacs-directory "elpa/archives/org")))
+  (package-refresh-contents))
 
 ;; Loads settings from this directory
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
@@ -97,6 +103,11 @@
 
 ;; Make backups of files, even when they're in version control
 (setq vc-make-backup-files t)
+(setq version-control t
+      kept-new-versions 10
+      kept-old-versions 0
+      delete-old-versions t
+      backup-by-copying t)
 
 ;; Save point position between sessions
 (require 'saveplace)
