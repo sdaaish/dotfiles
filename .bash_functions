@@ -45,23 +45,32 @@ man() {
           man "$@"
 }
 
-# Get Beta1 of BBK
+# Get BBK
 get-bbk() {
 	  #Set download URL's
-	  AMD='http://beta1.bredbandskollen.se/download/bbk_cli_linux_amd64'
-	  ARM='http://beta1.bredbandskollen.se/download/bbk_cli_linux_arm'
-
+	  AMD=http://beta1.bredbandskollen.se/download/bbk-cli_0.3.8_amd64.deb
+	  ARM=http://beta1.bredbandskollen.se/download/bbk-cli_0.3.8_armhf.deb
+	  TMP=$(mktemp bbk.deb.XXXXX)
+	  
+	  #Check arch
 	  if [[ $(uname -a|grep x86_64) ]]
 	  then
-		wget -O ~/bin/bbk ${AMD}
+		wget -O ${TMP} ${AMD}
 	  elif [[ $(uname -a|grep armv7l) ]]
 	  then
-		wget -O ~/bin/bbk ${ARM}
+		wget -O ${TMP} ${ARM}
 	  else
 	  	printf "No supported arch\n"
+		exit 1
 	  fi
 
-	chmod a+x ~/bin/bbk
+	  #Install the file
+	  if [[ -f ${TMP} ]]
+	  then
+	      sudo dpkg -i ${TMP}
+	  fi
+	  
+	  rm -f ${TMP}
 }
 
 # Base16 script to change lxss colors
