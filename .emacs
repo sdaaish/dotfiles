@@ -17,7 +17,7 @@
 ;;      )
 
 (require 'package)
-(setq package-check-signature nil)	;;Fix for marmalade repo
+;;(setq package-check-signature nil)	;;Fix for marmalade repo
 (setq package-archives nil)
 (setq package-archives '(("org"			. "http://orgmode.org/elpa/")
 			 ("gnu" 		. "https://elpa.gnu.org/packages/")
@@ -104,8 +104,8 @@
 ;; Make backups of files, even when they're in version control
 (setq vc-make-backup-files t)
 (setq version-control t
-      kept-new-versions 10
-      kept-old-versions 0
+      kept-new-versions 6
+      kept-old-versions 2
       delete-old-versions t
       backup-by-copying t)
 
