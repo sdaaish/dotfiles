@@ -16,13 +16,18 @@
 ;;      starttls-extra-arguments '("--tofu")
 ;;      )
 
+(prefer-coding-system 'utf-8)
 (require 'package)
 ;;(setq package-check-signature nil)	;;Fix for marmalade repo
 (setq package-archives nil)
-(setq package-archives '(("org"			. "http://orgmode.org/elpa/")
-			 ("gnu" 		. "https://elpa.gnu.org/packages/")
-                         ("melpa-stable"        . "https://stable.melpa.org/packages")
-                         ("melpa"		. "https://melpa.org/packages")))
+(add-to-list 'package-archives
+	     '("melpa-stable"	. "https://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives
+	     '("melpa"	. "https://melpa.org/packages/") t)
+(add-to-list 'package-archives
+	     '("gnu"	. "https://elpa.gnu.org/packages/") t)
+(add-to-list 'package-archives
+	     '("org"	. "http://orgmode.org/elpa/") t)
 (package-initialize)
 (unless (and (file-exists-p (concat user-emacs-directory "elpa/archives/gnu"))
 	     (file-exists-p (concat user-emacs-directory "elpa/archives/melpa"))
