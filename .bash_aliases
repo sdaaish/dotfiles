@@ -34,3 +34,6 @@ alias gts='git status -sb'
 alias gtp='git push && git pull'
 alias ci='git commit'
 alias co='git checkout'
+
+# emacs support
+alias emd='emacs --debug-init'
