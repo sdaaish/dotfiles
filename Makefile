@@ -8,11 +8,10 @@ SRCDIR ?= $(PWD)
 DESTDIR ?= $(HOME)
 DOT_FILES = $(shell find $(SRCDIR) -maxdepth 1 -type f -name '.*' -not -name '*.sh' -not -name '.DS_Store' | sort | xargs -n1 basename)
 BIN_FILES = $(shell find $(SRCDIR)/bin -maxdepth 1 -type f -name '*' | sort | xargs -n1 basename)
-EMACS_FILES = $(shell find $(SRCDIR)/.emacs.d -maxdepth 1 -type f -name '*' | sort | xargs -n1 basename)
 
-.PHONY : install dot bin emacs
+.PHONY : install dot bin 
 
-install : dot bin emacs
+install : dot bin 
 
 dot :
 	@for file in $(DOT_FILES); do \
@@ -24,13 +23,6 @@ bin :	$(DESTDIR)/bin
 	[ ! -h $(DESTDIR)/bin/$${file} ] && ln -fs $(SRCDIR)/bin/$${file} $(DESTDIR)/bin/$${file} && \
 	printf "\033[32mbin/$${file}\033[0m\n" || printf "\033[1;30mbin/$${file}\033[0m\n"; done
 
-emacs :	$(DESTDIR)/.emacs.d
-	@for file in $(EMACS_FILES); do [ ! -h $(DESTDIR)/.emacs.d/$${file} ] && \
-	ln -fs $(SRCDIR)/.emacs.d/$${file} $(DESTDIR)/.emacs.d/$${file} && \
-	printf "\033[32mbin/$${file}\033[0m\n" || printf "\033[1;30mbin/$${file}\033[0m\n"; done
-
 $(DESTDIR)/bin :
 	@mkdir -p $(DESTDIR)/bin
 
-$(DESTDIR)/.emacs.d :
-	@mkdir -p $(DESTDIR)/.emacs.d
