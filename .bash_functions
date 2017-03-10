@@ -20,7 +20,7 @@ apdd() {
 }
 # Check for outdated packages
 apo() {
-    sudo bash -c "sudo ap-get update; \
+    sudo bash -c "sudo apt-get update; \
     	 apt-get dist-upgrade --dry-run| grep ^Inst|cut -d\" \" -f2"
 }
 
