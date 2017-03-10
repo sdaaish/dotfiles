@@ -10,9 +10,18 @@ apc() {
 	printf "Usage: apc <1 or more args>\n"
       fi
 }
-
+# Upgrade system
 apd() {
     sudo bash -c  "apt-get update ; apt-get upgrade -y"
+}
+#Do dist-upgrade
+apdd() {
+    sudo bash -c  "apt-get update ; apt-get dist-upgrade -y"
+}
+# Check for outdated packages
+apo() {
+    sudo bash -c "sudo ap-get update; \
+    	 apt-get dist-upgrade --dry-run| grep ^Inst|cut -d\" \" -f2"
 }
 
 cdr() {
