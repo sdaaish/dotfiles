@@ -69,8 +69,13 @@ get-bbk() {
 	  then
 	      sudo dpkg -i ${TMP}
 	  fi
-	  
 	  rm -f ${TMP}
+
+	  # remove old file if it exists
+	  if [[ -f ~/bin/bbk ]]
+	  then
+	  	  rm -f ~/bin/bbk
+	  fi
 }
 
 # Base16 script to change lxss colors
@@ -103,4 +108,43 @@ update-repos(){
 	git -C $(dirname $D) pull
 	echo
     done
+}
+
+#Install emacs.d, new version
+install-emacsd(){
+    #If there is a link to old emacs-repo-file, remove it. If there is a file, move it to old.
+    if [[ -L ~/.emacs ]]
+    then
+	rm -f ~/.emacs 2>/dev/null
+    fi
+    
+    if [[ -f ~/.emacs ]]
+    then
+	mv -f ~/.emacs ~/.emacs.old 2>/dev/null
+    fi
+    
+    #If there is an old emacs.d, copy stuff and delete it
+    if [[ -d ~/.emacs.d ]]
+    then
+	mkdir ~/.emacs.d 2>/dev/null
+	cp -a ~/.emacs.d ~/.emacs.d.old 2>/dev/null
+	rm -rf ~/.emacs.d  2>/dev/null
+    fi
+    #Clone emacs.d repo to local repo-dir
+    #Method to clone
+    if [[ $(grep git@github.com ~/.ssh/config) ]]
+    then
+	clone="git clone git@github.com:sdaaish/emacs.d.git emacs.d"
+    else
+	clone="git clone https://github.com/sdaaish/emacs.d.git"
+    fi
+    
+    if [[ -d ~/repos ]]
+    then
+	cd ~/repos
+    else
+	cd ~/repos
+    fi
+    ${clone}
+    ln -s ~/repos/emacs.d ~/.emacs.d
 }
