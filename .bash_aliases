@@ -37,6 +37,8 @@ alias co='git checkout'
 
 # emacs support
 alias emd='emacs --debug-init'
+alias emx='emacsclient $1'
+alias emd='emacs --daemon'
 
 # binary support
 alias bbk='bbk_cli'

@@ -59,35 +59,51 @@ man() {
 
 # Get BBK
 get-bbk() {
-	  #Set download URL's
-	  AMD=http://beta1.bredbandskollen.se/download/bbk-cli_0.3.8_amd64.deb
-	  ARM=http://beta1.bredbandskollen.se/download/bbk-cli_0.3.8_armhf.deb
-	  TMP=$(mktemp bbk.deb.XXXXX)
-	  
-	  #Check arch
-	  if [[ $(uname -a|grep x86_64) ]]
-	  then
-		wget -O ${TMP} ${AMD}
-	  elif [[ $(uname -a|grep armv7l) ]]
-	  then
-		wget -O ${TMP} ${ARM}
-	  else
-	  	printf "No supported arch\n"
-		exit 1
-	  fi
+    URL="https://support.bredbandskollen.se/support/solutions/articles/1000245679-bredbandskollen-f%C3%B6r-linux"
+    for file in $(curl -s $URL |
+	html2text|
+	sed '/http:.*\.deb/!d'|
+	sed 's/.*http:/http:/')
+    do
+	ARCH=$(uname -m)
+	if [[ $ARCH == x86_64 ]]
+	then
+	    echo $file|grep amd64
+	else
+	    echo $file|grep arm 
+	fi
 
-	  #Install the file
-	  if [[ -f ${TMP} ]]
-	  then
-	      sudo dpkg -i ${TMP}
-	  fi
-	  rm -f ${TMP}
+    done
 
-	  # remove old file if it exists
-	  if [[ -f ~/bin/bbk ]]
-	  then
-	  	  rm -f ~/bin/bbk
-	  fi
+    #Set download URL's
+    AMD=http://beta1.bredbandskollen.se/download/bbk-cli_0.3.8_amd64.deb
+    ARM=http://beta1.bredbandskollen.se/download/bbk-cli_0.3.8_armhf.deb
+    TMP=$(mktemp bbk.deb.XXXXX)
+    
+    #Check arch
+    if [[ $(uname -a|grep x86_64) ]]
+    then
+	wget -qO ${TMP} ${AMD}
+    elif [[ $(uname -a|grep armv7l) ]]
+    then
+	wget -qO ${TMP} ${ARM}
+    else
+	printf "No supported arch\n"
+	exit 1
+    fi
+
+    #Install the file
+    if [[ -f ${TMP} ]]
+    then
+	sudo dpkg -i ${TMP}
+    fi
+    rm -f ${TMP}
+
+    # remove old file if it exists
+    if [[ -f ~/bin/bbk ]]
+    then
+	rm -f ~/bin/bbk
+    fi
 }
 
 # Base16 script to change lxss colors
