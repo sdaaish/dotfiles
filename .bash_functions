@@ -184,9 +184,9 @@ install-emacsd(){
 }
 # Install basic stuff that are useful on virtual linux-machines
 lxss-install-basic(){
-    lista="git make bin-utils build-essential python3 python-pip \
-               emacs24-nox bind9-utils whois html2text dos2unix gnupg gnutls-bin \
-               sshguard cowsay lolcat locate"
+    lista="git make binutils build-essential python3 python-pip \
+               emacs24-nox bind9utils whois html2text dos2unix gnupg gnutls-bin \
+               sshguard cowsay lolcat locate tree etckeeper most screen ssmtp mpack ufw"
 
     sudo apt-get -y -q update
     for prg in ${lista}

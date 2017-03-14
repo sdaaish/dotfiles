@@ -19,9 +19,9 @@ main-menu(){
 	printf '%s' "Select option (1-3): "
 	read answer
 	case ${answer} in
-	     1) lista=build-essentials git make python-pip html2text;;
-     	     2) lista=whois bind9-utils traceroute tcpdump hping3;;
-     	     3) lista=ufw sshguard;;
+	     1) lista="build-essentials git make python-pip html2text";;
+     	     2) lista="whois bind9-utils traceroute tcpdump hping3";;
+     	     3) lista="ufw sshguard";;
      	     Q|q) exit;;
      	     *) ;;
 	esac
