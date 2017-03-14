@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 #
 ## A place for all the functions
 #
@@ -25,7 +27,8 @@ apo() {
 }
 
 cdr() {
-      cd ~/repos
+    cd ~/repos
+    ls -1
 }
 
 cx() {
@@ -96,6 +99,12 @@ get-base16() {
 src() {
       . ~/.bashrc
       }
+srca() {
+    cd ~/repos/dotfiles
+    git pull
+    make
+    . ~/.bashrc
+}
 
 ssa() {
       eval $(ssh-agent -s)
@@ -156,4 +165,18 @@ install-emacsd(){
     fi
     ${clone}
     ln -s ~/repos/emacs.d ~/.emacs.d
+}
+# Install basic stuff that are useful on virtual linux-machines
+lxss-install-basic(){
+    lista="git make bin-utils build-essential python3 python-pip \
+               emacs24-nox bind9-utils whois html2text dos2unix gnupg gnutls-bin \
+               sshguard cowsay lolcat locate"
+
+    sudo apt-get -y -q update
+    for prg in ${lista}
+    do
+        printf "Installing ${prg}\n"
+        sudo apt-get -y -q install ${prg}
+    done
+    sudo apt-get -y autoremove
 }
