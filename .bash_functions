@@ -197,7 +197,7 @@ lxss-install-basic(){
     sudo apt-get -y autoremove
 }
 # Install useful net-tools
-net-install-stuff()
+net-install-stuff(){
     lista="bind9utils whois sshguard screen tmux ssmtp mpack ufw nmap \
         iptraf ncat ngrep htop nload curl wget"
 
