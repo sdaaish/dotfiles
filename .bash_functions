@@ -196,3 +196,16 @@ lxss-install-basic(){
     done
     sudo apt-get -y autoremove
 }
+# Install useful net-tools
+net-install-stuff()
+    lista="bind9utils whois sshguard screen tmux ssmtp mpack ufw nmap \
+        iptraf ncat ngrep htop nload curl wget"
+
+    sudo apt-get -y -q update
+    for prg in ${lista}
+    do
+        printf "Installing ${prg}\n"
+        sudo apt-get -y -q install ${prg}
+    done
+    sudo apt-get -y autoremove
+}
