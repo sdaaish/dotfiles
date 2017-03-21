@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # load shell dotfiles
 for file in ~/.bash_{exports,aliases,functions,private,git-completion,git-prompt};do
     if [ -r ${file} ];then
