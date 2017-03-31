@@ -232,7 +232,7 @@ transfer() {
     # check arguments
     if [ $# -eq 0 ]; 
     then 
-        echo "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md"
+        printf "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md\n"
         return 1
     fi
 
@@ -270,7 +270,8 @@ transfer() {
    
     # cat output link
     cat $tmpfile
-
+    printf "\n"
+    
     # cleanup
     rm -f $tmpfile
 }
