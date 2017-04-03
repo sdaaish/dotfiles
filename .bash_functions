@@ -116,10 +116,11 @@ src() {
       . ~/.bashrc
       }
 srca() {
-    cd ~/repos/dotfiles
-    git pull
-    make
-    . ~/.bashrc
+    ( cd ~/repos/dotfiles pull
+      git pull
+      make
+      . ~/.bashrc
+    )
 }
 
 ssa() {
