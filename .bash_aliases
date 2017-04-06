@@ -36,7 +36,8 @@ alias gts='git status -sb'
 alias gtp='git push && git pull'
 
 # emacs support
-alias emd='emacs --debug-init'
+alias em='emacs --no-window-system $1'
+alias emdi='emacs --debug-init'
 alias emx='emacsclient $1'
 alias emd='emacs --daemon'
 

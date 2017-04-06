@@ -23,7 +23,11 @@ apdd() {
 # Check for outdated packages
 apo() {
     sudo bash -c "sudo apt-get update; \
-    	 apt-get dist-upgrade --dry-run| grep ^Inst|cut -d\" \" -f2"
+    	 apt-get dist-upgrade --dry-run| grep ^Inst|cut -d\" \" -f2| grep ."
+}
+# Reove unwanted stuff
+apr() {
+    sudo bash -c  "apt-get autoremove"
 }
 
 cdr() {
@@ -79,7 +83,7 @@ get-bbk() {
     AMD=http://beta1.bredbandskollen.se/download/bbk-cli_0.3.8_amd64.deb
     ARM=http://beta1.bredbandskollen.se/download/bbk-cli_0.3.8_armhf.deb
     TMP=$(mktemp bbk.deb.XXXXX)
-    
+
     #Check arch
     if [[ $(uname -a|grep x86_64) ]]
     then
@@ -116,11 +120,11 @@ src() {
       . ~/.bashrc
       }
 srca() {
-    ( cd ~/repos/dotfiles pull
-      git pull
-      make
-      . ~/.bashrc
-    )
+    printf "Udates ~/emacs.d and ~/dotfiles\n"
+    git -C ~/repos/dotfiles/ pull
+    git -C ~/repos/emacs.d/ pull
+    make -C ~/repos/dotfiles/
+    . ~/.bashrc
 }
 
 ssa() {
@@ -184,7 +188,7 @@ install-emacsd(){
     ln -s ~/repos/emacs.d ~/.emacs.d
 }
 # Install basic stuff that are useful on virtual linux-machines
-lxss-install-basic(){
+install-lxss-basic(){
     lista="git make binutils build-essential python3 python-pip \
                emacs24-nox bind9utils whois html2text dos2unix gnupg gnutls-bin \
                sshguard cowsay lolcat locate tree etckeeper most screen ssmtp mpack ufw"
@@ -198,7 +202,7 @@ lxss-install-basic(){
     sudo apt-get -y autoremove
 }
 # Install useful net-tools
-net-install-stuff(){
+install-net-stuff(){
     lista="bind9utils whois sshguard screen tmux ssmtp mpack ufw nmap \
         iptraf ncat ngrep htop nload curl wget"
 
@@ -210,6 +214,17 @@ net-install-stuff(){
     done
     sudo apt-get -y autoremove
 }
+# Install unnecessary stuff
+install-fun-stuff(){
+    lista="cowsay lolcat fortune sl"
+    for prg in $lista
+    do
+        printf "Installing ${prg}\n"
+        sudo apt-get install ${prg}
+    done
+    sudo apt-get -y autoremove
+}
+
 # Transfer files with https://transfer.sh
 transfer-vt(){
     # write to output to tmpfile because of progress bar
