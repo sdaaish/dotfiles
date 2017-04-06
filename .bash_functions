@@ -121,9 +121,9 @@ src() {
       }
 srca() {
     printf "Udates ~/emacs.d and ~/dotfiles\n"
-    git -C ~/repos/dotfiles/ pull
-    git -C ~/repos/emacs.d/ pull
-    make -C ~/repos/dotfiles/
+    printf "Pulling dotfiles: "; git -C ~/repos/dotfiles/ pull
+    printf "Pulling emacs.d: "; git -C ~/repos/emacs.d/ pull
+    (cd ~/repos/dotfiles/ && make)
     . ~/.bashrc
 }
 
