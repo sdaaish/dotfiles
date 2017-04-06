@@ -5,9 +5,11 @@
 
 # List alias
 alias l='less'
+alias la='ls -la'
 alias ll='ls -lAhG'
 alias llt='ls -ltrah'
 alias llh='ls -lah'
+alias lls='ls -lAhSrG'
 
 # Change dir
 alias cd..='cd ..'
