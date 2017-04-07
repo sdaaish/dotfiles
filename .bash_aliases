@@ -11,6 +11,9 @@ alias llt='ls -ltrah'
 alias llh='ls -lah'
 alias lls='ls -lAhSrG'
 
+# Stupid stuff
+alias sl='sl -ea'
+
 # Change dir
 alias cd..='cd ..'
 alias ..='cd ..'

@@ -216,7 +216,7 @@ install-net-stuff(){
 }
 # Install unnecessary stuff
 install-fun-stuff(){
-    lista="cowsay lolcat fortune sl"
+    lista="cowsay lolcat fortune fortunes-ubuntu-server fortunes-bofh-excuses sl"
     for prg in $lista
     do
         printf "Installing ${prg}\n"
