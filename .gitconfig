@@ -42,8 +42,9 @@
         short = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\"
         changelog = log --pretty=format:\" * %s\"
         shortnocolor = log --pretty= format:\"%h %cr %cn %s\"
-        ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cgreen\\ [%cn]%Creset" --decorate
-        ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cgreen\\ [%cn]%Creset" --decorate --numstat
+        ls = ls-files
+        lo = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cgreen\\ [%cn]%Creset" --decorate
+        lol = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cgreen\\ [%cn]%Creset" --decorate --numstat
         lnc = log --pretty=format:"%h\\ %s\\ [%cn]"
         lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cgreen\\ [%cn]%Creset" --decorate --date=short
         ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cgreen\\ [%cn]%Creset" --decorate --date=relative
