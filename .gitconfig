@@ -31,31 +31,32 @@
         linenumber = true
         
 [alias]
-        alias = "!git config --list | grep alias|cut -c 7-"
+	alias = "!git config --list | grep alias|cut -c 7-"
+	a = alias
 	co = checkout
 	st = status -sb
 	ci = commit
 	br = branch
 	last = log -1 HEAD
 	unstage = reset HEAD --
-        changes = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\" --name-status
-        short = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\"
-        changelog = log --pretty=format:\" * %s\"
-        shortnocolor = log --pretty= format:\"%h %cr %cn %s\"
-        ls = ls-files
-        lo = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cgreen\\ [%cn]%Creset" --decorate
-        lol = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cgreen\\ [%cn]%Creset" --decorate --numstat
-        lnc = log --pretty=format:"%h\\ %s\\ [%cn]"
-        lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cgreen\\ [%cn]%Creset" --decorate --date=short
-        ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cgreen\\ [%cn]%Creset" --decorate --date=relative
-        le = log --oneline --decorate
-        fl = log -u
-        lt = log --graph --oneline --decorate --all
-        dl = "!git ll -1"
-        dlc = diff --cached HEAD^
-        gr = grep -Ii
-        f = "!git ls-files | grep -i"
-        stl = stash list --pretty=format:'%C(blue)%gd %C(red)* %C(yellow)%s'
+	changes = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\" --name-status
+	short = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\"
+	changelog = log --pretty=format:\" * %s\"
+	shortnocolor = log --pretty= format:\"%h %cr %cn %s\"
+	ls = ls-files
+	lo = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cgreen\\ [%cn]%Creset" --decorate
+	lol = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cgreen\\ [%cn]%Creset" --decorate --numstat
+	lnc = log --pretty=format:"%h\\ %s\\ [%cn]"
+	lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cgreen\\ [%cn]%Creset" --decorate --date=short
+	ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cgreen\\ [%cn]%Creset" --decorate --date=relative
+	le = log --oneline --decorate
+	fl = log -u
+	lt = log --graph --oneline --decorate --all
+	dl = "!git ll -1"
+	dlc = diff --cached HEAD^
+	gr = grep -Ii
+	f = "!git ls-files | grep -i"
+	stl = stash list --pretty=format:'%C(blue)%gd %C(red)* %C(yellow)%s'
 #
 # Include local or personal stuff from this file
 # ie.
