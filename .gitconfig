@@ -10,25 +10,29 @@
 	excludesFile = ~/.gitignore
 	editor = emacs
 [color]
-        branch = true
-        diff = true
-        grep = true
-        pager = true
-        status = true
-        ui = always
+	branch = true
+	diff = true
+	grep = true
+	pager = true
+	status = true
+	ui = always
+	interactive = always
 
+[color "interactive"]
+	error = red bold
+	
 [color "branch"]
-        remote = red
-        current = green
-        upstream = yellow
+	remote = red
+	current = green
+	upstream = yellow
         
 [color "status"]
-       added = green
-       changed = yellow
-       untracked = red
+	added = green
+	changed = yellow
+	untracked = red
 
 [grep]
-        linenumber = true
+	linenumber = true
         
 [alias]
 	alias = "!git config --list | grep alias|cut -c 7-"
