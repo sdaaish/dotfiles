@@ -41,10 +41,12 @@ alias gts='git status -sb'
 alias gtp='git push && git pull'
 
 # emacs support
-alias em='emacs --no-window-system $1'
+alias em='emacsclient -t -n -a ""'
+alias ems='sudo emacsclient -t -n -a ""'
 alias emdi='emacs --debug-init'
-alias emx='emacsclient $1'
+alias emx='emacsclient -n -a ""'
 alias emd='emacs --daemon'
+alias emk='emacsclient --eval "(save-buffers-kill-emacs)"'
 
 # binary support
 alias bbk='bbk_cli'
