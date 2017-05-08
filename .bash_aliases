@@ -24,8 +24,8 @@ alias cdh='cd /mnt/c/Users/Stig'
 if [ -x /usr/bin/dircolors ]; then
     #test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
 
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
@@ -41,10 +41,10 @@ alias gts='git status -sb'
 alias gtp='git push && git pull'
 
 # emacs support
-alias em='emacsclient -t -n -a ""'
-alias ems='sudo emacsclient -t -n -a ""'
+alias em='emacsclient -t -a ""'
+alias ems='sudo emacsclient -t -a ""'
 alias emdi='emacs --debug-init'
-alias emx='emacsclient -n -a ""'
+alias emx='emacsclient -t -a ""'
 alias emd='emacs --daemon'
 alias emk='emacsclient --eval "(save-buffers-kill-emacs)"'
 
