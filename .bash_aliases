@@ -46,7 +46,7 @@ alias ems='sudo emacsclient -t -a ""'
 alias emdi='emacs --debug-init'
 alias emx='emacsclient -t -a ""'
 alias emd='emacs --daemon'
-alias emk='emacsclient --eval "(save-buffers-kill-emacs)"'
+alias emk='emacsclient --eval "(save-buffers-kill-emacs)" --no-wait'
 
 # binary support
 alias bbk='bbk_cli'
