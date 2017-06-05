@@ -126,9 +126,16 @@ srca() {
     (cd ~/repos/dotfiles/ && make)
     . ~/.bashrc
 }
-
+# Starts ssh-agent
 ssa() {
       eval $(ssh-agent -s)
+}
+# Add all local keys
+ssk() {
+    for key in $(ls ~/.ssh/*.pub)
+    do
+        ssh-add ${key%.pub}
+    done
 }
 
 # Grep - green
