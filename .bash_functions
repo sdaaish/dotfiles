@@ -244,6 +244,7 @@ install-powershell() {
         # Register the Microsoft Ubuntu repository
         curl https://packages.microsoft.com/config/ubuntu/14.04/prod.list | sudo tee /etc/apt/sources.list.d/microsoft.list
     elif [[ ${REL} == 16.04 ]]
+    then
         # Register the Microsoft Ubuntu repository
         curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list | sudo tee /etc/apt/sources.list.d/microsoft.list
     else
