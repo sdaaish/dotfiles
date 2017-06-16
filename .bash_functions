@@ -232,6 +232,33 @@ install-fun-stuff(){
     sudo apt-get -y autoremove
 }
 
+# Install Powershell
+install-powershell() {
+    REL=$(lsb_release -r| awk '{print $2}')
+
+    # Import the public repository GPG keys
+    curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+    
+    if [[ ${REL} == 14.04]]
+    then
+        # Register the Microsoft Ubuntu repository
+        curl https://packages.microsoft.com/config/ubuntu/14.04/prod.list | sudo tee /etc/apt/sources.list.d/microsoft.list
+    elif [[ ${REL} == 16.04 ]]
+    then
+        # Register the Microsoft Ubuntu repository
+        curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list | sudo tee /etc/apt/sources.list.d/microsoft.list
+    else
+        printf "No version to get ${REL}\n!"
+        exit 1
+    fi
+
+    # Update apt-get
+    sudo apt-get update
+
+    # Install PowerShell
+    sudo apt-get install -y powershell
+}
+
 # Transfer files with https://transfer.sh
 transfer-vt(){
     # write to output to tmpfile because of progress bar
