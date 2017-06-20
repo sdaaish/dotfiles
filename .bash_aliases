@@ -4,6 +4,7 @@
 # Alias file
 
 # List alias
+alias dmesg='dmesg -T --color=always| less -R'
 alias l='less'
 alias la='ls -la'
 alias ll='ls -lAhG'
