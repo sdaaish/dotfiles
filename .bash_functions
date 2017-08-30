@@ -161,39 +161,48 @@ install-emacsd(){
     #If there is a link to old emacs-repo-file, remove it. If there is a file, move it to old.
     if [[ -L ~/.emacs ]]
     then
-	rm -f ~/.emacs 2>/dev/null
+	      rm -f ~/.emacs 2>/dev/null
     fi
     
     if [[ -f ~/.emacs ]]
     then
-	mv -f ~/.emacs ~/.emacs.old 2>/dev/null
+	      mv -f ~/.emacs ~/.emacs.old 2>/dev/null
     fi
     
     #If there is an old emacs.d, copy stuff and delete it
     if [[ -d ~/.emacs.d ]]
     then
-	mkdir ~/.emacs.d 2>/dev/null
-	cp -a ~/.emacs.d ~/.emacs.d.old 2>/dev/null
-	rm -rf ~/.emacs.d  2>/dev/null
+	      mkdir ~/.emacs.d 2>/dev/null
+	      cp -a ~/.emacs.d ~/.emacs.d.old 2>/dev/null
+	      rm -rf ~/.emacs.d  2>/dev/null
     fi
+    
     #Clone emacs.d repo to local repo-dir
     #Method to clone
     if [[ $(grep git@github.com ~/.ssh/config) ]]
     then
-	clone="git clone git@github.com:sdaaish/emacs.d.git emacs.d"
+	      clone="git clone git@github.com:sdaaish/emacs.d.git emacs.d"
     else
-	clone="git clone https://github.com/sdaaish/emacs.d.git"
+	      clone="git clone https://github.com/sdaaish/emacs.d.git"
     fi
     
     if [[ -d ~/repos ]]
     then
-	cd ~/repos
+	      cd ~/repos
     else
-	cd ~/repos
+	      cd ~/repos
     fi
     ${clone}
     ln -s ~/repos/emacs.d ~/.emacs.d
 }
+
+# Install latest emacs version
+install-emacs-dev() {
+    sudo apt-add-repository ppa:ubuntu-elisp/ppa
+    sudo apt-get update
+    sudo apt-get install emacs-snapshot 
+}
+
 # Install basic stuff that are useful on virtual linux-machines
 install-lxss-basic(){
     lista="git make binutils build-essential python3 python-pip \
