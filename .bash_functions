@@ -268,6 +268,20 @@ install-powershell() {
     sudo apt-get install -y powershell
 }
 
+# Install jekyll on Windows bash. Use updated version.
+# From https://jekyllrb.com/docs/windows/
+install-jekyll () {
+    sudo apt-get update -y
+    sudo apt-get upgrade -y
+    sudo apt-get install gcc make
+    sudo apt-add-repository ppa:brightbox/ruby-ng
+    sudo apt-get update
+    sudo apt-get install ruby2.3 ruby2.3-dev build-essential
+    sudo gem update
+    sudo gem install jekyll bundler
+    jekyll -v
+}
+
 # Transfer files with https://transfer.sh
 transfer-vt(){
     # write to output to tmpfile because of progress bar
