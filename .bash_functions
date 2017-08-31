@@ -273,10 +273,10 @@ install-powershell() {
 install-jekyll () {
     sudo apt-get update -y
     sudo apt-get upgrade -y
-    sudo apt-get install gcc make
-    sudo apt-add-repository ppa:brightbox/ruby-ng
-    sudo apt-get update
-    sudo apt-get install ruby2.3 ruby2.3-dev build-essential
+    sudo apt-get install -y gcc make
+    sudo apt-add-repository -y ppa:brightbox/ruby-ng
+    sudo apt-get update -y
+    sudo apt-get install -y ruby2.3 ruby2.3-dev build-essential
     sudo gem update
     sudo gem install jekyll bundler
     jekyll -v
