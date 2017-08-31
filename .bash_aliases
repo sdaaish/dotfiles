@@ -51,3 +51,6 @@ alias emk='emacsclient --eval "(save-buffers-kill-emacs)" --no-wait'
 
 # binary support
 alias bbk='bbk_cli'
+
+# system stuff
+alias myver='lsb_release -a'
