@@ -42,7 +42,7 @@
         
 [alias]
 	alias = "!git config --list | grep alias|cut -c 7-"
-	a = alias
+	a = "!git alias"
 	co = checkout
 	st = status -sb
 	ci = commit
@@ -52,7 +52,7 @@
 	changes = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\" --name-status
 	short = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\"
 	changelog = log --pretty=format:\" * %s\"
-	shortnocolor = log --pretty= format:\"%h %cr %cn %s\"
+	shortnocolor = log --pretty=format:\"%h %cr %cn %s\"
 	ls = ls-files
 	lo = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cgreen\\ [%cn]%Creset" --decorate
 	lol = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cgreen\\ [%cn]%Creset" --decorate --numstat
@@ -62,11 +62,13 @@
 	le = log --oneline --decorate
 	fl = log -u
 	lt = log --graph --oneline --decorate --all
+	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
 	dl = "!git ll -1"
 	dlc = diff --cached HEAD^
 	gr = grep -Ii
 	f = "!git ls-files | grep -i"
 	stl = stash list --pretty=format:'%C(blue)%gd %C(red)* %C(yellow)%s'
+	ru = remote -v update
 #
 # Include local or personal stuff from this file
 # ie.
