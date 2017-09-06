@@ -157,7 +157,7 @@ update-repos(){
 }
 
 #Install emacs.d, new version
-install-emacsd(){
+install-emacs-d(){
     #If there is a link to old emacs-repo-file, remove it. If there is a file, move it to old.
     if [[ -L ~/.emacs ]]
     then
@@ -172,16 +172,15 @@ install-emacsd(){
     #If there is an old emacs.d, copy stuff and delete it
     if [[ -d ~/.emacs.d ]]
     then
-	      mkdir ~/.emacs.d 2>/dev/null
 	      cp -a ~/.emacs.d ~/.emacs.d.old 2>/dev/null
 	      rm -rf ~/.emacs.d  2>/dev/null
     fi
     
     #Clone emacs.d repo to local repo-dir
     #Method to clone
-    if [[ $(grep git@github.com ~/.ssh/config) ]]
+    if [[ $(grep git@github.com ~/.ssh/config 2>/dev/null) ]]
     then
-	      clone="git clone git@github.com:sdaaish/emacs.d.git emacs.d"
+	      clone="git clone git@github.com:sdaaish/emacs.d.git"
     else
 	      clone="git clone https://github.com/sdaaish/emacs.d.git"
     fi
@@ -190,6 +189,7 @@ install-emacsd(){
     then
 	      cd ~/repos
     else
+        mkdir ~/repos
 	      cd ~/repos
     fi
     ${clone}
