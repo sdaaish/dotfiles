@@ -17,6 +17,21 @@ usage(){
 	exit 1
 }
 
+# Lookup the names
+f_lookup() {
+    # First param is the domainname.
+    domainname=${1}
+    dnsrecords=($(dig "${domainname}" A +short))  # Add all records to an array.
+
+    # Print the domainname, and loop trough all values in the array.
+    printf "${domainname}"
+    for arg in ${dnsrecords[@]}
+    do
+        printf ",${arg%.}"     # Remove trailing dot from CNAMES
+    done
+    printf "\n"
+}
+
 #
 ## main
 #
@@ -31,38 +46,25 @@ fi
 # Check if filename exists
 if [ -f ${filename} ]
 then
-    # Create tempfile to preserve original.
+    # Create a tmp-file for modification.
     tmpfile=$(mktemp /tmp/domain.XXXXXX) || exit 3
     cp $filename $tmpfile
-    # Remove lines that starts with # and blank lines
+    # Remove lines that starts with # and blank lines.
     sed -i '/^#/d' ${tmpfile}
     sed -i '/^[[:space:]]*$/d' ${tmpfile}
 else
     printf "The file ${filename} does not exist\n"
     exit 2
 fi
-   
+
+# Loop trough the file for each domain
 for domain in $(<${tmpfile})
 do
-    # Put the results from dig into a array
-    records1=($(dig "${domain}" A +short))
-    records2=($(dig "www.${domain}" A +short))
-
-    # Print the domain name, and loop trough all values in the first array.
-    printf "${domain}"
-    for name in ${records1[@]}
+    # Do a lookup for both the domain and www.domain
+    for name in "${domain}" "www.${domain}"
     do
-        printf ",${name%.}"     # Remove trailing dot from CNAMES
+        f_lookup ${name}    # Call the function
     done
-    printf "\n"
-    
-    # Print the domain name, and loop trough all values in the second array.
-    printf "www.${domain%.}"
-    for name in ${records2[@]}
-    do
-        printf ",${name%.}"     # Remove trailing dot from CNAMES
-    done
-    printf "\n"
 done
 
 # Cleanup
