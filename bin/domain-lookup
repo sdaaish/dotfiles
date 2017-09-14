@@ -1,0 +1,69 @@
+#!/usr/bin/env bash
+
+# This file loops through all the domain-names in a file and returns the value of all the A-records and CNAMES as a comma-separated list.
+
+# The input file should look like this:
+## example.com
+## anotherexample.com
+## etc.
+
+# The script checks the values for both 'example.com' and 'www.example.com'.
+
+#set -x
+
+# Syntax checking
+usage(){
+	echo "Usage: $0 <filename>"
+	exit 1
+}
+
+#
+## main
+#
+
+# Must supply input filename
+if [ ${#*} != 1 ];then
+    usage
+else
+    filename=$1
+fi
+
+# Check if filename exists
+if [ -f ${filename} ]
+then
+    # Create tempfile to preserve original.
+    tmpfile=$(mktemp /tmp/domain.XXXXXX) || exit 3
+    cp $filename $tmpfile
+    # Remove lines that starts with # and blank lines
+    sed -i '/^#/d' ${tmpfile}
+    sed -i '/^[[:space:]]*$/d' ${tmpfile}
+else
+    printf "The file ${filename} does not exist\n"
+    exit 2
+fi
+   
+for domain in $(<${tmpfile})
+do
+    # Put the results from dig into a array
+    records1=($(dig "${domain}" A +short))
+    records2=($(dig "www.${domain}" A +short))
+
+    # Print the domain name, and loop trough all values in the first array.
+    printf "${domain}"
+    for name in ${records1[@]}
+    do
+        printf ",${name%.}"     # Remove trailing dot from CNAMES
+    done
+    printf "\n"
+    
+    # Print the domain name, and loop trough all values in the second array.
+    printf "www.${domain%.}"
+    for name in ${records2[@]}
+    do
+        printf ",${name%.}"     # Remove trailing dot from CNAMES
+    done
+    printf "\n"
+done
+
+# Cleanup
+rm -f ${tmpfile}
