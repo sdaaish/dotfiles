@@ -206,8 +206,8 @@ install-emacs-dev() {
 # Install basic stuff that are useful on virtual linux-machines
 install-lxss-basic(){
     lista="git make binutils build-essential python3 python-pip \
-               emacs24-nox bind9utils whois html2text dos2unix gnupg gnutls-bin \
-               sshguard cowsay lolcat locate tree etckeeper most screen ssmtp mpack ufw"
+               emacs25-nox html2text dos2unix gnupg gnutls-bin \
+               sshguard locate tree etckeeper most zsh apt-file"
 
     sudo apt-get -y -q update
     for prg in ${lista}
@@ -219,8 +219,8 @@ install-lxss-basic(){
 }
 # Install useful net-tools
 install-net-stuff(){
-    lista="bind9utils whois sshguard screen tmux ssmtp mpack ufw nmap \
-        iptraf ncat ngrep htop nload curl wget"
+    lista="dnsutils bind9-host bind9utils whois sshguard screen tmux ssmtp mpack ufw nmap \
+        iptraf ngrep htop nload curl wget telnet"
 
     sudo apt-get -y -q update
     for prg in ${lista}
