@@ -79,3 +79,5 @@
 [include]
         path = ~/.gitconfig.local
 
+[magit]
+	hideCampaign = true
