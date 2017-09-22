@@ -220,7 +220,7 @@ install-lxss-basic(){
 # Install useful net-tools
 install-net-stuff(){
     lista="dnsutils bind9-host bind9utils whois sshguard screen tmux ssmtp mpack ufw nmap \
-        iptraf ngrep htop nload curl wget telnet"
+        iptraf ngrep htop nload curl wget telnet mtr-tiny"
 
     sudo apt-get -y -q update
     for prg in ${lista}
