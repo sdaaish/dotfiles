@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+# From https://www.reddit.com/r/ProgrammerDadJokes/comments/6ebrdk/git_dad/
+joke=$(curl https://icanhazdadjoke.com/ 2> /dev/null || echo "Insert favorite dad joke")
+printf "$joke\n"
