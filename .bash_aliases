@@ -54,3 +54,6 @@ alias bbk='bbk_cli'
 
 # system stuff
 alias myver='lsb_release -a'
+
+# Other stuff
+alias kb='keybase'
