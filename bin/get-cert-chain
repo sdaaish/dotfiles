@@ -1,6 +1,9 @@
 #!/bin/bash
 
-# Grabs a certificate chain from a web-site
+# Grabs a certificate chain from a web-site.
+# Example usage: "get-cert-chain google.se| openssl verify"
+
+# Note: You might need to add CA-certs to your ca-certificate storage (/usr/share/ca-certificates) for this to work.
 
 server=$1
 port=$2
