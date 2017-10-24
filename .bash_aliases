@@ -57,3 +57,7 @@ alias myver='lsb_release -a'
 
 # Other stuff
 alias kb='keybase'
+
+# Certificate stuff
+alias ov="openssl verify"
+alias o5="openssl x509 -text -noout"
