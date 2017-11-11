@@ -46,6 +46,11 @@ cvsloc() {
 check-etckeeper() {
     sudo bash -c "etckeeper unclean || etckeeper commit"
 }
+check-speed() {
+    # Checks speed for IPv4 and IPv6
+    bbk --quiet
+    bbk --quiet --v6
+}
 
 #
 ## From http://www.cyberciti.biz/faq/linux-unix-colored-man-pages-with-less-command/
@@ -74,7 +79,7 @@ get-bbk() {
 	then
 	    echo $file|grep amd64
 	else
-	    echo $file|grep arm 
+	    echo $file|grep arm
 	fi
 
     done
@@ -115,7 +120,7 @@ get-bbk() {
 get-base16() {
 	 git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell
 	 }
-	 
+
 src() {
       . ~/.bashrc
       }
@@ -163,19 +168,19 @@ install-emacs-d(){
     then
 	      rm -f ~/.emacs 2>/dev/null
     fi
-    
+
     if [[ -f ~/.emacs ]]
     then
 	      mv -f ~/.emacs ~/.emacs.old 2>/dev/null
     fi
-    
+
     #If there is an old emacs.d, copy stuff and delete it
     if [[ -d ~/.emacs.d ]]
     then
 	      cp -a ~/.emacs.d ~/.emacs.d.old 2>/dev/null
 	      rm -rf ~/.emacs.d  2>/dev/null
     fi
-    
+
     #Clone emacs.d repo to local repo-dir
     #Method to clone
     if [[ $(grep git@github.com ~/.ssh/config 2>/dev/null) ]]
@@ -184,7 +189,7 @@ install-emacs-d(){
     else
 	      clone="git clone https://github.com/sdaaish/emacs.d.git"
     fi
-    
+
     if [[ -d ~/repos ]]
     then
 	      cd ~/repos
@@ -200,7 +205,7 @@ install-emacs-d(){
 install-emacs-dev() {
     sudo apt-add-repository ppa:ubuntu-elisp/ppa
     sudo apt-get update
-    sudo apt-get install emacs-snapshot 
+    sudo apt-get install emacs-snapshot
 }
 
 # Install basic stuff that are useful on virtual linux-machines
@@ -247,7 +252,7 @@ install-powershell() {
 
     # Import the public repository GPG keys
     curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
-    
+
     if [[ ${REL} == 14.04 ]]
     then
         # Register the Microsoft Ubuntu repository
@@ -294,7 +299,7 @@ transfer-vt(){
 # Defines transfer alias and provides easy command line file and folder sharing.
 # From https://gist.github.com/nl5887/a511f172d3fb3cd0e42d
 
-transfer() { 
+transfer() {
     # Check for curl
     curl --version 2>&1 > /dev/null
     if [ $? -ne 0 ]; then
@@ -303,28 +308,28 @@ transfer() {
     fi
 
     # check arguments
-    if [ $# -eq 0 ]; 
-    then 
+    if [ $# -eq 0 ];
+    then
         printf "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md\n"
         return 1
     fi
 
     # get temporarily filename, output is written to this file show progress can be showed
     tmpfile=$( mktemp -t transferXXXXX )
-    
+
     # upload stdin or file
     file=$1
 
-    if tty -s; 
-    then 
-        basefile=$(basename "$file" | sed -e 's/[^a-zA-Z0-9._-]/-/g') 
+    if tty -s;
+    then
+        basefile=$(basename "$file" | sed -e 's/[^a-zA-Z0-9._-]/-/g')
 
         if [ ! -e $file ];
         then
             echo "File $file doesn't exists."
             return 1
         fi
-        
+
         if [ -d $file ];
         then
             # zip directory and transfer
@@ -336,16 +341,15 @@ transfer() {
             # transfer file
             curl --progress-bar --upload-file "$file" "https://transfer.sh/$basefile" >> $tmpfile
         fi
-    else 
+    else
         # transfer pipe
         curl --progress-bar --upload-file "-" "https://transfer.sh/$file" >> $tmpfile
     fi
-   
+
     # cat output link
     cat $tmpfile
     printf "\n"
-    
+
     # cleanup
     rm -f $tmpfile
 }
-
