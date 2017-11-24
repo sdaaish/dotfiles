@@ -42,10 +42,10 @@ alias gts='git status -sb'
 alias gtp='git push && git pull'
 
 # emacs support
-alias em='emacsclient -c -a ""'
+alias em='emacsclient -t -a ""'
+alias emx='emacsclient -c -a "" 2>/dev/null'
 alias ems='sudo emacsclient -t -a ""'
 alias emdi='emacs --debug-init'
-alias emx='emacsclient -t -a ""'
 alias emd='emacs --daemon'
 alias emk='emacsclient --eval "(save-buffers-kill-emacs)" --no-wait'
 
