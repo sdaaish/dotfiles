@@ -121,6 +121,17 @@ get-base16() {
 	 git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell
 	 }
 
+# Commit all org-files
+oc() {
+    if [[ -d ~/Dropbox/emacs/org ]]
+    then
+        pushd ~/Dropbox/emacs/org
+        git add *.org *.org_archive
+        git commit -m "Comitting changes"
+        git push
+    fi
+}
+
 src() {
       . ~/.bashrc
       }
