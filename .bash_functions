@@ -331,6 +331,11 @@ function install-keybase {
     run_keybase    
 }
 
+# Install keybase-cli
+function install-keybase-cli {
+    go get github.com/keybase/client/go/keybase
+}
+
 # Transfer files with https://transfer.sh
 transfer-vt(){
     # write to output to tmpfile because of progress bar
