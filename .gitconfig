@@ -70,14 +70,16 @@
 	stl = stash list --pretty=format:'%C(blue)%gd %C(red)* %C(yellow)%s'
 	ru = remote -v update
 #
-# Include local or personal stuff from this file
-# ie.
- # [user]
- #	email = my@adress
- #	name = My Name
+# Include local or personal stuff from these files.
 
 [include]
-        path = ~/.gitconfig.local
+	path = ~/.gitconfig.local
+
+[includeIf "gitdir/i:~/repos/"]
+	path = ~/repos/git-personal/.gitconfig.private
+
+[includeIf "gitdir/i:~/work/"]
+	path = ~/repos/git-personal/.gitconfig.work
 
 [magit]
 	hideCampaign = true
