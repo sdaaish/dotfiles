@@ -172,6 +172,29 @@ update-repos(){
     done
 }
 
+# Check git remote
+function check-remotes() {
+    if [ $# -eq 1 ]
+    then
+        dir=$1
+    else
+        printf "You must specify an input directory.\n"
+        exit 1
+    fi
+
+    if [[ -d $dir ]]
+    then
+        for D in $(find $dir -type d -name '\.git')
+        do
+            printf "Checking directory: $(dirname $D)\n"
+            git -C $(dirname $D) remote -v
+        done
+    else
+        printf "Not a directory: $dir\n"
+        exit 2
+    fi
+}
+
 #Install emacs.d, new version
 install-emacs-d(){
     #If there is a link to old emacs-repo-file, remove it. If there is a file, move it to old.
