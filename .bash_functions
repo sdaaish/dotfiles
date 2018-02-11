@@ -242,6 +242,13 @@ install-emacs-dev() {
     sudo apt-get install emacs-snapshot
 }
 
+# Install latest stable git-version
+install-git-latest() {
+    sudo add-apt-repository --yes ppa:git-core/ppa
+    sudo apt-get update
+    sudo apt-get install git
+}
+
 # Install basic stuff that are useful on virtual linux-machines
 install-lxss-basic(){
     lista="git make binutils build-essential python3 python-pip \
