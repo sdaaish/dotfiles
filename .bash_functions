@@ -98,7 +98,7 @@ get-bbk() {
 	wget -qO ${TMP} ${ARM}
     else
 	printf "No supported arch\n"
-	exit 1
+	return 1
     fi
 
     #Install the file
@@ -310,7 +310,7 @@ install-powershell() {
         curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list | sudo tee /etc/apt/sources.list.d/microsoft.list
     else
         printf "No version to get, version=${REL}\n!"
-        exit 1
+        return 1
     fi
 
     # Update apt-get
