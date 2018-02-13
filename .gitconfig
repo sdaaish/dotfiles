@@ -3,12 +3,14 @@
 #       https://github.com/thomd/dotfiles/blob/master/.gitconfig
 #       https://github.com/jalcine/gitrc/blob/master/home/.gitconfig
 #       http://durdn.com/blog/2012/11/22/must-have-git-aliases-advanced-examples/
-
+	
 [push]
 	default = simple
+	
 [core]
 	excludesFile = ~/.gitignore
-	editor = emacs
+	editor = emacsclient -t -a=
+	
 [color]
 	branch = true
 	diff = true
