@@ -81,5 +81,8 @@
 [includeIf "gitdir/i:~/work/"]
 	path = ~/repos/git-personal/.gitconfig.work
 
+[includeIf "gitdir/i:~/dropbox/emacs/"]
+	path = ~/repos/git-personal/.gitconfig.private
+
 [magit]
 	hideCampaign = true
