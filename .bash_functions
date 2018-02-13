@@ -162,13 +162,19 @@ sc-services() {
 
 # Update repos
 update-repos(){
-    SRCDIR="${HOME}/repos"
+
+    if [ $# -eq 1 ]
+    then
+        dir=$1
+    else
+        dir=.
+    fi
 
     # git repositories
-    for D in $(find $SRCDIR -type d -name '\.git'); do
-	git -C $(dirname $D) config --get remote.origin.url
-	git -C $(dirname $D) pull
-	echo
+    for D in $(find $dir -type d -name '\.git'); do
+	      git -C $(dirname $D) config --get remote.origin.url
+	      git -C $(dirname $D) pull
+	      echo
     done
 }
 
@@ -179,7 +185,7 @@ function check-remotes() {
         dir=$1
     else
         printf "You must specify an input directory.\n"
-        exit 1
+        return 1
     fi
 
     if [[ -d $dir ]]
@@ -191,7 +197,7 @@ function check-remotes() {
         done
     else
         printf "Not a directory: $dir\n"
-        exit 2
+        return 2
     fi
 }
 
