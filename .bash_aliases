@@ -45,7 +45,7 @@ alias gtp='git push && git pull'
 alias em='emacsclient -t -a ""'
 alias ems='sudo emacsclient -t -a ""'
 alias emdi='emacs --debug-init'
-alias emd='emacs --daemon'
+alias emd='emacs --daemon &>~/tmp/emacs-daemon.log &'
 alias emk='emacsclient --eval "(save-buffers-kill-emacs)" --no-wait'
 
 # binary support

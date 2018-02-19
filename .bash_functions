@@ -421,9 +421,9 @@ transfer() {
 emx() {
     if [[ $# -eq 0 ]]
     then
-        emacsclient --alternate-editor "" --create-frame 1>/dev/null 2>&1 &
+        emacsclient --alternate-editor "" --create-frame &>~/tmp/emacs-client.log &
     else
-        emacsclient --alternate-editor "" "$*" 1>/dev/null 2>&1 &
+        emacsclient --alternate-editor "" "$*" &>~/tmp/emacs-clients.log &
     fi
 }
 
