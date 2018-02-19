@@ -43,7 +43,6 @@ alias gtp='git push && git pull'
 
 # emacs support
 alias em='emacsclient -t -a ""'
-alias emx='emacsclient -c -a "" 2>/dev/null'
 alias ems='sudo emacsclient -t -a ""'
 alias emdi='emacs --debug-init'
 alias emd='emacs --daemon'

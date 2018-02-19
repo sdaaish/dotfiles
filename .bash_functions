@@ -415,3 +415,15 @@ transfer() {
     # cleanup
     rm -f $tmpfile
 }
+
+# Start emacs client frame and emacs server if not already started.
+# Without options a new frame is created, with options an existing frame are used.
+emx() {
+    if [[ $# -eq 0 ]]
+    then
+        emacsclient --alternate-editor "" --create-frame 1>/dev/null 2>&1 &
+    else
+        emacsclient --alternate-editor "" "$*" 1>/dev/null 2>&1 &
+    fi
+}
+
