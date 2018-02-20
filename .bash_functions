@@ -27,7 +27,7 @@ apo() {
 }
 # Reove unwanted stuff
 apr() {
-    sudo bash -c  "apt-get autoremove"
+    sudo bash -c  "apt-get --yes autoremove"
 }
 
 cdr() {
@@ -252,7 +252,7 @@ install-emacs-dev() {
 install-git-latest() {
     sudo add-apt-repository --yes ppa:git-core/ppa
     sudo apt-get update
-    sudo apt-get install git
+    sudo apt-get --yes install git
 }
 
 # Install basic stuff that are useful on virtual linux-machines
