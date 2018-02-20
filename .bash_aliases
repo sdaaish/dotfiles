@@ -3,6 +3,9 @@
 #
 # Alias file
 
+# Remove old aliases
+unalias emx
+
 # List alias
 alias dmesg='dmesg -T --color=always| less -R'
 alias l='less'
