@@ -428,3 +428,11 @@ emx() {
     fi
 }
 
+# Fix SSH daemon on WSL
+fix-wsl-ssh() {
+    sshd_config=/etc/ssh/sshd_config
+    sed 's/^Port 22$/Port 22222/' $sshd_config
+    sed 's/^PermitRootLogin prohibit-password$/PermitRootLogin no/' $sshd_config
+    sed 's/^PasswordAuthentication yes$/PasswordAuthentication no/' $sshd_config
+}
+
