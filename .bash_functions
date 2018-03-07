@@ -436,3 +436,18 @@ fix-wsl-ssh() {
     sed 's/^PasswordAuthentication yes$/PasswordAuthentication no/' $sshd_config
 }
 
+# This sets up a branch for this host and pushes the etckeeper repo to remote server.
+# See https://serverfault.com/questions/28973/is-it-possible-to-use-etckeeper-with-a-single-shared-git-repository
+fix-etckeeper-repo() {
+    # The remote repo
+    myorigin=ssh://gitlocal/~/code/etckeeper
+
+    # Rename the master branch to the hostname of the system
+    sudo git -C /etc branch -m master $HOSTNAME
+    # Add the remote repo
+    sudo git -C /etc remote add origin ${myorigin}
+    # make a commit to be sure
+    sudo git -C /etc commit -m "Initial commit to specific branch"
+    # And push the master branch to the remote
+    sudo git -C /etc push -u origin master:$HOSTNAME
+}
