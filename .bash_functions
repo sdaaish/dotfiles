@@ -48,6 +48,7 @@ check-etckeeper() {
 }
 check-speed() {
     # Checks speed for IPv4 and IPv6
+    printf "Latency Download Upload Server\n"
     bbk --quiet
     bbk --quiet --v6
 }
