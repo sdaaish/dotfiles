@@ -301,18 +301,23 @@ install-powershell() {
     # Import the public repository GPG keys
     curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
 
-    if [[ ${REL} == 14.04 ]]
-    then
-        # Register the Microsoft Ubuntu repository
-        curl https://packages.microsoft.com/config/ubuntu/14.04/prod.list | sudo tee /etc/apt/sources.list.d/microsoft.list
-    elif [[ ${REL} == 16.04 ]]
-    then
-        # Register the Microsoft Ubuntu repository
-        curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list | sudo tee /etc/apt/sources.list.d/microsoft.list
-    else
-        printf "No version to get, version=${REL}\n!"
-        return 1
-    fi
+    # Add the correct repository from Microsoft based on Linux version
+    case ${REL} in
+        "14.04")
+            printf "Installing for 14.04\n"
+            curl https://packages.microsoft.com/config/ubuntu/14.04/prod.list | \
+                sudo tee /etc/apt/sources.list.d/microsoft.list;;
+        "16.04"|"18")
+            printf "Installing for 16.04\n"
+            curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list | \
+                sudo tee /etc/apt/sources.list.d/microsoft.list;;
+        "17.04")
+            printf "Installing for 17.04\n"
+            curl https://packages.microsoft.com/config/ubuntu/17.04/prod.list | \
+                sudo tee /etc/apt/sources.list.d/microsoft.list;;
+        *)      printf "No version to get, version=${REL}\n!"
+                return 1;;
+    esac
 
     # Update apt-get
     sudo apt-get update
