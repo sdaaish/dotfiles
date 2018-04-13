@@ -35,6 +35,11 @@ cdr() {
     ls -1
 }
 
+cdrw() {
+    cd ~/work
+    ls -1
+}
+
 cx() {
      chmod a+x ${*}
      }
