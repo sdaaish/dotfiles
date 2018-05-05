@@ -131,10 +131,10 @@ get-base16() {
 oc() {
     if [[ -d ~/Dropbox/emacs/org ]]
     then
-        date = $(date '+%Y%m%d-%H:%M:%S')
+        DATE=$(date '+%Y%m%d-%H:%M:%S')
         pushd ~/Dropbox/emacs/org
         git add *.org *.org_archive
-        git commit -m "Comitting changes $date"
+        git commit -m "Comitting changes $DATE"
         git push
     fi
 }
