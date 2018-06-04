@@ -276,9 +276,22 @@ install-lxss-basic(){
     done
     sudo apt-get -y autoremove
 }
+
+# Install domain-tools
+install-domain-tool(){
+    lista="dnsutils bind9-host bind9utils whois"
+    sudo apt-get -y -q update
+    for prg in ${lista}
+    do
+        printf "Installing ${prg}\n"
+        sudo apt-get -y -q install ${prg}
+    done
+    sudo apt-get -y autoremove
+}
+
 # Install useful net-tools
 install-net-stuff(){
-    lista="dnsutils bind9-host bind9utils whois sshguard screen tmux ssmtp mpack ufw nmap \
+    lista="sshguard screen tmux ssmtp mpack ufw nmap \
         iptraf ngrep htop nload curl wget telnet mtr-tiny"
 
     sudo apt-get -y -q update
