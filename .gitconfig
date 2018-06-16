@@ -71,6 +71,7 @@ gr = grep -Ii
 f = "!git ls-files | grep -i"
 stl = stash list --pretty=format:'%C(blue)%gd %C(red)* %C(yellow)%s'
 ru = remote -v update
+	nah = reset --hard	
 #
 # Include local or personal stuff from these files.
 
