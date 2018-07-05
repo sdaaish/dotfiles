@@ -90,5 +90,8 @@
 [includeIf "gitdir/i:~/vagrantdir/"]
 	path = ~/repos/git-personal/.gitconfig.private
 
+[includeIf "gitdir/i:~/.config/"]
+	path = ~/repos/git-personal/.gitconfig.private
+
 [magit]
 	hideCampaign = true
