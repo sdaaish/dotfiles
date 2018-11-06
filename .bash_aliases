@@ -63,3 +63,6 @@ alias kb='keybase'
 # Certificate stuff
 alias ov="openssl verify"
 alias o5="openssl x509 -text -noout"
+
+# Fonts
+alias install-fonts="sudo apt-get install fonts-powerline"
