@@ -39,6 +39,7 @@ fi
 # Git stuff
 alias ci='git commit'
 alias co='git checkout'
+alias gta='git alias'
 alias gtd='git diff'
 alias gtr='git log --graph'
 alias gts='git status -sb'
