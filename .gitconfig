@@ -10,6 +10,7 @@
 [core]
 	excludesFile = ~/.gitignore
 	editor = emacsclient -t -a=
+	autocrlf = input
 
 [color]
 	branch = true
