@@ -127,6 +127,20 @@ get-base16() {
 	 git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell
 	 }
 
+# Get powerline fonts
+get-powerline-fonts(){
+    if [[ -d ~/tmp]]
+    then
+        pushd ~/tmp
+        git clone https://github.com/powerline/fonts.git --depth=1 
+        cd fonts
+        ./install.sh
+        cd ..
+        rm -rf fonts
+        popd
+    fi
+}
+
 # Commit all org-files
 oc() {
     if [[ -d ~/Dropbox/emacs/org ]]
