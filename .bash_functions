@@ -129,7 +129,7 @@ get-base16() {
 
 # Get powerline fonts
 get-powerline-fonts(){
-    if [[ -d ~/tmp]]
+    if [[ -d ~/tmp ]]
     then
         pushd ~/tmp
         git clone https://github.com/powerline/fonts.git --depth=1 
