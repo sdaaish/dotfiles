@@ -329,28 +329,16 @@ install-fun-stuff(){
 
 # Install Powershell
 install-powershell() {
-    REL=$(lsb_release -r| awk '{print $2}')
+    ID=$(lsb_release -i -s)
+    REL=$(lsb_release -r -s)
 
     # Import the public repository GPG keys
+    printf "Adding Microsoft PPA\n"
     curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
 
-    # Add the correct repository from Microsoft based on Linux version
-    case ${REL} in
-        "14.04")
-            printf "Installing for 14.04\n"
-            curl https://packages.microsoft.com/config/ubuntu/14.04/prod.list | \
-                sudo tee /etc/apt/sources.list.d/microsoft.list;;
-        "16.04"|"18")
-            printf "Installing for 16.04\n"
-            curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list | \
-                sudo tee /etc/apt/sources.list.d/microsoft.list;;
-        "17.04")
-            printf "Installing for 17.04\n"
-            curl https://packages.microsoft.com/config/ubuntu/17.04/prod.list | \
-                sudo tee /etc/apt/sources.list.d/microsoft.list;;
-        *)      printf "No version to get, version=${REL}\n!"
-                return 1;;
-    esac
+    printf "Downloading powershell for ${ID} ${REL}\n"
+    curl https://packages.microsoft.com/config/${ID}/${REL}/prod.list | \
+        sudo tee /etc/apt/sources.list.d/microsoft.list;;
 
     # Update apt-get
     sudo apt-get update
