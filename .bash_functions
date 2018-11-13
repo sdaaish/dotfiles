@@ -362,7 +362,7 @@ install-jekyll () {
     }
 
 # Install keybase
-function install-keybase {
+function install-keybase-full {
     sudo apt-get update -y
     sudo apt-get upgrade -y
     curl -O https://prerelease.keybase.io/keybase_amd64.deb
