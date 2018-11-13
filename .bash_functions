@@ -338,7 +338,7 @@ install-powershell() {
 
     printf "Downloading powershell for ${ID} ${REL}\n"
     curl https://packages.microsoft.com/config/${ID}/${REL}/prod.list | \
-        sudo tee /etc/apt/sources.list.d/microsoft.list;;
+        sudo tee /etc/apt/sources.list.d/microsoft.list
 
     # Update apt-get
     sudo apt-get update
