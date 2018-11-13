@@ -127,7 +127,7 @@ oc() {
     then
         DATE=$(date '+%Y%m%d-%H:%M:%S')
         pushd ~/Dropbox/emacs/org
-        git add *.org *.org_archive
+        git add *.org *.org_archive archive/*.org*
         git commit -m "Comitting changes $DATE"
         git push
     fi
