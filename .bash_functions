@@ -263,7 +263,7 @@ install-emacs-d(){
 }
 
 # Install latest emacs version
-install-emacs-dev() {
+install-emacs-snapshot() {
     sudo apt-add-repository ppa:ubuntu-elisp/ppa
     sudo apt-get update
     sudo apt-get install emacs-snapshot
@@ -278,9 +278,9 @@ install-git-latest() {
 
 # Install basic stuff that are useful on virtual linux-machines
 install-lxss-basic(){
-    lista="git make binutils build-essential python3 python-pip \
-               emacs25-nox html2text dos2unix gnupg gnutls-bin \
-               sshguard locate tree etckeeper most zsh apt-file"
+    lista="git make binutils build-essential \
+               html2text dos2unix gnupg gnutls-bin \
+               locate tree etckeeper most zsh apt-file"
 
     sudo apt-get -y -q update
     for prg in ${lista}
