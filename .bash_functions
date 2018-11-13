@@ -54,8 +54,8 @@ check-etckeeper() {
 check-speed() {
     # Checks speed for IPv4 and IPv6
     printf "Latency Download Upload Server\n"
-    bbk --quiet
-    bbk --quiet --v6
+    ~/bin/bbk_cli --quiet
+    ~/bin/bbk_cli --quiet --v6
 }
 
 #
@@ -72,53 +72,33 @@ man() {
         man "$@"
 }
 
-# Get BBK
+# Get BBK from bredbandskollen
 get-bbk() {
-    URL="https://support.bredbandskollen.se/support/solutions/articles/1000245679-bredbandskollen-f%C3%B6r-linux"
-    for file in $(curl -s $URL |
-	                    html2text|
-	                    sed '/http:.*\.deb/!d'|
-	                    sed 's/.*http:/http:/')
-    do
-	      ARCH=$(uname -m)
-	      if [[ $ARCH == x86_64 ]]
-	      then
-	          echo $file|grep amd64
-	      else
-	          echo $file|grep arm
-	      fi
+    # Name for the file
+    binary=~/bin/bbk_cli
 
-    done
-
-    #Set download URL's
-    AMD=http://beta1.bredbandskollen.se/download/bbk-cli_0.3.8_amd64.deb
-    ARM=http://beta1.bredbandskollen.se/download/bbk-cli_0.3.8_armhf.deb
-    TMP=$(mktemp bbk.deb.XXXXX)
-
-    #Check arch
-    if [[ $(uname -a|grep x86_64) ]]
+    # Remove old file if it exists
+    if [[ -f $binary ]]
     then
-	      wget -qO ${TMP} ${AMD}
-    elif [[ $(uname -a|grep armv7l) ]]
+	      rm -f $binary
+    fi
+
+    # Get architecture
+	  ARCH=$(uname -m)
+	  if [[ $ARCH == x86_64 ]]
+	  then
+        AMD=https://frontend.bredbandskollen.se/download/bbk_cli_linux_amd64-1.0
+	      wget -qO ${binary} ${AMD}
+        chmod a+x ${binary}
+    elif [[ $ARCH == armv7l ]]
     then
-	      wget -qO ${TMP} ${ARM}
+        ARM=https://frontend.bredbandskollen.se/download/bbk_cli_linux_armhf-1.0
+	      wget -qO ${binary} ${ARM}
+        chmod a+x ${binary}
     else
 	      printf "No supported arch\n"
 	      return 1
-    fi
-
-    #Install the file
-    if [[ -f ${TMP} ]]
-    then
-	      sudo dpkg -i ${TMP}
-    fi
-    rm -f ${TMP}
-
-    # remove old file if it exists
-    if [[ -f ~/bin/bbk ]]
-    then
-	      rm -f ~/bin/bbk
-    fi
+	  fi
 }
 
 # Base16 script to change lxss colors
