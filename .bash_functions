@@ -4,13 +4,13 @@
 ## A place for all the functions
 #
 apc() {
-      if [ ${#*} != 0 ]
-      then
-            apt-cache search ${*}
-      else
-	printf "Searches for available packages.\n"
-	printf "Usage: apc <1 or more args>\n"
-      fi
+    if [ ${#*} != 0 ]
+    then
+        apt-cache search ${*}
+    else
+	      printf "Searches for available packages.\n"
+	      printf "Usage: apc <1 or more args>\n"
+    fi
 }
 # Upgrade system
 apd() {
@@ -41,8 +41,8 @@ cdrw() {
 }
 
 cx() {
-     chmod a+x ${*}
-     }
+    chmod a+x ${*}
+}
 
 cvsloc() {
     export CVSROOT=:fork:$HOME/cvsroot/CVSROOT
@@ -61,32 +61,32 @@ check-speed() {
 #
 ## From http://www.cyberciti.biz/faq/linux-unix-colored-man-pages-with-less-command/
 man() {
-      env \
-          LESS_TERMCAP_mb=$(printf "\e[1;35m") \
-          LESS_TERMCAP_md=$(printf "\e[1;33m") \
-          LESS_TERMCAP_me=$(printf "\e[0m") \
-          LESS_TERMCAP_se=$(printf "\e[0m") \
-          LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
-          LESS_TERMCAP_ue=$(printf "\e[0m") \
-          LESS_TERMCAP_us=$(printf "\e[1;31m") \
-          man "$@"
+    env \
+        LESS_TERMCAP_mb=$(printf "\e[1;35m") \
+        LESS_TERMCAP_md=$(printf "\e[1;33m") \
+        LESS_TERMCAP_me=$(printf "\e[0m") \
+        LESS_TERMCAP_se=$(printf "\e[0m") \
+        LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
+        LESS_TERMCAP_ue=$(printf "\e[0m") \
+        LESS_TERMCAP_us=$(printf "\e[1;31m") \
+        man "$@"
 }
 
 # Get BBK
 get-bbk() {
     URL="https://support.bredbandskollen.se/support/solutions/articles/1000245679-bredbandskollen-f%C3%B6r-linux"
     for file in $(curl -s $URL |
-	html2text|
-	sed '/http:.*\.deb/!d'|
-	sed 's/.*http:/http:/')
+	                    html2text|
+	                    sed '/http:.*\.deb/!d'|
+	                    sed 's/.*http:/http:/')
     do
-	ARCH=$(uname -m)
-	if [[ $ARCH == x86_64 ]]
-	then
-	    echo $file|grep amd64
-	else
-	    echo $file|grep arm
-	fi
+	      ARCH=$(uname -m)
+	      if [[ $ARCH == x86_64 ]]
+	      then
+	          echo $file|grep amd64
+	      else
+	          echo $file|grep arm
+	      fi
 
     done
 
@@ -98,34 +98,34 @@ get-bbk() {
     #Check arch
     if [[ $(uname -a|grep x86_64) ]]
     then
-	wget -qO ${TMP} ${AMD}
+	      wget -qO ${TMP} ${AMD}
     elif [[ $(uname -a|grep armv7l) ]]
     then
-	wget -qO ${TMP} ${ARM}
+	      wget -qO ${TMP} ${ARM}
     else
-	printf "No supported arch\n"
-	return 1
+	      printf "No supported arch\n"
+	      return 1
     fi
 
     #Install the file
     if [[ -f ${TMP} ]]
     then
-	sudo dpkg -i ${TMP}
+	      sudo dpkg -i ${TMP}
     fi
     rm -f ${TMP}
 
     # remove old file if it exists
     if [[ -f ~/bin/bbk ]]
     then
-	rm -f ~/bin/bbk
+	      rm -f ~/bin/bbk
     fi
 }
 
 # Base16 script to change lxss colors
 # from https://github.com/chriskempson/base16-shell
 get-base16() {
-	 git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell
-	 }
+	  git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell
+}
 
 # Get powerline fonts
 get-powerline-fonts(){
@@ -154,8 +154,8 @@ oc() {
 }
 
 src() {
-      . ~/.bashrc
-      }
+    . ~/.bashrc
+}
 srca() {
     printf "Udates ~/emacs.d and ~/dotfiles\n"
     printf "Pulling dotfiles: "; git -C ~/repos/dotfiles/ pull
@@ -165,7 +165,7 @@ srca() {
 }
 # Starts ssh-agent
 ssa() {
-      eval $(ssh-agent -s)
+    eval $(ssh-agent -s)
 }
 # Add all local keys
 ssk() {
@@ -177,8 +177,8 @@ ssk() {
 
 # Grep - green
 sc-services() {
-  export GREP_COLOR='1;32'
-  systemctl list-units --type=service | grep --color -E "active running|$"
+    export GREP_COLOR='1;32'
+    systemctl list-units --type=service | grep --color -E "active running|$"
 }
 
 # Update repos
@@ -350,16 +350,16 @@ install-powershell() {
 # Install jekyll on Windows bash. Use updated version.
 # From https://jekyllrb.com/docs/windows/
 install-jekyll () {
-        sudo apt-get update -y
-        sudo apt-get upgrade -y
-        sudo apt-get install -y gcc make
-        sudo apt-add-repository -y ppa:brightbox/ruby-ng
-        sudo apt-get update -y
-        sudo apt-get install -y ruby2.3 ruby2.3-dev build-essential
-        sudo gem update
-        sudo gem install jekyll bundler
-        jekyll -v
-    }
+    sudo apt-get update -y
+    sudo apt-get upgrade -y
+    sudo apt-get install -y gcc make
+    sudo apt-add-repository -y ppa:brightbox/ruby-ng
+    sudo apt-get update -y
+    sudo apt-get install -y ruby2.3 ruby2.3-dev build-essential
+    sudo gem update
+    sudo gem install jekyll bundler
+    jekyll -v
+}
 
 # Install keybase
 function install-keybase-full {
