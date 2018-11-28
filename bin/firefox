@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+/mnt/c/Program\ Files/Mozilla\ Firefox/firefox.exe $@
+
+exit 0
