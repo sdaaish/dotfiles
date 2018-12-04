@@ -4,13 +4,13 @@
 ## A place for all the functions
 #
 apc() {
-      if [ ${#*} != 0 ]
-      then
-            apt-cache search ${*}
-      else
-	printf "Searches for available packages.\n"
-	printf "Usage: apc <1 or more args>\n"
-      fi
+    if [ ${#*} != 0 ]
+    then
+        apt-cache search ${*}
+    else
+	      printf "Searches for available packages.\n"
+	      printf "Usage: apc <1 or more args>\n"
+    fi
 }
 # Upgrade system
 apd() {
@@ -41,8 +41,8 @@ cdrw() {
 }
 
 cx() {
-     chmod a+x ${*}
-     }
+    chmod a+x ${*}
+}
 
 cvsloc() {
     export CVSROOT=:fork:$HOME/cvsroot/CVSROOT
@@ -54,78 +54,58 @@ check-etckeeper() {
 check-speed() {
     # Checks speed for IPv4 and IPv6
     printf "Latency Download Upload Server\n"
-    bbk --quiet
-    bbk --quiet --v6
+    ~/bin/bbk_cli --quiet
+    ~/bin/bbk_cli --quiet --v6
 }
 
 #
 ## From http://www.cyberciti.biz/faq/linux-unix-colored-man-pages-with-less-command/
 man() {
-      env \
-          LESS_TERMCAP_mb=$(printf "\e[1;35m") \
-          LESS_TERMCAP_md=$(printf "\e[1;33m") \
-          LESS_TERMCAP_me=$(printf "\e[0m") \
-          LESS_TERMCAP_se=$(printf "\e[0m") \
-          LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
-          LESS_TERMCAP_ue=$(printf "\e[0m") \
-          LESS_TERMCAP_us=$(printf "\e[1;31m") \
-          man "$@"
+    env \
+        LESS_TERMCAP_mb=$(printf "\e[1;35m") \
+        LESS_TERMCAP_md=$(printf "\e[1;33m") \
+        LESS_TERMCAP_me=$(printf "\e[0m") \
+        LESS_TERMCAP_se=$(printf "\e[0m") \
+        LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
+        LESS_TERMCAP_ue=$(printf "\e[0m") \
+        LESS_TERMCAP_us=$(printf "\e[1;31m") \
+        man "$@"
 }
 
-# Get BBK
+# Get BBK from bredbandskollen
 get-bbk() {
-    URL="https://support.bredbandskollen.se/support/solutions/articles/1000245679-bredbandskollen-f%C3%B6r-linux"
-    for file in $(curl -s $URL |
-	html2text|
-	sed '/http:.*\.deb/!d'|
-	sed 's/.*http:/http:/')
-    do
-	ARCH=$(uname -m)
-	if [[ $ARCH == x86_64 ]]
-	then
-	    echo $file|grep amd64
-	else
-	    echo $file|grep arm
-	fi
+    # Name for the file
+    binary=~/bin/bbk_cli
 
-    done
-
-    #Set download URL's
-    AMD=http://beta1.bredbandskollen.se/download/bbk-cli_0.3.8_amd64.deb
-    ARM=http://beta1.bredbandskollen.se/download/bbk-cli_0.3.8_armhf.deb
-    TMP=$(mktemp bbk.deb.XXXXX)
-
-    #Check arch
-    if [[ $(uname -a|grep x86_64) ]]
+    # Remove old file if it exists
+    if [[ -f $binary ]]
     then
-	wget -qO ${TMP} ${AMD}
-    elif [[ $(uname -a|grep armv7l) ]]
+	      rm -f $binary
+    fi
+
+    # Get architecture
+	  ARCH=$(uname -m)
+	  if [[ $ARCH == x86_64 ]]
+	  then
+        AMD=https://frontend.bredbandskollen.se/download/bbk_cli_linux_amd64-1.0
+	      wget -qO ${binary} ${AMD}
+        chmod a+x ${binary}
+    elif [[ $ARCH == armv7l ]]
     then
-	wget -qO ${TMP} ${ARM}
+        ARM=https://frontend.bredbandskollen.se/download/bbk_cli_linux_armhf-1.0
+	      wget -qO ${binary} ${ARM}
+        chmod a+x ${binary}
     else
-	printf "No supported arch\n"
-	return 1
-    fi
-
-    #Install the file
-    if [[ -f ${TMP} ]]
-    then
-	sudo dpkg -i ${TMP}
-    fi
-    rm -f ${TMP}
-
-    # remove old file if it exists
-    if [[ -f ~/bin/bbk ]]
-    then
-	rm -f ~/bin/bbk
-    fi
+	      printf "No supported arch\n"
+	      return 1
+	  fi
 }
 
 # Base16 script to change lxss colors
 # from https://github.com/chriskempson/base16-shell
 get-base16() {
-	 git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell
-	 }
+	  git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell
+}
 
 # Get powerline fonts
 get-powerline-fonts(){
@@ -147,15 +127,15 @@ oc() {
     then
         DATE=$(date '+%Y%m%d-%H:%M:%S')
         pushd ~/Dropbox/emacs/org
-        git add *.org *.org_archive
+        git add *.org *.org_archive archive/*.org*
         git commit -m "Comitting changes $DATE"
         git push
     fi
 }
 
 src() {
-      . ~/.bashrc
-      }
+    . ~/.bashrc
+}
 srca() {
     printf "Udates ~/emacs.d and ~/dotfiles\n"
     printf "Pulling dotfiles: "; git -C ~/repos/dotfiles/ pull
@@ -165,7 +145,7 @@ srca() {
 }
 # Starts ssh-agent
 ssa() {
-      eval $(ssh-agent -s)
+    eval $(ssh-agent -s)
 }
 # Add all local keys
 ssk() {
@@ -177,8 +157,8 @@ ssk() {
 
 # Grep - green
 sc-services() {
-  export GREP_COLOR='1;32'
-  systemctl list-units --type=service | grep --color -E "active running|$"
+    export GREP_COLOR='1;32'
+    systemctl list-units --type=service | grep --color -E "active running|$"
 }
 
 # Update repos
@@ -263,7 +243,7 @@ install-emacs-d(){
 }
 
 # Install latest emacs version
-install-emacs-dev() {
+install-emacs-snapshot() {
     sudo apt-add-repository ppa:ubuntu-elisp/ppa
     sudo apt-get update
     sudo apt-get install emacs-snapshot
@@ -278,9 +258,9 @@ install-git-latest() {
 
 # Install basic stuff that are useful on virtual linux-machines
 install-lxss-basic(){
-    lista="git make binutils build-essential python3 python-pip \
-               emacs25-nox html2text dos2unix gnupg gnutls-bin \
-               sshguard locate tree etckeeper most zsh apt-file"
+    lista="git make binutils build-essential \
+               html2text dos2unix gnupg gnutls-bin \
+               locate tree etckeeper most zsh apt-file"
 
     sudo apt-get -y -q update
     for prg in ${lista}
@@ -329,28 +309,16 @@ install-fun-stuff(){
 
 # Install Powershell
 install-powershell() {
-    REL=$(lsb_release -r| awk '{print $2}')
+    ID=$(lsb_release -i -s)
+    REL=$(lsb_release -r -s)
 
     # Import the public repository GPG keys
+    printf "Adding Microsoft PPA\n"
     curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
 
-    # Add the correct repository from Microsoft based on Linux version
-    case ${REL} in
-        "14.04")
-            printf "Installing for 14.04\n"
-            curl https://packages.microsoft.com/config/ubuntu/14.04/prod.list | \
-                sudo tee /etc/apt/sources.list.d/microsoft.list;;
-        "16.04"|"18")
-            printf "Installing for 16.04\n"
-            curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list | \
-                sudo tee /etc/apt/sources.list.d/microsoft.list;;
-        "17.04")
-            printf "Installing for 17.04\n"
-            curl https://packages.microsoft.com/config/ubuntu/17.04/prod.list | \
-                sudo tee /etc/apt/sources.list.d/microsoft.list;;
-        *)      printf "No version to get, version=${REL}\n!"
-                return 1;;
-    esac
+    printf "Downloading powershell for ${ID} ${REL}\n"
+    curl https://packages.microsoft.com/config/${ID}/${REL}/prod.list | \
+        sudo tee /etc/apt/sources.list.d/microsoft.list
 
     # Update apt-get
     sudo apt-get update
@@ -362,19 +330,19 @@ install-powershell() {
 # Install jekyll on Windows bash. Use updated version.
 # From https://jekyllrb.com/docs/windows/
 install-jekyll () {
-        sudo apt-get update -y
-        sudo apt-get upgrade -y
-        sudo apt-get install -y gcc make
-        sudo apt-add-repository -y ppa:brightbox/ruby-ng
-        sudo apt-get update -y
-        sudo apt-get install -y ruby2.3 ruby2.3-dev build-essential
-        sudo gem update
-        sudo gem install jekyll bundler
-        jekyll -v
-    }
+    sudo apt-get update -y
+    sudo apt-get upgrade -y
+    sudo apt-get install -y gcc make
+    sudo apt-add-repository -y ppa:brightbox/ruby-ng
+    sudo apt-get update -y
+    sudo apt-get install -y ruby2.3 ruby2.3-dev build-essential
+    sudo gem update
+    sudo gem install jekyll bundler
+    jekyll -v
+}
 
 # Install keybase
-function install-keybase {
+function install-keybase-full {
     sudo apt-get update -y
     sudo apt-get upgrade -y
     curl -O https://prerelease.keybase.io/keybase_amd64.deb
