@@ -309,7 +309,7 @@ install-fun-stuff(){
 
 # Install Powershell
 install-powershell() {
-    ID=$(lsb_release -i -s)
+    ID=$(lsb_release -i -s|tr [:upper:] [:lower:])
     REL=$(lsb_release -r -s)
 
     # Import the public repository GPG keys
