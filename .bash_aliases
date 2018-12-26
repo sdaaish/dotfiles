@@ -15,6 +15,8 @@ alias llt='ls -ltrah'
 alias llh='ls -lah'
 alias lls='ls -lAhSrG'
 
+alias rehash='hash -r'
+
 # Stupid stuff
 alias sl='sl -ea'
 
