@@ -8,10 +8,11 @@ SRCDIR ?= $(PWD)
 DESTDIR ?= $(HOME)
 DOT_FILES = $(shell find $(SRCDIR) -maxdepth 1 -type f -name '.*' -not -name '*.sh' -not -name '.DS_Store' | sort | xargs -n1 basename)
 BIN_FILES = $(shell find $(SRCDIR)/bin -maxdepth 1 -type f -name '*' | sort | xargs -n1 basename)
+GPG_FILES = $(shell find $(SRCDIR)/.gnupg -maxdepth 1 -type f -name '*.conf' | sort | xargs -n1 basename)
 
-.PHONY : install dot bin 
+.PHONY : install dot bin gpg
 
-install : dot bin 
+install : dot bin gpg
 
 dot :
 	@for file in $(DOT_FILES); do \
@@ -26,3 +27,10 @@ bin :	$(DESTDIR)/bin
 $(DESTDIR)/bin :
 	@mkdir -p $(DESTDIR)/bin
 
+gpg :	$(DESTDIR)/.gnupg
+	@for file in $(GPG_FILES); do \
+	[ ! -h $(DESTDIR)/.gnupg/$${file} ] && ln -fs $(SRCDIR)/.gnupg/$${file} $(DESTDIR)/.gnupg/$${file} && \
+	printf "\033[32m.gnupg/$${file}\033[0m\n" || printf "\033[1;30m.gnupg/$${file}\033[0m\n"; done
+
+$(DESTDIR)/.gnupg :
+	@mkdir -p $(DESTDIR)/.gnupg
