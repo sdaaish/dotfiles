@@ -356,6 +356,21 @@ function install-keybase-cli {
     go get github.com/keybase/client/go/keybase
 }
 
+# Install mail-tools for emacs
+install-mailtools() {
+    sudo apt update -y
+    sudo apt-get upgrade -y
+    sudo apt install -y ca-certificates msmtp msmtp-mta isync gcc clang
+    if [ -d ~/repos ]
+    then
+        mkdir -p ~/repos/github/notmuch
+        git clone https://git.notmuchmail.org/git/notmuch ~/repos/github/notmuch
+        cd ~/repos/github/notmuch
+        make
+        sudo make install
+    fi
+}
+
 # Transfer files with https://transfer.sh
 transfer-vt(){
     # write to output to tmpfile because of progress bar
