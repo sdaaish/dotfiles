@@ -358,9 +358,15 @@ function install-keybase-cli {
 
 # Install mail-tools for emacs
 install-mailtools() {
+    # Refresh
     sudo apt update -y
     sudo apt-get upgrade -y
-    sudo apt install -y ca-certificates msmtp msmtp-mta isync gcc clang
+
+    # Install mail-programs and dependencies to build notmuch
+    sudo apt install -y ca-certificates msmtp msmtp-mta isync gnutls-bin \
+         gcc clang make libgnutls28-dev \
+         libxapian-dev libgmime-2.6-dev libtalloc-dev zlib1g-dev
+
     if [ -d ~/repos ]
     then
         mkdir -p ~/repos/github/notmuch
