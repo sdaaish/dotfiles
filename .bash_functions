@@ -204,6 +204,10 @@ function check-remotes() {
 
 #Install emacs.d, new version
 install-emacs-d(){
+
+    REPODIR=~/repos
+    DST=${REPODIR}/emacs.d
+
     #If there is a link to old emacs-repo-file, remove it. If there is a file, move it to old.
     if [[ -L ~/.emacs ]]
     then
@@ -215,31 +219,23 @@ install-emacs-d(){
 	      mv -f ~/.emacs ~/.emacs.old 2>/dev/null
     fi
 
-    #If there is an old emacs.d, copy stuff and delete it
+    #If there is an old emacs.d, move it to a backup copy
     if [[ -d ~/.emacs.d ]]
     then
-	      cp -a ~/.emacs.d ~/.emacs.d.old 2>/dev/null
-	      rm -rf ~/.emacs.d  2>/dev/null
+	      mv -f ~/.emacs.d ~/.emacs.d.old 2>/dev/null
     fi
 
     #Clone emacs.d repo to local repo-dir
-    #Method to clone
     if [[ $(grep git@github.com ~/.ssh/config 2>/dev/null) ]]
     then
-	      clone="git clone git@github.com:sdaaish/emacs.d.git"
+	      SRC="git@github.com:sdaaish/emacs.d.git"
     else
-	      clone="git clone https://github.com/sdaaish/emacs.d.git"
+	      SRC="https://github.com/sdaaish/emacs.d.git"
     fi
 
-    if [[ -d ~/repos ]]
-    then
-	      cd ~/repos
-    else
-        mkdir ~/repos
-	      cd ~/repos
-    fi
-    ${clone}
-    ln -s ~/repos/emacs.d ~/.emacs.d
+    git clone ${SRC} ${DST}
+    cd ${DST}
+    make emacs
 }
 
 # Install latest emacs version
