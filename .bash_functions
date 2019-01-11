@@ -139,7 +139,7 @@ src() {
 srca() {
     printf "Udates ~/emacs.d and ~/dotfiles\n"
     printf "Pulling dotfiles: "; git -C ~/repos/dotfiles/ pull
-    printf "Pulling emacs.d: "; git -C ~/repos/emacs.d/ pull
+    printf "Pulling emacs.d: "; git -C ~/repos/.emacs.d/ pull
     (cd ~/repos/dotfiles/ && make)
     . ~/.bashrc
 }
@@ -206,7 +206,7 @@ function check-remotes() {
 install-emacs-d(){
 
     REPODIR=~/repos
-    DST=${REPODIR}/emacs.d
+    DST=${REPODIR}/.emacs.d
 
     #If there is a link to old emacs-repo-file, remove it. If there is a file, move it to old.
     if [[ -L ~/.emacs ]]
@@ -240,9 +240,9 @@ install-emacs-d(){
 
 # Install latest emacs version
 install-emacs-snapshot() {
-    sudo apt-add-repository ppa:ubuntu-elisp/ppa
-    sudo apt-get update
-    sudo apt-get install emacs-snapshot
+    sudo apt-add-repository --yes ppa:ubuntu-elisp/ppa
+    sudo apt-get --yes update
+    sudo apt-get --yes install emacs-snapshot
 }
 
 # Install latest stable git-version
