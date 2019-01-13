@@ -53,3 +53,6 @@ export LIBGL_ALWAYS_INDIRECT=1
 
 # GnuPG stuff
 export GPG_TTY=$(tty)
+
+# Docker on WSL
+export DOCKER_HOST=tcp://localhost:2375

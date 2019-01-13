@@ -474,3 +474,42 @@ fix-etckeeper-repo() {
     # And push the master branch to the remote
     sudo git -C /etc push -u origin master:$HOSTNAME
 }
+
+# Install docker
+# From https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly
+install-docker-for-wsl() {
+    # Update the apt package list.
+    sudo apt-get update --yes
+
+    # Install Docker's package dependencies.
+    sudo apt-get install --yes \
+         apt-transport-https \
+         ca-certificates \
+         curl \
+         software-properties-common
+
+    # Download and add Docker's official public PGP key.
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+    # Verify the fingerprint.
+    sudo apt-key fingerprint 0EBFCD88
+
+    # Add the `stable` channel's Docker upstream repository.
+    sudo add-apt-repository \
+         "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+
+    # Update the apt package list (for the new apt repo).
+    sudo apt-get update --yes
+
+    # Install the latest version of Docker CE.
+    sudo apt-get install --yes docker-ce
+
+    # Allow your user to access the Docker CLI without needing root access.
+    sudo usermod -aG docker $USER
+
+    # Install Python and PIP.
+    sudo apt-get install -y python python-pip
+
+    # Install Docker Compose into your user's home directory.
+    pip install --user docker-compose
+}
