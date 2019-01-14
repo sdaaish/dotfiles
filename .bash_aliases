@@ -69,3 +69,7 @@ alias o5="openssl x509 -text -noout"
 
 # Fonts
 alias install-fonts="sudo apt-get install fonts-powerline"
+
+# Tools
+alias psa="ps ax -O ppid"
+alias e="env|sort"
