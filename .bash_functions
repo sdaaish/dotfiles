@@ -22,8 +22,9 @@ apdd() {
 }
 # Check for outdated packages
 apo() {
-    sudo bash -c "sudo apt-get update; \
-    	 apt-get dist-upgrade --dry-run| grep ^Inst|cut -d\" \" -f2| grep ."
+    printf "Checking for upgrades...\n------------------------\n"
+    sudo bash -c "sudo apt-get update >/dev/null; \
+    	 apt-get dist-upgrade --dry-run| grep ^Inst|cut -d\" \" -f2| grep .|sort"
 }
 # Reove unwanted stuff
 apr() {
