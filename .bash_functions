@@ -127,10 +127,13 @@ oc() {
     if [[ -d ~/Dropbox/emacs/org ]]
     then
         DATE=$(date '+%Y%m%d-%H:%M:%S')
-        pushd ~/Dropbox/emacs/org
+        pushd ~/Dropbox/emacs
+        git add bookmarks
+        cd org
         git add *.org *.org_archive archive/*.org*
         git commit -m "Comitting changes $DATE"
         git push
+        popd
     fi
 }
 
