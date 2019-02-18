@@ -124,7 +124,7 @@ get-powerline-fonts(){
 
 # find links
 find-links(){
-    find ${1:-.} -type l -ls|awk '{printf "%-50s\t%-50s\n",$13,$11}'
+    find ${1:-.} -type l -ls|awk '{printf "%-50s\t%-50s\n",$11,$13}'
 }
 
 # Commit all org-files
