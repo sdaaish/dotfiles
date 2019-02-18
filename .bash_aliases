@@ -14,6 +14,7 @@ alias ll='ls -lAhG'
 alias llt='ls -ltrah'
 alias llh='ls -lah'
 alias lls='ls -lAhSrG'
+alias lll='find-links'
 
 alias rehash='hash -r'
 
