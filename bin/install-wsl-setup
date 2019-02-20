@@ -5,6 +5,9 @@ KERNEL=$(uname --kernel-release)
 RELEASE=$(lsb_release --short --release)
 DATE=$(date '+%Y%m%d-%H%M%S')
 TMPDIR=/home/${_USER}/tmp
+LOGFILE=${TMPDIR}/installation-${DATE}.log
+
+#apt-cache policy
 
 # Check for root
 if [[ $EUID -ne 0 ]]
@@ -22,9 +25,9 @@ fi
 
 # Function to install software
 software-install(){
-    $program=$*
+    program=${*}
     printf "Installing $program\n"
-    apt install --yes $program
+    apt install --yes ${program}
 }
 
 # Update package-DB and upgrade system
