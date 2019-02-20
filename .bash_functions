@@ -522,3 +522,13 @@ install-docker-for-wsl() {
     # Install Docker Compose into your user's home directory.
     pip install --user docker-compose
 }
+
+# Tmux plugin manager
+get-tmux-plugin-manager() {
+    if [ ! -d ~/.tmux/plugins/tpm ]
+    then
+        printf "Cloning Tmux Plugin Manager (TPM)...\n"
+        git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    fi
+
+}
