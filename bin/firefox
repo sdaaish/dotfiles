@@ -1,5 +1,15 @@
 #!/usr/bin/env bash
 
-/mnt/c/Program\ Files/Mozilla\ Firefox/firefox.exe $@
+# Workaround for browser support in WSL
+FIREFOX="/c/Program Files/Mozilla Firefox/firefox.exe"
 
+if [ -f "${FIREFOX}" ]
+then
+    "${FIREFOX}" --new-tab "${@}"
+elif [ -f "/mnt${FIREFOX}" ]
+then
+    "/mnt${FIREFOX}" --new-tab "${@}"
+else
+    exit 1
+fi
 exit 0
