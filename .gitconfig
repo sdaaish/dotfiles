@@ -8,7 +8,7 @@
 	default = simple
 
 [core]
-	excludesFile = ~/.gitignore
+	excludesFile = ~/.gitignore.global
 	editor = emacsclient -t -a=
 	autocrlf = input
 

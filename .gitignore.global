@@ -58,7 +58,7 @@ Thumbs.db
 
 # Local OS stuff
 ####################
-settings/
-.settings/
-etc/
+/settings/
+/.settings/
+/etc/
 demo/
