@@ -79,16 +79,16 @@
 [include]
 	path = ~/.gitconfig.local
 
-[includeIf "gitdir/i:~/repos/"]
+[includeIf "gitdir/i:~/[rR]epos/"]
 	path = ~/repos/git-personal/.gitconfig.private
 
-[includeIf "gitdir/i:~/work/"]
+[includeIf "gitdir/i:~/[wW]ork/"]
 	path = ~/repos/git-personal/.gitconfig.work
 
-[includeIf "gitdir/i:~/dropbox/emacs/"]
+[includeIf "gitdir/i:~/[dD]ropbox/emacs/"]
 	path = ~/repos/git-personal/.gitconfig.private
 
-[includeIf "gitdir/i:~/vagrantdir/"]
+[includeIf "gitdir/i:~/[vV]agrantdir/"]
 	path = ~/repos/git-personal/.gitconfig.private
 
 [includeIf "gitdir/i:~/.config/"]

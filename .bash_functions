@@ -37,7 +37,7 @@ cdr() {
 }
 
 cdrw() {
-    cd ~/work
+    cd ~/Work
     ls -1
 }
 
