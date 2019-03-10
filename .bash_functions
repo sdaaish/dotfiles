@@ -532,3 +532,17 @@ get-tmux-plugin-manager() {
     fi
 
 }
+
+# Reload gpg-agent
+gpu(){
+    printf "Reloading gpg-config.\n"
+    killall pinentry-curses 2>/dev/null
+    /usr/bin/gpg-connect-agent reloadagent /bye
+    /usr/bin/gpg-connect-agent updatestartuptty /bye
+}
+
+# Kill gpg-agent
+gpk(){
+    printf "Kill gpg-agent\n"
+    /usr/bin/gpg-connect-agent killagent /bye
+}
