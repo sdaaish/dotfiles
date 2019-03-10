@@ -452,11 +452,14 @@ transfer() {
 # Start emacs client frame and emacs server if not already started.
 # Without options a new frame is created, with options an existing frame are used.
 emx() {
+    DATE=$(date '+%Y%m%d-%H%M%S')
+    LOGFILE=~/tmp/emacs-client-${DATE}.log
+
     if [[ $# -eq 0 ]]
     then
-        emacsclient --alternate-editor "" --create-frame &>~/tmp/emacs-client.log &
+        emacsclient --alternate-editor "" --create-frame &>${LOGFILE} &
     else
-        emacsclient --alternate-editor "" "$*" &>~/tmp/emacs-clients.log &
+        emacsclient --alternate-editor "" "$*" &>${LOGFILE} &
     fi
 }
 
