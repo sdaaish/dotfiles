@@ -59,7 +59,7 @@ list="zlib1g-dev libc-dev-bin libpcap-dev libssl-dev"
 software-install $list
 
 # Install security stuff
-list="ca-certificates gnupg2 gnupg-agent gnutls-bin libgnutls-dev"
+list="ca-certificates gnupg2 gnupg-agent gnutls-bin libgnutls-dev pinentry-tty pinentry-curses"
 software-install $list
 
 # Install dns tools
@@ -76,4 +76,8 @@ software-install $list
 
 # Install emacs utils
 list="abbrev hunspell hunspell-sv hunspell-en-gb hunspell-en-us silversearcher-ag"
+software-install $list
+
+# Install terminals
+list="xterm terminators"
 software-install $list
