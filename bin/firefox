@@ -1,15 +1,23 @@
 #!/usr/bin/env bash
 
 # Workaround for browser support in WSL
-FIREFOX="/c/Program Files/Mozilla Firefox/firefox.exe"
 
-if [ -f "${FIREFOX}" ]
+# Detect if running in WSL
+if [[ -n ${WSL_DISTRO_NAME} ]]
 then
-    "${FIREFOX}" --new-tab "${@}"
-elif [ -f "/mnt${FIREFOX}" ]
-then
-    "/mnt${FIREFOX}" --new-tab "${@}"
+    FIREFOX="/c/Program Files/Mozilla Firefox/firefox.exe"
+
+    if [ -f "${FIREFOX}" ]
+    then
+        "${FIREFOX}" --new-tab "${@}" # For new mountpoint
+    elif [ -f "/mnt${FIREFOX}" ]
+    then
+        "/mnt${FIREFOX}" --new-tab "${@}" # For old mountpoint
+    else
+        exit 1
+    fi
+    exit 0
 else
-    exit 1
+    # Running outside of WSL
+    /usr/bin/firefox --new-tab $1 &
 fi
-exit 0
