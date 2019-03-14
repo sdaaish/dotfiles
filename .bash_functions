@@ -563,3 +563,26 @@ gpk(){
     printf "Kill gpg-agent\n"
     /usr/bin/gpg-connect-agent killagent /bye
 }
+
+# Create links in WSL to Windows home-directories
+create-wsl-links(){
+    local userdirs="Documents Downloads Dropbox Music Pictures Videos Work"
+
+    if [ ! $# == 1 ]
+    then
+        printf "Usage: ${FUNCNAME} <Windows-user-name>\n"
+    else
+        local userpath=/c/Users/${1}
+        if [ -d ${userpath} ]
+        then
+            printf "Linking directories to ${userpath}:\n"
+            for i in ${userdirs}
+            do
+                printf "${userpath}/${i}\n"
+                ln -s ${userpath}/${i} ${HOME}
+            done
+        else
+            printf "No such user: ${userpath}\n"
+        fi
+    fi
+}
