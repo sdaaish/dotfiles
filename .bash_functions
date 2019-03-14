@@ -471,6 +471,14 @@ fix-wsl-ssh() {
     sed 's/^PasswordAuthentication yes$/PasswordAuthentication no/' $sshd_config
 }
 
+# Mount Windows filesystem on correct-path
+fix-wsl-mountpoint(){
+    if [ ! -f /etc/wsl.conf ]
+    then
+        printf "[automount]\nroot = /\noptions = \"metadata\"\n" > /etc/wsl.conf
+    fi
+}
+
 # This sets up a branch for this host and pushes the etckeeper repo to remote server.
 # See https://serverfault.com/questions/28973/is-it-possible-to-use-etckeeper-with-a-single-shared-git-repository
 fix-etckeeper-repo() {
