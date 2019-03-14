@@ -79,5 +79,5 @@ list="abbrev hunspell hunspell-sv hunspell-en-gb hunspell-en-us silversearcher-a
 software-install $list
 
 # Install terminals
-list="xterm terminators"
+list="xterm terminators xclip"
 software-install $list
