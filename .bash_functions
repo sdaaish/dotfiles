@@ -105,7 +105,14 @@ get-bbk() {
 # Base16 script to change lxss colors
 # from https://github.com/chriskempson/base16-shell
 get-base16() {
-	  git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell
+    local BASE16DIR=~/.config/base16-shell
+
+    if [ ! -d ${BASE16DIR} ]
+    then
+	      git clone https://github.com/chriskempson/base16-shell.git ${BASE16DIR}
+    else
+        git -C ${BASE16DIR} pull
+    fi
 }
 
 # Get powerline fonts
@@ -528,10 +535,14 @@ install-docker-for-wsl() {
 
 # Tmux plugin manager
 get-tmux-plugin-manager() {
-    if [ ! -d ~/.tmux/plugins/tpm ]
+    local PLUGINDIR=~/.tmux/plugins/tpm/
+
+    if [ ! -d ${PLUGINDIR} ]
     then
         printf "Cloning Tmux Plugin Manager (TPM)...\n"
-        git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+        git clone https://github.com/tmux-plugins/tpm ${PLUGINDIR}
+    else
+        git -C ${PLUGINDIR} pull
     fi
 
 }
