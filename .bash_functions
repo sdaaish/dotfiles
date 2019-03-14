@@ -105,7 +105,14 @@ get-bbk() {
 # Base16 script to change lxss colors
 # from https://github.com/chriskempson/base16-shell
 get-base16() {
-	  git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell
+    local BASE16DIR=~/.config/base16-shell
+
+    if [ ! -d ${BASE16DIR} ]
+    then
+	      git clone https://github.com/chriskempson/base16-shell.git ${BASE16DIR}
+    else
+        git -C ${BASE16DIR} pull
+    fi
 }
 
 # Get powerline fonts
@@ -124,7 +131,7 @@ get-powerline-fonts(){
 
 # find links
 find-links(){
-    find ${1:-.} -type l -ls|awk '{printf "%-50s\t%-50s\n",$11,$13}'
+    find ${1:-.} -maxdepth 1 -type l -ls|awk '{printf "%-50s\t%-50s\n",$11,$13}'
 }
 
 # Commit all org-files
@@ -461,6 +468,9 @@ emx() {
     else
         emacsclient --alternate-editor "" "$*" &>${LOGFILE} &
     fi
+
+    # Cleanup old logfiles
+    find ~/tmp -name "emacs*.log" -mtime +10 -type f -print0|xargs --null --no-run-if-empty /bin/rm -f
 }
 
 # Fix SSH daemon on WSL
@@ -536,10 +546,14 @@ install-docker-for-wsl() {
 
 # Tmux plugin manager
 get-tmux-plugin-manager() {
-    if [ ! -d ~/.tmux/plugins/tpm ]
+    local PLUGINDIR=~/.tmux/plugins/tpm/
+
+    if [ ! -d ${PLUGINDIR} ]
     then
         printf "Cloning Tmux Plugin Manager (TPM)...\n"
-        git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+        git clone https://github.com/tmux-plugins/tpm ${PLUGINDIR}
+    else
+        git -C ${PLUGINDIR} pull
     fi
 
 }
