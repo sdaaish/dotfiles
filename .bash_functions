@@ -131,7 +131,7 @@ get-powerline-fonts(){
 
 # find links
 find-links(){
-    find ${1:-.} -type l -ls|awk '{printf "%-50s\t%-50s\n",$11,$13}'
+    find ${1:-.} -maxdepth 1 -type l -ls|awk '{printf "%-50s\t%-50s\n",$11,$13}'
 }
 
 # Commit all org-files
@@ -468,6 +468,9 @@ emx() {
     else
         emacsclient --alternate-editor "" "$*" &>${LOGFILE} &
     fi
+
+    # Cleanup old logfiles
+    find ~/tmp -name "emacs*.log" -mtime +10 -type f -print0|xargs --null --no-run-if-empty /bin/rm -f
 }
 
 # Fix SSH daemon on WSL
