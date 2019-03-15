@@ -486,6 +486,8 @@ fix-wsl-mountpoint(){
     if [ ! -f /etc/wsl.conf ]
     then
         printf "[automount]\nroot = /\noptions = \"metadata\"\n" > /etc/wsl.conf
+    else
+        printf "Error: /etc/wsl does already exist!\n"
     fi
 }
 
