@@ -59,6 +59,19 @@ check-speed() {
     ~/bin/bbk_cli --quiet --v6
 }
 
+# Prints the signature for all ssh-keys
+check-ssh-signatures(){
+    public=$(find ~/.ssh -name "*.pub" -type f)
+    for pub in $public
+    do
+        key=${pub%.pub}
+        md5=$(ssh-keygen -E md5 -lf ${key})
+        sha2=$(ssh-keygen -E sha256 -lf ${key})
+        printf "%-18s%s\n" "${key##${HOME}/.ssh/}" "$md5"
+        printf "%-18s%s\n" "${key##${HOME}/.ssh/}" "$sha2"
+    done
+}
+
 #
 ## From http://www.cyberciti.biz/faq/linux-unix-colored-man-pages-with-less-command/
 man() {
