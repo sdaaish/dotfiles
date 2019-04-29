@@ -4,7 +4,7 @@
 KERNEL=$(uname --kernel-release)
 RELEASE=$(lsb_release --short --release)
 DATE=$(date '+%Y%m%d-%H%M%S')
-TMPDIR=/home/${_USER}/tmp
+TMPDIR=/home/${SUDO_USER}/tmp
 LOGFILE=${TMPDIR}/installation-${DATE}.log
 
 #apt-cache policy
@@ -20,21 +20,21 @@ fi
 if [[ ! -d ${TMPDIR} ]]
 then
     mkdir ${TMPDIR}
-    printf "Creating directory ${TMPDIR}\n"
+    printf "Creating directory ${TMPDIR}\n"|tee -a ${LOGFILE}
 fi
 
 # Function to install software
 software-install(){
     program=${*}
-    printf "Installing $program\n"
-    apt install --yes ${program}
+    printf "Installing programs: $program\n"|tee -a ${LOGFILE}
+    apt install --yes ${program}|tee -a ${LOGFILE}
 }
 
 # Update package-DB and upgrade system
 printf "Updating package DB\n"
-apt update --yes
+apt update --yes|tee -a ${LOGFILE}
 printf "Upgrading system\n"
-apt upgrade --yes
+apt upgrade --yes|tee -a ${LOGFILE}
 
 # Install this to keep track of changes
 list="etckeeper"
@@ -51,7 +51,7 @@ list="emacs-snapshot"
 software-install $list
 
 # Install Devtools
-list="make binutils build-essential gcc clang go curl wget"
+list="make binutils build-essential gcc clang golang curl wget"
 software-install $list
 
 # Install libraries
@@ -59,7 +59,7 @@ list="zlib1g-dev libc-dev-bin libpcap-dev libssl-dev"
 software-install $list
 
 # Install security stuff
-list="ca-certificates gnupg2 gnupg-agent gnutls-bin libgnutls-dev pinentry-tty pinentry-curses"
+list="ca-certificates gnupg2 gnupg-agent gnutls-bin libgnutls28-dev pinentry-tty pinentry-curses"
 software-install $list
 
 # Install dns tools
@@ -75,9 +75,12 @@ list="openssh-server mitmproxy"
 software-install $list
 
 # Install emacs utils
-list="abbrev hunspell hunspell-sv hunspell-en-gb hunspell-en-us silversearcher-ag"
+list="hunspell hunspell-sv hunspell-en-gb hunspell-en-us silversearcher-ag"
 software-install $list
 
 # Install terminals
-list="xterm terminators xclip"
+list="xterm terminator xclip"
 software-install $list
+
+# Status emssage
+printf "Done installing software. Logfile in ${LOGFILE}\n"
