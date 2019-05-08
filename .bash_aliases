@@ -74,3 +74,7 @@ alias install-fonts="sudo apt-get install fonts-powerline"
 # Tools
 alias psa="ps ax -O ppid"
 alias e="env|sort"
+
+# Docker
+alias dk=docker
+alias dco=docker-compose
