@@ -47,6 +47,7 @@ alias gtd='git diff'
 alias gtr='git log --graph'
 alias gts='git status -sb'
 alias gtp='git push && git pull'
+alias glog="\git log --color --all --date-order --decorate --dirstat=lines,cumulative --stat | sed 's/\([0-9] file[s]\? .*)$\)/\1\n_______\n-------/g' | \less -R"
 
 # emacs support
 alias em='emacsclient -t -a ""'
