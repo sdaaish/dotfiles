@@ -79,3 +79,7 @@ alias e="env|sort"
 # Docker
 alias dk=docker
 alias dco=docker-compose
+
+# Python
+alias python=python3
+alias pip=pip3
