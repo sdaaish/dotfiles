@@ -81,3 +81,6 @@ alias dco=docker-compose
 # Python
 alias python=python3
 alias pip=pip3
+
+# Code
+alias ci='code-insiders'
