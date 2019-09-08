@@ -40,8 +40,6 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # Git stuff
-alias ci='git commit'
-alias co='git checkout'
 alias gta='git alias'
 alias gtd='git diff'
 alias gtr='git log --graph'
@@ -79,3 +77,6 @@ alias e="env|sort"
 # Docker
 alias dk=docker
 alias dco=docker-compose
+
+# Code
+alias ci='code-insiders'
