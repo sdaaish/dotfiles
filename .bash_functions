@@ -401,6 +401,13 @@ install-mailtools() {
         sudo make install
     fi
 }
+# Install fresh version of keepass2
+# From https://launchpad.net/~jtaylor/+archive/ubuntu/keepass
+install-keepass() {
+    sudo add-apt-repository --yes ppa:jtaylor/keepass
+    sudo apt-get update --yes
+    sudo apt install --yes keepass2
+}
 
 # Transfer files with https://transfer.sh
 transfer-vt(){
