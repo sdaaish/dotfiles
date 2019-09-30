@@ -378,6 +378,7 @@ function install-keybase-full {
 
 # Install keybase-cli
 function install-keybase-cli {
+    sudo apt install --yes golang-go
     go get github.com/keybase/client/go/keybase
 }
 
