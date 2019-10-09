@@ -490,7 +490,7 @@ emx() {
     fi
 
     # Cleanup old logfiles
-    find ~/tmp -name "emacs*.log" -mtime +10 -type f -print0|xargs --null --no-run-if-empty /bin/rm -f
+    find ~/tmp -name "emacs*.log" -mtime +14 -type f -print0|xargs --null --no-run-if-empty /bin/rm -f
 }
 
 # Fix SSH daemon on WSL
