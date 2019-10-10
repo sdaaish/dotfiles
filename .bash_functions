@@ -630,3 +630,10 @@ create-wsl-links(){
         fi
     fi
 }
+
+# Install nodejs and npm to use with LPS
+install-nodejs(){
+    sudo apt install --yes nodejs npm
+    sudo npm install -g bash-language-server
+    sudo npm install -g dockerfile-language-server-nodejs
+}
