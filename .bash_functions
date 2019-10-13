@@ -637,3 +637,11 @@ install-nodejs(){
     sudo npm install -g bash-language-server
     sudo npm install -g dockerfile-language-server-nodejs
 }
+
+install-rclone(){
+    curl https://rclone.org/install.sh | sudo bash
+}
+
+
+
+
