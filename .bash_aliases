@@ -87,3 +87,6 @@ alias ci='code-insiders'
 
 # rclone GUI
 alias rcgui='rclone rcd --rc-web-gui'
+
+# systemd
+alias sysu="systemctl --user"

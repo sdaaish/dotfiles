@@ -187,7 +187,7 @@ ssk() {
 # Grep - green
 sc-services() {
     export GREP_COLOR='1;32'
-    systemctl list-units --type=service | grep --color -E "active running|$"
+    systemctl list-units --type=service | grep --color -E "active\s*running|$"
 }
 
 # Update repos
