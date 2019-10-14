@@ -642,6 +642,16 @@ install-rclone(){
     curl https://rclone.org/install.sh | sudo bash
 }
 
-
-
-
+# password-manager functions
+pf(){
+    pass find "$1"
+}
+pasu(){
+    pass git pull
+}
+pasp(){
+    pass git push
+}
+pasg() {
+    pass generate "$@"
+}
