@@ -187,7 +187,7 @@ ssk() {
 # Grep - green
 sc-services() {
     export GREP_COLOR='1;32'
-    systemctl list-units --type=service | grep --color -E "active running|$"
+    systemctl list-units --type=service | grep --color -E "active\s*running|$"
 }
 
 # Update repos
@@ -491,7 +491,7 @@ emx() {
     fi
 
     # Cleanup old logfiles
-    find ~/tmp -name "emacs*.log" -mtime +10 -type f -print0|xargs --null --no-run-if-empty /bin/rm -f
+    find ~/tmp -name "emacs*.log" -mtime +14 -type f -print0|xargs --null --no-run-if-empty /bin/rm -f
 }
 
 # Fix SSH daemon on WSL
@@ -630,4 +630,29 @@ create-wsl-links(){
             printf "No such user: ${userpath}\n"
         fi
     fi
+}
+
+# Install nodejs and npm to use with LPS
+install-nodejs(){
+    sudo apt install --yes nodejs npm
+    sudo npm install -g bash-language-server
+    sudo npm install -g dockerfile-language-server-nodejs
+}
+
+install-rclone(){
+    curl https://rclone.org/install.sh | sudo bash
+}
+
+# password-manager functions
+pf(){
+    pass find "$1"
+}
+pasu(){
+    pass git pull
+}
+pasp(){
+    pass git push
+}
+pasg() {
+    pass generate "$@"
 }
