@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+DOTFILES=$HOME/.config/dotfiles
+EMACSDIR=$HOME/.config/emacs
+
 #
 ## A place for all the functions
 #
@@ -32,7 +35,7 @@ apr() {
 }
 
 cdr() {
-    cd ~/repos
+    cd ~/$REPODIR
     ls -1
 }
 
@@ -166,11 +169,12 @@ src() {
     . ~/.bashrc
 }
 srca() {
-    printf "Udates ~/emacs.d and ~/dotfiles\n"
-    printf "Pulling dotfiles: "; git -C ~/repos/dotfiles/ pull
-    printf "Pulling emacs.d: "; git -C ~/repos/.emacs.d/ pull
-    (cd ~/repos/dotfiles/ && make)
-    . ~/.bashrc
+    printf "Udates $EMACSDIR and $DOTFILES\n"
+    printf "Pulling dotfiles: "; git -C "$DOTFILES" pull
+    printf "Pulling emacs-config: "; git -C "$EMACSDIR" pull
+    make -C "$DOTFILES"
+    make -C "$EMACSDIR"
+    src
 }
 # Starts ssh-agent
 ssa() {
@@ -234,11 +238,13 @@ function check-remotes() {
 #Install emacs.d, new version
 install-emacs-d(){
 
-    REPODIR=~/repos
-    DST=${REPODIR}/.emacs.d
-
     #If there is a link to old emacs-repo-file, remove it. If there is a file, move it to old.
     if [[ -L ~/.emacs ]]
+    then
+	      rm -f ~/.emacs 2>/dev/null
+    fi
+
+    if [[ -L ~/.emacs.d ]]
     then
 	      rm -f ~/.emacs 2>/dev/null
     fi
@@ -254,6 +260,12 @@ install-emacs-d(){
 	      mv -f ~/.emacs.d ~/.emacs.d.old 2>/dev/null
     fi
 
+    #If there is an old emacs.d, move it to a backup copy
+    if [[ -d "$EMACSDIR" ]]
+    then
+	      mv -f "$EMACSDIR" "$EMACSDIR.old" 2>/dev/null
+    fi
+
     #Clone emacs.d repo to local repo-dir
     if [[ $(grep git@github.com ~/.ssh/config 2>/dev/null) ]]
     then
@@ -262,9 +274,8 @@ install-emacs-d(){
 	      SRC="https://github.com/sdaaish/emacs.d.git"
     fi
 
-    git clone ${SRC} ${DST}
-    cd ${DST}
-    make emacs
+    git clone "${SRC}" "${EMACSDIR}"
+    make -C "${EMACSDIR}" emacs
 }
 
 # Install latest emacs version
@@ -393,11 +404,11 @@ install-mailtools() {
          gcc clang make libgnutls28-dev \
          libxapian-dev libgmime-2.6-dev libtalloc-dev zlib1g-dev
 
-    if [ -d ~/repos ]
+    if [ -d ~/$REPODIR ]
     then
-        mkdir -p ~/repos/github/notmuch
-        git clone https://git.notmuchmail.org/git/notmuch ~/repos/github/notmuch
-        cd ~/repos/github/notmuch
+        mkdir -p ~/$REPODIR/github/notmuch
+        git clone https://git.notmuchmail.org/git/notmuch ~/$REPODIR/github/notmuch
+        cd ~/$REPODIR/github/notmuch
         make
         sudo make install
     fi
