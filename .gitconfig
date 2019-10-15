@@ -11,6 +11,7 @@
 	excludesFile = ~/.gitignore.global
 	editor = emacsclient -t -a=
 	autocrlf = false
+	filemode = false
 
 [color]
 	branch = true
