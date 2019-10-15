@@ -35,7 +35,7 @@ apr() {
 }
 
 cdr() {
-    cd ~/$REPODIR
+    cd $REPODIR
     ls -1
 }
 
@@ -404,11 +404,11 @@ install-mailtools() {
          gcc clang make libgnutls28-dev \
          libxapian-dev libgmime-2.6-dev libtalloc-dev zlib1g-dev
 
-    if [ -d ~/$REPODIR ]
+    if [ -d "$REPODIR" ]
     then
-        mkdir -p ~/$REPODIR/github/notmuch
-        git clone https://git.notmuchmail.org/git/notmuch ~/$REPODIR/github/notmuch
-        cd ~/$REPODIR/github/notmuch
+        mkdir -p "$REPODIR/github/notmuch"
+        git clone https://git.notmuchmail.org/git/notmuch "$REPODIR/github/notmuch"
+        cd "$REPODIR/github/notmuch" || exit
         make
         sudo make install
     fi
