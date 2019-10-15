@@ -34,7 +34,7 @@ if [ -d "$HOME/bin" ];then
     PATH="$HOME/bin:/sbin:/usr/sbin:$HOME/golang/bin:$PATH"
 fi
 
-export GOPATH=~/golang
+export GOPATH="$HOME/golang"
 
 # Local pythin stuff
 if [ -d "$HOME/.local/bin" ];then
@@ -69,3 +69,10 @@ fi
 
 # GnuPG stuff
 export GPG_TTY=$(tty)
+
+# My repositories
+export REPODIR="$HOME/repos"
+if [ ! -d "$REPODIR" ]
+then
+    mkdir -m 0755 "$REPODIR"
+fi
