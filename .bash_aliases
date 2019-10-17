@@ -53,6 +53,12 @@ alias ems='sudo emacsclient -t -a ""'
 alias emdi='emacs --debug-init'
 alias emd='emacs --daemon &>~/tmp/emacs-daemon.log &'
 alias emk='emacsclient --eval "(save-buffers-kill-emacs)" --no-wait'
+alias emfg='emacs --fg-daemon --debug-init'
+alias emq='emacs -Q \
+--border-color "White smoke" \
+--foreground-color "dark red" \
+--cursor-color "gray" \
+--no-blinking-cursor'
 
 # binary support
 alias bbk='bbk_cli'
