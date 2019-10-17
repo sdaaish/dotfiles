@@ -396,23 +396,28 @@ function install-keybase-cli {
 # Install mail-tools for emacs
 install-mailtools() {
     # Refresh
-    sudo apt update -y
-    sudo apt-get upgrade -y
+    sudo apt-get update --yes
+    sudo apt-get upgrade --yes
 
     # Install mail-programs and dependencies to build notmuch
-    sudo apt install -y ca-certificates msmtp msmtp-mta isync gnutls-bin \
+    sudo apt-get install --yes \
+         ca-certificates msmtp msmtp-mta isync gnutls-bin \
          gcc clang make libgnutls28-dev \
-         libxapian-dev libgmime-2.6-dev libtalloc-dev zlib1g-dev
+         libxapian-dev libgmime-3.0-dev libtalloc-dev zlib1g-dev python3-sphinx texinfo install-info
 
     if [ -d "$REPODIR" ]
     then
         mkdir -p "$REPODIR/github/notmuch"
         git clone https://git.notmuchmail.org/git/notmuch "$REPODIR/github/notmuch"
         cd "$REPODIR/github/notmuch" || exit
+        make clean
         make
         sudo make install
+    else
+        exit 1
     fi
 }
+
 # Install fresh version of keepass2
 # From https://launchpad.net/~jtaylor/+archive/ubuntu/keepass
 install-keepass() {
