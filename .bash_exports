@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 export ALTERNATE_EDITOR=""
-export EDITOR="emacsclient -t"
+export EDITOR="emacsclient -c"
 export VISUAL="emacsclient -c -a emacs"
 
 # http://askubuntu.com/questions/466198/how-do-i-change-the-color-for-directories-with-ls-in-the-console
