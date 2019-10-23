@@ -669,6 +669,10 @@ pasu(){
 pasp(){
     pass git push
 }
-pasg() {
+pasg(){
+    pass git status -sb
+    pass git remote -v update
+}
+passgen() {
     pass generate "$@"
 }
