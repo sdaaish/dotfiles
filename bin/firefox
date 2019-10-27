@@ -10,6 +10,7 @@
 if [[ -n ${WSL_DISTRO_NAME} || ${DISTRO} == WSL ]]
 then
     FIREFOX="/c/Program Files/Mozilla Firefox/firefox.exe"
+    SCOOPFF="/c/Users/$USER/scoop/shims/firefox.ps1"
 
     if [ -f "${FIREFOX}" ]
     then
@@ -17,11 +18,14 @@ then
     elif [ -f "/mnt${FIREFOX}" ]
     then
         "/mnt${FIREFOX}" --new-tab "${@}" # For old mountpoint
+    elif [ -f "$SCOOPFF" ]
+    then
+        "$SCOOPFF" --new-tab "${@}" # For scoop installs
     else
         exit 1
     fi
-    exit 0
 else
     # Running outside of WSL
-    /usr/bin/firefox --new-tab $1 &
+    /usr/bin/firefox --new-tab "${@}" &
 fi
+exit 0
