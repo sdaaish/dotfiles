@@ -676,3 +676,8 @@ pasg(){
 passgen() {
     pass generate "$@"
 }
+markdown2org(){
+    INFILE="$1"
+    OUTFILE=${INFILE/\.md/\.org}
+    pandoc -f markdown -t org "$INFILE" -o "$OUTFILE"
+}
