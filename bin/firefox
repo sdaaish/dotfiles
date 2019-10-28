@@ -20,7 +20,7 @@ then
         "/mnt${FIREFOX}" --new-tab "${@}" # For old mountpoint
     elif [ -f "$SCOOPFF" ]
     then
-        "$SCOOPFF" --new-tab "${@}" # For scoop installs
+        powershell.exe -NoProfile -Command "firefox.ps1 --new-tab ${@}" # For scoop installs
     else
         exit 1
     fi
