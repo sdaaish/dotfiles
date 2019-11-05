@@ -658,7 +658,9 @@ install-nodejs(){
 install-rclone(){
     curl https://rclone.org/install.sh | sudo bash
 }
-
+install-microsoft-teams(){
+    sudo snap install teams-for-linux --edge
+}
 # password-manager functions
 pf(){
     pass find "$1"
