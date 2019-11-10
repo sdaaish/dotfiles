@@ -152,10 +152,10 @@ find-links(){
 
 # Commit all org-files
 oc() {
-    if [[ -d ~/Dropbox/emacs/org ]]
+    if [[ -d ~/OneDrive/emacs/org ]]
     then
         DATE=$(date '+%Y%m%d-%H:%M:%S')
-        pushd ~/Dropbox/emacs
+        pushd ~/OneDrive/emacs
         git add bookmarks
         cd org
         git add *.org *.org_archive archive/*.org*
@@ -682,4 +682,15 @@ markdown2org(){
     INFILE="$1"
     OUTFILE=${INFILE/\.md/\.org}
     pandoc -f markdown -t org "$INFILE" -o "$OUTFILE"
+}
+# Start docker version onedrive
+start_onedrive(){
+    OneDriveDir="${HOME}/OneDrive"
+    OneDriveConf="${HOME}/.config/onedrive"
+    docker run \
+           --restart unless-stopped \
+           --name onedrive \
+           -v "${OneDriveConf}":/onedrive/conf \
+           -v "${OneDriveDir}:/onedrive/data" \
+           onedrive
 }
