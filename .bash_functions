@@ -707,3 +707,30 @@ start_onedrive_resync(){
            -v "${OneDriveDir}":/onedrive/data \
            onedrive
 }
+
+# Creates backup of WSL-files
+create-wsl-backup(){
+    DATE=$(date '+%Y%m%d-%H%M%S')
+    WSLFILE="wsl-backup-${DATE}.tgz"
+
+    if [ ! $# == 1 ]
+    then
+        printf "Usage: ${FUNCNAME} <Backup-dir>\n"
+    else
+        local backupdir=${1}
+        if [ -d ${backupdir} ]
+        then
+            bkpfile="${backupdir}/${WSLFILE}"
+            printf "Backup WSL files to %s\n" ${bkpfile}
+            tar cvfz "${bkpfile}" \
+                --exclude .cache \
+                --exclude .local \
+                --exclude .npm \
+                --exclude golang \
+                --exclude .config/emacs/straight \
+                "${HOME}"
+        else
+            printf "No such directory: %s\n" ${backupdir}
+        fi
+    fi
+}
