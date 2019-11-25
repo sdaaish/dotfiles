@@ -152,10 +152,10 @@ find-links(){
 
 # Commit all org-files
 oc() {
-    if [[ -d ~/Dropbox/emacs/org ]]
+    if [[ -d ~/OneDrive/emacs/org ]]
     then
         DATE=$(date '+%Y%m%d-%H:%M:%S')
-        pushd ~/Dropbox/emacs
+        pushd ~/OneDrive/emacs
         git add bookmarks
         cd org
         git add *.org *.org_archive archive/*.org*
@@ -396,23 +396,28 @@ function install-keybase-cli {
 # Install mail-tools for emacs
 install-mailtools() {
     # Refresh
-    sudo apt update -y
-    sudo apt-get upgrade -y
+    sudo apt-get update --yes
+    sudo apt-get upgrade --yes
 
     # Install mail-programs and dependencies to build notmuch
-    sudo apt install -y ca-certificates msmtp msmtp-mta isync gnutls-bin \
+    sudo apt-get install --yes \
+         ca-certificates msmtp msmtp-mta isync gnutls-bin \
          gcc clang make libgnutls28-dev \
-         libxapian-dev libgmime-2.6-dev libtalloc-dev zlib1g-dev
+         libxapian-dev libgmime-3.0-dev libtalloc-dev zlib1g-dev python3-sphinx texinfo install-info
 
     if [ -d "$REPODIR" ]
     then
         mkdir -p "$REPODIR/github/notmuch"
         git clone https://git.notmuchmail.org/git/notmuch "$REPODIR/github/notmuch"
         cd "$REPODIR/github/notmuch" || exit
+        make clean
         make
         sudo make install
+    else
+        exit 1
     fi
 }
+
 # Install fresh version of keepass2
 # From https://launchpad.net/~jtaylor/+archive/ubuntu/keepass
 install-keepass() {
@@ -653,7 +658,9 @@ install-nodejs(){
 install-rclone(){
     curl https://rclone.org/install.sh | sudo bash
 }
-
+install-microsoft-teams(){
+    sudo snap install teams-for-linux --edge
+}
 # password-manager functions
 pf(){
     pass find "$1"
@@ -664,6 +671,66 @@ pasu(){
 pasp(){
     pass git push
 }
-pasg() {
+pasg(){
+    pass git status -sb
+    pass git remote -v update
+}
+passgen() {
     pass generate "$@"
+}
+markdown2org(){
+    INFILE="$1"
+    OUTFILE=${INFILE/\.md/\.org}
+    pandoc -f markdown -t org "$INFILE" -o "$OUTFILE"
+}
+# Start docker version onedrive
+start_onedrive(){
+    OneDriveDir="${HOME}/OneDrive"
+    OneDriveConf="${HOME}/.config/onedrive"
+    docker run \
+           --detach \
+           --restart unless-stopped \
+           --name onedrive \
+           -v "${OneDriveConf}":/onedrive/conf \
+           -v "${OneDriveDir}":/onedrive/data \
+           onedrive
+}
+start_onedrive_resync(){
+    OneDriveDir="${HOME}/OneDrive"
+    OneDriveConf="${HOME}/.config/onedrive"
+    docker run \
+           --restart unless-stopped \
+           --name onedrive \
+           -e ONEDRIVE_VERBOSE=1 \
+           -e ONEDRIVE_RESYNC=1 \
+           -v "${OneDriveConf}":/onedrive/conf \
+           -v "${OneDriveDir}":/onedrive/data \
+           onedrive
+}
+
+# Creates backup of WSL-files
+create-wsl-backup(){
+    DATE=$(date '+%Y%m%d-%H%M%S')
+    WSLFILE="wsl-backup-${DATE}.tgz"
+
+    if [ ! $# == 1 ]
+    then
+        printf "Usage: ${FUNCNAME} <Backup-dir>\n"
+    else
+        local backupdir=${1}
+        if [ -d ${backupdir} ]
+        then
+            bkpfile="${backupdir}/${WSLFILE}"
+            printf "Backup WSL files to %s\n" ${bkpfile}
+            tar cvfz "${bkpfile}" \
+                --exclude .cache \
+                --exclude .local \
+                --exclude .npm \
+                --exclude golang \
+                --exclude .config/emacs/straight \
+                "${HOME}"
+        else
+            printf "No such directory: %s\n" ${backupdir}
+        fi
+    fi
 }

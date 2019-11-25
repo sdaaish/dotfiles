@@ -97,3 +97,5 @@
 
 [magit]
 	hideCampaign = true
+[diff]
+	noprefix = true
