@@ -688,9 +688,22 @@ start_onedrive(){
     OneDriveDir="${HOME}/OneDrive"
     OneDriveConf="${HOME}/.config/onedrive"
     docker run \
+           --detach \
            --restart unless-stopped \
            --name onedrive \
            -v "${OneDriveConf}":/onedrive/conf \
-           -v "${OneDriveDir}:/onedrive/data" \
+           -v "${OneDriveDir}":/onedrive/data \
+           onedrive
+}
+start_onedrive_resync(){
+    OneDriveDir="${HOME}/OneDrive"
+    OneDriveConf="${HOME}/.config/onedrive"
+    docker run \
+           --restart unless-stopped \
+           --name onedrive \
+           -e ONEDRIVE_VERBOSE=1 \
+           -e ONEDRIVE_RESYNC=1 \
+           -v "${OneDriveConf}":/onedrive/conf \
+           -v "${OneDriveDir}":/onedrive/data \
            onedrive
 }
