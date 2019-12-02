@@ -691,6 +691,7 @@ start_onedrive(){
            --detach \
            --restart unless-stopped \
            --name onedrive \
+           -e ONEDRIVE_VERBOSE=1 \
            -v "${OneDriveConf}":/onedrive/conf \
            -v "${OneDriveDir}":/onedrive/data \
            onedrive
