@@ -36,7 +36,7 @@ fi
 
 export GOPATH="$HOME/golang"
 
-# Local pythin stuff
+# Local python stuff
 if [ -d "$HOME/.local/bin" ];then
     PATH="$PATH:$HOME/.local/bin"
 fi

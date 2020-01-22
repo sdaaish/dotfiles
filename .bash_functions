@@ -177,8 +177,20 @@ srca() {
     src
 }
 # Starts ssh-agent
+# Workaround for WSL
+# See https://github.com/Microsoft/WSL/issues/3183
+# Also "sc.exe create sshd binPath=C:\Windows\System32\OpenSSH\ssh.exe"
 ssa() {
-    eval $(ssh-agent -s)
+
+    if [ ! $(pgrep ssh-agent) ]
+    then
+        eval $(ssh-agent -s -a /tmp/ssh-auth.sock)
+    else
+        SSH_AUTH_SOCK="/tmp/ssh-auth.sock"
+        SSH_AGENT_PID=$(pgrep ssh-agent)
+    fi
+         export SSH_AUTH_SOCK
+         export SSH_AGENT_PID
 }
 # Add all local keys
 ssk() {
@@ -691,6 +703,7 @@ start_onedrive(){
            --detach \
            --restart unless-stopped \
            --name onedrive \
+           -e ONEDRIVE_VERBOSE=1 \
            -v "${OneDriveConf}":/onedrive/conf \
            -v "${OneDriveDir}":/onedrive/data \
            onedrive
