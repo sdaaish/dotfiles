@@ -20,7 +20,7 @@ fi
 
 if [ ${port} ] ;then
     connect=${server}:${port}
-    printf "\n"|openssl s_client -show-certs -connect ${connect} 2>/dev/null|sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p'
+    printf "\n"|openssl s_client -showcerts -connect ${connect} 2>/dev/null|sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p'
 else
     connect=${server}:443
     printf "\n"|openssl s_client -showcerts -connect ${connect} 2>/dev/null|sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p'
