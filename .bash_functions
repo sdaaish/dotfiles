@@ -747,3 +747,18 @@ create-wsl-backup(){
         fi
     fi
 }
+
+# Start mitmproxy in docker
+start_mitmproxy(){
+    if [ ! -d ${HOME}/.mitmproxy ]
+    then
+        mkdir ${HOME}/.mitmproxy
+    fi
+
+    # Start the container
+    docker run --rm -it \
+           -v ${HOME}/.mitmproxy:/home/mitmproxy/.mitmproxy \
+           -v ${HOME}/tmp:/home/mitmproxy/tmp \
+           -v /etc/timezone:/etc/timezone:ro \
+           -p 127.0.0.1:8080:8080 mitmproxy/mitmproxy mitmproxy
+}
