@@ -81,3 +81,9 @@ if [ ! -d "$REPODIR" ]
 then
     mkdir -m 0755 "$REPODIR"
 fi
+
+# https://polansky.co/blog/a-better-windows-wsl-openssh-experience/
+if [ -n ${WSL_AUTH_SOCK} ]
+then
+    export SSH_AUTH_SOCK=${WSL_AUTH_SOCK}
+fi
