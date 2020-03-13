@@ -40,7 +40,7 @@ cdr() {
 }
 
 cdrw() {
-    cd ~/Work
+    cd ~/work
     ls -1
 }
 
@@ -639,7 +639,7 @@ install-syncthing(){
 
 # Create links in WSL to Windows home-directories
 create-wsl-links(){
-    local userdirs="Documents Downloads Dropbox Music Onedrive Pictures Videos Work"
+    local userdirs="Documents Downloads Dropbox Music Onedrive Pictures Videos work repos"
 
     if [ ! $# == 1 ]
     then
