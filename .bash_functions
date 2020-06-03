@@ -740,6 +740,7 @@ create-wsl-backup(){
                 --exclude .local \
                 --exclude .npm \
                 --exclude golang \
+                --exclude tmp \
                 --exclude .config/emacs/straight \
                 "${HOME}"
         else
