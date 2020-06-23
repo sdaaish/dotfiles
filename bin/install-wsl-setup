@@ -47,7 +47,7 @@ list="emacs-snapshot"
 software-install $list
 
 # Install Devtools
-list="make binutils build-essential gcc clang golang curl wget shellsheck"
+list="make binutils build-essential gcc clang golang curl wget shellcheck"
 software-install $list
 
 # Install libraries
