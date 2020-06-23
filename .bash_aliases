@@ -59,6 +59,7 @@ alias emq='emacs -Q \
 --foreground-color "dark red" \
 --cursor-color "gray" \
 --no-blinking-cursor'
+alias doom='~/.config/emacs/bin/doom'
 
 # binary support
 alias bbk='bbk_cli'
