@@ -295,6 +295,14 @@ install-emacs-snapshot() {
     sudo apt-add-repository --yes ppa:ubuntu-elisp/ppa
     sudo apt-get --yes update
     sudo apt-get --yes install emacs-snapshot
+
+    sudo apt install --yes ripgrep fd-find
+}
+
+# Install emacs, DOOM version
+install-emacs-doom(){
+    git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.config/emacs
+    ~/.config/emacs/bin/doom install
 }
 
 # Install latest stable git-version
