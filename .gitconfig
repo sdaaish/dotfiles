@@ -81,21 +81,23 @@
 	path = ~/.gitconfig.local
 
 [includeIf "gitdir/i:~/[rR]epos/"]
-	path = ~/repos/git-personal/.gitconfig.private
+	path = ~/.config/dotfiles.private/.gitconfig.private
 
 [includeIf "gitdir/i:~/[wW]ork/"]
-	path = ~/repos/git-personal/.gitconfig.work
+	path = ~/.config/dotfiles.private/.gitconfig.work
 
 [includeIf "gitdir/i:~/[dD]ropbox/emacs/"]
-	path = ~/repos/git-personal/.gitconfig.private
+	path = ~/.config/dotfiles.private/.gitconfig.private
 
 [includeIf "gitdir/i:~/[vV]agrantdir/"]
-	path = ~/repos/git-personal/.gitconfig.private
+	path = ~/.config/dotfiles.private/.gitconfig.private
 
 [includeIf "gitdir/i:~/.config/"]
-	path = ~/repos/git-personal/.gitconfig.private
+	path = ~/.config/dotfiles.private/.gitconfig.private
 
 [magit]
 	hideCampaign = true
 [diff]
 	noprefix = true
+[pull]
+	ff = only

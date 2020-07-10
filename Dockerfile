@@ -1,8 +1,8 @@
-FROM ubuntu:latest AS build
+FROM ubuntu:18.04 AS build
 
 RUN apt-get update --yes && \
-  apt-get update --yes && \
-  apt-get install --yes --no-install-recommends ca-certificates git make
+  apt-get install --yes --no-install-recommends ca-certificates git make && \
+  rm -rf /var/lib/apt/lists/*
 
 FROM build
 COPY . /src

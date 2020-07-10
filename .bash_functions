@@ -40,7 +40,7 @@ cdr() {
 }
 
 cdrw() {
-    cd ~/Work
+    cd ~/work
     ls -1
 }
 
@@ -295,6 +295,14 @@ install-emacs-snapshot() {
     sudo apt-add-repository --yes ppa:ubuntu-elisp/ppa
     sudo apt-get --yes update
     sudo apt-get --yes install emacs-snapshot
+
+    sudo apt install --yes ripgrep fd-find
+}
+
+# Install emacs, DOOM version
+install-emacs-doom(){
+    git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.config/emacs
+    ~/.config/emacs/bin/doom install
 }
 
 # Install latest stable git-version
@@ -589,7 +597,7 @@ install-docker-for-wsl() {
     sudo usermod -aG docker $USER
 
     # Install Python and PIP.
-    sudo apt-get install -y python python-pip
+    sudo apt-get install -y python3 python3-pip
 
     # Install Docker Compose into your user's home directory.
     pip install --user docker-compose
@@ -639,7 +647,7 @@ install-syncthing(){
 
 # Create links in WSL to Windows home-directories
 create-wsl-links(){
-    local userdirs="Documents Downloads Dropbox Music Onedrive Pictures Videos Work"
+    local userdirs="Documents Downloads Dropbox Music Onedrive Pictures Videos work repos"
 
     if [ ! $# == 1 ]
     then
@@ -720,6 +728,19 @@ start_onedrive_resync(){
            -v "${OneDriveDir}":/onedrive/data \
            onedrive
 }
+start_onedrive_login(){
+    OneDriveDir="${HOME}/OneDrive"
+    OneDriveConf="${HOME}/.config/onedrive"
+    docker run \
+           -it \
+           --restart unless-stopped \
+           --name onedrive \
+           -e ONEDRIVE_VERBOSE=1 \
+           -e ONEDRIVE_RESYNC=1 \
+           -v "${OneDriveConf}":/onedrive/conf \
+           -v "${OneDriveDir}":/onedrive/data \
+           onedrive
+}
 
 # Creates backup of WSL-files
 create-wsl-backup(){
@@ -740,10 +761,26 @@ create-wsl-backup(){
                 --exclude .local \
                 --exclude .npm \
                 --exclude golang \
+                --exclude tmp \
                 --exclude .config/emacs/straight \
                 "${HOME}"
         else
             printf "No such directory: %s\n" ${backupdir}
         fi
     fi
+}
+
+# Start mitmproxy in docker
+start_mitmproxy(){
+    if [ ! -d ${HOME}/.mitmproxy ]
+    then
+        mkdir ${HOME}/.mitmproxy
+    fi
+
+    # Start the container
+    docker run --rm -it \
+           -v ${HOME}/.mitmproxy:/home/mitmproxy/.mitmproxy \
+           -v ${HOME}/tmp:/home/mitmproxy/tmp \
+           -v /etc/timezone:/etc/timezone:ro \
+           -p 127.0.0.1:8080:8080 mitmproxy/mitmproxy mitmproxy
 }

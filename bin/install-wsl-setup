@@ -36,10 +36,6 @@ apt update --yes|tee -a ${LOGFILE}
 printf "Upgrading system\n"
 apt upgrade --yes|tee -a ${LOGFILE}
 
-# Install this to keep track of changes
-list="etckeeper"
-software-install $list
-
 # Install latest git
 add-apt-repository --yes --update ppa:git-core/ppa
 list="git"
@@ -51,7 +47,7 @@ list="emacs-snapshot"
 software-install $list
 
 # Install Devtools
-list="make binutils build-essential gcc clang golang curl wget"
+list="make binutils build-essential gcc clang golang curl wget shellcheck"
 software-install $list
 
 # Install libraries
@@ -71,7 +67,7 @@ list="locate apt-utils apt-transport-https tmux"
 software-install $list
 
 # Install server software
-list="openssh-server mitmproxy"
+list="openssh-server"
 software-install $list
 
 # Install emacs utils
@@ -79,7 +75,7 @@ list="hunspell hunspell-sv hunspell-en-gb hunspell-en-us silversearcher-ag"
 software-install $list
 
 # Install terminals
-list="xterm terminator xclip"
+list="xterm xclip"
 software-install $list
 
 # Status emssage
