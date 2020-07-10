@@ -728,6 +728,19 @@ start_onedrive_resync(){
            -v "${OneDriveDir}":/onedrive/data \
            onedrive
 }
+start_onedrive_login(){
+    OneDriveDir="${HOME}/OneDrive"
+    OneDriveConf="${HOME}/.config/onedrive"
+    docker run \
+           -it \
+           --restart unless-stopped \
+           --name onedrive \
+           -e ONEDRIVE_VERBOSE=1 \
+           -e ONEDRIVE_RESYNC=1 \
+           -v "${OneDriveConf}":/onedrive/conf \
+           -v "${OneDriveDir}":/onedrive/data \
+           onedrive
+}
 
 # Creates backup of WSL-files
 create-wsl-backup(){
