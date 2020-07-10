@@ -10,6 +10,7 @@ git submodule update
 base=(
     bash
     bin
+    git
     gpg
 )
 

@@ -647,7 +647,7 @@ install-syncthing(){
 
 # Create links in WSL to Windows home-directories
 create-wsl-links(){
-    local userdirs="Documents Downloads Dropbox Music Onedrive Pictures Videos work repos"
+    local userdirs="Documents Downloads Dropbox Music OneDrive Pictures Videos"
 
     if [ ! $# == 1 ]
     then

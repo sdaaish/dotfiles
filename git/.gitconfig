@@ -8,7 +8,7 @@
 	default = simple
 
 [core]
-	excludesFile = ~/.gitignore.global
+	excludesFile = ~/.config/git/.gitignore.global
 	editor = emacsclient -t -a=
 	autocrlf = false
 	filemode = false
@@ -78,22 +78,22 @@
 #
 # Include local or personal stuff from these files.
 [include]
-	path = ~/.gitconfig.local
+	path = ~/.config/git/.gitconfig.local
 
 [includeIf "gitdir/i:~/[rR]epos/"]
-	path = ~/.config/dotfiles.private/.gitconfig.private
+	path = ~/.config/git/.gitconfig.private
 
 [includeIf "gitdir/i:~/[wW]ork/"]
-	path = ~/.config/dotfiles.private/.gitconfig.work
+	path = ~/.config/git/.gitconfig.work
 
 [includeIf "gitdir/i:~/[dD]ropbox/emacs/"]
-	path = ~/.config/dotfiles.private/.gitconfig.private
+	path = ~/.config/git/.gitconfig.private
 
 [includeIf "gitdir/i:~/[vV]agrantdir/"]
-	path = ~/.config/dotfiles.private/.gitconfig.private
+	path = ~/.config/git/.gitconfig.private
 
 [includeIf "gitdir/i:~/.config/"]
-	path = ~/.config/dotfiles.private/.gitconfig.private
+	path = ~/.config/git/.gitconfig.private
 
 [magit]
 	hideCampaign = true
