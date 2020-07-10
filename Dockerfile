@@ -7,7 +7,7 @@ RUN apt-get update --yes && \
 FROM build
 COPY . /src
 WORKDIR /src
-RUN make
+RUN ./setup.sh
 #  source ~/.profile && \
 #  install-emacs-d
 
