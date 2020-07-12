@@ -172,7 +172,7 @@ srca() {
     printf "Udates $EMACSDIR and $DOTFILES\n"
     printf "Pulling dotfiles: "; git -C "$DOTFILES" pull
     printf "Pulling emacs-config: "; git -C "$EMACSDIR" pull
-    make -C "$DOTFILES"
+    (cd "$DOTFILES";./setup.sh)
     make -C "$EMACSDIR"
     src
 }
