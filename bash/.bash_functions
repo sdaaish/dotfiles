@@ -166,13 +166,15 @@ oc() {
 }
 
 src() {
-    . ~/.bashrc
+    # shellcheck source=/dev/null
+    source "$HOME/.bashrc"
 }
+
 srca() {
-    printf "Udates $EMACSDIR and $DOTFILES\n"
+    printf "Udates %s and %s\n" "$EMACSDIR" "$DOTFILES"
     printf "Pulling dotfiles: "; git -C "$DOTFILES" pull
     printf "Pulling emacs-config: "; git -C "$EMACSDIR" pull
-    (cd "$DOTFILES";./setup.sh)
+    (cd "$DOTFILES" || exit 1;sh setup.sh)
     make -C "$EMACSDIR"
     src
 }
@@ -217,10 +219,13 @@ update-repos(){
     fi
 
     # git repositories
-    for D in $(find $dir -type d -name '\.git'); do
-	      git -C $(dirname $D) config --get remote.origin.url
-	      git -C $(dirname $D) pull
-	      echo
+    lista=$(find $dir -type d -name '\.git')
+    for D in $lista
+    do
+        DIR=$(dirname "$D")
+	      git -C "$DIR" config --get remote.origin.url
+        git -C "$DIR" pull
+        echo
     done
 }
 
