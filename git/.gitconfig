@@ -21,7 +21,7 @@
 	status = true
 	ui = always
 	interactive = always
-	
+
 [color "interactive"]
 	error = red bold
 
@@ -53,7 +53,7 @@
 	br = branch
 	last = log -1 HEAD
 	unstage = reset HEAD --
-	nah = reset --hard	
+	nah = reset --hard
 	changes = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\" --name-status
 	short = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\"
 	changelog = log --pretty=format:\" * %s\"
@@ -74,26 +74,31 @@
 	f = "!git ls-files | grep -i"
 	stl = stash list --pretty=format:'%C(blue)%gd %C(red)* %C(yellow)%s'
 	ru = remote -v update
-	
+
 #
 # Include local or personal stuff from these files.
 [include]
 	path = ~/.config/git/.gitconfig.local
 
-[includeIf "gitdir/i:~/[rR]epos/"]
+[includeIf "gitdir/i:~/[rR]epos/**"]
 	path = ~/.config/git/.gitconfig.private
 
-[includeIf "gitdir/i:~/[wW]ork/"]
+[includeIf "gitdir/i:~/[vV]agrantdir/**"]
+	path = ~/.config/git/.gitconfig.private
+
+[includeIf "gitdir/i:**/[Uu]sers/**/[vV]agrantdir/**"]
+	path = ~/.config/git/.gitconfig.private
+
+[includeIf "gitdir/i:~/.config/**"]
+	path = ~/.config/git/.gitconfig.private
+
+# Work related configs
+## Both in Windows and in WSL
+[includeIf "gitdir/i:~/[wW]ork/**"]
 	path = ~/.config/git/.gitconfig.work
 
-[includeIf "gitdir/i:~/[dD]ropbox/emacs/"]
-	path = ~/.config/git/.gitconfig.private
-
-[includeIf "gitdir/i:~/[vV]agrantdir/"]
-	path = ~/.config/git/.gitconfig.private
-
-[includeIf "gitdir/i:~/.config/"]
-	path = ~/.config/git/.gitconfig.private
+[includeIf "gitdir/i:**/[Uu]sers/**/[wW]ork/**"]
+	path = ~/.config/git/.gitconfig.work
 
 [magit]
 	hideCampaign = true
