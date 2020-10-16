@@ -89,8 +89,10 @@ man() {
         man "$@"
 }
 
-# Get BBK from bredbandskollen
 get-bbk() {
+    # Get BBK from bredbandskollen
+    # Source code in https://github.com/dotse/bbk
+
     # Name for the file
     binary=~/bin/bbk_cli
 
@@ -136,10 +138,10 @@ get-powerline-fonts(){
     if [[ -d ~/tmp ]]
     then
         pushd ~/tmp
-        git clone https://github.com/powerline/fonts.git --depth=1 
-        cd fonts
+        git clone "https://github.com/powerline/fonts.git" --depth=1
+        cd fonts || exit
         ./install.sh
-        cd ..
+        cd .. || exit
         rm -rf fonts
         popd
     fi
@@ -409,7 +411,7 @@ function install-keybase-full {
     curl -O https://prerelease.keybase.io/keybase_amd64.deb
     sudo dpkg -i keybase_amd64.deb
     sudo apt-get install -f
-    run_keybase    
+    run_keybase
 }
 
 # Install keybase-cli
