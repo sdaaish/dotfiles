@@ -791,3 +791,41 @@ start_mitmproxy(){
            -v /etc/timezone:/etc/timezone:ro \
            -p 127.0.0.1:8080:8080 mitmproxy/mitmproxy mitmproxy
 }
+# Docker features to quickly run containers
+# From https://blog.ropnop.com/docker-for-pentesters/
+dockershell(){
+    docker run --rm -it --entrypoint /bin/bash "$@"
+}
+dockershellsh(){
+    docker run --rm -it --entrypoint /bin/sh "$@"
+}
+dockerpwsh(){
+    docker run --rm -it mcr.microsoft.com/powershell:ubuntu-18.04 "$@"
+}
+dockertestssl(){
+    docker run --rm sdaaish/testssl.sh:latest --fast -S --quiet --hints "$@"
+}
+dockershellhere(){
+    curdir="/${PWD##*/}"
+    docker run \
+           --rm -it \
+           -v "${PWD}":"${curdir}" \
+           -w "${curdir}" \
+           --entrypoint /bin/bash "$@"
+}
+dockershellshhere(){
+    curdir="/${PWD##*/}"
+    docker run \
+           --rm -it \
+           -v "${PWD}":"${curdir}" \
+           -w "${curdir}" \
+           --entrypoint /bin/sh "$@"
+}
+dockerpwshhere(){
+    curdir="/${PWD##*/}"
+    docker run \
+           --rm -it \
+           -v "${PWD}":"${curdir}" \
+           -w "${curdir}" \
+           mcr.microsoft.com/powershell:ubuntu-18.04 "$@"
+}
