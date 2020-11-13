@@ -176,7 +176,7 @@ srca() {
     printf "Udates %s and %s\n" "$EMACSDIR" "$DOTFILES"
     printf "Pulling dotfiles: "; git -C "$DOTFILES" pull
     printf "Pulling emacs-config: "; git -C "$EMACSDIR" pull
-    (cd "$DOTFILES" || exit 1;sh setup.sh)
+    (cd "$DOTFILES" || exit 1 ; ./setup.sh)
     make -C "$EMACSDIR"
     src
 }
@@ -193,8 +193,8 @@ ssa() {
         SSH_AUTH_SOCK="/tmp/ssh-auth.sock"
         SSH_AGENT_PID=$(pgrep ssh-agent)
     fi
-         export SSH_AUTH_SOCK
-         export SSH_AGENT_PID
+    export SSH_AUTH_SOCK
+    export SSH_AGENT_PID
 }
 # Add all local keys
 ssk() {
@@ -803,7 +803,13 @@ dockerpwsh(){
     docker run --rm -it mcr.microsoft.com/powershell:ubuntu-18.04 "$@"
 }
 dockertestssl(){
-    docker run --rm sdaaish/testssl.sh:latest --fast -S --quiet --hints "$@"
+    if [ $# -eq 0 ]
+    then
+        docker run --rm sdaaish/testssl.sh:latest --help
+        printf "Usage: dockertestssl <destination host/ip address>\n"
+    else
+        docker run --rm sdaaish/testssl.sh:latest --fast -S --quiet --hints "$@"
+    fi
 }
 dockershellhere(){
     curdir="/${PWD##*/}"
