@@ -63,7 +63,7 @@ fi
 if [[ -n ${WSL_DISTRO_NAME} || -x /bin/wslpath ]]
 then
     # For displaying stuff with WSL
-    if [[ $(uname --kernel-release|grep 4.19) ]]
+    if [[ -n ${WSL_INTEROP} ]]
     then
         #WSL2
         export DISPLAY="$(awk '/nameserver/ {print $2}' /etc/resolv.conf):0.0"
