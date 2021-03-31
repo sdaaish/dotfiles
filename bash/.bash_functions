@@ -835,3 +835,7 @@ dockerpwshhere(){
            -w "${curdir}" \
            mcr.microsoft.com/powershell:ubuntu-18.04 "$@"
 }
+# Check GreyNoise
+function gn(){
+    curl -s https://api.greynoise.io/v3/community/$1 | python -m json.tool
+}
