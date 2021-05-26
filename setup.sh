@@ -12,6 +12,7 @@ base=(
     bin
     git
     gpg
+    emacs
 )
 
 # Stow apps to target, restow deletes the old and updates them again

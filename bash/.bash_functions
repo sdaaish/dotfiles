@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 DOTFILES=$HOME/.config/dotfiles
-EMACSDIR=$HOME/.config/emacs
+EMACSDIR=$HOME/.config/emacs.default
 
 #
 ## A place for all the functions
@@ -308,8 +308,7 @@ install-emacs-snapshot() {
 
 # Install emacs, DOOM version
 install-emacs-doom(){
-    git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.config/emacs
-    ~/.config/emacs/bin/doom install
+    ~/.config/emacs.doom/bin/doom install
 }
 
 # Install latest stable git-version
