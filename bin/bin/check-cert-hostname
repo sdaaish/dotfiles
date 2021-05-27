@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Checks a server certificate based on hostname or IP-address
+# Inspiration from http://www.shellhacks.com/en/HowTo-Check-SSL-Certificate-Expiration-Date-from-the-Linux-Shell
+
+# 2020-10-28/SDAA
+
+server=$1
+port=$2
+
+usage(){
+	  echo "Usage: $0 <server> [<port>]"
+	  exit 1
+}
+
+# main
+if [ ${port} ] ;then
+    connect=${server}:${port}
+    printf "\n"|openssl s_client -connect ${connect} 2>/dev/null| openssl x509 -noout -subject
+else
+    connect=${server}:443
+    printf "\n"|openssl s_client -connect ${connect} 2>/dev/null| openssl x509 -noout -subject
+fi

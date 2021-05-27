@@ -89,8 +89,10 @@ man() {
         man "$@"
 }
 
-# Get BBK from bredbandskollen
 get-bbk() {
+    # Get BBK from bredbandskollen
+    # Source code in https://github.com/dotse/bbk
+
     # Name for the file
     binary=~/bin/bbk_cli
 
@@ -136,10 +138,10 @@ get-powerline-fonts(){
     if [[ -d ~/tmp ]]
     then
         pushd ~/tmp
-        git clone https://github.com/powerline/fonts.git --depth=1 
-        cd fonts
+        git clone "https://github.com/powerline/fonts.git" --depth=1
+        cd fonts || exit
         ./install.sh
-        cd ..
+        cd .. || exit
         rm -rf fonts
         popd
     fi
@@ -166,13 +168,15 @@ oc() {
 }
 
 src() {
-    . ~/.bashrc
+    # shellcheck source=/dev/null
+    source "$HOME/.bashrc"
 }
+
 srca() {
-    printf "Udates $EMACSDIR and $DOTFILES\n"
+    printf "Udates %s and %s\n" "$EMACSDIR" "$DOTFILES"
     printf "Pulling dotfiles: "; git -C "$DOTFILES" pull
     printf "Pulling emacs-config: "; git -C "$EMACSDIR" pull
-    make -C "$DOTFILES"
+    (cd "$DOTFILES" || exit 1 ; ./setup.sh)
     make -C "$EMACSDIR"
     src
 }
@@ -189,8 +193,8 @@ ssa() {
         SSH_AUTH_SOCK="/tmp/ssh-auth.sock"
         SSH_AGENT_PID=$(pgrep ssh-agent)
     fi
-         export SSH_AUTH_SOCK
-         export SSH_AGENT_PID
+    export SSH_AUTH_SOCK
+    export SSH_AGENT_PID
 }
 # Add all local keys
 ssk() {
@@ -217,10 +221,13 @@ update-repos(){
     fi
 
     # git repositories
-    for D in $(find $dir -type d -name '\.git'); do
-	      git -C $(dirname $D) config --get remote.origin.url
-	      git -C $(dirname $D) pull
-	      echo
+    lista=$(find $dir -type d -name '\.git')
+    for D in $lista
+    do
+        DIR=$(dirname "$D")
+	      git -C "$DIR" config --get remote.origin.url
+        git -C "$DIR" pull
+        echo
     done
 }
 
@@ -404,7 +411,7 @@ function install-keybase-full {
     curl -O https://prerelease.keybase.io/keybase_amd64.deb
     sudo dpkg -i keybase_amd64.deb
     sudo apt-get install -f
-    run_keybase    
+    run_keybase
 }
 
 # Install keybase-cli
@@ -783,4 +790,52 @@ start_mitmproxy(){
            -v ${HOME}/tmp:/home/mitmproxy/tmp \
            -v /etc/timezone:/etc/timezone:ro \
            -p 127.0.0.1:8080:8080 mitmproxy/mitmproxy mitmproxy
+}
+# Docker features to quickly run containers
+# From https://blog.ropnop.com/docker-for-pentesters/
+dockershell(){
+    docker run --rm -it --entrypoint /bin/bash "$@"
+}
+dockershellsh(){
+    docker run --rm -it --entrypoint /bin/sh "$@"
+}
+dockerpwsh(){
+    docker run --rm -it mcr.microsoft.com/powershell:ubuntu-18.04 "$@"
+}
+dockertestssl(){
+    if [ $# -eq 0 ]
+    then
+        docker run --rm sdaaish/testssl.sh:latest --help
+        printf "Usage: dockertestssl <destination host/ip address>\n"
+    else
+        docker run --rm sdaaish/testssl.sh:latest --fast -S --quiet --hints "$@"
+    fi
+}
+dockershellhere(){
+    curdir="/${PWD##*/}"
+    docker run \
+           --rm -it \
+           -v "${PWD}":"${curdir}" \
+           -w "${curdir}" \
+           --entrypoint /bin/bash "$@"
+}
+dockershellshhere(){
+    curdir="/${PWD##*/}"
+    docker run \
+           --rm -it \
+           -v "${PWD}":"${curdir}" \
+           -w "${curdir}" \
+           --entrypoint /bin/sh "$@"
+}
+dockerpwshhere(){
+    curdir="/${PWD##*/}"
+    docker run \
+           --rm -it \
+           -v "${PWD}":"${curdir}" \
+           -w "${curdir}" \
+           mcr.microsoft.com/powershell:ubuntu-18.04 "$@"
+}
+# Check GreyNoise
+function gn(){
+    curl -s https://api.greynoise.io/v3/community/$1 | python -m json.tool
 }

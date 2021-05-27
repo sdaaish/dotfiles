@@ -16,18 +16,18 @@ base=(
 
 # Stow apps to target, restow deletes the old and updates them again
 stowit() {
-    target=$1
-    app=$2
-    stow -v -R -t ${target} ${app}
+    target="$1"
+    app="$2"
+    stow -v -R -t "${target}" "${app}"
 }
 
 echo ""
-echo "Stowing apps for user: ${whoami}"
+echo "Stowing apps for user: $(whoami)"
 
 # Install the apps
-for app in ${base[@]}
+for app in "${base[@]}"
 do
-    stowit "${HOME}" $app
+    stowit "${HOME}" "$app"
 done
 
 echo ""
