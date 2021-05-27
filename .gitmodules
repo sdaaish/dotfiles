@@ -4,3 +4,6 @@
 [submodule "emacs/.config/emacs.doom"]
 	path = emacs/.config/emacs.doom
 	url = https://github.com/hlissner/doom-emacs
+[submodule "emacs/.config/emacs.default"]
+	path = emacs/.config/emacs.default
+	url = git@github.com:sdaaish/emacs.d.git
