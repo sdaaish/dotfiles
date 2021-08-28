@@ -768,7 +768,12 @@ create-wsl-backup(){
                 --exclude .npm \
                 --exclude golang \
                 --exclude tmp \
-                --exclude .config/emacs/straight \
+                --exclude straight/repos \
+		            --exclude straight/build \
+		            --exclude *.deb \
+		            --exclude *.log \
+		            --exclude *.tgz \
+		            --exclude *.gz \
                 "${HOME}"
         else
             printf "No such directory: %s\n" ${backupdir}
