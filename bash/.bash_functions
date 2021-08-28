@@ -2,6 +2,7 @@
 
 DOTFILES=$HOME/.config/dotfiles
 EMACSDIR=$HOME/.config/emacs.default
+DOTPRIVATE=$HOME/.config/dotfiles.private
 
 #
 ## A place for all the functions
@@ -173,9 +174,10 @@ src() {
 }
 
 srca() {
-    printf "Udates %s and %s\n" "$EMACSDIR" "$DOTFILES"
+    printf "Udates %s, %s and %s\n" "$EMACSDIR" "$DOTFILES" "$DOTPRIVATE"
     printf "Pulling dotfiles: "; git -C "$DOTFILES" pull
     printf "Pulling emacs-config: "; git -C "$EMACSDIR" pull
+    printf "Pulling dotfiles: "; git -C "$DOTPRIVATE" pull
     (cd "$DOTFILES" || exit 1 ; ./setup.sh)
     make -C "$EMACSDIR"
     src
