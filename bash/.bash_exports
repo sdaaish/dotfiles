@@ -76,6 +76,7 @@ then
     fi
 
     export LIBGL_ALWAYS_INDIRECT=1
+    export GDK_DPI_SCALING=1.50
 
     # Set this to WSL for local use
     export DISTRO=WSL
