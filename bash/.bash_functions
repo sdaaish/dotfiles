@@ -108,12 +108,12 @@ get-bbk() {
 	  if [[ $ARCH == x86_64 ]]
 	  then
         AMD=https://frontend.bredbandskollen.se/download/bbk_cli_linux_amd64-1.0
-	      wget -qO ${binary} ${AMD}
+	      curl -so ${binary} -L ${AMD}
         chmod a+x ${binary}
     elif [[ $ARCH == armv7l ]]
     then
         ARM=https://frontend.bredbandskollen.se/download/bbk_cli_linux_armhf-1.0
-	      wget -qO ${binary} ${ARM}
+        curl -so ${binary} -L ${ARM}
         chmod a+x ${binary}
     else
 	      printf "No supported arch\n"
@@ -256,49 +256,6 @@ function check-remotes() {
     fi
 }
 
-#Install emacs.d, new version
-install-emacs-d(){
-
-    #If there is a link to old emacs-repo-file, remove it. If there is a file, move it to old.
-    if [[ -L ~/.emacs ]]
-    then
-	      rm -f ~/.emacs 2>/dev/null
-    fi
-
-    if [[ -L ~/.emacs.d ]]
-    then
-	      rm -f ~/.emacs 2>/dev/null
-    fi
-
-    if [[ -f ~/.emacs ]]
-    then
-	      mv -f ~/.emacs ~/.emacs.old 2>/dev/null
-    fi
-
-    #If there is an old emacs.d, move it to a backup copy
-    if [[ -d ~/.emacs.d ]]
-    then
-	      mv -f ~/.emacs.d ~/.emacs.d.old 2>/dev/null
-    fi
-
-    #If there is an old emacs.d, move it to a backup copy
-    if [[ -d "$EMACSDIR" ]]
-    then
-	      mv -f "$EMACSDIR" "$EMACSDIR.old" 2>/dev/null
-    fi
-
-    #Clone emacs.d repo to local repo-dir
-    if [[ $(grep git@github.com ~/.ssh/config 2>/dev/null) ]]
-    then
-	      SRC="git@github.com:sdaaish/emacs.d.git"
-    else
-	      SRC="https://github.com/sdaaish/emacs.d.git"
-    fi
-
-    git clone "${SRC}" "${EMACSDIR}"
-    make -C "${EMACSDIR}" emacs
-}
-
 # Install latest emacs version
 install-emacs-snapshot() {
     sudo apt-add-repository --yes ppa:ubuntu-elisp/ppa
@@ -310,7 +267,7 @@ install-emacs-snapshot() {
 
 # Install emacs, DOOM version
 install-emacs-doom(){
-    ~/.config/emacs.doom/bin/doom install
+    ~/.config/emacs.doom/bin/doom install --yes
 }
 
 # Install latest stable git-version
@@ -324,7 +281,7 @@ install-git-latest() {
 install-lxss-basic(){
     lista="git make binutils build-essential \
                html2text dos2unix gnupg gnutls-bin \
-               locate tree etckeeper most zsh apt-file"
+               locate tree most zsh apt-file"
 
     sudo apt-get -y -q update
     for prg in ${lista}
@@ -349,7 +306,7 @@ install-domain-tool(){
 
 # Install useful net-tools
 install-net-stuff(){
-    lista="sshguard screen tmux ssmtp mpack ufw nmap \
+    lista="sshguard tmux ssmtp mpack ufw nmap \
         iptraf ngrep htop nload curl wget telnet mtr-tiny"
 
     sudo apt-get -y -q update
@@ -363,11 +320,7 @@ install-net-stuff(){
 # Install unnecessary stuff
 install-fun-stuff(){
     lista="cowsay lolcat fortune fortunes-ubuntu-server fortunes-bofh-excuses sl"
-    for prg in $lista
-    do
-        printf "Installing ${prg}\n"
-        sudo apt-get install ${prg}
-    done
+    sudo apt-get install ${lista} --yes
     sudo apt-get -y autoremove
 }
 
