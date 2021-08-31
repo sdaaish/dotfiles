@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 DOTFILES=$HOME/.config/dotfiles
-EMACSDIR=$HOME/.config/emacs
+EMACSDIR=$HOME/.config/emacs.default
+DOTPRIVATE=$HOME/.config/dotfiles.private
 
 #
 ## A place for all the functions
@@ -173,9 +174,10 @@ src() {
 }
 
 srca() {
-    printf "Udates %s and %s\n" "$EMACSDIR" "$DOTFILES"
+    printf "Udates %s, %s and %s\n" "$EMACSDIR" "$DOTFILES" "$DOTPRIVATE"
     printf "Pulling dotfiles: "; git -C "$DOTFILES" pull
     printf "Pulling emacs-config: "; git -C "$EMACSDIR" pull
+    printf "Pulling dotfiles: "; git -C "$DOTPRIVATE" pull
     (cd "$DOTFILES" || exit 1 ; ./setup.sh)
     make -C "$EMACSDIR"
     src
@@ -308,8 +310,7 @@ install-emacs-snapshot() {
 
 # Install emacs, DOOM version
 install-emacs-doom(){
-    git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.config/emacs
-    ~/.config/emacs/bin/doom install
+    ~/.config/emacs.doom/bin/doom install
 }
 
 # Install latest stable git-version
@@ -769,7 +770,12 @@ create-wsl-backup(){
                 --exclude .npm \
                 --exclude golang \
                 --exclude tmp \
-                --exclude .config/emacs/straight \
+                --exclude straight/repos \
+		            --exclude straight/build \
+		            --exclude *.deb \
+		            --exclude *.log \
+		            --exclude *.tgz \
+		            --exclude *.gz \
                 "${HOME}"
         else
             printf "No such directory: %s\n" ${backupdir}
