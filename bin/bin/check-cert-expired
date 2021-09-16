@@ -4,7 +4,7 @@
 # Takes a servername or address, port and number of days as arguments.
 # Connects over network to the <address> on <port>.
 #
-# Stig Dahl <stig.dahl@svenskaspel.se>
+# Stig Dahl <stig|charlottendal.net>
 
 #set -x
 
