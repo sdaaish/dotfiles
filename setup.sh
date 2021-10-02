@@ -3,8 +3,7 @@
 # Example taken from https://writingco.de/blog/how-i-manage-my-dotfiles-using-gnu-stow/
 
 # Update git submodules
-git submodule init
-git submodule update
+git submodule update --init
 
 # Stow the following directories
 base=(
