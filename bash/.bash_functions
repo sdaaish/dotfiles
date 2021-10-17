@@ -584,6 +584,7 @@ gpu(){
     killall pinentry-curses 2>/dev/null
     /usr/bin/gpg-connect-agent reloadagent /bye
     /usr/bin/gpg-connect-agent updatestartuptty /bye
+    export SSH_AUTH_SOCK="/run/user/$(id -u)/gnupg/S.gpg-agent.ssh"
 }
 
 # Kill gpg-agent

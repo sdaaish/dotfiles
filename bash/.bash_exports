@@ -96,4 +96,6 @@ fi
 if [ -n ${WSL_AUTH_SOCK} ]
 then
     export SSH_AUTH_SOCK=${WSL_AUTH_SOCK}
+else
+    export SSH_AUTH_SOCK="/run/user/$(id -u)/gnupg/S.gpg-agent.ssh"
 fi
