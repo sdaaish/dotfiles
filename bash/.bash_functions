@@ -139,7 +139,7 @@ get-nerd-fonts(){
     fontarchive="CaskaydiaCode.zip"
     pushd "${HOME}/.local/share/fonts/"||exit 1
     curl -fLo ${fontarchive} "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/CascadiaCode.zip"
-    unzip ${fontarchive}
+    unzip -o ${fontarchive}
     fc-cache -fv
     rm -f ${fontarchive}
     popd||exit 1
