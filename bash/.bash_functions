@@ -134,18 +134,35 @@ get-base16() {
     fi
 }
 
+# Get Nerd Fonts
+get-nerd-fonts(){
+    fontarchive="CaskaydiaCode.zip"
+    pushd "${HOME}/.local/share/fonts/"||exit 1
+    curl -fLo ${fontarchive} "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/CascadiaCode.zip"
+    unzip ${fontarchive}
+    fc-cache -fv
+    rm -f ${fontarchive}
+    popd||exit 1
+}
+
 # Get powerline fonts
 get-powerline-fonts(){
     if [[ -d ~/tmp ]]
     then
-        pushd ~/tmp
+        pushd "${HOME}/tmp"||exit 1
         git clone "https://github.com/powerline/fonts.git" --depth=1
         cd fonts || exit
         ./install.sh
         cd .. || exit
         rm -rf fonts
-        popd
+        popd||exit 1
     fi
+}
+
+# Alias for fonts
+get-fonts(){
+    get-nerd-fonts
+    get-powerline-fonts
 }
 
 # find links
