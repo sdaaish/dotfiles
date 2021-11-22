@@ -660,6 +660,16 @@ install-rclone(){
 install-microsoft-teams(){
     sudo snap install teams-for-linux --edge
 }
+
+# age encryption tool
+install-age-tool(){
+    RELEASE="v1.0.0"
+    url="https://github.com/FiloSottile/age/releases/download/${RELEASE}/age-${RELEASE}-linux-amd64.tar.gz"
+    curl -sL -o - ${url}|tar  xvfz - -C ${HOME} >/dev/null
+    cp -f ${HOME}/age/age* ${HOME}/bin
+    rm -rf ${HOME}/age
+}
+
 # password-manager functions
 pf(){
     pass find "$1"
