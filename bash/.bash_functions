@@ -134,18 +134,35 @@ get-base16() {
     fi
 }
 
+# Get Nerd Fonts
+get-nerd-fonts(){
+    fontarchive="CaskaydiaCode.zip"
+    pushd "${HOME}/.local/share/fonts/"||exit 1
+    curl -fLo ${fontarchive} "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/CascadiaCode.zip"
+    unzip -o ${fontarchive}
+    fc-cache -fv
+    rm -f ${fontarchive}
+    popd||exit 1
+}
+
 # Get powerline fonts
 get-powerline-fonts(){
     if [[ -d ~/tmp ]]
     then
-        pushd ~/tmp
+        pushd "${HOME}/tmp"||exit 1
         git clone "https://github.com/powerline/fonts.git" --depth=1
         cd fonts || exit
         ./install.sh
         cd .. || exit
         rm -rf fonts
-        popd
+        popd||exit 1
     fi
+}
+
+# Alias for fonts
+get-fonts(){
+    get-nerd-fonts
+    get-powerline-fonts
 }
 
 # find links
@@ -584,6 +601,7 @@ gpu(){
     killall pinentry-curses 2>/dev/null
     /usr/bin/gpg-connect-agent reloadagent /bye
     /usr/bin/gpg-connect-agent updatestartuptty /bye
+    export SSH_AUTH_SOCK="/run/user/$(id -u)/gnupg/S.gpg-agent.ssh"
 }
 
 # Kill gpg-agent
@@ -642,6 +660,16 @@ install-rclone(){
 install-microsoft-teams(){
     sudo snap install teams-for-linux --edge
 }
+
+# age encryption tool
+install-age-tool(){
+    RELEASE="v1.0.0"
+    url="https://github.com/FiloSottile/age/releases/download/${RELEASE}/age-${RELEASE}-linux-amd64.tar.gz"
+    curl -sL -o - ${url}|tar  xvfz - -C ${HOME} >/dev/null
+    cp -f ${HOME}/age/age* ${HOME}/bin
+    rm -rf ${HOME}/age
+}
+
 # password-manager functions
 pf(){
     pass find "$1"

@@ -44,6 +44,7 @@ alias gta='git alias'
 alias gtd='git diff'
 alias gtr='git log --graph'
 alias gts='git status -sb'
+alias gtss="git status -sb --ignore-submodules=dirty"
 alias gtp='git push && git pull'
 alias glog="\git log --color --all --date-order --decorate --dirstat=lines,cumulative --stat | sed 's/\([0-9] file[s]\? .*)$\)/\1\n_______\n-------/g' | \less -R"
 
@@ -75,7 +76,7 @@ alias ov="openssl verify"
 alias o5="openssl x509 -text -noout"
 
 # Fonts
-alias install-fonts="sudo apt-get install fonts-powerline"
+alias install-fonts="sudo apt-get install fonts-powerline fonts-cascadia-code --yes"
 
 # Tools
 alias psa="ps ax -O ppid"
