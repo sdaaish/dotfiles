@@ -668,6 +668,10 @@ install-age-tool(){
     curl -sL -o - ${url}|tar  xvfz - -C ${HOME} >/dev/null
     cp -f ${HOME}/age/age* ${HOME}/bin
     rm -rf ${HOME}/age
+# Oh My Posh
+install-oh-my-posh() {
+    wget https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-amd64 -O "${HOME}/bin/oh-my-posh"
+    chmod +x "${HOME}/bin/oh-my-posh"
 }
 
 # password-manager functions
