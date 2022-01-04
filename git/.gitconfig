@@ -21,7 +21,7 @@
 	excludesFile = ~/.config/git/.gitignore.global
 	attributesFile = ~/.config/git/attributes
 	editor = emacsclient -t -a=
-	autocrlf = false
+	autocrlf = input
 	eol = lf
 	filemode = false
 
