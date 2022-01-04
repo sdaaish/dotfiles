@@ -63,10 +63,15 @@ fi
 if [[ -n ${WSL_DISTRO_NAME} || -x /bin/wslpath ]]
 then
     # For displaying stuff with WSL
-    if [[ -n ${WSL_INTEROP} ]]
+    if [[ -n ${PULSE_SERVER} ]]
     then
-        #WSL2
-        export DISPLAY="$(awk '/nameserver/ {print $2}' /etc/resolv.conf):0.0"
+        # WSLg in Windows 11
+        export DISPLAY=":0"
+
+    elif [[ -n ${WSL_INTEROP} ]]
+
+         #WSL2
+         export DISPLAY="$(awk '/nameserver/ {print $2}' /etc/resolv.conf):0.0"
     else
         #WSL1
         export DISPLAY=:0.0
@@ -75,27 +80,27 @@ then
         export DOCKER_HOST=tcp://localhost:2375
     fi
 
-    export LIBGL_ALWAYS_INDIRECT=1
-    export GDK_DPI_SCALING=1.50
+         export LIBGL_ALWAYS_INDIRECT=1
+         export GDK_DPI_SCALING=1.50
 
-    # Set this to WSL for local use
-    export DISTRO=WSL
-fi
+         # Set this to WSL for local use
+         export DISTRO=WSL
+    fi
 
-# GnuPG stuff
-export GPG_TTY=$(tty)
+         # GnuPG stuff
+         export GPG_TTY=$(tty)
 
-# My repositories
-export REPODIR="$HOME/repos"
-if [ ! -d "$REPODIR" ]
-then
-    mkdir -m 0755 "$REPODIR"
-fi
+         # My repositories
+         export REPODIR="$HOME/repos"
+         if [ ! -d "$REPODIR" ]
+         then
+             mkdir -m 0755 "$REPODIR"
+         fi
 
-# https://polansky.co/blog/a-better-windows-wsl-openssh-experience/
-if [ -n ${WSL_AUTH_SOCK} ]
-then
-    export SSH_AUTH_SOCK=${WSL_AUTH_SOCK}
-else
-    export SSH_AUTH_SOCK="/run/user/$(id -u)/gnupg/S.gpg-agent.ssh"
-fi
+         # https://polansky.co/blog/a-better-windows-wsl-openssh-experience/
+         if [ -n ${WSL_AUTH_SOCK} ]
+         then
+             export SSH_AUTH_SOCK=${WSL_AUTH_SOCK}
+         else
+             export SSH_AUTH_SOCK="/run/user/$(id -u)/gnupg/S.gpg-agent.ssh"
+         fi

@@ -3,14 +3,26 @@
 #       https://github.com/thomd/dotfiles/blob/master/.gitconfig
 #       https://github.com/jalcine/gitrc/blob/master/home/.gitconfig
 #       http://durdn.com/blog/2012/11/22/must-have-git-aliases-advanced-examples/
+#
+# Line endings on Windows:
+#      https://www.aleksandrhovhannisyan.com/blog/crlf-vs-lf-normalizing-line-endings-in-git/
+#
 
 [push]
 	default = simple
 
+[pull]
+	ff = only
+
+[diff]
+	noprefix = true
+
 [core]
 	excludesFile = ~/.config/git/.gitignore.global
+	attributesFile = ~/.config/git/attributes
 	editor = emacsclient -t -a=
-	autocrlf = false
+	autocrlf = input
+	eol = lf
 	filemode = false
 
 [color]
@@ -74,6 +86,7 @@
 	f = "!git ls-files | grep -i"
 	stl = stash list --pretty=format:'%C(blue)%gd %C(red)* %C(yellow)%s'
 	ru = remote -v update
+	eol = ls-files --eol
 
 #
 # Include local or personal stuff from these files.
@@ -102,7 +115,3 @@
 
 [magit]
 	hideCampaign = true
-[diff]
-	noprefix = true
-[pull]
-	ff = only
