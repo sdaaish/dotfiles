@@ -668,6 +668,8 @@ install-age-tool(){
     curl -sL -o - ${url}|tar  xvfz - -C ${HOME} >/dev/null
     cp -f ${HOME}/age/age* ${HOME}/bin
     rm -rf ${HOME}/age
+}
+
 # Oh My Posh
 install-oh-my-posh() {
     wget https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-amd64 -O "${HOME}/bin/oh-my-posh"
@@ -833,6 +835,6 @@ dockerpwshhere(){
            mcr.microsoft.com/powershell:ubuntu-18.04 "$@"
 }
 # Check GreyNoise
-function gn(){
-    curl -s https://api.greynoise.io/v3/community/$1 | python -m json.tool
+gn(){
+    curl -s "https://api.greynoise.io/v3/community/${1}" | python -m json.tool
 }

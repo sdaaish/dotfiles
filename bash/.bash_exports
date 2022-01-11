@@ -31,14 +31,16 @@ export LESS_TERMCAP_ZW=$(tput rsupm)
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # Local go
-if [ -d "$HOME/bin" ];then
+if [ -d "$HOME/bin" ]
+then
     PATH="$HOME/bin:/sbin:/usr/sbin:$HOME/golang/bin:$PATH"
 fi
 
 export GOPATH="$HOME/golang"
 
 # Local python stuff
-if [ -d "$HOME/.local/bin" ];then
+if [ -d "$HOME/.local/bin" ]
+then
     PATH="$PATH:$HOME/.local/bin"
 fi
 
@@ -69,38 +71,39 @@ then
         export DISPLAY=":0"
 
     elif [[ -n ${WSL_INTEROP} ]]
+    then
+        #WSL2
+        export DISPLAY="$(awk '/nameserver/ {print $2}' /etc/resolv.conf):0.0"
 
-         #WSL2
-         export DISPLAY="$(awk '/nameserver/ {print $2}' /etc/resolv.conf):0.0"
     else
         #WSL1
         export DISPLAY=:0.0
 
         # Docker on WSL
         export DOCKER_HOST=tcp://localhost:2375
+
+        export LIBGL_ALWAYS_INDIRECT=1
+        export GDK_DPI_SCALING=1.50
+
+        # Set this to WSL for local use
+        export DISTRO=WSL
     fi
 
-         export LIBGL_ALWAYS_INDIRECT=1
-         export GDK_DPI_SCALING=1.50
+    # GnuPG stuff
+    export GPG_TTY=$(tty)
 
-         # Set this to WSL for local use
-         export DISTRO=WSL
+    # My repositories
+    export REPODIR="$HOME/repos"
+    if [[ ! -d "$REPODIR" ]]
+    then
+        mkdir -m 0755 "$REPODIR"
     fi
 
-         # GnuPG stuff
-         export GPG_TTY=$(tty)
-
-         # My repositories
-         export REPODIR="$HOME/repos"
-         if [ ! -d "$REPODIR" ]
-         then
-             mkdir -m 0755 "$REPODIR"
-         fi
-
-         # https://polansky.co/blog/a-better-windows-wsl-openssh-experience/
-         if [ -n ${WSL_AUTH_SOCK} ]
-         then
-             export SSH_AUTH_SOCK=${WSL_AUTH_SOCK}
-         else
-             export SSH_AUTH_SOCK="/run/user/$(id -u)/gnupg/S.gpg-agent.ssh"
-         fi
+    # https://polansky.co/blog/a-better-windows-wsl-openssh-experience/
+    if [[ -n ${WSL_AUTH_SOCK} ]]
+    then
+        export SSH_AUTH_SOCK=${WSL_AUTH_SOCK}
+    else
+        export SSH_AUTH_SOCK="/run/user/$(id -u)/gnupg/S.gpg-agent.ssh"
+    fi
+fi
