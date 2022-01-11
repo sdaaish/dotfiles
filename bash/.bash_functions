@@ -295,29 +295,24 @@ install-git-latest() {
 }
 
 # Install basic stuff that are useful on virtual linux-machines
-install-lxss-basic(){
+install-linux-basic(){
     lista="git make binutils build-essential \
                html2text dos2unix gnupg gnutls-bin \
-               locate tree most zsh apt-file"
+               locate tree most zsh apt-file pass"
 
     sudo apt-get -y -q update
-    for prg in ${lista}
-    do
-        printf "Installing ${prg}\n"
-        sudo apt-get -y -q install ${prg}
-    done
+    printf "Installing %s\n" ${lista}
+    sudo apt-get -y -q install ${lista}
     sudo apt-get -y autoremove
 }
 
 # Install domain-tools
 install-domain-tool(){
     lista="dnsutils bind9-host bind9utils whois"
+
     sudo apt-get -y -q update
-    for prg in ${lista}
-    do
-        printf "Installing ${prg}\n"
-        sudo apt-get -y -q install ${prg}
-    done
+    printf "Installing %s\n" ${lista}
+    sudo apt-get -y -q install ${lista}
     sudo apt-get -y autoremove
 }
 
@@ -327,16 +322,15 @@ install-net-stuff(){
         iptraf ngrep htop nload curl wget telnet mtr-tiny"
 
     sudo apt-get -y -q update
-    for prg in ${lista}
-    do
-        printf "Installing ${prg}\n"
-        sudo apt-get -y -q install ${prg}
-    done
+    printf "Installing %s\n" ${lista}
+    sudo apt-get -y -q install ${lista}
     sudo apt-get -y autoremove
 }
+
 # Install unnecessary stuff
 install-fun-stuff(){
     lista="cowsay lolcat fortune fortunes-ubuntu-server fortunes-bofh-excuses sl"
+    printf "Installing %s\n" ${lista}
     sudo apt-get install ${lista} --yes
     sudo apt-get -y autoremove
 }
