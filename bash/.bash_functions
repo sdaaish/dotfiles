@@ -671,7 +671,7 @@ install-oh-my-posh() {
 
     mkdir "${HOME}/.poshthemes"
     wget https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/themes.zip -O ~/.poshthemes/themes.zip
-    unzip ~/.poshthemes/themes.zip -d ~/.poshthemes
+    unzip -o -f ~/.poshthemes/themes.zip -d ~/.poshthemes
     chmod u+rw ~/.poshthemes/*.json
     rm -f ~/.poshthemes/themes.zip
 }
