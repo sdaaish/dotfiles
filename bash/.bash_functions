@@ -850,3 +850,10 @@ dockerpwshhere(){
 gn(){
     curl -s "https://api.greynoise.io/v3/community/${1}" | python -m json.tool
 }
+# Repository for org-files
+orgit(){
+    gitdir="${HOME}/.orgit"
+    workdir="${HOME}/OneDrive/emacs"
+
+    git --git-dir=$gitdir --work-tree=$workdir $@
+}
