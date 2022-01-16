@@ -700,38 +700,56 @@ markdown2org(){
 }
 # Start docker version onedrive
 start_onedrive(){
+    # Normal start of OneDrive
+    ONEDRIVE_UID=$(id -u)
+    ONEDRIVE_GID=$(id -g)
     OneDriveDir="${HOME}/OneDrive"
     OneDriveConf="${HOME}/.config/onedrive"
+
     docker run \
            --detach \
            --restart unless-stopped \
            --name onedrive \
-           -e ONEDRIVE_VERBOSE=1 \
+           -e "ONEDRIVE_VERBOSE=1" \
+           -e "ONEDRIVE_UID:${ONEDRIVE_UID}" \
+           -e "ONEDRIVE_GID:${ONEDRIVE_GID}" \
            -v "${OneDriveConf}":/onedrive/conf \
            -v "${OneDriveDir}":/onedrive/data \
            onedrive
 }
 start_onedrive_resync(){
+    # Resynchronize OneDrive
     OneDriveDir="${HOME}/OneDrive"
     OneDriveConf="${HOME}/.config/onedrive"
+    ONEDRIVE_UID=$(id -u)
+    ONEDRIVE_GID=$(id -g)
+
     docker run \
            --restart unless-stopped \
            --name onedrive \
-           -e ONEDRIVE_VERBOSE=1 \
-           -e ONEDRIVE_RESYNC=1 \
-           -v "${OneDriveConf}":/onedrive/conf \
-           -v "${OneDriveDir}":/onedrive/data \
+           -e "ONEDRIVE_VERBOSE=1" \
+           -e "ONEDRIVE_RESYNC=1" \
+           -e "ONEDRIVE_UID:${ONEDRIVE_UID}" \
+           -e "ONEDRIVE_GID:${ONEDRIVE_GID}" \
+           -v "${OneDriveConf}:/onedrive/conf" \
+           -v "${OneDriveDir}:/onedrive/data" \
            onedrive
 }
-start_onedrive_login(){
+start_onedrive_logout(){
+    # Reauthenticate OneDrive
     OneDriveDir="${HOME}/OneDrive"
     OneDriveConf="${HOME}/.config/onedrive"
+    ONEDRIVE_UID=$(id -u)
+    ONEDRIVE_GID=$(id -g)
+
     docker run \
            -it \
            --restart unless-stopped \
            --name onedrive \
-           -e ONEDRIVE_VERBOSE=1 \
-           -e ONEDRIVE_RESYNC=1 \
+           -e "ONEDRIVE_VERBOSE=1" \
+           -e "ONEDRIVE_LOGOUT=1" \
+           -e "ONEDRIVE_UID:${ONEDRIVE_UID}" \
+           -e "ONEDRIVE_GID:${ONEDRIVE_GID}" \
            -v "${OneDriveConf}":/onedrive/conf \
            -v "${OneDriveDir}":/onedrive/data \
            onedrive
