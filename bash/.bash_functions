@@ -659,9 +659,9 @@ install-microsoft-teams(){
 install-age-tool(){
     RELEASE="v1.0.0"
     url="https://github.com/FiloSottile/age/releases/download/${RELEASE}/age-${RELEASE}-linux-amd64.tar.gz"
-    curl -sL -o - ${url}|tar  xvfz - -C ${HOME} >/dev/null
-    cp -f ${HOME}/age/age* ${HOME}/bin
-    rm -rf ${HOME}/age
+    curl -sL -o - "${url}"|tar  xvfz - -C "${HOME}" >/dev/null
+    cp -f "${HOME}/age/age*" "${HOME}/bin"
+    rm -rf "${HOME}/age"
 }
 
 # Oh My Posh
