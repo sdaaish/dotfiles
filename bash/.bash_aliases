@@ -57,9 +57,11 @@ alias emk='emacsclient --eval "(save-buffers-kill-emacs)" --no-wait'
 alias emfg='emacs --fg-daemon --debug-init'
 alias emq='emacs -Q \
 --border-color "White smoke" \
---foreground-color "dark red" \
---cursor-color "gray" \
---no-blinking-cursor'
+--background-color "LightSkyBlue1" \
+--foreground-color "black" \
+--cursor-color "DarkBlue" \
+--no-blinking-cursor \
+--eval "(toggle-frame-fullscreen)"'
 alias doom='~/.config/emacs/bin/doom'
 
 # binary support
