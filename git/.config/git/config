@@ -81,27 +81,27 @@
 	path = ~/.config/git/alias	
 
 [include]
-	path = ~/.config/git/.gitconfig.local
+	path = ~/.config/git/local
 
 [includeIf "gitdir/i:~/[rR]epos/**"]
-	path = ~/.config/git/.gitconfig.private
+	path = ~/.config/git/private
 
 [includeIf "gitdir/i:~/[vV]agrantdir/**"]
-	path = ~/.config/git/.gitconfig.private
+	path = ~/.config/git/private
 
 [includeIf "gitdir/i:**/[Uu]sers/**/[vV]agrantdir/**"]
-	path = ~/.config/git/.gitconfig.private
+	path = ~/.config/git/private
 
 [includeIf "gitdir/i:~/.config/**"]
-	path = ~/.config/git/.gitconfig.private
+	path = ~/.config/git/private
 
 # Work related configs
 ## Both in Windows and in WSL
 [includeIf "gitdir/i:~/[wW]ork/**"]
-	path = ~/.config/git/.gitconfig.work
+	path = ~/.config/git/work
 
 [includeIf "gitdir/i:**/[Uu]sers/**/[wW]ork/**"]
-	path = ~/.config/git/.gitconfig.work
+	path = ~/.config/git/work
 
 [magit]
 	hideCampaign = true
