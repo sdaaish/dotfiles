@@ -632,8 +632,12 @@ create-wsl-links(){
             printf "Linking directories to ${userpath}:\n"
             for i in ${userdirs}
             do
-                printf "${userpath}/${i}\n"
-                ln -s ${userpath}/${i} ${HOME}
+                # Only create if destination exists
+                if [ -d "${userpath}/${i}" ]
+                then
+                    printf "${userpath}/${i}\n"
+                    ln -s ${userpath}/${i} ${HOME}
+                fi
             done
         else
             printf "No such user: ${userpath}\n"
