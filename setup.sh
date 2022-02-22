@@ -2,6 +2,8 @@
 
 # Example taken from https://writingco.de/blog/how-i-manage-my-dotfiles-using-gnu-stow/
 
+mkdir ~/{.cache/custom,bin,tmp,code,repos} 2>/dev/null
+
 # Update git submodules
 git submodule update --init
 
