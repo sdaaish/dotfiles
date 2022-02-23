@@ -639,6 +639,8 @@ create-wsl-links(){
                     ln -s ${userpath}/${i} ${HOME}
                 fi
             done
+            printf "Creating link to Windows directory\n"
+            ln -s "${userpath}" "${HOME}/windir"
         else
             printf "No such user: ${userpath}\n"
         fi
