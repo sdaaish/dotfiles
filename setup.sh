@@ -20,7 +20,7 @@ base=(
 stowit() {
     target="$1"
     app="$2"
-    stow -v -R -t "${target}" "${app}"
+    stow -v -R -t "${target}" "${app}" 2>&1| grep -v BUG
 }
 
 echo ""
