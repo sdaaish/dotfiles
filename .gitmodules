@@ -7,5 +7,5 @@
 	branch = develop
 [submodule "emacs/.config/emacs.default"]
 	path = emacs/.config/emacs.default
-	url = git@github.com:sdaaish/emacs.d.git
+	url = https://github.com/sdaaish/emacs.d.git
 	ignore = dirty
