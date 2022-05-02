@@ -57,20 +57,8 @@
 	linenumber = true
 
 # Rewrite Urls
-[url "git@github.com/"]
-	pushInsteadOf = https://github.com/
-
-[url "git@github.com:"]
-	pushInsteadOf = https://github.com/
-
 [url "ssh://git@github.com:"]
 	pushInsteadOf = https://github.com/
-
-[url "git@gitlab.com/"]
-	pushInsteadOf = https://gitlab.com/
-
-[url "git@gitlab.com:"]
-	pushInsteadOf = https://gitlab.com/
 
 [url "ssh://git@gitlab.com:"]
 	pushInsteadOf = https://gitlab.com/
