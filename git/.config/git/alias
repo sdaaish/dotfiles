@@ -1,31 +1,34 @@
 [alias]
-	alias = "!git config --list | grep alias|cut -c 7-"
 	a = "!git alias"
-	co = checkout
-	st = status -sb
-	ci = commit
+	alias = "!git config --list | grep alias|cut -c 7-"
 	br = branch
-	last = log -1 HEAD
-	unstage = reset HEAD --
-	nah = reset --hard
-	changes = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\" --name-status
-	short = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\"
 	changelog = log --pretty=format:\" * %s\"
-	shortnocolor = log --pretty=format:\"%h %cr %cn %s\"
-	ls = ls-files
-	lo = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cgreen\\ [%cn]%Creset" --decorate
-	lol = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cgreen\\ [%cn]%Creset" --decorate --numstat
-	lnc = log --pretty=format:"%h\\ %s\\ [%cn]"
-	lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cgreen\\ [%cn]%Creset" --decorate --date=short
-	ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cgreen\\ [%cn]%Creset" --decorate --date=relative
-	le = log --oneline --decorate
-	fl = log -u
-	lt = log --graph --oneline --decorate --all
-	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+	changes = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\" --name-status
+	ci = commit
+	co = checkout
 	dl = "!git ll -1"
 	dlc = diff --cached HEAD^
-	gr = grep -Ii
-	f = "!git ls-files | grep -i"
-	stl = stash list --pretty=format:'%C(blue)%gd %C(red)* %C(yellow)%s'
-	ru = remote -v update
 	eol = ls-files --eol
+	f = "!git ls-files | grep -i"
+	fl = log -u
+	gr = grep -Ii
+	last = log -1 HEAD
+	ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cgreen\\ [%cn]%Creset" --decorate --date=relative
+	lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cgreen\\ [%cn]%Creset" --decorate --date=short
+	le = log --oneline --decorate
+	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+	lnc = log --pretty=format:"%h\\ %s\\ [%cn]"
+	lo = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cgreen\\ [%cn]%Creset" --decorate
+	lol = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cgreen\\ [%cn]%Creset" --decorate --numstat
+	ls = ls-files
+	lt = log --graph --oneline --decorate --all
+	nah = reset --hard
+	ru = remote -v update
+	short = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\"
+	shortnocolor = log --pretty=format:\"%h %cr %cn %s\"
+	st = status -sb
+	stl = stash list --pretty=format:'%C(blue)%gd %C(red)* %C(yellow)%s'
+	unstage = reset HEAD --
+  cat = cat-file
+  lst = ls-tree
+
