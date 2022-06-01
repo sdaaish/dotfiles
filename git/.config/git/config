@@ -83,6 +83,9 @@
 [includeIf "gitdir/i:~/.config/**"]
 	path = ~/.config/git/private
 
+[includeIf "gitdir/i:~/AppData/**"]
+	path = ~/.config/git/private
+
 # Work related configs
 ## Both in Windows and in WSL
 [includeIf "gitdir/i:~/[wW]ork/**"]
