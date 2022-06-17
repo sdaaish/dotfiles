@@ -13,6 +13,7 @@
 	fl = log -u
 	gr = grep -Ii
 	last = log -1 HEAD
+	la = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset %C(cyan)auth:%ae%Creset %C(magenta)comm:%cE\"
 	ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cgreen\\ [%cn]%Creset" --decorate --date=relative
 	lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cgreen\\ [%cn]%Creset" --decorate --date=short
 	le = log --oneline --decorate
@@ -29,6 +30,6 @@
 	st = status -sb
 	stl = stash list --pretty=format:'%C(blue)%gd %C(red)* %C(yellow)%s'
 	unstage = reset HEAD --
-  cat = cat-file
-  lst = ls-tree
+	cat = cat-file
+	lst = ls-tree
 
