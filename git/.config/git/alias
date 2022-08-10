@@ -22,6 +22,7 @@
 	lo = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cgreen\\ [%cn]%Creset" --decorate
 	lol = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cgreen\\ [%cn]%Creset" --decorate --numstat
 	ls = ls-files
+	lso = ls-files --others --directory --no-empty-directory
 	lt = log --graph --oneline --decorate --all
 	nah = reset --hard
 	ru = remote -v update
