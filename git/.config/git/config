@@ -87,11 +87,19 @@
 	path = ~/.config/git/private
 
 # Work related configs
+
 ## Both in Windows and in WSL
 [includeIf "gitdir/i:~/[wW]ork/**"]
 	path = ~/.config/git/work
 
 [includeIf "gitdir/i:**/[Uu]sers/**/[wW]ork/**"]
+	path = ~/.config/git/work
+
+# For Visual Studio default repository location
+[includeIf "gitdir/i:~/source/**"]
+	path = ~/.config/git/work
+
+[includeIf "gitdir/i:**/[Uu]sers/**/source/**"]
 	path = ~/.config/git/work
 
 [magit]
