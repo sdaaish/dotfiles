@@ -511,10 +511,15 @@ fix-wsl-ssh() {
 }
 
 # Mount Windows filesystem on correct-path
+# https://docs.microsoft.com/en-us/windows/wsl/wsl-config
 fix-wsl-mountpoint(){
     if [ ! -f /etc/wsl.conf ]
     then
         printf "[automount]\nroot = /\noptions = \"metadata\"\n" > /etc/wsl.conf
+        printf "[network]\n#hostname = DemoHost\n#generateHosts = false\n#generateResolvConf = false" >> /etc/wsl.conf
+        printf "[interop]\n#enabled = false\n#appendWindowsPath = false" >> /etc/wsl.conf
+        printf "[user]\n#default = DemoUser" >> /etc/wsl.conf
+        printf "[boot]\n#command = service docker start" >> /etc/wsl.conf
     else
         printf "Error: /etc/wsl does already exist!\n"
     fi
@@ -542,14 +547,22 @@ install-docker-for-wsl() {
     # Update the apt package list.
     sudo apt-get update --yes
 
+    # Remove old version
+    sudo apt-get remove docker docker-engine docker.io containerd runc
+
     # Install Docker's package dependencies.
     sudo apt-get install --yes \
          apt-transport-https \
          ca-certificates \
          curl \
-         software-properties-common
+         gnupg \
+         software-properties-common \
+         lsb-release \
+         python3 \
+         python3-pip
 
     # Download and add Docker's official public PGP key.
+    sudo mkdir -p /etc/apt/keyrings
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
     # Verify the fingerprint.
@@ -563,16 +576,10 @@ install-docker-for-wsl() {
     sudo apt-get update --yes
 
     # Install the latest version of Docker CE.
-    sudo apt-get install --yes docker-ce
+    sudo apt-get install --yes docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
     # Allow your user to access the Docker CLI without needing root access.
     sudo usermod -aG docker $USER
-
-    # Install Python and PIP.
-    sudo apt-get install -y python3 python3-pip
-
-    # Install Docker Compose into your user's home directory.
-    pip install --user docker-compose
 }
 
 # Tmux plugin manager
