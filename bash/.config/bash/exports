@@ -5,6 +5,7 @@ export EDITOR="emacsclient -t"
 export VISUAL="emacsclient -c -a emacs"
 export DOOMDIR="~/.config/doom"
 export GNUPGHOME="~/.config/gnupg"
+export STARSHIP_CONFIG="~/.config/starship/starship.toml"
 
 # http://askubuntu.com/questions/466198/how-do-i-change-the-color-for-directories-with-ls-in-the-console
 # http://linux-sxs.org/housekeeping/lscolors.html
@@ -110,4 +111,10 @@ then
     else
         export SSH_AUTH_SOCK="/run/user/$(id -u)/gnupg/S.gpg-agent.ssh"
     fi
+fi
+
+# Use starship as prompt, https://starship.rs
+if [ -x starship ]
+then
+    eval "$(starship init bash)"
 fi
