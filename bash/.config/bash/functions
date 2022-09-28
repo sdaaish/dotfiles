@@ -691,13 +691,8 @@ install-oh-my-posh() {
 
 # Starship, https://starship.rs
 install-starship () {
-    if [[ $EUID -ne 0 ]]
-    then
-        printf "This script needs to be run as root or with sudo.\n"
-        exit 1
-    else
-        curl -sS https://starship.rs/install.sh | sh
-    fi
+    sudo -k
+    curl -sS https://starship.rs/install.sh | sh
 }
 
 # password-manager functions

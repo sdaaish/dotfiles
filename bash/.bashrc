@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
 # load shell dotfiles
-for file in ~/.config/bash/{exports,aliases,functions,private,git-completion.bash,git-prompt.sh}
+for file in ${HOME}/.config/bash/{exports,aliases,functions,private,git-completion.bash,git-prompt.sh}
 do
     if [ -r ${file} ]
     then
-        source ${file}
+        source "${file}"
     fi
 done
 unset file
@@ -25,7 +25,7 @@ esac
 #
 
 # Keep home clean
-HISTFILE=~/.cache/custom/history
+HISTFILE="${HOME}/.cache/custom/history"
 
 # don't put duplicate lines or lines starting with space in the history.
 HISTCONTROL=ignoreboth
@@ -114,3 +114,11 @@ fi
 # From https://github.com/chriskempson/base16-shell
 BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+
+# Use starship as prompt, https://starship.rs
+if [ -x $(which starship) ]
+then
+    eval "$(starship init bash)"
+else
+    printf "Using default prompt\n"
+fi

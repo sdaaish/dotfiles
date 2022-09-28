@@ -3,9 +3,9 @@
 export ALTERNATE_EDITOR=""
 export EDITOR="emacsclient -t"
 export VISUAL="emacsclient -c -a emacs"
-export DOOMDIR="~/.config/doom"
-export GNUPGHOME="~/.config/gnupg"
-export STARSHIP_CONFIG="~/.config/starship/starship.toml"
+export DOOMDIR="${HOME}/.config/doom"
+export GNUPGHOME="${HOME}/.config/gnupg"
+export STARSHIP_CONFIG="${HOME}/.config/starship/starship.toml"
 
 # http://askubuntu.com/questions/466198/how-do-i-change-the-color-for-directories-with-ls-in-the-console
 # http://linux-sxs.org/housekeeping/lscolors.html
@@ -15,7 +15,7 @@ export TERM=xterm-256color
 export LS_COLORS='di=1;34:fi=0:ln=32:pi=33:so=0:bd=0:cd=0:or=0:mi=0:ex=1;31' # used by tree(1)
 
 # Use custom directory for less history
-export LESSHISTFILE=~/.cache/custom/lesshistory
+export LESSHISTFILE="${HOME}/.cache/custom/lesshistory"
 
 # less colors for man pages
 #export LESS_TERMCAP_mb=$'\E[0;103m' # begin blinking
@@ -111,10 +111,4 @@ then
     else
         export SSH_AUTH_SOCK="/run/user/$(id -u)/gnupg/S.gpg-agent.ssh"
     fi
-fi
-
-# Use starship as prompt, https://starship.rs
-if [ -x starship ]
-then
-    eval "$(starship init bash)"
 fi
