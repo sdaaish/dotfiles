@@ -136,12 +136,23 @@ get-base16() {
 
 # Get Nerd Fonts
 get-nerd-fonts(){
-    fontarchive="CaskaydiaCode.zip"
+    VERSION="v2.2.2"
+    url="https://github.com/ryanoasis/nerd-fonts/releases/download/${VERSION}/"
+    fonts="SourceCodePro.zip CascadiaCode.zip"
+
+    fontarchive="fontstmp.zip"
     pushd "${HOME}/.local/share/fonts/"||exit 1
-    curl -fLo ${fontarchive} "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/CascadiaCode.zip"
-    unzip -o ${fontarchive}
+
+    for font in $fonts
+    do
+        printf "Downloading font $font.\n"
+        download="${url}${font}"
+        curl -fLo ${fontarchive} ${download}
+        unzip -o -qq ${fontarchive}
+        rm -f ${fontarchive}
+        printf "Downloaded and extracted font $font.\n"
+    done
     fc-cache -fv
-    rm -f ${fontarchive}
     popd||exit 1
 }
 
