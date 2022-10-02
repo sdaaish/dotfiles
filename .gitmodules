@@ -1,6 +1,7 @@
 [submodule "emacs/.config/emacs"]
 	path = emacs/.config/emacs
 	url = https://github.com/plexus/chemacs2.git
+  branch = main
 [submodule "emacs/.config/emacs.doom"]
 	path = emacs/.config/emacs.doom
 	url = https://github.com/hlissner/doom-emacs
@@ -8,4 +9,5 @@
 [submodule "emacs/.config/emacs.default"]
 	path = emacs/.config/emacs.default
 	url = https://github.com/sdaaish/emacs.d.git
+  branch = master
 	ignore = dirty
