@@ -1,3 +1,4 @@
 /bin/bin/age*
 *.kbx
 *.gpg
+/gpg/.config/gnupg/random_seed

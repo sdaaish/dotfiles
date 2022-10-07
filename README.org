@@ -1,0 +1,22 @@
+* Options                                                  :ARCHIVE:noexport:
+#+SETUPFILE: ~/.config/orgmode/readthedocs.config
+#+TITLE: Readme
+#+SUBTITLE: Readme for dotfiles installation.
+#+PROPERTY: header-args :exports none :results none :noweb yes
+#+OPTIONS: author:nil date:nil timestamp:nil num:nil
+#+CALL:
+#+STARTUP: show2levels indent
+
+
+* dotfiles
+Dotfiles needs some place to stay.
+
+Scrips and shell-settings that are useful. Mostly stolen goods, if you cant write steal with pride.
+
+** Links
+http://wiki.bash-hackers.org/
+
+** Fonts
+Need to install fonts with =get-nerd-fonts= before they are working with xterm.
+
+[[www.futurile.net/2016/06/14/xterm-setup-and-truetype-font-configuration/]]

@@ -138,22 +138,25 @@ get-base16() {
 get-nerd-fonts(){
     VERSION="v2.2.2"
     url="https://github.com/ryanoasis/nerd-fonts/releases/download/${VERSION}/"
-    fonts="SourceCodePro.zip CascadiaCode.zip"
+    fonts="SourceCodePro CascadiaCode Inconsolata JetBrainsMono"
 
     fontarchive="fontstmp.zip"
     pushd "${HOME}/.local/share/fonts/"||exit 1
 
     for font in $fonts
     do
-        printf "Downloading font $font.\n"
-        download="${url}${font}"
-        curl -fLo ${fontarchive} ${download}
+        printf "Downloading font %s.\n" "$font"
+        download="${url}${font}.zip"
+        curl -s -fLo "${fontarchive}" "${download}"
+        printf "Installing %s.\n" "$font"
         unzip -o -qq ${fontarchive}
         rm -f ${fontarchive}
-        printf "Downloaded and extracted font $font.\n"
+        printf "Downloaded and extracted font %s.\n" "$font"
     done
+    printf "Updating font cache."
     fc-cache -fv
     popd||exit 1
+    printf "Done installing fonts."
 }
 
 # Get powerline fonts
