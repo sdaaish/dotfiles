@@ -3,7 +3,7 @@
 # load shell dotfiles
 for file in ${HOME}/.config/bash/{exports,aliases,functions,private,git-completion.bash,git-prompt.sh}
 do
-    if [ -r ${file} ]
+    if [ -r "${file}" ]
     then
         source "${file}"
     fi
@@ -32,10 +32,14 @@ HISTCONTROL=ignoreboth
 
 # append to the history file, don't overwrite it
 shopt -s histappend
+shopt -s cmdhist
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=5000
 HISTFILESIZE=10000
+
+# Correct spelling
+shopt -s cdspell
 
 # From https://www.digitalocean.com/community/tutorials/how-to-use-bash-history-commands-and-expansions-on-a-linux-vps
 export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
@@ -103,20 +107,23 @@ esac
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
-if ! shopt -oq posix; then
-    if [ -f /usr/share/bash-completion/bash_completion ]; then
+if ! shopt -oq posix
+then
+    if [ -f /usr/share/bash-completion/bash_completion ]
+    then
         . /usr/share/bash-completion/bash_completion
-    elif [ -f /etc/bash_completion ]; then
+    elif [ -f /etc/bash_completion ]
+    then
         . /etc/bash_completion
     fi
 fi
 
 # From https://github.com/chriskempson/base16-shell
-BASE16_SHELL=$HOME/.config/base16-shell/
-[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+BASE16_SHELL="${HOME}/.config/base16-shell/"
+[ -n "$PS1" ] && [ -s "$BASE16_SHELL/profile_helper.sh" ] && eval "$(${BASE16_SHELL}/profile_helper.sh)"
 
 # Use starship as prompt, https://starship.rs
-if [ -x $(which starship) ]
+if [ -x "$(which starship)" ]
 then
     eval "$(starship init bash)"
 else
