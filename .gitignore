@@ -2,3 +2,6 @@
 *.kbx
 *.gpg
 /gpg/.config/gnupg/random_seed
+
+# Ignore the file for a default emacs profile in chemacs.
+/emacs/.config/chemacs/profile
