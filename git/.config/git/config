@@ -71,6 +71,9 @@
 [include]
 	path = ~/.config/git/local
 
+[include]
+	path = ~/.config/git/sites
+
 [includeIf "gitdir/i:~/[rR]epos/**"]
 	path = ~/.config/git/private
 
