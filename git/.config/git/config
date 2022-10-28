@@ -1,3 +1,5 @@
+# -*- mode:gitconfig; -*-
+
 #
 # Useful links:
 #       https://github.com/thomd/dotfiles/blob/master/.gitconfig
@@ -17,6 +19,7 @@
 [diff]
 	noprefix = true
 	ignoreSubmodules = dirty
+
 [core]
 	excludesFile = ~/.config/git/ignore
 	attributesFile = ~/.config/git/attributes
