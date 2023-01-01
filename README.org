@@ -13,6 +13,18 @@ Dotfiles needs some place to stay.
 
 Scrips and shell-settings that are useful. Mostly stolen goods, if you cant write steal with pride.
 
+**** Git and WSL
+To use git with WSL and not need to have an extra SSH key, use Git Credential Manager (GCM). This was released as GCM Core initially but has since then removed the =-core= extension.
+
+And use the Windows SSH_Agent that has the keys, and forward the requests with =npiperelay= so can SSH also work with minimum setup.
+#+begin_src gitconfig
+[credential]
+	helper = /c/Program\\ Files/Git/mingw64/bin/git-credential-manager.exe
+
+#+end_src
+/NOTE/
+=git-credential-manager.exe= was called =git-credential-manager-core.exe= in an earlier version of Git for Windows, so better check your version of git.
+
 ** Links
 http://wiki.bash-hackers.org/
 
