@@ -1,5 +1,5 @@
-[submodule "emacs/.config/emacs"]
-	path = emacs/.config/emacs
+[submodule "home/.config/emacs"]
+	path = home/.config/emacs
 	url = https://github.com/plexus/chemacs2.git
   branch = main
 [submodule "emacs/.config/emacs.doom"]
