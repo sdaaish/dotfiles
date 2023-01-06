@@ -1,0 +1,64 @@
+#!/bin/bash
+
+#Show the different colors available
+# References:
+# http://misc.flogisoft.com/bash/tip_colors_and_formatting
+# http://www.ibm.com/developerworks/linux/library/l-tip-prompt/
+
+#Just for show...
+#i=0
+#while ((( i < 10 )));do printf "This is i: $((++i)) and $i\n"; done
+
+
+
+printf "\nText effects\n"
+for i in 0 1 4 5 7 8;do
+      printf "Number \033[${i};32;107m$i have this effect\033[0m\n"
+done
+
+printf "\nAll the colors"
+#The basic colors, 30-37, 40-47
+printf "\n\033[32mBg color: "
+for bgclr in {40..47};do
+     printf " ${bgclr}    "
+done
+printf "\n"
+
+for fgclr in {30..37};do
+    for effect in 0 1;do
+	if [ ${effect} -eq 0 ];then
+	    text="Normal"
+    	    printf "\033[32mFg:${fgclr}\t"
+	else
+	    text="BOLD  "
+	    printf "  \t"
+	fi
+	for bgclr in {40..47};do
+            printf "\033[${effect};${fgclr};${bgclr}m ${text} \033[0m"
+        done
+	printf "\n"
+    done
+done
+
+#Extended colors, 90-97, 100-107
+printf "\n\033[32mBg color: "
+for bgclr in {100..107};do
+     printf " ${bgclr}    "
+done
+printf "\n"
+
+for fgclr in {90..97};do
+    for effect in 0 1;do
+	if [ ${effect} -eq 0 ];then
+	    text="Normal"
+    	    printf "\033[31;32mFg:${fgclr}\t"
+	else
+	    text="BOLD  "
+    	    printf "  \t"
+	fi
+	for bgclr in {100..107};do
+            printf "\033[${effect};${fgclr};${bgclr}m ${text} \033[0m"
+        done
+	printf "\n"
+    done
+done

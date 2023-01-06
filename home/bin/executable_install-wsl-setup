@@ -1,0 +1,82 @@
+#!/usr/bin/env bash
+
+# Installs packages and config for my WSL-installation
+KERNEL=$(uname --kernel-release)
+RELEASE=$(lsb_release --short --release)
+DATE=$(date '+%Y%m%d-%H%M%S')
+TMPDIR=/home/${SUDO_USER}/tmp
+LOGFILE=${TMPDIR}/installation-${DATE}.log
+
+#apt-cache policy
+
+# Check for root
+if [[ $EUID -ne 0 ]]
+then
+    printf "This script needs to be run as root or with .\n"
+    exit 1
+fi
+
+# Create tmpdir
+if [[ ! -d ${TMPDIR} ]]
+then
+    mkdir ${TMPDIR}
+    printf "Creating directory ${TMPDIR}\n"|tee -a ${LOGFILE}
+fi
+
+# Function to install software
+software-install(){
+    program=${*}
+    printf "Installing programs: $program\n"|tee -a ${LOGFILE}
+    apt install --yes ${program}|tee -a ${LOGFILE}
+}
+
+# Update package-DB and upgrade system
+printf "Updating package DB\n"
+apt update --yes|tee -a ${LOGFILE}
+printf "Upgrading system\n"
+apt upgrade --yes|tee -a ${LOGFILE}
+
+# Install latest git
+add-apt-repository --yes --update ppa:git-core/ppa
+list="git"
+software-install $list
+
+# Install emacs dev edition
+apt-add-repository --yes --update ppa:ubuntu-elisp/ppa
+list="emacs-snapshot"
+software-install $list
+
+# Install Devtools
+list="make binutils build-essential gcc clang golang curl wget shellcheck"
+software-install $list
+
+# Install libraries
+list="zlib1g-dev libc-dev-bin libpcap-dev libssl-dev"
+software-install $list
+
+# Install security stuff
+list="ca-certificates gnupg2 gnupg-agent gnutls-bin libgnutls28-dev pinentry-tty pinentry-curses"
+software-install $list
+
+# Install dns tools
+list="dnsutils bind9-host bind9utils whois"
+software-install $list
+
+# Install system tools
+list="locate apt-utils apt-transport-https tmux"
+software-install $list
+
+# Install server software
+list="openssh-server"
+software-install $list
+
+# Install emacs utils
+list="hunspell hunspell-sv hunspell-en-gb hunspell-en-us silversearcher-ag"
+software-install $list
+
+# Install terminals
+list="xterm xclip"
+software-install $list
+
+# Status emssage
+printf "Done installing software. Logfile in ${LOGFILE}\n"

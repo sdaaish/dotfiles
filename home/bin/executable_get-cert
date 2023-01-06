@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Grabs a certificate from a web-site
+
+server=$1
+port=$2
+
+usage(){
+	echo "Usage: $0 <server> [<port>]"
+	exit 1
+}
+
+
+if [ ${#*} -lt 1 ];then
+    usage
+fi
+
+if [ ${port} ] ;then
+    connect=${server}:${port}
+    printf "\n"|openssl s_client -connect ${connect} 2>/dev/null|sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p'
+else
+    connect=${server}:443
+    printf "\n"|openssl s_client -connect ${connect} 2>/dev/null|sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p'
+fi

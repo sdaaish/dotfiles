@@ -1,0 +1,14 @@
+#!/bin/bash
+#
+## Check my ip through resolver
+# Inspiration from http://www.cyberciti.biz/faq/how-to-find-my-public-ip-address-from-command-line-on-a-linux/
+# 2016-06-21/SDAA
+#
+
+# Options for dig
+for number in {1..4};do
+    dig +nostats +nocomments +nocmd +noquestion +recurse \
+        myip.opendns.com @resolver1.opendns.com ${*}
+done
+
+

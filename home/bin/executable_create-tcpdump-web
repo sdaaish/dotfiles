@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+# Captures web-traffic and dns with tcpdump
+
+DATE=$(date '+%Y%m%d-%H%M%S')
+TMPDIR=/home/${SUDO_USER}/tmp
+OUTFILE=${TMPDIR}/tcpdump-web-${DATE}.pcap
+
+if [[ $EUID -ne 0 ]]
+then
+    printf "This script needs to be run as root or with sudo.\n"
+    exit 1
+fi
+
+if [[ ! -d ${TMPDIR} ]]
+then
+    mkdir ${TMPDIR}
+    printf "Creating directory ${TMPDIR}\n"
+fi
+
+printf "Capturing..."
+tcpdump -ni eth0 -w ${OUTFILE} -s 65535 -c 2000 port 53 or port 80 or port 443
+chown ${SUDO_USER} ${OUTFILE}
+printf "Done. The file is ${OUTFILE}\n"
+
