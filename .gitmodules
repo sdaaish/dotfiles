@@ -14,3 +14,9 @@
 [submodule "home/private_dot_config/emacs"]
 	path = home/private_dot_config/emacs
 	url = https://github.com/plexus/chemacs2.git
+[submodule "home/private_dot_config/emacs.default"]
+	path = home/private_dot_config/emacs.default
+	url = https://github.com/sdaaish/emacs.d.git
+[submodule "home/private_dot_config/emacs.doom"]
+	path = home/private_dot_config/emacs.doom
+	url = https://github.com/hlissner/doom-emacs
