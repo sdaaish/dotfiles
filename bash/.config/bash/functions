@@ -134,6 +134,11 @@ get-base16() {
     fi
 }
 
+# Install Chezmoi dotfiles manager.
+get-chezmoi() {
+    sh -c "$(curl -fsLS get.chezmoi.io)" -- -b "${HOME}/bin"
+}
+
 # Get Nerd Fonts
 get-nerd-fonts(){
     VERSION="v2.2.2"
