@@ -104,10 +104,16 @@ then
         mkdir -m 0755 "$REPODIR"
     fi
 
-    # https://polansky.co/blog/a-better-windows-wsl-openssh-experience/
+    # Use npiperelay for SSH
     if [[ -n ${WSL_AUTH_SOCK} ]]
     then
-        export SSH_AUTH_SOCK=${WSL_AUTH_SOCK}
+        # Route SSH Agent Forwarding to Windows Host's ssh-agent
+        export SSH_AUTH_SOCK=$HOME/.ssh/agent.sock
+        ss -a | grep -q $SSH_AUTH_SOCK
+        if [ $? -ne 0 ]; then
+            rm -f $SSH_AUTH_SOCK
+            (setsid socat UNIX-LISTEN:$SSH_AUTH_SOCK,fork EXEC:"npiperelay.exe -ei -s //./pipe/openssh-ssh-agent",nofork &) > /dev/null 2>&1
+        fi
     else
         export SSH_AUTH_SOCK="/run/user/$(id -u)/gnupg/S.gpg-agent.ssh"
     fi
