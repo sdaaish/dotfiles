@@ -11,3 +11,6 @@
 	url = https://github.com/sdaaish/emacs.d.git
   branch = master
 	ignore = dirty
+[submodule "home/private_dot_config/emacs"]
+	path = home/private_dot_config/emacs
+	url = https://github.com/plexus/chemacs2.git
