@@ -1,3 +1,5 @@
+{{ if eq .chezmoi.os "windows"}}
+
 # Sets environment variables
 
 # Settings for Emacs as editor.
@@ -9,3 +11,5 @@ if (Test-Path "C:\Windows\System32\OpenSSH\ssh.exe"){
 }
 
 [System.Environment]::SetEnvironmentVariable("HOME", $(Resolve-Path ${env:UserProfile}),"User")
+
+{{ end }}
