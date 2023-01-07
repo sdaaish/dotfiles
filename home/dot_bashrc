@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # load shell dotfiles
-for file in ${HOME}/.config/bash/{exports,aliases,functions,private,git-completion.bash,git-prompt.sh}
+for file in ${HOME}/.config/bash/*
 do
     if [ -r "${file}" ]
     then
