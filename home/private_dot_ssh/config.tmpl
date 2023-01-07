@@ -1,0 +1,40 @@
+## Host profiles for SSH
+# See more info:
+## http://www.cyberciti.biz/faq/create-ssh-config-file-on-linux-unix/
+
+# From http://www.phcomp.co.uk/Tutorials/Unix-And-Linux/ssh-check-server-fingerprint.html
+VerifyHostKeyDNS ask
+# Ensure KnownHosts are unreadable if leaked - it is otherwise easier to know which hosts your keys have access to.
+HashKnownHosts yes
+
+# From https://wiki.mozilla.org/Security/Guidelines/OpenSSH
+# Host keys the client accepts - order here is honored by OpenSSH
+HostKeyAlgorithms ssh-ed25519-cert-v01@openssh.com,ssh-rsa-cert-v01@openssh.com,ssh-ed25519,ssh-rsa,ecdsa-sha2-nistp521-cert-v01@openssh.com,ecdsa-sha2-nistp384-cert-v01@openssh.com,ecdsa-sha2-nistp256-cert-v01@openssh.com,ecdsa-sha2-nistp521,ecdsa-sha2-nistp384,ecdsa-sha2-nistp256
+KexAlgorithms curve25519-sha256@libssh.org,ecdh-sha2-nistp521,ecdh-sha2-nistp256,ecdh-sha2-nistp384,diffie-hellman-group-exchange-sha256,diffie-hellman-group14-sha1,diffie-hellman-group1-sha1
+MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512,hmac-sha2-256,umac-128@openssh.com,hmac-sha1,hmac-md5
+#Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr
+Ciphers chacha20-poly1305@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr
+
+# Defaults
+Host *
+  Protocol 2
+  HashKnownHosts yes
+
+Host github.com
+  User git
+  ForwardX11 no
+  Hostname github.com
+  UpdateHostKeys yes
+
+Host gist.github.com
+  User git
+  Hostname gist.github.com
+  ForwardX11 no
+  UpdateHostKeys yes
+
+Host bitbucket.org
+  Hostname bitbucket.org
+  User hg
+  IdentityFile ~/.ssh/id_bitbucket
+
+Include config.*

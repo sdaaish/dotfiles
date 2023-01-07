@@ -1,0 +1,16 @@
+{{- $email := promptStringOnce . "email" "Email address:" -}}
+{{- $name := promptStringOnce . "name" "Fullname:" -}}
+{{- $githubname := promptStringOnce . "githubname" "Github username:" -}}
+{{- $personal := promptStringOnce . "personal" "Personal true/false:" -}}
+
+[data]
+    email = {{ $email | quote }}
+    name = {{ $name | quote }}
+    githubname = {{ $githubname | quote }}
+    personal = {{ $personal | quote }}
+    umask = 0o22
+
+[interpreters.ps1]
+    command = "powershell.exe"
+    args = ["-NoLogo","-NoProfile","-NonInteractive"]
+

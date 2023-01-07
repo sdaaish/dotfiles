@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# Create RRD-file
+# Run only once
+# 20160525/SDAA
+
+usage(){
+	echo "Usage: $0 <hostname> <interface>"
+	exit 1
+}
+
+if [ ${#*} != 2 ];then
+    usage
+fi
+
+HOST=$1
+INTERFACE=$2
+RRD=~/rrd/${HOST}-${INTERFACE}.rrd
+
+if [  -f ${RRD} ]; then
+    echo "File exists ${RRD}"
+    exit 2
+else
+    rrdtool create ${RRD} --step 60 \
+	DS:input:DERIVE:120:0:125000000  \
+	DS:output:DERIVE:120:0:125000000  \
+	RRA:MIN:0.5:1440:800              \
+	RRA:MIN:0.5:120:800              \
+	RRA:MIN:0.5:30:800               \
+	RRA:MIN:0.5:1:2880                \
+	RRA:AVERAGE:0.5:1440:800          \
+	RRA:AVERAGE:0.5:120:800           \
+	RRA:AVERAGE:0.5:30:800            \
+	RRA:AVERAGE:0.5:1:2880            \
+	RRA:MAX:0.5:1440:800              \
+	RRA:MAX:0.5:120:800              \
+	RRA:MAX:0.5:30:800               \
+	RRA:MAX:0.5:1:2880
+fi
+
+# Values for RRD from https://oss.oetiker.ch/rrdtool/tut/rrdtutorial.en.html
+# 2 days of 1 minute updates = 2880
+# 16 days of 30 minute updates ~= 800
+# 67 days of 2h updates ~= 800
+# 800 days of 24h updates

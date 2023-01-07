@@ -1,0 +1,66 @@
+#!/bin/bash
+#
+# Checks if a server X509 certificate is about to expire.
+# Takes a servername or address, port and number of days as arguments.
+# Connects over network to the <address> on <port>.
+#
+# Stig Dahl <stig|charlottendal.net>
+
+#set -x
+
+# Display usage
+usage(){
+     printf "Usage: $0 <hostname> <port> <expire-time in days>\n"
+     exit 3
+}
+
+# Error codes
+# 0=no error
+# 1=Cert will expire in n days
+# 2=Cert has expired
+# 3=Script error
+
+#Params
+HOST=$1
+PORT=$2
+WARN_DAYS=$3
+
+#Check if binary available
+if [ -x /usr/bin/openssl ]; then
+    BIN=/usr/bin/openssl
+elif [ -x /usr/local/bin/openssl ];then
+    BIN=/usr/local/bin/openssl
+else
+    printf "Can't find openssl executable.\n"
+    exit 3
+fi
+
+# main
+if [ ${#*} != 3 ];then
+    usage
+fi
+
+#Grab certificate
+CERT=$(${BIN} s_client -connect ${HOST}:${PORT} </dev/null 2>/dev/null|\
+	${BIN} x509 -outform PEM 2>/dev/null)
+
+# Check if certificate expires within WARN_DAYS
+MSG=$(printf -- "${CERT}" |\
+	${BIN} x509 -checkend $(( 86400 * ${WARN_DAYS})) 2>/dev/null)
+WARN=$?
+
+# Check if certificate already expired
+printf -- "${CERT}" |\
+	${BIN} x509 -checkend 0 >/dev/null 2>&1
+EXP=$?
+
+if [[ ${EXP} == 1 ]]; then
+        printf "Certificate has expired!\n"
+        exit 2
+else
+        printf "$MSG in less than $WARN_DAYS days\n"
+        exit ${WARN}
+fi
+
+# If everyting is OK, return 0
+exit 0

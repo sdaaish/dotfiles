@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+
+# This file loops through all the domain-names in a file and returns the value of all the A-records and CNAMES as a comma-separated list.
+
+# The input file should look like this:
+## example.com
+## anotherexample.com
+## etc.
+
+# The script checks the values for both 'example.com' and 'www.example.com'.
+
+#set -x
+
+# Syntax checking
+usage(){
+	echo "Usage: $0 <filename>"
+	exit 1
+}
+
+# Lookup the names
+f_lookup() {
+    # First param is the domainname.
+    domainname=${1}
+    dnsrecords=($(dig "${domainname}" A +short))  # Add all records to an array.
+
+    # Print the domainname, and loop trough all values in the array.
+    printf "${domainname}"
+    for arg in ${dnsrecords[@]}
+    do
+        printf ",${arg%.}"     # Remove trailing dot from CNAMES
+    done
+    printf "\n"
+}
+
+#
+## main
+#
+
+# Must supply input filename
+if [ ${#*} != 1 ];then
+    usage
+else
+    filename=$1
+fi
+
+# Check if filename exists
+if [ -f ${filename} ]
+then
+    # Create a tmp-file for modification.
+    tmpfile=$(mktemp /tmp/domain.XXXXXX) || exit 3
+    cp $filename $tmpfile
+    # Remove lines that starts with # and blank lines.
+    sed -i '/^#/d' ${tmpfile}
+    sed -i '/^[[:space:]]*$/d' ${tmpfile}
+else
+    printf "The file ${filename} does not exist\n"
+    exit 2
+fi
+
+# Loop trough the file for each domain
+for domain in $(<${tmpfile})
+do
+    # Do a lookup for both the domain and www.domain
+    for name in "${domain}" "www.${domain}"
+    do
+        f_lookup ${name}    # Call the function
+    done
+done
+
+# Cleanup
+rm -f ${tmpfile}

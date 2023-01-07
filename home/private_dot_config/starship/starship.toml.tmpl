@@ -1,0 +1,165 @@
+# Settings for starship. Symbols mostly chosen from CaskaydiaCove Nerd Font and Inconsolata
+
+format = """
+[$status$battery$time$env_var:$username$hostname  $git_status$git_branch$git_commit$git_state $directory$all](bold blue)
+[$shell ](bold blue)"""
+
+continuation_prompt = '[](green) '
+
+[battery]
+full_symbol = ' '
+charging_symbol = ' '
+discharging_symbol = ' '
+unknown_symbol = ' '
+empty_symbol = ' '
+disabled = false
+format = '[$symbol$percentage]($style) '
+
+[[battery.display]]
+threshold = 15
+style = 'red bold'
+
+[[battery.display]]
+threshold = 95
+style = 'yellow bold'
+
+[[battery.display]]
+threshold = 99
+style = 'green bold'
+
+[character]
+format = "$symbol"
+success_symbol = "[└](bold blue)"
+error_symbol = "[└](bold red)"
+disabled = true
+
+[cmd_duration]
+format = " [$duration]($style)"
+style = '#3399ff'
+
+[hostname]
+ssh_only = false
+trim_at = '.'
+format = '[@$hostname]($style)'
+style = '#3399ff'
+disabled = false
+
+[username]
+format = '[$user]($style)'
+style_root = 'red bold'
+style_user = '#66b3ff'
+show_always = true
+disabled = false
+
+[status]
+disabled = false
+format = "[$symbol]($style) "
+symbol = '[](bold red)'
+style = ''
+success_symbol = '[](bold green)'
+
+[env_var.SUPERUSER]
+symbol = "🧨"
+format = "$symbol "
+
+[env_var.STARSHIP_SHEll]
+format = "[$env_value](#9933ff)"
+
+[shell]
+powershell_indicator = "ﲵ"
+style = "(bold blue)"
+format = "[$indicator]($style)"
+disabled = false
+
+[time]
+format = '[$time]($style) '
+style = '#9999ff'
+use_12hr = false
+disabled = false
+utc_time_offset = 'local'
+time_format = '%T'
+time_range = '-'
+
+[aws]
+symbol = "  "
+
+[conda]
+symbol = " "
+
+[dart]
+symbol = " "
+
+[directory]
+read_only = " "
+truncation_length = 3
+truncation_symbol = ".../"
+
+[docker_context]
+symbol = " "
+
+[elixir]
+symbol = " "
+
+[elm]
+symbol = " "
+
+[git_branch]
+symbol = " "
+
+[git_status]
+format = '([$all_status$ahead_behind]($style) )'
+up_to_date = "[](bold green)"
+
+[golang]
+symbol = " "
+
+[hg_branch]
+symbol = " "
+
+[java]
+symbol = " "
+
+[julia]
+symbol = " "
+
+[line_break]
+disabled = true
+
+[memory_usage]
+symbol = " "
+
+[nim]
+symbol = " "
+
+[nix_shell]
+symbol = " "
+
+[nodejs]
+symbol = " "
+
+[package]
+symbol = " "
+
+[perl]
+symbol = " "
+
+[php]
+symbol = " "
+
+[python]
+symbol = " "
+
+[ruby]
+symbol = " "
+
+[rust]
+symbol = " "
+
+[scala]
+symbol = " "
+
+[shlvl]
+symbol = " "
+
+[swift]
+symbol = "ﯣ "

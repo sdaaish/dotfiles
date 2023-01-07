@@ -11,9 +11,43 @@
 * dotfiles
 Dotfiles needs some place to stay.
 
-Scrips and shell-settings that are useful. Mostly stolen goods, if you cant write steal with pride.
+Scrips and shell-settings that are useful. Based on many examples from other people's dotfiles and configuration scripts.
 
-**** Git and WSL
+Moving to a =chezmoi= managed installation, since it was a bit tricky to maintain dotfiles on many devices with various configs. And want to use the same dotfiles directory for both Windows and Linux was an obstacle. But [[https://www.chezmoi.io/][Chezmoi]] seems to be the right tool for this.
+Currently in =dev= status.
+
+** Install
+*** Linux
+#+begin_src shell
+sh -c "$(curl -fsLS get.chezmoi.io)" -- -b "${HOME}/bin"
+mkdir -p "${HOME}/.local/share"
+chezmoi init --branch chezmoi --verbose sdaaish
+#+end_src
+*** Windows
+To use a different branch for the setup and having submodules, requires that Git is installed in the PATH of the system.
+
+*Chezmoi* can be downloaded directly or installed with *Scoop* or *Chocolatey*.
+#+begin_src powershell
+New-Item -Path $HOME -Name .local/share -ItemType Directory
+New-Item -Path $HOME -Name bin -ItemType Directory
+(irm -useb https://get.chezmoi.io/ps1) | powershell -c -
+chezmoi init --branch chezmoi --verbose sdaaish
+#+end_src
+
+* Linux
+** Fonts
+Need to install fonts with =get-nerd-fonts= before they are working with xterm.
+
+[[www.futurile.net/2016/06/14/xterm-setup-and-truetype-font-configuration/]]
+
+* Windows
+Originally setup a =bare= repository on Windows, [[https://github.com/sdaaish/windotfiles][and used my own custom scripts for this]]. But having the top folder as a git work directory made some applications complain about to many files in the working tree. For example Visual Studio Code didn't like this.
+
+To make things /easier/, (sort of), I moved to a Chezmoi setup where I can share the same dotfiles in the same repository both for Windows and Linux setups. Which makes sense with WSL and my Emacs configs.
+
+Moving from two separate dotfiles setups to one common with Chezmoi is a bit tricky, but the overall experience is that it's both fairly straightforward and worth the extra work.
+
+** Git and WSL
 To use git with WSL and not need to have an extra SSH key, use Git Credential Manager (GCM). This was released as GCM Core initially but has since then removed the =-core= extension.
 
 And use the Windows SSH_Agent that has the keys, and forward the requests with =npiperelay= so can SSH also work with minimum setup.
@@ -25,10 +59,7 @@ And use the Windows SSH_Agent that has the keys, and forward the requests with =
 /NOTE/
 =git-credential-manager.exe= was called =git-credential-manager-core.exe= in an earlier version of Git for Windows, so better check your version of git.
 
-** Links
-http://wiki.bash-hackers.org/
-
-** Fonts
-Need to install fonts with =get-nerd-fonts= before they are working with xterm.
-
-[[www.futurile.net/2016/06/14/xterm-setup-and-truetype-font-configuration/]]
+* Links
+- http://wiki.bash-hackers.org/
+- [[https://www.chezmoi.io/][Chezmoi]]
+- [[https://www.atlassian.com/git/tutorials/dotfiles][Bare dotfiles directory]]  

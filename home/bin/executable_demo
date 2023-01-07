@@ -1,0 +1,65 @@
+#!/bin/bash
+
+# File for testing bash stuff
+# 20160525/SDAA
+
+#set -x
+
+usage(){
+	echo "Usage: $0 <param1> <param2>"
+	exit 1
+}
+
+if [ ${#*} != 2 ];then
+    usage
+fi
+
+myArray=(${*})
+echo "* ${*}"
+echo "# ${#*}"
+echo "#@ ${#@}"
+echo "myArray ${myArray[0]}"
+echo "\${0} ${0} \${1} ${1}"
+
+for i in ${myArray[@]};do
+    echo "In the loop $i"
+done
+    
+for i in ${*};do
+    echo "In the other loop $i"
+done
+
+#Test av select
+PS3="Svara på frågan: "
+select value in 1 2 3 4;do
+    [[ -n $value ]] && echo "You selected: ${value}" && break
+    echo "Select a number [1-4]."
+done
+
+#Looping
+i=0
+while ((( i < 10 )));do
+    printf "This is i: Before \${i}=${i} \$((i++))=$((i++)) i=${i}\n \
+     and \$((++i))=$((++i)) after \${i}=${i}\n"
+done
+
+#
+## Read line by line
+tmpfile=$(mktemp tmp.XXXXX)
+printf "Line 1\nLine 2\nLine 3\n" > ${tmpfile}
+while IFS= read -r line
+    do
+            printf "${line}\n"
+    done < ${tmpfile}
+
+#
+## Test variable settings
+for i in 1 2 3 4;do
+    config+=( "$i" )
+    printf '%s\n' "Var ${config}"
+    printf '%s\n' "Num ${config[@]}"
+done
+
+
+#Cleanup
+#rm -f ${tmpfile}

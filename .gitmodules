@@ -1,13 +1,15 @@
-[submodule "emacs/.config/emacs"]
-	path = emacs/.config/emacs
+[submodule "home/private_dot_config/emacs"]
+	path = home/private_dot_config/emacs
 	url = https://github.com/plexus/chemacs2.git
-  branch = main
-[submodule "emacs/.config/emacs.doom"]
-	path = emacs/.config/emacs.doom
-	url = https://github.com/hlissner/doom-emacs
-	branch = develop
-[submodule "emacs/.config/emacs.default"]
-	path = emacs/.config/emacs.default
+[submodule "home/private_dot_config/emacs.default"]
+	path = home/private_dot_config/emacs.default
 	url = https://github.com/sdaaish/emacs.d.git
-  branch = master
-	ignore = dirty
+[submodule "home/private_dot_config/emacs.doom"]
+	path = home/private_dot_config/emacs.doom
+	url = https://github.com/hlissner/doom-emacs
+[submodule "home/private_dot_config/emacs.work"]
+	path = home/private_dot_config/emacs.work
+	url = https://github.com/sdaaish/emacs.work.git
+[submodule "home/private_dot_config/crafted-emacs"]
+	path = home/private_dot_config/crafted-emacs
+	url = https://github.com/SystemCrafters/crafted-emacs.git

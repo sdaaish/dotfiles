@@ -1,0 +1,19 @@
+Emacs*geometry: 400x120
+Terminal*geometry: 150x50
+XTerm.termName: xterm-256color
+XTerm.vt100.metaSendsEscape: true
+XTerm.vt100.saveLines: 4096
+XTerm.vt100.font: 7x13
+xterm*background: Black
+xterm*faceName: JetBrainsMono Nerd Font
+xterm*faceSize: 12
+xterm*renderFont: true
+xterm*BorderWidth: 0
+xterm*toolBar: false
+xterm*maximized: true
+xterm*VT100.Translations: #override \
+    Shift <KeyPress> Insert: insert-selection(CLIPBOARD) \n\
+    Ctrl Shift <Key>V:    insert-selection(CLIPBOARD) \n\
+    Ctrl Shift <Key>C:    copy-selection(CLIPBOARD) \n\
+    Ctrl <Btn1Up>: exec-formatted("xdg-open '%t'", PRIMARY) \n\
+    Ctrl <Key>M: maximize()

@@ -1,0 +1,13 @@
+{{- if eq .chezmoi.os "linux" -}}
+
+#!/usr/bin/env bash
+
+set -eufo pipefail
+
+# Backup existing ssh config one time
+if [ -f "${HOME}/.ssh/config" ]
+then
+    cp "${HOME}/.ssh/config" "${HOME}/.ssh/config.bak"
+fi
+
+{{ end }}

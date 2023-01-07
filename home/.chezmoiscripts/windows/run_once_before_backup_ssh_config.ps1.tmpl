@@ -1,0 +1,6 @@
+{{ if eq .chezmoi.os "windows"}}
+
+if (Test-Path ${env:UserProfile}/.ssh/config ){
+    Copy-Item ${env:UserProfile}/.ssh/config ${env:UserProfile}/.ssh/config.bak
+}
+{{ end }}

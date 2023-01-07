@@ -1,0 +1,17 @@
+# Ignore file for chezmoi
+
+# No linux files on Windows.
+{{ if eq .chezmoi.os "windows" }}
+.*rc
+.X*
+.bash*
+.hushlogin
+.profile
+.tmux*
+.x*
+{{ end }}
+
+# No Windows files on Linux.
+{{ if eq .chezmoi.os "linux" }}
+AppData/
+{{ end}}

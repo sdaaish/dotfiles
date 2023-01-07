@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Checks the differnt algorithms that a particular server supports
+# 20161026/SDAA
+
+for alg in cipher cipher-auth mac kex key
+    do
+	printf "#\n# The current ${alg} is supported\n"
+	ssh -Q ${alg}
+    done
