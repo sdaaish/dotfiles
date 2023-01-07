@@ -20,3 +20,6 @@
 [submodule "home/private_dot_config/emacs.doom"]
 	path = home/private_dot_config/emacs.doom
 	url = https://github.com/hlissner/doom-emacs
+[submodule "home/private_dot_config/emacs.work"]
+	path = home/private_dot_config/emacs.work
+	url = https://github.com/sdaaish/emacs.work.git
