@@ -1,15 +1,17 @@
+# Settings for starship. Symbols mostly chosen from CaskaydiaCove Nerd Font and Inconsolata
+
 format = """
-[┌─ $time$env_var:$username$hostname $git_status$git_branch$git_commit$git_state $directory$all](bold blue)
-[$character $status](bold blue)"""
+[$status$battery$time$env_var:$username$hostname  $git_status$git_branch$git_commit$git_state $directory$all](bold blue)
+[$shell ](bold blue)"""
 
 continuation_prompt = '[](green) '
 
 [battery]
-full_symbol = '´ò© '
-charging_symbol = '´ûâ '
-discharging_symbol = '´ûé '
-unknown_symbol = '´ò╝ '
-empty_symbol = '´ûì '
+full_symbol = ' '
+charging_symbol = ' '
+discharging_symbol = ' '
+unknown_symbol = ' '
+empty_symbol = ' '
 disabled = false
 format = '[$symbol$percentage]($style) '
 
@@ -17,10 +19,19 @@ format = '[$symbol$percentage]($style) '
 threshold = 15
 style = 'red bold'
 
+[[battery.display]]
+threshold = 95
+style = 'yellow bold'
+
+[[battery.display]]
+threshold = 99
+style = 'green bold'
+
 [character]
 format = "$symbol"
 success_symbol = "[└](bold blue)"
 error_symbol = "[└](bold red)"
+disabled = true
 
 [cmd_duration]
 format = " [$duration]($style)"
@@ -53,6 +64,12 @@ format = "$symbol "
 
 [env_var.STARSHIP_SHEll]
 format = "[$env_value](#9933ff)"
+
+[shell]
+powershell_indicator = "ﲵ"
+style = "(bold blue)"
+format = "[$indicator]($style)"
+disabled = false
 
 [time]
 format = '[$time]($style) '

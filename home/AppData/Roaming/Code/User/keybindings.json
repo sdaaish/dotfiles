@@ -1,0 +1,195 @@
+// Place your key bindings in this file to overwrite the defaults
+[
+  {
+    "key": "ctrl+c shift+b",
+    "command": "workbench.action.terminal.new"
+  },
+  {
+    "key": "ctrl+x b",
+    "command": "-workbench.action.showAllEditors"
+  },
+  {
+    "key": "ctrl+x ctrl+b",
+    "command": "workbench.action.switchWindow"
+  },
+  {
+    "key": "ctrl+x 0",
+    "command": "workbench.action.closeActiveEditor",
+  },
+  {
+    "key": "ctrl+x 1",
+    "command": "-workbench.action.closeEditorsInOtherGroups"
+  },
+  {
+    "key": "alt+u",
+    "command": "editor.action.transformToUppercase",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "ctrl+x ctrl+u",
+    "command": "-editor.action.transformToUppercase",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "alt+l",
+    "command": "-toggleFindInSelection",
+    "when": "editorFocus"
+  },
+  {
+    "key": "alt+l",
+    "command": "editor.action.transformToLowercase",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "ctrl+x ctrl+l",
+    "command": "-editor.action.transformToLowercase",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "ctrl+k ctrl+o",
+    "command": "-workbench.action.files.openFolder"
+  },
+  {
+    "key": "ctrl+x ctrl+x",
+    "command": "workbench.action.terminal.toggleTerminal"
+  },
+  {
+    "key": "ctrl+oem_3",
+    "command": "-workbench.action.terminal.toggleTerminal"
+  },
+  {
+    "key": "alt+right",
+    "command": "workbench.action.terminal.focusNext"
+  },
+  {
+    "key": "alt+left",
+    "command": "workbench.action.terminal.focusPrevious"
+  },
+  {
+    "key": "ctrl+tab",
+    "command": "workbench.action.openPreviousEditorFromHistory"
+  },
+  {
+    "key": "ctrl+tab",
+    "command": "workbench.action.quickOpenNavigateNext",
+    "when": "inQuickOpen"
+  },
+  {
+    "key": "ctrl+x ctrl+e",
+    "command": "PowerShell.RunSelection",
+    "when": "editorTextFocus && editorLangId == 'powershell'"
+  },
+  {
+    "key": "ctrl+x d",
+    "command": "extension.dired.open",
+    "when": "editorTextFocus && !inDebugRepl"
+  },
+  {
+    "key": "ctrl+x f",
+    "command": "-extension.dired.open",
+    "when": "editorTextFocus && !inDebugRepl"
+  },
+  {
+    "key": "shift+b",
+    "command": "-extension.dired.goUpDir",
+    "when": "dired.open && !findWidgetVisible && !inQuickOpen && !sideBarFocus"
+  },
+  {
+    "key": "shift+b",
+    "command": "-extension.dired.goUpDir",
+    "when": "dired.open && !findWidgetVisible && !inQuickOpen"
+  },
+  {
+    "key": "oem_2",
+    "command": "extension.dired.goUpDir",
+    "when": "dired.open && !findWidgetVisible && !inQuickOpen && !sideBarFocus"
+  },
+  {
+    "key": "enter",
+    "command": "-extension.dired.enter",
+    "when": "dired.open && !findWidgetVisible && !inQuickOpen"
+  },
+  {
+    "key": "enter",
+    "command": "extension.dired.enter",
+    "when": "dired.open && !findWidgetVisible && !inQuickOpen && !sideBarFocus"
+  },
+  {
+    "key": "shift+oem_plus",
+    "command": "-extension.dired.createDir",
+    "when": "dired.open && !findWidgetVisible && !inQuickOpen"
+  },
+  {
+    "key": "shift+oem_plus",
+    "command": "extension.dired.createDir",
+    "when": "dired.open && !findWidgetVisible && !inQuickOpen && !sideBarFocus"
+  },
+  {
+    "key": "shift+r",
+    "command": "-extension.dired.rename",
+    "when": "dired.open && !findWidgetVisible && !inQuickOpen"
+  },
+  {
+    "key": "shift+r",
+    "command": "extension.dired.rename",
+    "when": "dired.open && !findWidgetVisible && !inQuickOpen && !sideBarFocus"
+  },
+  {
+    "key": "shift+c",
+    "command": "-extension.dired.copy",
+    "when": "dired.open && !findWidgetVisible && !inQuickOpen"
+  },
+  {
+    "key": "shift+c",
+    "command": "extension.dired.copy",
+    "when": "dired.open && !findWidgetVisible && !inQuickOpen && !sideBarFocus"
+  },
+  {
+    "key": "m",
+    "command": "-extension.dired.select",
+    "when": "dired.open && !findWidgetVisible && !inQuickOpen"
+  },
+  {
+    "key": "m",
+    "command": "extension.dired.select",
+    "when": "dired.open && !findWidgetVisible && !inQuickOpen && !sideBarFocus"
+  },
+  {
+    "key": "u",
+    "command": "-extension.dired.unselect",
+    "when": "dired.open && !findWidgetVisible && !inQuickOpen"
+  },
+  {
+    "key": "u",
+    "command": "extension.dired.unselect",
+    "when": "dired.open && !findWidgetVisible && !inQuickOpen && !sideBarFocus"
+  },
+  {
+    "key": "g",
+    "command": "-extension.dired.refresh",
+    "when": "dired.open && !findWidgetVisible && !inQuickOpen"
+  },
+  {
+    "key": "g",
+    "command": "extension.dired.refresh",
+    "when": "dired.open && !findWidgetVisible && !inQuickOpen && !sideBarFocus"
+  },
+  {
+    "key": "q",
+    "command": "-extension.dired.close",
+    "when": "dired.open && !findWidgetVisible && !inQuickOpen"
+  },
+  {
+    "key": "q",
+    "command": "extension.dired.close",
+    "when": "dired.open && !findWidgetVisible && !inQuickOpen && !sideBarFocus"
+  },
+  {
+    "key": "alt+x",
+    "command": "workbench.action.showCommands"
+  },
+  {
+    "key": "ctrl+shift+p",
+    "command": "-workbench.action.showCommands"
+  }
+]

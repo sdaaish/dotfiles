@@ -1,0 +1,303 @@
+* Config                                                   :noexport:ARCHIVE:
+#+PROPERTY: header-args:emacs-lisp :tangle ./init.el :results silent
+#+options: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline
+#+options: author:t broken-links:nil c:nil creator:nil
+#+options: d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t num:t
+#+options: p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t
+#+options: timestamp:t title:t toc:t todo:t |:t
+#+title: emacs
+#+date: <2021-11-14>
+#+email: 
+#+author:
+#+language: en
+#+select_tags: export
+#+exclude_tags: noexport
+#+creator: Emacs 27.2 (Org mode 9.4.4)
+#+cite_export:
+#+startup: show3levels indent  
+* Emacs config
+** Org tangle init files
+Untangle init files automatically when save with org-babel.
+From [[https://github.com/daviwil/emacs-from-scratch/blob/9388cf6ecd9b44c430867a5c3dad5f050fdc0ee1/init.el][Emacs From Scratch: Everything in Babel]].
+#+begin_src emacs-lisp
+  (defvar my/init-dir (file-name-directory (or load-file-name (buffer-file-name))))
+  (defvar my/emacs-orgfile (expand-file-name "emacs.org" my/init-dir))
+  (defun my/org-babel-tangle-config ()
+    (when (string-equal (buffer-file-name) my/emacs-orgfile)
+      (let ((org-confirm-babel-evaluate nil))
+        (org-babel-tangle))))
+
+  (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'my/org-babel-tangle-config)))
+#+end_src
+** Early-init
+#+begin_src emacs-lisp :tangle ./early-init.el
+(setq package-enable-at-startup nil)
+#+end_src
+** Init.el
+#+begin_src emacs-lisp
+  (defvar bootstrap-version)
+  (let ((bootstrap-file
+         (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+        (bootstrap-version 5))
+    (unless (file-exists-p bootstrap-file)
+      (with-current-buffer
+          (url-retrieve-synchronously
+           "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+           'silent 'inhibit-cookies)
+        (goto-char (point-max))
+        (eval-print-last-sexp)))
+    (load bootstrap-file nil 'nomessage))
+
+  ;; Local customize-file
+  (setq custom-file (expand-file-name "emacs-custom.el" user-emacs-directory))
+  (load custom-file)
+#+end_src
+** Straight
+#+begin_src emacs-lisp
+(straight-use-package 'use-package)
+(setq straight-use-package-by-default t)
+(setq straight-host-usernames
+      '((github . "sdaaish")
+        (gitlab . "sdaaish")
+        (bitbucket . "bitbucketUser")))
+#+end_src
+** Packages
+*** GCMH
+Garbage collection
+#+begin_src emacs-lisp
+(use-package gcmh
+  :diminish gcmh-mode)
+#+end_src
+*** Melpa
+#+begin_src emacs-lisp
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+#+end_src
+*** Nolittering
+#+begin_src emacs-lisp
+(use-package no-littering)
+#+end_src
+*** Org
+#+begin_src emacs-lisp
+(use-package org
+  :config
+  (setq org-structure-template-alist
+        '(("a" . "export ascii\n")
+          ("c" . "center\n")
+          ("C" . "comment\n")
+          ("e" . "src emacs-lisp\n")
+          ("E" . "example\n")
+          ("x" . "export")
+          ("h" . "export html\n")
+          ("l" . "export latex\n")
+          ("p" . "src powershell\n")
+          ("q" . "quote\n")
+          ("s" . "src")
+          ("v" . "verse\n")))
+  :custom (org-src-preserve-indentation t)
+  :straight org-contrib)
+#+end_src
+*** Org-superstar
+#+begin_src emacs-lisp
+(use-package org-superstar
+  :config (org-superstar-mode t))
+#+end_src
+*** Helpful
+#+begin_src emacs-lisp
+(use-package helpful
+  :bind
+  ("C-h k" . #'helpful-key)
+  ("C-c C-h" . #'helpful-at-point)
+  ("C-h F" . #'helpful-function)
+  ("C-h C" . #'helpful-command))
+#+end_src
+*** Diminish
+#+begin_src emacs-lisp
+(use-package diminish)
+#+end_src
+*** Try
+Test Emacs packages.
+#+begin_src emacs-lisp
+(use-package try)
+#+end_src
+*** Ivy, counsel, swiper
+#+begin_src emacs-lisp
+(use-package ivy
+  :diminish
+  :config
+  (ivy-mode))
+(use-package swiper
+  :config
+  (setq apropos-do-all t)
+  :bind
+  ("C-r" . swiper)
+  ("C-s" . swiper))
+
+(use-package counsel
+  :diminish
+  :config
+  (setq counsel-describe-function-function #'helpful-callable)
+  (setq counsel-describe-variable-function #'helpful-variable)
+  (counsel-mode)
+  :bind (("C-h f" . counsel-describe-function)
+         ("C-h v" . counsel-describe-variable)))
+#+end_src
+*** Aggressive-indent
+#+begin_src emacs-lisp
+(use-package aggressive-indent
+  :diminish
+  :config
+  (global-aggressive-indent-mode t)
+  (setq-default indent-tabs-mode nil)
+  (setq-default tab-width 2)
+  (setq-default tab-always-indent 'complete))
+#+end_src
+*** Hungry delete
+#+begin_src emacs-lisp
+(use-package hungry-delete
+  :config
+  (global-hungry-delete-mode t))
+#+end_src
+*** Rainbow
+#+begin_src emacs-lisp
+(use-package rainbow-delimiters
+  :diminish
+  :hook
+  ((org-mode prog-mode) . rainbow-delimiters-mode))
+
+(use-package rainbow-mode)
+
+(use-package smartparens
+  :diminish
+  :config (smartparens-global-mode t))
+
+(use-package undo-tree
+  :diminish
+  :config (global-undo-tree-mode 1))
+  #+end_src
+*** AMX
+Show a list of recently used commands.
+#+begin_src emacs-lisp
+(use-package amx)
+#+end_src
+*** Magit
+The one and only.
+#+begin_src emacs-lisp
+  (use-package magit
+    :bind ("C-x g" . magit-status)
+    :config
+    (setq magit-completing-read-function 'ivy-completing-read)
+    (if (eq system-type 'windows-nt)
+        (setq-default with-editor-emacsclient-executable "emacsclientw.exe")
+      (setq-default with-editor-emacsclient-executable "emacsclient")))
+#+end_src
+*** Company
+#+begin_src emacs-lisp
+(use-package company
+  :config 
+  (setq company-idle-delay
+        (lambda () (if (company-in-string-or-comment) nil 0.3)))
+  :bind ("C-." . #'company-indent-or-complete-common)
+  :hook (after-init-hook . global-company-mode))
+#+end_src
+#+begin_src emacs-lisp
+  (use-package ace-window
+    :config
+    (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+    (setq aw-background nil)
+    (setq aw-dispatch-always t)
+    :bind ("M-o" . ace-window))
+  (use-package resize-window
+    :bind ("C-;" . resize-window))
+#+end_src
+*** Projectile
+#+begin_src emacs-lisp
+(use-package projectile)
+(use-package counsel-projectile)
+#+end_src
+*** Diff-hl
+#+begin_src emacs-lisp
+(use-package diff-hl
+  :hook ((prog-mode vc-dir-mode) . diff-hl-mode))
+#+end_src
+** Settings
+*** Menubars
+#+begin_src emacs-lisp
+;;(toggle-menu-bar-mode-from-frame)
+;;(toggle-horizontal-scroll-bar)
+(menu-bar-mode 0)
+(tool-bar-mode 0)
+(scroll-bar-mode 0)
+;;(menu-bar--display-line-numbers-mode-relative)
+(show-paren-mode t)
+(defalias 'yes-or-no-p 'y-or-n-p)
+(global-hl-line-mode t)
+#+end_src
+*** Theme
+#+begin_src emacs-lisp
+(use-package doom-themes
+  :hook
+  (window-setup . (lambda()
+                    (load-theme 'doom-snazzy t nil)
+                    (toggle-frame-maximized))))
+
+(use-package autothemer)
+;; (load-theme 'Homestead t nil)
+(set-frame-font "Cascadia Code-11" nil t)
+#+end_src
+*** Info
+#+begin_src emacs-lisp
+(bind-key "'" 'Info-up 'Info-mode-map)
+#+end_src
+*** Which-key
+#+begin_src emacs-lisp
+  (use-package which-key
+    :config (which-key-mode t)
+    (setq which-key-idle-delay 0))
+#+end_src
+*** Powershell
+#+begin_src emacs-lisp
+  (use-package powershell
+  :straight (powershell :fork t))
+#+end_src
+*** Babel for powershell
+#+begin_src emacs-lisp
+(use-package ob-powershell
+  :config (require 'ob-powershell)
+  :custom (ob-powershell-powershell-command "pwsh -NoProfile -NoLogo"))
+#+end_src
+*** Dired git
+#+begin_src emacs-lisp
+	(use-package dired-git-info
+	  :bind (:map dired-mode-map
+		      ("M-g" . dired-git-info-mode)))
+
+      (bind-key "'" 'dired-up-directory dired-mode-map)
+#+end_src
+*** Scratch
+Rename scratch and no startup screen.
+#+begin_src emacs-lisp
+(setq initial-scratch-message "This is scratch....")
+(setq inhibit-startup-screen t)
+#+end_src
+** LSP
+#+begin_src emacs-lisp
+(setq read-process-output-max (* 1024 1024))
+(use-package lsp-mode
+  :config (lsp-enable-which-key-integration t)
+  :hook
+  ((powershell-mode sh-mode) . lsp-mode)
+  (lsp-mode . lsp-enable-which-key-integration))
+(use-package dap-mode)
+(use-package company-lsp)
+#+end_src
+*** Ivy for LSP
+#+begin_src emacs-lisp
+(use-package lsp-ivy
+  :commands lsp-ivy-workspace-symbol)
+#+end_src
+** Org mode
+#+begin_src emacs-lisp
+(customize-set-variable 'org-confirm-babel-evaluate nil)
+#+end_src
+

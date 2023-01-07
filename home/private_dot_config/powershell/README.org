@@ -1,0 +1,3 @@
+* Introduction
+Here I store config for my Powershell profile. I use a local directory where the files are so I don't have to use the default in =$env:UserProfile\Documents\{Powershell|WindowsPowershell\}= since it's often get's stored with OneDrive.
+
