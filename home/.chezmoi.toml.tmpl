@@ -14,3 +14,12 @@
     command = "powershell.exe"
     args = ["-NoLogo","-NoProfile","-NonInteractive"]
 
+{{ if eq .chezmoi.os "windows" }}
+[cd]
+     command = "powershell.exe"
+     args = ["-NoLogo","-NoProfile","-NonInteractive"]
+{{ else }}
+[cd]
+     command = "bash"
+     args = []
+{{ end }}

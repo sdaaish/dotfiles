@@ -25,7 +25,7 @@ alias sl='sl -ea'
 alias cd..='cd ..'
 alias ..='cd ..'
 alias ...='cd ../..'
-alias cdh='cd /mnt/c/Users/Stig'
+alias cdh='cd ~'
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
