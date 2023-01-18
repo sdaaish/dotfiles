@@ -2,6 +2,7 @@
 
 # Set own aliases
 Set-Alias -Name cm -Value chezmoi
+Set-Alias -Name cmdiff -Value Chezmoi-Diff
 
 Set-Alias -Name src -Value Reload-PowershellProfile
 Set-Alias -Name alias -Value Search-Alias
@@ -209,4 +210,10 @@ function Update-Scoop {
 Function Install-WslTools {
     $uri = "https://github.com/rupor-github/wsl-ssh-agent/releases/latest/download/wsl-ssh-agent.json"
     scoop install $uri
+}
+
+# Chezmoi
+function Chezmoi-Diff {
+    chezmoi git pull -- --autostash --rebase
+    chezmoi diff
 }
