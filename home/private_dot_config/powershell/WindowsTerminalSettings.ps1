@@ -78,6 +78,7 @@ $MyDefaults = @{
     defaultProfile =  "{574e775e-4f2a-5b96-ac1e-a2962a402336}"
     showTabsInTitlebar = $true
     tabSwitcherMode = "disabled"
+    disableAnimations = $true
 }
 Set-TerminalSettings -Path $WTSettingsFile -NewSetting $MyDefaults
 
@@ -93,6 +94,7 @@ $MyDefaults = @{
                 face =  "CaskaydiaCove Nerd Font"
                 size =  11
             }
+            scrollbarState = "hidden"
             useAcrylic = $false
         }
     }

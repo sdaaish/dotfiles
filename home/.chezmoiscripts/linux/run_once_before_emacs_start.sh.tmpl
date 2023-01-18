@@ -1,0 +1,9 @@
+{{- if eq .chezmoi.os "linux" -}}
+
+#!/usr/bin/env bash
+
+set -eufo pipefail
+
+find "${HOME}/.config/emacs.*" -name *.elc -exec rm {}\;
+
+{{ end }}

@@ -1,6 +1,8 @@
 # My various aliases
 
 # Set own aliases
+Set-Alias -Name cm -Value chezmoi
+
 Set-Alias -Name src -Value Reload-PowershellProfile
 Set-Alias -Name alias -Value Search-Alias
 
