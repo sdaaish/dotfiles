@@ -1,8 +1,20 @@
-# Settings for starship. Symbols mostly chosen from CaskaydiaCove Nerd Font and Inconsolata
+# Settings for starship. Symbols mostly chosen from CaskaydiaCove Nerd Font and Inconsolata.
+
+{{ if eq .chezmoi.os "windows" }}
+# This part works for Windows.
 
 format = """
 [$status$battery$time$env_var:$username$hostname  $git_status$git_branch$git_commit$git_state $directory$all](bold blue)
 [$shell ](bold blue)"""
+
+{{ else if eq .chezmoi.os "linux" }}
+# Use default fonts for Linux.
+
+format = """
+[$status$time$env_var:$username$hostname $git_status$git_branch$git_commit$git_state $directory$all](bold blue)
+[$shell ](bold blue)"""
+
+{{ end }}
 
 continuation_prompt = '[](green) '
 
@@ -67,7 +79,7 @@ format = "[$env_value](#9933ff)"
 
 [shell]
 powershell_indicator = "ﲵ"
-bash_indicator = ""
+bash_indicator = "🐧"
 style = "(bold blue)"
 format = "[$indicator]($style)"
 disabled = false
