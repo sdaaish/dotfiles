@@ -4,6 +4,6 @@
 
 set -eufo pipefail
 
-find "${HOME}/.config/emacs.*" -name *.elc -exec rm {}\;
+find "${HOME}/.config/emacs.*" -name *.elc -exec rm '{}' ';'
 
 {{ end }}
