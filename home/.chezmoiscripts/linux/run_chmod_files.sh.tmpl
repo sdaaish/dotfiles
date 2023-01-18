@@ -4,12 +4,7 @@
 
 set -eufo pipefail
 
-# Change permissions on folders to keep the application from complaining.
-chmod 0700 "${HOME}/.ssh"
-#chmod 0600 "${HOME}/.ssh/.*"
+# Nothing yet...
 
-chmod 0700 "${HOME}/.config/gnupg"
-#chmod 0600 "${HOME}/.config/gnupg/.*"
 
-chmod a+x "${HOME}/.config/base16-shell/profile_helper.*"
 {{ end }}
