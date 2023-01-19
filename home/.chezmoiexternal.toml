@@ -1,0 +1,9 @@
+[".config/lisp/sv-kalender.el"]
+    type = "file"
+    url = "https://bigwalter.net/daniel/elisp/sv-kalender.el"
+    refreshPeriod = "168h"
+
+[".config/lisp/sv-kalender-namnsdagar.el"]
+    type = "file"
+    url = "https://raw.githubusercontent.com/matsl/sv-kalender-namnsdagar/master/sv-kalender-namnsdagar.el"
+    refreshPeriod = "168h"
