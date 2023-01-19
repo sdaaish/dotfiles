@@ -48,6 +48,8 @@ Set-Alias -Name wug -Value Update-WinGet
 
 Set-Alias -Name ytp -Value yt-dlp
 
+Set-Alias -Name man -Value Search-LinuxMan
+
 # Some functions
 function .. {
     cd ..
