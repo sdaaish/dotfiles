@@ -36,3 +36,4 @@
 	cat = cat-file
 	lst = ls-tree
   sub = "!git submodule foreach  --recursive 'git checkout $(git config -f $toplevel/.gitmodules submodule.$name.branch || echo master)'"
+	subr = "!git submodule foreach --recursive 'git ls-remote --heads;printf \"\n\"'"
