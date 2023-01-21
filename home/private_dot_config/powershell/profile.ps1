@@ -16,6 +16,7 @@ if ($env:TERM_PROGRAM){
 else {
     $view = "ListView"
 }
+
 $PSReadLineOptions = @{
     EditMode = "Emacs"
     BellStyle = "None"
@@ -28,7 +29,6 @@ Get-RunningTime $starttime
 
 # Add output of all commands to $__, set as default value
 $PSDefaultParameterValues["Out-Default:OutVariable"] = "__"
-
 
 # Oh-my-PoSH https://ohmyposh.dev/docs
 $Theme = Join-Path ${env:USERPROFILE} ".config\oh-my-posh\my-posh-theme.omp.json"
@@ -54,13 +54,13 @@ Get-RunningTime $starttime
 try { Get-Command 'Import-PowerShellDataFile' -ErrorAction Stop | Out-Null}
 catch {
     function Import-PowerShellDataFile {
-	[CmdletBinding()]
-	Param (
+	      [CmdletBinding()]
+	      Param (
             [Parameter(Mandatory = $true)]
             [Microsoft.PowerShell.DesiredStateConfiguration.ArgumentToConfigurationDataTransformation()]
             [hashtable] $Path
-	)
-	return $Path
+	      )
+	      return $Path
     }
 }
 
