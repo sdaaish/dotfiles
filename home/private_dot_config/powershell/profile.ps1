@@ -23,6 +23,9 @@ $PSReadLineOptions = @{
     PredictionSource = "History"
     PredictionViewStyle = $view
     HistorySearchCursorMovesToEnd = $true
+    Colors = @{
+        Selection = "#fd625d"
+    }
 }
 Set-PSReadlineOption @PSReadLineOptions
 Get-RunningTime $starttime
