@@ -3,6 +3,9 @@
 # Set own aliases
 Set-Alias -Name cm -Value chezmoi
 Set-Alias -Name cmdiff -Value Chezmoi-Diff
+Set-Alias -Name cms -Value Chezmoi-Status
+Set-Alias -Name cmg -Value Chezmoi-GitStatus
+Set-Alias -Name cmu -Value Chezmoi-UnManaged
 
 Set-Alias -Name src -Value Reload-PowershellProfile
 Set-Alias -Name alias -Value Search-Alias
@@ -224,4 +227,16 @@ Function Install-WslTools {
 function Chezmoi-Diff {
     chezmoi git pull -- --autostash --rebase
     chezmoi diff
+}
+Function Chezmoi-Status {
+    chezmoi status
+}
+Function Chezmoi-GitStatus {
+    chezmoi git status -- -sb
+}
+Function Chezmoi-UnManaged {
+    param(
+        $Path = "."
+    )
+    chezmoi unmanaged $(Resolve-Path $Path)
 }
