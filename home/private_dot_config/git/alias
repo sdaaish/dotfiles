@@ -35,5 +35,6 @@
 	unstage = reset HEAD --
 	cat = cat-file
 	lst = ls-tree
-  sub = "!git submodule foreach  --recursive 'git checkout $(git config -f $toplevel/.gitmodules submodule.$name.branch || echo master)'"
+	subc = "!git submodule foreach --recursive 'git checkout $(git config -f $toplevel/.gitmodules submodule.$name.branch || echo master)'"
+	subu = "!git submodule foreach --recursive 'git pull)'"
 	subr = "!git submodule foreach --recursive 'git ls-remote --heads;printf \"\n\"'"
