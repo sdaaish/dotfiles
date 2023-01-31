@@ -1,0 +1,11 @@
+{{ if eq .chezmoi.os "linux" -}}
+
+#!/usr/bin/env bash
+
+set -eufo pipefail
+
+# Change Base16-shell scripts to executable
+find ${HOME}/.config/base16-shell -type f -regextype sed -regex ".*/.*.[zsh|sh|fish]" -print0|
+    xargs -0 chmod a+x
+
+{{ end }}
