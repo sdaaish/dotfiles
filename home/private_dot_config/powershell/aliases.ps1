@@ -250,3 +250,9 @@ Function Chezmoi-UnManaged {
     )
     chezmoi unmanaged $(Resolve-Path $Path)
 }
+function Get-CurrentWeek {
+    $svSE = [System.Globalization.CultureInfo]("sv-SE")
+    $svCalendar = $svSE.DateTimeFormat.Calendar
+    $date = Get-Date
+    $week = $svCalendar.GetWeekOfYear($date, [System.Globalization.CalendarWeekRule]::FirstFourDayWeek, [DayOfWeek]::Monday)
+}
