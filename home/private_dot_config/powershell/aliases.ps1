@@ -98,6 +98,16 @@ function lla {
     Get-ChildItem $Path -Attributes H,!H,A,!A,S,!S,C,!C,E,!E
 }
 
+function lle {
+    [cmdletbinding()]
+    Param (
+        $Path
+    )
+    Get-ChildItem $Path -File -Attributes H,!H,A,!A,S,!S|
+      Group-Object -Property Extension |
+      Sort-Object -Property count -Descending
+}
+
 function lls {
     [cmdletbinding()]
     Param (
