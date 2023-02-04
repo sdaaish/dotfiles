@@ -4,6 +4,12 @@
 #    refreshPeriod = "168h"
 
 [".config/lisp/sv-kalender-namnsdagar.el"]
-    type = "file"
-    url = "https://raw.githubusercontent.com/matsl/sv-kalender-namnsdagar/master/sv-kalender-namnsdagar.el"
-    refreshPeriod = "168h"
+  type = "file"
+  url = "https://raw.githubusercontent.com/matsl/sv-kalender-namnsdagar/master/sv-kalender-namnsdagar.el"
+  refreshPeriod = "168h"
+
+# Simple CSS from https://simplecss.org/
+["www/css/simple.css"]
+  type = "file"
+  url = "https://raw.githubusercontent.com/kevquirk/simple.css/main/simple.css"
+  refreshPeriod = "168h"
