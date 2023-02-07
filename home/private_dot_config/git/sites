@@ -1,0 +1,12 @@
+#	-*- mode: gitconfig; -*-
+
+# Custom settings for sites that require exceptions to work properly.
+
+[http]
+	sslCAInfo = ~/.config/git/CAcerts.pem
+
+# Gnu Emacs needs this for the package manager "straight" to work properly.
+[http "https://git.savannah.gnu.org"]
+	sslVerify = true
+	sslbackend = openssl
+	cookieFile = ~/.cache/cookie.txt
