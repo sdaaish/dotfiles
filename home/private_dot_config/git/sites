@@ -3,7 +3,7 @@
 # Custom settings for sites that require exceptions to work properly.
 
 [http]
-	sslCAPath = ~/.config/git/CAcerts
+	sslCAInfo = ~/.config/git/CAcerts/CA-chain.crt
 
 # Gnu Emacs needs this for the package manager "straight" to work properly.
 [http "https://git.savannah.gnu.org"]
