@@ -1,13 +1,13 @@
 {{- $email := promptStringOnce . "email" "Email address:" -}}
 {{- $name := promptStringOnce . "name" "Fullname:" -}}
 {{- $githubname := promptStringOnce . "githubname" "Github username:" -}}
-{{- $personal := promptStringOnce . "personal" "Personal true/false:" -}}
+{{- $personal := promptBoolOnce . "personal" "Personal device, (T)rue/(F)alse:" -}}
 
 [data]
     email = {{ $email | quote }}
     name = {{ $name | quote }}
     githubname = {{ $githubname | quote }}
-    personal = {{ $personal | quote }}
+    personal = {{ $personal }}
     umask = 0o22
 
 [interpreters.ps1]

@@ -4,8 +4,8 @@
 
 [http]
 	sslCAPath = ~/.config/git/CAcerts
-	{{- if not .personal -}}
-	sslCAInfo = ~/.config/git/CACerts/CA-certs.crt
+	{{- if not .personal }}
+	sslCAInfo = ~/.config/git/CACerts/CA-chain.crt
 	{{ end }}
 
 # Gnu Emacs needs this for the package manager "straight" to work properly.
