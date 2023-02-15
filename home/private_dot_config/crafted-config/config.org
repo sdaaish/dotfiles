@@ -48,7 +48,6 @@ in the line about =crafted-evil= below.
 #+begin_src emacs-lisp
   (require 'crafted-defaults)    ; Sensible default settings for Emacs
   (require 'crafted-updates)     ; Tools to upgrade Crafted Emacs
-  (require 'crafted-completion)  ; selection framework based on `vertico`
   (require 'crafted-ui)          ; Better UI experience (modeline etc.)
   (require 'crafted-windows)     ; Window management configuration
   (require 'crafted-editing)     ; Whitspace trimming, auto parens etc.
@@ -58,6 +57,8 @@ in the line about =crafted-evil= below.
   (require 'crafted-speedbar)    ; built-in file-tree
   (require 'crafted-screencast)  ; show current command and binding in modeline
   (require 'crafted-compile)     ; automatically compile some emacs lisp files
+  (require 'crafted-completion)  ; selection framework based on `vertico`
+  (require 'popon)
 #+end_src
 
 * Font and theme settings
@@ -96,7 +97,7 @@ loading a different theme from the venerable Doom Emacs project.
   (crafted-package-install-package 'doom-themes)
   (progn
     (disable-theme 'deeper-blue)          ; first turn off the deeper-blue theme
-    (load-theme 'doom-palenight t))       ; load the doom-palenight theme
+    (load-theme 'doom-snazzy t))       ; load the doom-palenight theme
 #+end_src
 
 * Custom.el
@@ -117,7 +118,7 @@ Just begin the source code block with:
 #+end_src
 
 * Packages
-
+** Python and elpy
 #+begin_src emacs-lisp
   (require 'crafted-python)
   (with-eval-after-load "python"
@@ -129,9 +130,26 @@ Just begin the source code block with:
     (define-key pyvenv-mode-map (kbd "C-c p a") #'pyvenv-activate)
     (define-key pyvenv-mode-map (kbd "C-c p d") #'pyvenv-deactivate)
     (define-key pyvenv-mode-map (kbd "C-c p w") #'pyvenv-workon))
-
-
+  #+end_src
+** Mastering Emacs
+Settings from =Mastering Emacs=.
+  #+begin_src emacs-lisp
   (require 'crafted-mastering-emacs)
   (crafted-mastering-emacs-enable-hydra-package)
   (crafted-mastering-emacs-enable-dumb-jump-package)
   #+end_src
+** Setup orderless
+  #+begin_src emacs-lisp
+    (require 'orderless)
+    (customize-set-variable 'completion-styles '(orderless-flex basic))
+    (customize-set-variable 'completion-category-overrides '((file (styles basic partial-completion))))
+
+    (defun my/match-components-literally ()
+      "Components match literally for the rest of the session."
+      (interactive)
+      (setq-local orderless-matching-styles '(orderless-literal)
+                  orderless-style-dispatchers nil))
+
+    (define-key minibuffer-local-completion-map (kbd "C-l")
+      #'my/match-components-literally)
+    #+end_src
