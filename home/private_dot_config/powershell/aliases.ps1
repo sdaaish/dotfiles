@@ -6,6 +6,7 @@ Set-Alias -Name cmdiff -Value Chezmoi-Diff
 Set-Alias -Name cms -Value Chezmoi-Status
 Set-Alias -Name cmg -Value Chezmoi-GitStatus
 Set-Alias -Name cmu -Value Chezmoi-UnManaged
+Set-Alias -Name cmr -Value Chezmoi-RecursiveDiff
 
 Set-Alias -Name src -Value Reload-PowershellProfile
 Set-Alias -Name alias -Value Search-Alias
@@ -239,7 +240,10 @@ function Chezmoi-Diff {
     chezmoi diff
 }
 Function Chezmoi-Status {
-    chezmoi status
+    param(
+        $Path =  $(Resolve-Path ".")
+    )
+    chezmoi status $Path
 }
 Function Chezmoi-GitStatus {
     chezmoi git status -- -sb
@@ -250,6 +254,14 @@ Function Chezmoi-UnManaged {
     )
     chezmoi unmanaged $(Resolve-Path $Path)
 }
+Function Chezmoi-RecursiveDiff {
+    param(
+        $Path =  $(Resolve-Path ".")
+    )
+    $Path = $Path -replace "\\$",""
+    chezmoi diff --recursive $Path
+}
+
 # Show current week
 function Get-CurrentWeek {
     $culture = [System.Globalization.CultureInfo]::CurrentCulture
