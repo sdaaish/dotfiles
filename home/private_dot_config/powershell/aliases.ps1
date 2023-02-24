@@ -270,3 +270,8 @@ function Get-CurrentWeek {
     [int]$week = $Calendar.GetWeekOfYear($date, [System.Globalization.CalendarWeekRule]::FirstFourDayWeek, [DayOfWeek]::Monday)
     $week
 }
+
+# Load python aliases
+if (Test-Path $PSScriptRoot\PythonAlias.ps1){
+    . $PSScriptRoot\PythonAlias.ps1
+}
