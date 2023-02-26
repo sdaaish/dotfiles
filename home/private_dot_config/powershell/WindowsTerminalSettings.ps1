@@ -4,7 +4,7 @@ Function Save-WTSettingsFile {
         $Path
     )
 
-    $DestinationFolder = Split-Path $Path
+    $DestinationFolder = Split-Path -Path $Path -Parent
 
     $date = Get-Date -Format "yyyyMMdd-HHmmss"
     $Destination = Join-Path $DestinationFolder "settings.$date.json"
@@ -41,7 +41,7 @@ Function Set-TerminalSettings {
 }
 
 # Take a backup
-$WTSettingsFile = $(Join-Path $HOME "AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json")
+$WTSettingsFile = $(Join-Path $env:LocalAppData "Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json")
 
 Save-WTSettingsFile -Path $WTSettingsFile
 
@@ -64,7 +64,7 @@ $MyDefaults = @{
         @{ command = @{ action = "nextTab" }
            keys = "ctrl+pgdn" },
         @{ command = @{ action = "commandPalette" }
-           keys = "alt+x" }
+           keys = "alt+shift+x" }
     )
 }
 Set-TerminalSettings -Path $WTSettingsFile -NewSetting $MyDefaults
