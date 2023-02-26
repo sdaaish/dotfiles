@@ -6,6 +6,7 @@ Set-Alias -Name pipc -Value Clear-PipCache
 Set-Alias -Name pv -Value Enable-Env
 Set-Alias -Name penv -Value New-PythonEnv
 Set-Alias -Name de -Value deactivate
+Set-Alias -Name pycheck -Value Check-PythonVersion
 
 # Functions
 Function Upgrade-PipPackage {
@@ -47,4 +48,8 @@ Function Enable-Env {
     catch {
         Write-Error "No such environment, $EnvPath"
     }
+}
+Function Check-PythonVersion {
+    py -c "import sys;print(sys.version)"
+    py -c "import sys;print(sys.executable)"
 }
