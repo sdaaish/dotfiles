@@ -27,7 +27,7 @@ Function Clear-PipCache {
 
 Function New-PythonEnv {
     param(
-        [Paramete(Mandatory)]
+        [Parameter(Mandatory)]
         $EnvPath
     )
     python -m venv $EnvPath
@@ -42,7 +42,6 @@ Function Enable-Env {
     $ErrorActionPreference = "Stop"
 
     try {
-        $EnvPath = Resolve-Path $EnvPath
         & (Join-Path $EnvPath Scripts/Activate.ps1)
     }
     catch {
