@@ -14,7 +14,12 @@
   },
   "installBehavior": {
     "preferences": {
-      "scope": "machine"
+      "scope": "machine",
+      {{- if .personal }}
+      "locale": [ "sv-SE", "en-GB", "en-US" ]
+      {{- else }}
+      "locale": [  "en-GB", "en-US" ]
+      {{ end }}
     }
   }
 }
