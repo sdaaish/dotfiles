@@ -220,8 +220,27 @@ Function mysudo {
 }
 
 function Update-WinGet {
-    param()
-    winget upgrade --source=winget $args
+    [cmdletbinding()]
+
+    param(
+        [string[]]$Pkg
+    )
+
+    if ($Pkg.count -gt 0){
+        Write-Host "Upgrading packages $($Pkg -join " ")"  -ForegroundColor Green
+        $Pkg.foreach(
+            {
+                Write-Host "Upgrading $_"  -ForegroundColor Green
+                winget upgrade --source=winget $_
+            }
+        )
+    }
+    else {
+        Write-Host "Checking status..." -ForegroundColor Green
+        winget upgrade --source=winget
+    }
+
+
 }
 
 function Update-Scoop {
