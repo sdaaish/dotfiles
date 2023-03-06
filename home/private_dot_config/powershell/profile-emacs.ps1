@@ -1,6 +1,6 @@
 # Separate prompt for Powershell in Emacs as inferior shell.
 
-Import-Module $PSScriptRoot\MyFunctions\MyFunctions\MyFunctions.psd1
+Import-Module $PSScriptRoot\MyFunctions\MyFunctions\MyFunctions.psd1 -Force
 
 # Use a local path for modules
 $env:PSModulePath = Set-LocalModulePath
@@ -68,3 +68,5 @@ $dir = @(
 )
 
 $Psstyle.fileinfo.directory = $($dir -join "")
+
+"Start time {0}ms" -f (Get-RunningTime $starttime)

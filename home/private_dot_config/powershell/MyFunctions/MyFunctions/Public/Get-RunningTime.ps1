@@ -3,6 +3,6 @@ Function Get-RunningTime {
     param(
         $time
     )
-    $currenttime = ((Get-Date) - $time).TotalMilliseconds
-    $currenttime
+    [int]$CurrentTime = ((Get-Date) - $time).TotalMilliseconds
+    $CurrentTime
 }

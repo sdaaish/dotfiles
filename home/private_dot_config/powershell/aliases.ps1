@@ -190,12 +190,7 @@ Function Get-CommandSyntax {
 
 Function Reload-PowershellProfile {
 
-    if ($TERM -ne "emacs") {
-        . $(Join-Path ~ ".config/powershell/profile.ps1")
-    }
-    else {
-        . $(Join-Path ~ ".config/powershell/profile-emacs.ps1")
-    }
+    . $profile.CurrentUserAllHosts
 }
 
 # Make update of path easier
