@@ -7,6 +7,7 @@ Set-Alias -Name pv -Value Enable-Env
 Set-Alias -Name penv -Value New-PythonEnv
 Set-Alias -Name de -Value deactivate
 Set-Alias -Name pycheck -Value Check-PythonVersion
+Set-Alias -Name syspip -Value Install-SystemPip
 
 # Functions
 Function Upgrade-PipPackage {
@@ -51,4 +52,10 @@ Function Enable-Env {
 Function Check-PythonVersion {
     py -c "import sys;print(sys.version)"
     py -c "import sys;print(sys.executable)"
+}
+Function Install-SystemPip {
+    try {$Prg = Get-Command "python.exe"}
+    catch {throw "No such program, $Prg"}
+
+    & $prg -m pip --isolated install -U $args
 }
