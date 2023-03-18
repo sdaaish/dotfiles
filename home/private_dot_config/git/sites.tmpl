@@ -3,7 +3,6 @@
 # Custom settings for sites that require exceptions to work properly.
 
 [http]
-	sslCAPath = ~/.config/git/CAcerts
 	{{- if not .personal }}
 	sslCAInfo = ~/.config/git/CACerts/CA-chain.crt
 	{{ end }}
@@ -11,5 +10,9 @@
 # Gnu Emacs needs this for the package manager "straight" to work properly.
 [http "https://git.savannah.gnu.org"]
 	sslVerify = true
+	{{ if eq .chezmoi.os "windows" -}}
 	sslbackend = openssl
+	{{ else -}}
+	sslbackend = gnutls
+	{{ end -}}
 	cookieFile = ~/.cache/cookie.txt

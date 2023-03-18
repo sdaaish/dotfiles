@@ -5,7 +5,9 @@
 set -eufo pipefail
 
 # Change Base16-shell scripts to executable
-find ${HOME}/.config/base16-shell -type f -regextype sed -regex ".*/.*.[zsh|sh|fish]" -print0|
-    xargs -0 chmod a-x
-
+if [[ -d ${HOME}/.config/base16-shell ]]
+then
+    find ${HOME}/.config/base16-shell -type f -regextype sed -regex ".*/.*.[zsh|sh|fish]" -print0 |
+        xargs -0 chmod a-x
+fi
 {{ end }}
