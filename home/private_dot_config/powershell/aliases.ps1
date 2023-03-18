@@ -52,6 +52,7 @@ Set-Alias -Name wug -Value Update-WinGet
 
 Set-Alias -Name ytp -Value yt-dlp
 
+Remove-Item Alias:/man
 Set-Alias -Name man -Value Search-LinuxMan
 
 # Some functions
