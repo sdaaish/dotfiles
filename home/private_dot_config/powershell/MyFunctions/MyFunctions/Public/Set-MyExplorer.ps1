@@ -39,6 +39,7 @@ function Set-MyExplorer {
     Set-ItemProperty $key Start_SearchFiles 2
     Set-ItemProperty $key StoreAppsOnTaskbar 1
     Set-ItemProperty $key TaskbarAnimations 1
+    Set-ItemProperty $key TaskbarSi 0
     Set-ItemProperty $key TaskbarSmallIcons 1
     Set-ItemProperty $key WebView 1
     Stop-Process -processname explorer

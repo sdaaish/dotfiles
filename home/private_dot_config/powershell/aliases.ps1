@@ -29,6 +29,9 @@ Set-Alias -Name dgit -Value Invoke-DotGit
 Set-Alias -Name dk -Value 'docker'
 Set-Alias -Name dco -Value 'docker-compose'
 
+# Rancher desktop/Kubernetes
+Set-Alias -Name nk -Value 'nerdctl'
+
 # Ubuntu multipass virtual servers
 Set-Alias -Name mps -Value multipass
 
@@ -289,4 +292,9 @@ function Get-CurrentWeek {
 # Load python aliases
 if (Test-Path $PSScriptRoot\PythonAlias.ps1){
     . $PSScriptRoot\PythonAlias.ps1
+}
+
+# Load local aliases
+if (Test-Path $PSScriptRoot\local.ps1){
+    . $PSScriptRoot\local.ps1
 }
