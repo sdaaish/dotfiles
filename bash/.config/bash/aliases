@@ -84,9 +84,10 @@ alias install-fonts="sudo apt-get install fonts-powerline fonts-cascadia-code --
 alias psa="ps ax -O ppid"
 alias e="env|sort"
 
-# Docker
-alias dk=docker
-alias dco=docker-compose
+# Docker/Kubernetes/Rancher
+alias dk="docker"
+alias dco="docker compose"
+alias nk="nerdctl"
 
 # Python
 alias python=python3
