@@ -1,0 +1,12 @@
+alias ee 'find-file-other-window $1'
+alias ff 'find-file $1'
+alias llh 'ls -lah $*'
+alias ... 'cd ../..'
+alias .. 'cd ..'
+alias d 'dired $1'
+alias ll 'ls -la $*'
+alias llt 'ls -ltra $*'
+alias dir 'ls -l $*'
+
+# Alias for org-files and git
+alias ocs 'git -C ~/OneDrive/emacs/org/ status --porcelain'
