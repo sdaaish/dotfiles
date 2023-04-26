@@ -58,6 +58,9 @@ Set-Alias -Name ytp -Value yt-dlp
 Remove-Item Alias:/man
 Set-Alias -Name man -Value Search-LinuxMan
 
+# Utilities
+Set-Alias -Name fdq -Value Format-DoubleQuote
+
 # Some functions
 function .. {
     cd ..
@@ -287,6 +290,17 @@ function Get-CurrentWeek {
     $date = Get-Date
     [int]$week = $Calendar.GetWeekOfYear($date, [System.Globalization.CalendarWeekRule]::FirstFourDayWeek, [DayOfWeek]::Monday)
     $week
+}
+
+# Take a list of strings and add qoutes.
+function Format-DoubleQuote {
+    param (
+        [string[]]$List
+    )
+
+    $tmp = ($list -split ",") -join ""","""
+    $result = """$tmp"""
+    $result
 }
 
 # Load python aliases
