@@ -27,7 +27,7 @@ Set-Alias -Name dgit -Value Invoke-DotGit
 
 # Docker
 Set-Alias -Name dk -Value 'docker'
-Set-Alias -Name dco -Value 'docker-compose'
+Set-Alias -Name dco -Value 'docker compose'
 
 # Rancher desktop/Kubernetes
 Set-Alias -Name nk -Value 'nerdctl'
@@ -60,6 +60,7 @@ Set-Alias -Name man -Value Search-LinuxMan
 
 # Utilities
 Set-Alias -Name fdq -Value Format-DoubleQuote
+Set-Alias -Name cl -Value New-List
 
 # Some functions
 function .. {
@@ -301,6 +302,11 @@ function Format-DoubleQuote {
     $tmp = ($list -split ",") -join ""","""
     $result = """$tmp"""
     $result
+}
+
+# Return a list of objects.
+Function New-List {
+    $args
 }
 
 # Load python aliases
