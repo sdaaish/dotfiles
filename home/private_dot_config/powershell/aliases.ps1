@@ -30,6 +30,7 @@ Set-Alias -Name dk -Value 'docker'
 Set-Alias -Name dco -Value 'docker compose'
 
 # Rancher desktop/Kubernetes
+Set-Alias -Name k -Value 'kubectl'
 Set-Alias -Name nk -Value 'nerdctl'
 
 # Ubuntu multipass virtual servers

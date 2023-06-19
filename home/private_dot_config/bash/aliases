@@ -88,6 +88,10 @@ alias e="env|sort"
 alias dk="docker"
 alias dco="docker compose"
 
+# Kubernetes
+alias k="kubectl"
+alias nk="nerdctl"
+
 # Python
 alias python=python3
 alias pip=pip3
