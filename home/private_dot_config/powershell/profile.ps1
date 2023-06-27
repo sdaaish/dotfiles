@@ -79,4 +79,9 @@ Set-TerminalIconsTheme -ColorTheme MyColorTheme
 if (Test-Path $PSScriptRoot\aliases.ps1) {
     . $PSScriptRoot\aliases.ps1
 }
+
+if (Test-Path $PSScriptRoot\python-pip.ps1){
+    . $PSScriptRoot\python-pip.ps1
+}
+
 "{0,-20}: {1}ms" -f "Start time",(Get-RunningTime $starttime)

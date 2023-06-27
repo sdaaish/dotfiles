@@ -118,6 +118,20 @@ then
     fi
 fi
 
+# Completion for pip
+compfile="$HOME/.config/bash/pip-completion.bash"
+if [ -f ${compfile} ]
+then
+    source ${compfile}
+fi
+
+# Completion for Chezmoi
+compfile="$HOME/.config/bash/chezmoi-completion.sh"
+if [ -f ${compfile} ]
+then
+    source ${compfile}
+fi
+
 # From https://github.com/chriskempson/base16-shell
 BASE16_SHELL="${HOME}/.config/base16-shell/"
 [ -n "$PS1" ] && [ -s "$BASE16_SHELL/profile_helper.sh" ] && eval "$(${BASE16_SHELL}/profile_helper.sh)"
