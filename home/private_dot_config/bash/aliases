@@ -81,7 +81,7 @@ alias o5="openssl x509 -text -noout"
 alias install-fonts="sudo apt-get install fonts-powerline fonts-cascadia-code --yes"
 
 # Tools
-alias psa="ps ax -O ppid"
+alias psa="ps auxfww"
 alias e="env|sort"
 
 # Docker
