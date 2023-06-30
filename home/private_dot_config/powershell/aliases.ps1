@@ -62,6 +62,7 @@ Set-Alias -Name man -Value Search-LinuxMan
 # Utilities
 Set-Alias -Name fdq -Value Format-DoubleQuote
 Set-Alias -Name cl -Value New-List
+Set-Alias -Name gopass -Value $env:localappdata\gopass\gopass.exe
 
 # Some functions
 function .. {

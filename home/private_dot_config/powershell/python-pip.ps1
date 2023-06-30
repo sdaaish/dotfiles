@@ -2,8 +2,6 @@
 
 # From: python -m pip completion --powershell | Out-File -Encoding default -Append $PROFILE
 
-$exe = (get-command python.exe).source
-
 # pip powershell completion start
 if ((Test-Path Function:\TabExpansion) -and -not `
     (Test-Path Function:\_pip_completeBackup)) {
@@ -11,6 +9,7 @@ if ((Test-Path Function:\TabExpansion) -and -not `
 }
 
 function TabExpansion($line, $lastWord) {
+    $exe = (get-command python.exe).source
     $lastBlock = [regex]::Split($line, '[|;]')[-1].TrimStart()
     if ($lastBlock.StartsWith("$exe -m pip ")) {
         $Env:COMP_WORDS=$lastBlock

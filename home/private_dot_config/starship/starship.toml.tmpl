@@ -4,14 +4,14 @@
 # This part works for Windows.
 
 format = """
-[$status$battery$time$os$env_var:$username$hostname  $git_status$git_branch$git_commit$git_state $directory$all](bold blue)
+[$status$battery$time$os${env_var.root}${env_var.starship}:${env_var.user}$hostname  $git_status$git_branch$git_commit$git_state $directory$all](bold blue)
 [$shell ](bold blue)"""
 
 {{ else if eq .chezmoi.os "linux" }}
 # Use default fonts for Linux.
 
 format = """
-[$status$time$os$env_var:$username$hostname $sudo$git_status$git_branch$git_commit$git_state $directory$all](bold blue)
+[$status$time$os${env_var.starship}:$username$hostname $sudo$git_status$git_branch$git_commit$git_state $directory$all](bold blue)
 [$shell ](bold blue)"""
 
 {{ end }}
@@ -60,8 +60,12 @@ disabled = false
 format = '[$user]($style)'
 style_root = 'red bold'
 style_user = '#66b3ff'
-show_always = true
+show_always = false
+{{ if eq .chezmoi.os "windows" -}}
+disabled = true
+{{ else if eq .chezmoi.os "linux" -}}
 disabled = false
+{{ end }}
 
 [status]
 disabled = false
@@ -70,12 +74,19 @@ symbol = '[](bold red)'
 style = ''
 success_symbol = '[](bold green)'
 
-[env_var.SUPERUSER]
+[env_var.root]
 symbol = "🧨"
 format = "$symbol "
+variable = "SUPERUSER"
 
-[env_var.STARSHIP_SHEll]
+[env_var.starship]
 format = "[$env_value](#9933ff)"
+variable = "STARSHIP_SHELL"
+
+[env_var.user]
+format = "[$env_value]($style)"
+variable = "USERNAME"
+style = '#0099ff'
 
 [shell]
 powershell_indicator = "ﲵ"
