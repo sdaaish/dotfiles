@@ -4,14 +4,14 @@
 # This part works for Windows.
 
 format = """
-[$status$battery$time$env_var:$username$hostname  $git_status$git_branch$git_commit$git_state $directory$all](bold blue)
+[$status$battery$time$os$env_var:$username$hostname  $git_status$git_branch$git_commit$git_state $directory$all](bold blue)
 [$shell ](bold blue)"""
 
 {{ else if eq .chezmoi.os "linux" }}
 # Use default fonts for Linux.
 
 format = """
-[$status$time$env_var:$username$hostname $git_status$git_branch$git_commit$git_state $directory$all](bold blue)
+[$status$time$os$env_var:$username$hostname $sudo$git_status$git_branch$git_commit$git_state $directory$all](bold blue)
 [$shell ](bold blue)"""
 
 {{ end }}
@@ -90,8 +90,19 @@ style = '#9999ff'
 use_12hr = false
 disabled = false
 utc_time_offset = 'local'
-time_format = '%T'
+time_format = '%T (v%V)'
 time_range = '-'
+
+[os]
+disabled = false
+style = "#ff6600"
+
+[os.symbols]
+Ubuntu = " "
+
+[sudo]
+disabled = false
+format = "as [$symbol]($style)"
 
 [aws]
 symbol = "  "
