@@ -13,6 +13,7 @@ Set-Alias -Name alias -Value Search-Alias
 
 Set-Alias -Name em -Value emacs-client
 Set-Alias -Name emx -Value emacs-client
+Set-Alias -Name emc -Value Select-EmacsVersion
 
 Set-Alias -Name gs -Value Get-CommandSyntax
 
@@ -167,6 +168,47 @@ function emacs-client() {
         # Dont create a new frame if files exists as argument
         & $cmd @options  $args *> $logfile
     }
+}
+
+Function Select-EmacsVersion {
+    # Choose and launch a Emacs from installed versions
+try { $exe = (Get-Command runemacs.exe -ErrorAction Stop).path }
+catch { throw "No such file, 'runemacs.exe'" }
+
+$versions = Get-ChildItem ~/.config -Filter *emacs* -Directory |
+  Where-Object { $_.basename -notmatch "chemacs" } |
+  Select-Object resolvedtarget, basename
+
+$i = 0
+$versions.ForEach(
+    {
+        "[{1}] {0,-20}" -f $_.basename, $i++
+    }
+)
+
+$answer = Read-Host -Prompt "Select version"
+
+if ([system.string]::IsNullOrWhiteSpace($answer)) {
+    break
+}
+
+$OldPreference = $ErrorActionPreference
+$ErrorActionPreference = "SilentlyContinue"
+
+$valid = 0..$($versions.count - 1)
+if ([int]$answer -in $valid) {
+
+    $selected = $versions[$answer].resolvedtarget
+    $options = @(
+        "--init-directory=$selected"
+        "--geometry=150x50+10+10"
+    )
+
+    "$exe {0}" -f $($options -join " ")
+    & "$exe" @options
+}
+
+$ErrorActionPreference = $OldPreference
 }
 
 # Alias for git status
