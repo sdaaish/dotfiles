@@ -172,43 +172,43 @@ function emacs-client() {
 
 Function Select-EmacsVersion {
     # Choose and launch a Emacs from installed versions
-try { $exe = (Get-Command runemacs.exe -ErrorAction Stop).path }
-catch { throw "No such file, 'runemacs.exe'" }
+    try { $exe = (Get-Command runemacs.exe -ErrorAction Stop).path }
+    catch { throw "No such file, 'runemacs.exe'" }
 
-$versions = Get-ChildItem ~/.config -Filter *emacs* -Directory |
-  Where-Object { $_.basename -notmatch "chemacs" } |
-  Select-Object resolvedtarget, basename
+    $versions = Get-ChildItem ~/.config -Filter *emacs* -Directory |
+      Where-Object { $_.basename -notmatch "chemacs" } |
+      Select-Object resolvedtarget, basename
 
-$i = 0
-$versions.ForEach(
-    {
-        "[{1}] {0,-20}" -f $_.basename, $i++
-    }
-)
-
-$answer = Read-Host -Prompt "Select version"
-
-if ([system.string]::IsNullOrWhiteSpace($answer)) {
-    break
-}
-
-$OldPreference = $ErrorActionPreference
-$ErrorActionPreference = "SilentlyContinue"
-
-$valid = 0..$($versions.count - 1)
-if ([int]$answer -in $valid) {
-
-    $selected = $versions[$answer].resolvedtarget
-    $options = @(
-        "--init-directory=$selected"
-        "--geometry=150x50+10+10"
+    $i = 0
+    $versions.ForEach(
+        {
+            "[{1}] {0,-20}" -f $_.basename, $i++
+        }
     )
 
-    "$exe {0}" -f $($options -join " ")
-    & "$exe" @options
-}
+    $answer = Read-Host -Prompt "Select version"
 
-$ErrorActionPreference = $OldPreference
+    if ([system.string]::IsNullOrWhiteSpace($answer)) {
+        break
+    }
+
+    $OldPreference = $ErrorActionPreference
+    $ErrorActionPreference = "SilentlyContinue"
+
+    $valid = 0..$($versions.count - 1)
+    if ([int]$answer -in $valid) {
+
+        $selected = $versions[$answer].resolvedtarget
+        $options = @(
+            "--init-directory=$selected"
+            "--geometry=150x50+10+10"
+        )
+
+        "$exe {0}" -f $($options -join " ")
+        & "$exe" @options
+    }
+
+    $ErrorActionPreference = $OldPreference
 }
 
 # Alias for git status
