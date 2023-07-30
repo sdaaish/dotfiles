@@ -8,6 +8,8 @@ Set-Alias -Name cmg -Value Chezmoi-GitStatus
 Set-Alias -Name cmu -Value Chezmoi-UnManaged
 Set-Alias -Name cmr -Value Chezmoi-RecursiveDiff
 
+Set-Alias -Name dirr -Value Get-ChildItemRecursive
+
 Set-Alias -Name src -Value Reload-PowershellProfile
 Set-Alias -Name alias -Value Search-Alias
 
@@ -21,7 +23,7 @@ Set-Alias -Name gs -Value Get-CommandSyntax
 Set-Alias -Name lll -Value Find-Links
 
 # Git
-Set-alias -Name gts -Value Get-MyGitStatus
+Set-Alias -Name gts -Value Get-MyGitStatus
 Set-Alias -Name gtl -Value Get-MyGitLog
 Set-Alias -Name dotgit -Value Invoke-DotGit
 Set-Alias -Name dgit -Value Invoke-DotGit
@@ -38,7 +40,7 @@ Set-Alias -Name nk -Value 'nerdctl'
 Set-Alias -Name mps -Value multipass
 
 # Defender
-Set-Alias -Name mdatp -Value  'C:\Program Files\Windows Defender\MpCmdRun.exe'
+Set-Alias -Name mdatp -Value 'C:\Program Files\Windows Defender\MpCmdRun.exe'
 
 # Firefox
 Set-Alias -Name ff -Value Start-Firefox
@@ -67,10 +69,10 @@ Set-Alias -Name gopass -Value $env:localappdata\gopass\gopass.exe
 
 # Some functions
 function .. {
-    cd ..
+    Set-Location ..
 }
 function ... {
-    cd ..\..
+    Set-Location ..\..
 }
 function cdh {
     Set-Location ~
@@ -91,7 +93,7 @@ function cdv {
     Set-Location ~\Vagrantdir
 }
 function ls {
-    Get-ChildItem $args -Attributes H,!H,A,!A,S,!S
+    Get-ChildItem $args -Attributes H, !H, A, !A, S, !S
 }
 function ll {
     [cmdletbinding()]
@@ -99,7 +101,7 @@ function ll {
         $Path
     )
 
-    Get-ChildItem $Path -Attributes H,!H,A,!A,S,!S
+    Get-ChildItem $Path -Attributes H, !H, A, !A, S, !S
 }
 
 function lla {
@@ -107,7 +109,7 @@ function lla {
     Param (
         $Path
     )
-    Get-ChildItem $Path -Attributes H,!H,A,!A,S,!S,C,!C,E,!E
+    Get-ChildItem $Path -Attributes H, !H, A, !A, S, !S, C, !C, E, !E
 }
 
 function lle {
@@ -115,9 +117,9 @@ function lle {
     Param (
         $Path
     )
-    Get-ChildItem $Path -File -Attributes H,!H,A,!A,S,!S|
-      Group-Object -Property Extension |
-      Sort-Object -Property count -Descending
+    Get-ChildItem $Path -File -Attributes H, !H, A, !A, S, !S |
+        Group-Object -Property Extension |
+        Sort-Object -Property count -Descending
 }
 
 function lls {
@@ -125,7 +127,7 @@ function lls {
     Param (
         $Path
     )
-    Get-ChildItem $Path -Attributes H,!H,A,!A,S,!S|Sort-Object Length
+    Get-ChildItem $Path -Attributes H, !H, A, !A, S, !S | Sort-Object Length
 }
 
 function llt {
@@ -133,7 +135,7 @@ function llt {
     Param (
         $Path
     )
-    Get-ChildItem $Path -Attributes H,!H,A,!A,S,!S| Sort-Object lastwritetime
+    Get-ChildItem $Path -Attributes H, !H, A, !A, S, !S | Sort-Object lastwritetime
 }
 # Alias for help-command
 function gh([string]$help) {
@@ -146,8 +148,8 @@ Function emdi {
 }
 
 function emacs-client() {
-    $date =  Get-Date -Format 'yyyyMMdd-HH.mm.ss'
-    $logfile = Join-Path $(Resolve-path ~/tmp) "emacs-client-${date}.log"
+    $date = Get-Date -Format 'yyyyMMdd-HH.mm.ss'
+    $logfile = Join-Path $(Resolve-Path ~/tmp) "emacs-client-${date}.log"
     # Workaround for using chemacs2 with server in Windows10
     $serverfile = $(Resolve-Path ~/.config/emacs.default/server/server -ErrorAction ignore).Path
 
@@ -166,7 +168,7 @@ function emacs-client() {
     }
     else {
         # Dont create a new frame if files exists as argument
-        & $cmd @options  $args *> $logfile
+        & $cmd @options $args *> $logfile
     }
 }
 
@@ -176,8 +178,8 @@ Function Select-EmacsVersion {
     catch { throw "No such file, 'runemacs.exe'" }
 
     $versions = Get-ChildItem ~/.config -Filter *emacs* -Directory |
-      Where-Object { $_.basename -notmatch "chemacs" } |
-      Select-Object resolvedtarget, basename
+        Where-Object { $_.basename -notmatch "chemacs" } |
+        Select-Object resolvedtarget, basename
 
     $i = 0
     $versions.ForEach(
@@ -218,7 +220,7 @@ Function Get-MyGitStatus {
 
 # Kill explorer and restart it
 function pse {
-    Get-Process -Name explorer|Stop-Process -force
+    Get-Process -Name explorer | Stop-Process -Force
     Write-Host "Explorer restarted"
 }
 
@@ -228,9 +230,9 @@ function Find-Links {
     Param (
         $Path
     )
-    Get-ChildItem $Path -ErrorAction SilentlyContinue|
-      Where-Object {$_.Linktype}|
-      Select-Object FullName, Target,LastWriteTime,LinkType
+    Get-ChildItem $Path -ErrorAction SilentlyContinue |
+        Where-Object { $_.Linktype } |
+        Select-Object FullName, Target, LastWriteTime, LinkType
 }
 Function Get-CommandSyntax {
     [cmdletbinding()]
@@ -247,11 +249,11 @@ Function Reload-PowershellProfile {
 
 # Make update of path easier
 Function refreshenv {
-		$paths = @(
-				([System.Environment]::GetEnvironmentVariable("Path","Machine") -split ";")
-				([System.Environment]::GetEnvironmentVariable("Path","User") -split ";")
-		)
-		$env:path = ($paths|Select-Object -Unique) -join ";"
+    $paths = @(
+				([System.Environment]::GetEnvironmentVariable("Path", "Machine") -split ";")
+				([System.Environment]::GetEnvironmentVariable("Path", "User") -split ";")
+    )
+    $env:path = ($paths | Select-Object -Unique) -join ";"
 }
 
 Function mysudo {
@@ -273,11 +275,11 @@ function Update-WinGet {
         [string[]]$Pkg
     )
 
-    if ($Pkg.count -gt 0){
-        Write-Host "Upgrading packages $($Pkg -join " ")"  -ForegroundColor Green
+    if ($Pkg.count -gt 0) {
+        Write-Host "Upgrading packages $($Pkg -join " ")" -ForegroundColor Green
         $Pkg.foreach(
             {
-                Write-Host "Upgrading $_"  -ForegroundColor Green
+                Write-Host "Upgrading $_" -ForegroundColor Green
                 winget upgrade --source=winget $_
             }
         )
@@ -307,7 +309,7 @@ function Chezmoi-Diff {
 }
 Function Chezmoi-Status {
     param(
-        $Path =  $(Resolve-Path ".")
+        $Path = $(Resolve-Path ".")
     )
     chezmoi status $Path
 }
@@ -322,9 +324,9 @@ Function Chezmoi-UnManaged {
 }
 Function Chezmoi-RecursiveDiff {
     param(
-        $Path =  $(Resolve-Path ".")
+        $Path = $(Resolve-Path ".")
     )
-    $Path = $Path -replace "\\$",""
+    $Path = $Path -replace "\\$", ""
     chezmoi diff --recursive $Path
 }
 
@@ -354,11 +356,11 @@ Function New-List {
 }
 
 # Load python aliases
-if (Test-Path $PSScriptRoot\PythonAlias.ps1){
+if (Test-Path $PSScriptRoot\PythonAlias.ps1) {
     . $PSScriptRoot\PythonAlias.ps1
 }
 
 # Load local aliases
-if (Test-Path $PSScriptRoot\local.ps1){
+if (Test-Path $PSScriptRoot\local.ps1) {
     . $PSScriptRoot\local.ps1
 }
