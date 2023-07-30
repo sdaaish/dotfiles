@@ -364,3 +364,35 @@ if (Test-Path $PSScriptRoot\PythonAlias.ps1) {
 if (Test-Path $PSScriptRoot\local.ps1) {
     . $PSScriptRoot\local.ps1
 }
+
+# Find files recursive with pattern
+Function Get-ChildItemRecursive {
+    param(
+        [Parameter(
+            Position = 0,
+            ValueFromPipeLine,
+            HelpMessage = "Enter one or more paths to search in."
+        )]
+        [string[]]$Path = ".",
+
+        [Parameter(
+            Position = 1,
+            ValueFromPipeLine,
+            HelpMessage = "Enter the filter to search for, default='*'."
+        )]
+        [string]$Filter = "*"
+    )
+
+    $dirOptions = @{
+        Recurse = $true
+        Path    = $Path
+        Filter  = $Filter
+        File    = $true
+    }
+
+    $selectOptions = @{
+        Property = @("FullName", "Length", @{Label = "LastWriteTime"; Expression = { Get-Date $_.LastWriteTime -UFormat "%F %T" }})
+    }
+
+    Get-ChildItem @dirOptions | Select-Object @selectOptions
+}
