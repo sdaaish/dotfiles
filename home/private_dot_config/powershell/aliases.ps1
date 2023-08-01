@@ -53,6 +53,7 @@ Set-Alias -Name mps -Value multipass
 Set-Alias -Name top -Value Get-TopProcess
 
 Set-Alias -Name ra -Value Resolve-Address
+Set-Alias -Name lo -Value Resolve-LocalDnsName
 
 Set-Alias -Name sus -Value Update-Scoop
 Set-Alias -Name wug -Value Update-WinGet
@@ -395,4 +396,30 @@ Function Get-ChildItemRecursive {
     }
 
     Get-ChildItem @dirOptions | Select-Object @selectOptions
+}
+
+# Lookup a name with DNSClient-PS
+Function Resolve-LocalDnsName {
+    [cmdletbinding()]
+    param(
+        [Parameter(Mandatory,Position=0)]
+        [string]$Name,
+
+        [Parameter(Position=1)]
+        [string]$NameServer
+    )
+
+    switch -regex ($name) {
+        "([0-9]{1,3}\.){3}[0-9]{1,3}" {
+            $response = (Resolve-Dns -Query $Name -QueryType PTR -NameServer $Nameserver).answers
+        }
+        "/([0-9a-fA-F]{1,4}::?){1,7}([0-9a-fA-F]{1,4})" {
+            $response = (Resolve-Dns -Query $Name -QueryType PTR -NameServer $Nameserver).answers
+        }
+        default {
+            $response = (Resolve-Dns -Query $Name -QueryType A -NameServer $Nameserver).answers
+            $response += (Resolve-Dns -Query $Name -QueryType AAAA -NameServer $Nameserver).answers
+        }
+    }
+    $response
 }
