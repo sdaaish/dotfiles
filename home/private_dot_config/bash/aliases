@@ -20,6 +20,7 @@ alias rehash='hash -r'
 
 # Stupid stuff
 alias sl='sl -ea'
+alias sudp='sudo'
 
 # Change dir
 alias cd..='cd ..'
