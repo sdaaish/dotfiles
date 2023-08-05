@@ -18,6 +18,14 @@
 (setq custom-file (expand-file-name "emacs-custom.el" user-emacs-directory))
 (load custom-file)
 
+;; LISP directories
+(when (not (file-exists-p "lisp"))
+      (make-directory (concat user-emacs-directory "lisp") t))
+(add-to-list 'load-path (concat user-emacs-directory "lisp"))
+(setq lispdir (let (lispdir) (expand-file-name ".config/lisp/" (getenv "HOME"))))
+(when (file-exists-p lispdir)
+  (add-to-list 'load-path lispdir))
+
 (display-time-mode t)
 (setq display-time-24hr-format t)
 
@@ -52,8 +60,10 @@
 (tool-bar-mode -1)
 (visual-line-mode 1)
 (save-place-mode 1)
+(when (not (file-exists-p "backups"))
+      (make-directory (concat user-emacs-directory "backups") t))
 (setq backup-directory-alist
-      '((".*" . (expand-file-name "backups" user-emacs-directory))))
+      `((".*" . ,(expand-file-name "backups" user-emacs-directory))))
 
 (setq inhibit-startup-message t
       tab-always-indent 'complete)
