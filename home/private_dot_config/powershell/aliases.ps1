@@ -148,11 +148,20 @@ Function emdi {
     emacs.exe --debug-init
 }
 
+# Start emacsclient with custom emacs server
 function emacs-client() {
+    [cmdletbinding()]
+    param(
+        [Parameter(Position=0)]
+        [string]$InitDir = "~/.config/emacs",
+
+        [Parameter(Position=1, ValueFromRemainingArguments)]
+        [string[]]$Path
+    )
+
     $date = Get-Date -Format 'yyyyMMdd-HH.mm.ss'
     $logfile = Join-Path $(Resolve-Path ~/tmp) "emacs-client-${date}.log"
-    # Workaround for using chemacs2 with server in Windows10
-    $serverfile = $(Resolve-Path ~/.config/emacs.default/server/server -ErrorAction ignore).Path
+    $serverfile = Join-Path $(Resolve-Path $InitDir) "server/server" -ErrorAction ignore
 
     $cmd = Get-Command emacsclientw.exe
     $options = @(
@@ -162,15 +171,8 @@ function emacs-client() {
         "--create-frame"
     )
 
-    # Starts emacsclient and daemon if not started
-    if ($args.count -eq 0 ) {
-        # Create a new frame if no files as argument
-        & $cmd @options *> $logfile
-    }
-    else {
-        # Dont create a new frame if files exists as argument
-        & $cmd @options $args *> $logfile
-    }
+    "$cmd {0} {1}" -f $($options -join " "), ($path -join " ")
+    & $cmd @options $Path |out-file $logfile
 }
 
 Function Select-EmacsVersion {
