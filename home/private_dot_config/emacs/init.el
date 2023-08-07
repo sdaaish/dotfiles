@@ -4,12 +4,13 @@
 
 ;;; Code:
 
-(require 'bind-key)
-(require 'use-package)
+(if (>= emacs-major-version 29)
+    (require 'bind-key))
+;;(require 'use-package)
 (require 'json)
 (require 'project)
 (require 'python)
-(require 'eglot)
+;;(require 'eglot)
 (require 'org)
 (require 'eldoc)
 (require 'tramp)
