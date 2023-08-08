@@ -22,7 +22,8 @@
 (when (not (file-exists-p "lisp"))
   (make-directory (concat user-emacs-directory "lisp") t))
 (add-to-list 'load-path (concat user-emacs-directory "lisp"))
-(setq lispdir (let (lispdir) (expand-file-name ".config/lisp/" (getenv "HOME"))))
+(setq lispdir (let (lispdir)
+                (expand-file-name ".config/lisp/" (getenv "HOME"))))
 (when (file-exists-p lispdir)
   (add-to-list 'load-path lispdir))
 
@@ -97,6 +98,7 @@
       delete-by-moving-to-trash t
       save-silently t)
 
+(setq-default indent-tabs-mode nil)
 (setq inhibit-startup-message t
       tab-always-indent 'complete)
 (global-set-key [remap dabbrev-expand] 'hippie-expand)
