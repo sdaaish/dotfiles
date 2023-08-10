@@ -1,19 +1,46 @@
-;;; init.el --- Summary
+;;; init.el --- Default configuration of Emacs  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 
+;; This is a default or minimal configuration of Emacs to use as the sane default
+;; on a new system or when things go bad.
+;; This config don't use any external packages, not even Gnu Elpa or NonGnu Elpa,
+;; only the already built-in.
+
+;; This to make it fast and reliable to start, so it is useable as a backup or
+;; spare configuration of the editor.
+
+;; It is also a practical way to learn the inner of Emacs and of it's historic
+;; commands and settings.
+
+;; This config will most likely only work out-of-the-box with Emacs 29 at the moment,
+;; is not tested on other versions. But since the config is with only the built-in
+;; packages, this could be fairly easy to achieve.
+
+;; With Emacs 29, the '--init-dir' can be used on the command-line, which makes it
+;; possible to use multiple different configs on a system, without any third-party
+;; packages (Chemacs2 and others).
+
+;; WIP
+
 ;;; Code:
+
+;; Startup optimization
+(setq gc-cons-threshold (* 50 1000 1000))
+(defun gc/set-after-start ()
+  (setq gc-cons-threshold (* 2 1000 1000)))
+(setq after-init-hook 'gc/set-after-start)
 
 (if (>= emacs-major-version 29)
     (require 'bind-key))
 ;;(require 'use-package)
-(require 'json)
-(require 'project)
-(require 'python)
+;;(require 'json)
+;;(require 'project)
+;;(require 'python)
 ;;(require 'eglot)
-(require 'org)
-(require 'eldoc)
-(require 'tramp)
+;;(require 'org)
+;;(require 'eldoc)
+;;(require 'tramp)
 
 (setq custom-file (expand-file-name "emacs-custom.el" user-emacs-directory))
 (load custom-file)
@@ -81,13 +108,16 @@
 (which-function-mode t)
 
 ;; Backup and saving place in files
-(save-place-mode 1)
 (when (not (file-exists-p "backups"))
   (make-directory (concat user-emacs-directory "backups") t))
 (setq backup-directory-alist
       `((".*" . ,(expand-file-name "backups" user-emacs-directory))))
 ;; (setq auto-save-file-name-transforms
 ;;       `((".*" . ,(expand-file-name "backups" user-emacs-directory))))
+(save-place-mode 1)
+(setq save-place-file (expand-file-name ".cache/saveplace" user-emacs-directory))
+(setq recentf-save-file (expand-file-name ".cache/recentfiles" user-emacs-directory))
+
 (setq delete-old-versions t
       version-control t
       vc-make-backup-files t
@@ -102,18 +132,24 @@
 (setq inhibit-startup-message t
       tab-always-indent 'complete)
 (global-set-key [remap dabbrev-expand] 'hippie-expand)
+(global-set-key (kbd "C-z") 'zap-up-to-char)
+(global-set-key (kbd "C-<kp-add>") 'text-scale-increase)
+(global-set-key (kbd "C-<kp-subtract>") 'text-scale-decrease)
+(setq text-scale-mode-step 1.05)
 (defalias 'yes-or-no-p 'y-or-n-p)
 
+;; Abbreviations
 (setq save-abbrevs 'silently
       abbrev-en-file (expand-file-name "abbrev_english_defs" "~/.config/lisp/"))
 (if (file-readable-p abbrev-en-file)
     (read-abbrev-file abbrev-en-file))
+(setq-default abbrev-mode t)
 
 ;; Org mode
 (setq org-directory (expand-file-name "Org/" (getenv "ONEDRIVE"))
       org-agenda-files (list org-directory)
       org-fontify-quote-and-verse-blocks t
-      org-mode-hook 'abbrev-mode)
+      org-mode-hook (lambda () (abbrev-mode nil)))
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c c") 'org-capture)
 
@@ -123,8 +159,39 @@
             (keymap-set dired-mode-map "'" 'dired-up-directory)
             (dired-hide-details-mode 1)))
 
-;; Initial size of the frame
-(toggle-frame-maximized)
+;; Info mode
+(with-eval-after-load 'info
+  (keymap-set Info-mode-map "'" 'Info-up))
+
+;; Initial size of the frame, if wide screen, center the frame.
+;; Else, maximize it (not full screen).
+(if (>= (nth 3 (assq 'geometry (frame-monitor-attributes))) 5000)
+    (progn (set-frame-position nil 1000 20)
+           (set-frame-width nil 200)
+           (set-frame-height nil 40))
+  (toggle-frame-maximized))
+
+;; Remember windows
+(winner-mode 1)
+
+;; Move more easily
+(windmove-mode 1)
+(when (fboundp 'windmove-default-keybindings)
+  (windmove-default-keybindings))
+;; Make windmove work in Org mode:
+(add-hook 'org-shiftup-final-hook 'windmove-up)
+(add-hook 'org-shiftleft-final-hook 'windmove-left)
+(add-hook 'org-shiftdown-final-hook 'windmove-down)
+(add-hook 'org-shiftright-final-hook 'windmove-right)
+
+(setq initial-scratch-message ";; yo!\n\n")
+(setq initial-major-mode 'emacs-lisp-mode)
+
+(when (member "Segoe UI Emoji" (font-family-list))
+  (set-fontset-font
+   t 'symbol (font-spec :family "Segoe UI Emoji" :fontified t) nil 'prepend)
+  (set-fontset-font
+   t 'unicode (font-spec :family "Segoe UI Emoji" :fontified t) nil 'prepend))
 
 (provide 'init)
 ;;; init.el ends here
