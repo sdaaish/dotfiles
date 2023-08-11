@@ -165,11 +165,16 @@
 
 ;; Initial size of the frame, if wide screen, center the frame.
 ;; Else, maximize it (not full screen).
-(if (>= (nth 3 (assq 'geometry (frame-monitor-attributes))) 5000)
-    (progn (set-frame-position nil 1000 20)
-           (set-frame-width nil 200)
-           (set-frame-height nil 40))
-  (toggle-frame-maximized))
+(defun my/set-frame-size (p1 p2 x y)
+  (set-frame-position nil p1 p2)
+           (set-frame-width nil x)
+           (set-frame-height nil y))
+
+(cond ((>= (nth 3 (assq 'geometry (frame-monitor-attributes))) 5000)
+                      (my/set-frame-size 1000 20 200 40))
+       ((>= (nth 3 (assq 'geometry (frame-monitor-attributes))) 3000)
+               (my/set-frame-size 600 20 200 50))
+    (toggle-frame-maximized))
 
 ;; Remember windows
 (winner-mode 1)
