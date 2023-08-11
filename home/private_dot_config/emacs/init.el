@@ -28,6 +28,7 @@
 ;; Startup optimization
 (setq gc-cons-threshold (* 50 1000 1000))
 (defun gc/set-after-start ()
+  "Set a sane value after starting Emacs."
   (setq gc-cons-threshold (* 2 1000 1000)))
 (setq after-init-hook 'gc/set-after-start)
 
@@ -89,6 +90,7 @@
 (tool-bar-mode -1)
 (visual-line-mode 1)
 (blink-cursor-mode 2)
+(column-number-mode t)
 (setq blink-cursor-blinks 2
       visible-bell t
       visible-cursor t)
@@ -158,6 +160,8 @@
           (lambda ()
             (keymap-set dired-mode-map "'" 'dired-up-directory)
             (dired-hide-details-mode 1)))
+(put 'dired-find-alternate-file 'disabled nil)
+(setq dired-kill-when-opening-new-dired-buffer t)
 
 ;; Info mode
 (with-eval-after-load 'info
@@ -166,15 +170,20 @@
 ;; Initial size of the frame, if wide screen, center the frame.
 ;; Else, maximize it (not full screen).
 (defun my/set-frame-size (p1 p2 x y)
+  "Sets the frame size when Emacs starts up. Depending on display-size,
+  the frame try to adjust to that."
   (set-frame-position nil p1 p2)
-           (set-frame-width nil x)
-           (set-frame-height nil y))
+  (set-frame-width nil x)
+  (set-frame-height nil y))
 
 (cond ((>= (nth 3 (assq 'geometry (frame-monitor-attributes))) 5000)
-                      (my/set-frame-size 1000 20 200 40))
-       ((>= (nth 3 (assq 'geometry (frame-monitor-attributes))) 3000)
-               (my/set-frame-size 600 20 200 50))
-    (toggle-frame-maximized))
+       (my/set-frame-size 1000 20 200 40))
+      ((>= (nth 3 (assq 'geometry (frame-monitor-attributes))) 3000)
+       (my/set-frame-size 600 20 200 50))
+      (t (toggle-frame-maximized nil)))
+
+(add-hook 'window-size-change-functions
+          #'frame-hide-title-bar-when-maximized)
 
 ;; Remember windows
 (winner-mode 1)
@@ -192,11 +201,13 @@
 (setq initial-scratch-message ";; yo!\n\n")
 (setq initial-major-mode 'emacs-lisp-mode)
 
-(when (member "Segoe UI Emoji" (font-family-list))
-  (set-fontset-font
-   t 'symbol (font-spec :family "Segoe UI Emoji" :fontified t) nil 'prepend)
-  (set-fontset-font
-   t 'unicode (font-spec :family "Segoe UI Emoji" :fontified t) nil 'prepend))
+;; Setup an emoji font depending on OS
+(cond ((member "Segoe UI Emoji" (font-family-list))
+       (set-fontset-font t 'symbol (font-spec :family "Segoe UI Emoji" :fontified t) nil 'prepend)
+       (set-fontset-font t 'unicode (font-spec :family "Segoe UI Emoji" :fontified t) nil 'prepend))
+      ((member "Noto Color Emoji" (font-family-list))
+       (set-fontset-font t 'symbol (font-spec :family "Noto color emoji" :fontified t) nil 'prepend)
+       (set-fontset-font t 'unicode (font-spec :family "Noto color emoji" :fontified t) nil 'prepend)))
 
 (provide 'init)
 ;;; init.el ends here
