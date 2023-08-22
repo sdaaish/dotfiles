@@ -1,0 +1,18 @@
+;; Initialization file for MG, the Emacs like editor
+
+;; Make backup files but in a separate directory (~/.mg.d)
+backup-to-home-directory 1
+make-backup-files 1
+
+;; Visual feedback
+audible-bell 0
+visible-bell 1
+
+;; Wrap lines and indent text
+set-default-mode fill
+set-default-mode indent
+set-fill-column 72
+
+;; Show info in modeline
+column-number-mode 1
+line-number-mode 1
