@@ -119,8 +119,8 @@ function lle {
         $Path
     )
     Get-ChildItem $Path -File -Attributes H, !H, A, !A, S, !S |
-        Group-Object -Property Extension |
-        Sort-Object -Property count -Descending
+      Group-Object -Property Extension |
+      Sort-Object -Property count -Descending
 }
 
 function lls {
@@ -157,11 +157,16 @@ function emacs-client() {
 
         [Parameter(Position=1, ValueFromRemainingArguments)]
         [string[]]$Path
+
+        #        [string]$ServerName = "server"
     )
 
+    # Default servername is "server" but you can run Emacs with multiple different servernames.
+    #    $ServerName = "server/${ServerName}"
+    $ServerName = "server/server"
     $date = Get-Date -Format 'yyyyMMdd-HH.mm.ss'
     $logfile = Join-Path $(Resolve-Path ~/tmp) "emacs-client-${date}.log"
-    $serverfile = Join-Path $(Resolve-Path $InitDir) "server/server" -ErrorAction ignore
+    $serverfile = Join-Path $(Resolve-Path $InitDir) $ServerName -ErrorAction ignore
 
     $cmd = Get-Command emacsclientw.exe
     $options = @(
@@ -171,8 +176,9 @@ function emacs-client() {
         "--create-frame"
     )
 
+    $cmdline = $options -join " "
     "$cmd {0} {1}" -f $($options -join " "), ($path -join " ")
-    & $cmd @options $Path |out-file $logfile
+    Start-Process $cmd -Argumentlist $cmdline
 }
 
 Function Select-EmacsVersion {
@@ -181,8 +187,8 @@ Function Select-EmacsVersion {
     catch { throw "No such file, 'runemacs.exe'" }
 
     $versions = Get-ChildItem ~/.config -Filter *emacs* -Directory |
-        Where-Object { $_.basename -notmatch "chemacs" } |
-        Select-Object resolvedtarget, basename
+      Where-Object { $_.basename -notmatch "chemacs" } |
+      Select-Object resolvedtarget, basename
 
     $i = 0
     $versions.ForEach(
@@ -210,7 +216,7 @@ Function Select-EmacsVersion {
         )
 
         "$exe {0}" -f $($options -join " ")
-        & "$exe" @options
+        Start-Process $exe -ArgumentList $options
     }
 
     $ErrorActionPreference = $OldPreference
@@ -234,8 +240,8 @@ function Find-Links {
         $Path
     )
     Get-ChildItem $Path -ErrorAction SilentlyContinue |
-        Where-Object { $_.Linktype } |
-        Select-Object FullName, Target, LastWriteTime, LinkType
+      Where-Object { $_.Linktype } |
+      Select-Object FullName, Target, LastWriteTime, LinkType
 }
 Function Get-CommandSyntax {
     [cmdletbinding()]
@@ -372,17 +378,17 @@ if (Test-Path $PSScriptRoot\local.ps1) {
 Function Get-ChildItemRecursive {
     param(
         [Parameter(
-            Position = 0,
-            ValueFromPipeLine,
-            HelpMessage = "Enter one or more paths to search in."
-        )]
+             Position = 0,
+             ValueFromPipeLine,
+             HelpMessage = "Enter one or more paths to search in."
+         )]
         [string[]]$Path = ".",
 
         [Parameter(
-            Position = 1,
-            ValueFromPipeLine,
-            HelpMessage = "Enter the filter to search for, default='*'."
-        )]
+             Position = 1,
+             ValueFromPipeLine,
+             HelpMessage = "Enter the filter to search for, default='*'."
+         )]
         [string]$Filter = "*"
     )
 
