@@ -16,6 +16,7 @@ Set-Alias -Name alias -Value Search-Alias
 Set-Alias -Name em -Value emacs-client
 Set-Alias -Name emx -Value emacs-client
 Set-Alias -Name emc -Value Select-EmacsVersion
+Set-Alias -Name emq -Value EmacsQ
 
 Set-Alias -Name gs -Value Get-CommandSyntax
 
@@ -220,6 +221,11 @@ Function Select-EmacsVersion {
     }
 
     $ErrorActionPreference = $OldPreference
+}
+
+# Wrapper to start Emacs in the terminal
+Function EmacsQ {
+    emacs.exe -Q -nw --eval "(progn (setq visible-bell t)(setq ring-bell-function 'ignore))" $args
 }
 
 # Alias for git status
