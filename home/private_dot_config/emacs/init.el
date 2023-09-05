@@ -91,9 +91,12 @@
 (visual-line-mode 1)
 (blink-cursor-mode 2)
 (column-number-mode t)
-(setq blink-cursor-blinks 2
-      visible-bell t
-      visible-cursor t)
+(custom-set-variables
+ '(blink-cursor-blinks 2)
+ '(visible-bell t)
+ '(visible-cursor t)
+ '(ring-bell-function 'ignore)
+ '(use-dialog-box nil))
 
 ;; Interactively do things
 (when (not (file-exists-p ".cache"))
