@@ -4,10 +4,11 @@
 	a = "!git alias"
 	alias = "!git config --list | grep alias|cut -c 7-"
 	br = branch
-	changelog = log --pretty=format:\" * %s\"
-	changes = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\" --name-status
+	changelog = log --pretty=format:"\\ *\\ %s"
+	changes = log --pretty=format:"%h\\ %cr\\ %cn\\ %Cgreen%s%Creset" --name-status
 	ci = commit
 	co = checkout
+	conf = config --list --show-origin
 	dl = "!git ll -1"
 	dlc = diff --cached HEAD^
 	eol = ls-files --eol
@@ -15,7 +16,7 @@
 	fl = log -u
 	gr = grep -Ii
 	last = log -1 HEAD
-	la = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset %C(cyan)auth:%ae%Creset %C(magenta)comm:%cE\"
+	la = log --pretty=format:"%h\\ %cr\\ %cn\\ %Cgreen%s%Creset\\ %C(cyan)auth:%ae%Creset\\ %C(magenta)comm:%cE"
 	ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cgreen\\ [%cn]%Creset" --decorate --date=relative
 	lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cgreen\\ [%cn]%Creset" --decorate --date=short
 	le = log --oneline --decorate
@@ -27,14 +28,19 @@
 	lso = ls-files --others --directory --no-empty-directory
 	lt = log --graph --oneline --decorate --all
 	nah = reset --hard
+	norm = "!echo '* text=auto' >.gitattributes && git add --renormalize ."
+	ps = -p status
 	ru = remote -v update
-	short = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\"
-	shortnocolor = log --pretty=format:\"%h %cr %cn %s\"
+	save = "!git add -A && git commit -m 'chore: commit save point'"
+	short = log --pretty=format:"%h\\ %cr\\ %cn\\ %Cgreen%s%Creset"
+	shortnocolor = log --pretty=format:"%h\\ %cr\\ %cn\\ %s"
 	st = status -sb
-	stl = stash list --pretty=format:'%C(blue)%gd %C(red)* %C(yellow)%s'
+	stl = stash list --pretty=format:"%C(blue)%gd\\ %C(red)*\\ %C(yellow)%s"
+	sw = switch
 	unstage = reset HEAD --
 	cat = cat-file
 	lst = ls-tree
 	subc = "!git submodule foreach --recursive 'git checkout $(git config -f $toplevel/.gitmodules submodule.$name.branch || echo master)'"
 	subu = "!git submodule foreach --recursive 'git pull'"
 	subr = "!git submodule foreach --recursive 'git ls-remote --heads;printf \"\n\"'"
+	undo = reset HEAD~1 --mixed
