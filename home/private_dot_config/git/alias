@@ -4,6 +4,7 @@
 	a = "!git alias"
 	alias = "!git config --list | grep alias|cut -c 7-"
 	br = branch
+	cat = cat-file
 	changelog = log --pretty=format:"\\ *\\ %s"
 	changes = log --pretty=format:"%h\\ %cr\\ %cn\\ %Cgreen%s%Creset" --name-status
 	ci = commit
@@ -15,8 +16,8 @@
 	f = "!git ls-files | grep -i"
 	fl = log -u
 	gr = grep -Ii
-	last = log -1 HEAD
 	la = log --pretty=format:"%h\\ %cr\\ %cn\\ %Cgreen%s%Creset\\ %C(cyan)auth:%ae%Creset\\ %C(magenta)comm:%cE"
+	last = log -1 HEAD
 	ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cgreen\\ [%cn]%Creset" --decorate --date=relative
 	lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cgreen\\ [%cn]%Creset" --decorate --date=short
 	le = log --oneline --decorate
@@ -26,6 +27,7 @@
 	lol = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cgreen\\ [%cn]%Creset" --decorate --numstat
 	ls = ls-files
 	lso = ls-files --others --directory --no-empty-directory
+	lst = ls-tree
 	lt = log --graph --oneline --decorate --all
 	nah = reset --hard
 	norm = "!echo '* text=auto' >.gitattributes && git add --renormalize ."
@@ -36,11 +38,9 @@
 	shortnocolor = log --pretty=format:"%h\\ %cr\\ %cn\\ %s"
 	st = status -sb
 	stl = stash list --pretty=format:"%C(blue)%gd\\ %C(red)*\\ %C(yellow)%s"
-	sw = switch
-	unstage = reset HEAD --
-	cat = cat-file
-	lst = ls-tree
 	subc = "!git submodule foreach --recursive 'git checkout $(git config -f $toplevel/.gitmodules submodule.$name.branch || echo master)'"
-	subu = "!git submodule foreach --recursive 'git pull'"
 	subr = "!git submodule foreach --recursive 'git ls-remote --heads;printf \"\n\"'"
+	subu = "!git submodule foreach --recursive 'git pull'"
+	sw = switch
 	undo = reset HEAD~1 --mixed
+	unstage = reset HEAD --
