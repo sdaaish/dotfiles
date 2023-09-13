@@ -1,6 +1,7 @@
 # My various aliases
 
 # Set own aliases
+Set-Alias -Name ci -Value code-insiders.cmd
 Set-Alias -Name cm -Value chezmoi
 Set-Alias -Name cmdiff -Value Chezmoi-Diff
 Set-Alias -Name cms -Value Chezmoi-Status
@@ -308,8 +309,17 @@ function Update-WinGet {
 }
 
 function Update-Scoop {
-    param()
-    scoop update ; scoop status
+    param(
+        [string]$package
+    )
+
+    if ([system.string]::isNullOrWhiteSpace($package)){
+        & scoop update
+        & scoop status
+    }
+    else {
+        & scoop update $package
+    }
 }
 
 Function Install-WslTools {
