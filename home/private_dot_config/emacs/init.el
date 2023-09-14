@@ -14,7 +14,7 @@
 ;; commands and settings.
 
 ;; This config will most likely only work out-of-the-box with Emacs 29 at the moment,
-;; is not tested on other versions. But since the config is with only the built-in
+;; is not tested on other versions.  But since the config is with only the built-in
 ;; packages, this could be fairly easy to achieve.
 
 ;; With Emacs 29, the '--init-dir' can be used on the command-line, which makes it
@@ -34,11 +34,8 @@
 
 (if (>= emacs-major-version 29)
     (require 'bind-key))
-;;(require 'use-package)
 ;;(require 'json)
 ;;(require 'project)
-;;(require 'python)
-;;(require 'eglot)
 ;;(require 'org)
 ;;(require 'eldoc)
 ;;(require 'tramp)
@@ -58,6 +55,7 @@
 (display-time-mode t)
 (setq display-time-24hr-format t)
 
+;; Modus themes settings
 (require 'modus-themes)
 (setq modus-themes-italic-constructs t
       modus-themes-bold-constructs t
@@ -71,6 +69,7 @@
       '((matches . (extrabold underline))
         (selection . (semibold italic)))
       modus-themes-mode-line '(moody borderless accented)
+      modus-themes-subtle-line-numbers t
       modus-themes-headings
       '((0 . (background overline 1.5))
 	      (1 . (background overline 1.3))
@@ -78,25 +77,29 @@
         (3 . (overline 1.1))
         (t . (monochrome))))
 
-;; Modus themes
 (load-theme 'modus-operandi t t)
 (load-theme 'modus-vivendi t t)
 (enable-theme 'modus-vivendi)
 (define-key global-map (kbd "S-<f5>") #'modus-themes-toggle)
+(setq mode-line-compact t)
+(size-indication-mode 1)
 
-(setq-default hl-line-mode t
-              cursor-type 'bar)
+;; Visual preferences
+(require 'uniquify)
+(global-hl-line-mode 1)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 (visual-line-mode 1)
 (blink-cursor-mode 2)
 (column-number-mode t)
-(custom-set-variables
- '(blink-cursor-blinks 2)
- '(visible-bell t)
- '(visible-cursor t)
- '(ring-bell-function 'ignore)
- '(use-dialog-box nil))
+(setq-default cursor-type 'bar
+              cursor-in-non-selected-windows nil)
+(setq blink-cursor-blinks 2
+      visible-bell t
+      visible-cursor t
+      ring-bell-function 'ignore
+      use-dialog-box nil
+      uniquify-buffer-name-style 'forward)
 
 ;; Interactively do things
 (when (not (file-exists-p ".cache"))
@@ -117,9 +120,10 @@
   (make-directory (concat user-emacs-directory "backups") t))
 (setq backup-directory-alist
       `((".*" . ,(expand-file-name "backups" user-emacs-directory))))
-;; (setq auto-save-file-name-transforms
-;;       `((".*" . ,(expand-file-name "backups" user-emacs-directory))))
+;;(setq auto-save-file-name-transforms
+;;      `((".*" ,(expand-file-name "backups" user-emacs-directory) t)))
 (save-place-mode 1)
+(auto-save-mode 1)
 (setq save-place-file (expand-file-name ".cache/saveplace" user-emacs-directory))
 (setq recentf-save-file (expand-file-name ".cache/recentfiles" user-emacs-directory))
 
@@ -132,6 +136,10 @@
       auto-save-interval 40
       delete-by-moving-to-trash t
       save-silently t)
+
+(global-auto-revert-mode 1)
+(setq global-auto-revert-non-file-buffers t)
+(setq auto-revert-verbose nil)
 
 (setq-default indent-tabs-mode nil)
 (setq inhibit-startup-message t
@@ -173,7 +181,7 @@
 ;; Initial size of the frame, if wide screen, center the frame.
 ;; Else, maximize it (not full screen).
 (defun my/set-frame-size (p1 p2 x y)
-  "Sets the frame size when Emacs starts up. Depending on display-size,
+  "Set the frame size when Emacs starts up.  Depending on display-size,
   the frame try to adjust to that."
   (set-frame-position nil p1 p2)
   (set-frame-width nil x)
@@ -211,6 +219,11 @@
       ((member "Noto Color Emoji" (font-family-list))
        (set-fontset-font t 'symbol (font-spec :family "Noto color emoji" :fontified t) nil 'prepend)
        (set-fontset-font t 'unicode (font-spec :family "Noto color emoji" :fontified t) nil 'prepend)))
+
+
+;; Python settings
+(setq python-indent-guess-indent-offset-verbose nil)
+(add-hook 'python-mode-hook 'eglot-ensure)
 
 (provide 'init)
 ;;; init.el ends here
