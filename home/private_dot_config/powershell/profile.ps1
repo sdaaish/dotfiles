@@ -37,10 +37,10 @@ if (Test-Path $Psscriptroot\PsreadlineProfile.ps1) {
 $PSDefaultParameterValues["Out-Default:OutVariable"] = "__"
 
 # Oh-my-PoSH https://ohmyposh.dev/docs
-$Theme = Join-Path ${env:USERPROFILE} ".config\oh-my-posh\my-posh-theme.omp.json"
-$env:POSH_GIT_ENABLED = $true
-Import-Module Posh-Git
-"{0,-20}: {1}ms" -f "After git",(Get-RunningTime $starttime)
+# $Theme = Join-Path ${env:USERPROFILE} ".config\oh-my-posh\my-posh-theme.omp.json"
+# $env:POSH_GIT_ENABLED = $true
+# Import-Module Posh-Git
+# "{0,-20}: {1}ms" -f "After git",(Get-RunningTime $starttime)
 
 #oh-my-posh.exe --init --shell pwsh --config jandedobbeleer | Invoke-Expression
 #Enable-PoshTransientPrompt
