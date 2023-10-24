@@ -5,3 +5,4 @@
 
 # Ignore the file for a default emacs profile in chemacs.
 /emacs/.config/chemacs/profile
+/home/private_dot_config/zsh/dot_zcompdump

@@ -1,0 +1,31 @@
+* Emacs default directory
+An Emacs initialization directory with minimal customizations that should be loaded quickly and without errors. This is the =sane= default settings for a new system, and can be used as backup if nothing else works.
+Should only used the built in packages and not need to download anything to be able to load.
+
+** Emacs 29
+From Emacs release 29, custom init-directories can be used when loading Emacs. There is no need for any other package than Emacs. That is, Chemacs2 and others should not be used any more.
+
+To launch Emacs with a different directory as home, assuming this is =~/.config/emacs=:
+
+#+name: Linux/Mac
+#+begin_src sh
+
+  emacs --init-dir ~/.config/emacs
+
+#+end_src
+
+#+name: Windows
+#+begin_src powershell
+
+  runemacs  --init-dir ~/.config/emacs
+
+#+end_src
+
+The default directory is =~/.config/emacs= on Linux, and on Windows systems if the =HOME= variable is setup to point to =%USERPROFILE%= for CMD or =$env:USERPROFILE= in PowerShell.
+
+#+name: Set HOME environment variable on Windows
+#+begin_src powershell
+
+  [System.Environment]::SetEnvironmentVariable("HOME",$(Resolve-Path $env:UserProfile),"User")
+  
+#+end_src

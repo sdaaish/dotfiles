@@ -95,7 +95,7 @@ get-bbk() {
     # Source code in https://github.com/dotse/bbk
 
     # Name for the file
-    binary=~/bin/bbk_cli
+    binary="${HOME}/bin/bbk_cli"
 
     # Remove old file if it exists
     if [[ -f $binary ]]
@@ -107,18 +107,19 @@ get-bbk() {
 	  ARCH=$(uname -m)
 	  if [[ $ARCH == x86_64 ]]
 	  then
-        AMD=https://frontend.bredbandskollen.se/download/bbk_cli_linux_amd64-1.0
-	      curl -so ${binary} -L ${AMD}
-        chmod a+x ${binary}
+        URL="https://frontend.bredbandskollen.se/download/bbk_cli_linux_amd64-1.0"
+	  elif [[ $ARCH == aarch64 ]]
+    then
+        URL="https://frontend.bredbandskollen.se/download/bbk_cli_linux_aarch64-1.0"
     elif [[ $ARCH == armv7l ]]
     then
-        ARM=https://frontend.bredbandskollen.se/download/bbk_cli_linux_armhf-1.0
-        curl -so ${binary} -L ${ARM}
-        chmod a+x ${binary}
+        URL="https://frontend.bredbandskollen.se/download/bbk_cli_linux_armhf-1.0"
     else
 	      printf "No supported arch\n"
 	      return 1
 	  fi
+	  curl -so ${binary} -L ${URL}
+    chmod a+x ${binary}
 }
 
 # Base16 script to change lxss colors

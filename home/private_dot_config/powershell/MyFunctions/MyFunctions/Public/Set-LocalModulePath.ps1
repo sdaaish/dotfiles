@@ -11,16 +11,16 @@ Function Set-LocalModulePath {
     }
 
     process {
-        if ($isLinux){
+        if ($isLinux) {
             # Dont do anything at the moment
             Write-Verbose "$env:PSModulePath"
         }
         else {
 
             # Check wich version of Powershell
-            switch ($PSVersionTable.PSEdition){
-                "Core" {$version = "PowerShell/Modules"}
-                "Desktop" { $version = "WindowsPowerShell/Modules"}
+            switch ($PSVersionTable.PSEdition) {
+                "Core" { $version = "PowerShell/Modules" }
+                "Desktop" { $version = "WindowsPowerShell/Modules" }
             }
 
             # Resolve the path to modules depending on version of Powershell
@@ -32,16 +32,16 @@ Function Set-LocalModulePath {
                 Test-Path $NewModuleDirectory -ErrorAction Stop-Process
             }
             catch {
-                New-Item -Path $NewModuleDirectory -ItemType Directory -Force|Out-Null
+                New-Item -Path $NewModuleDirectory -ItemType Directory -Force | Out-Null
             }
 
-            $OldModulePath = $env:PSModulePath -split(";")
+            $OldModulePath = $env:PSModulePath -split ([io.path]::PathSeparator)
             [string[]]$NewModulePath = $NewModuleDirectory
             $NewModulePath += $OldModulePath
         }
     }
     end {
-        $NewModulePath -join(";")
+        $NewModulePath -join ([io.path]::PathSeparator)
         Write-Verbose "Old module path: $env:PSModulePath"
         Write-Verbose "New module path: $NewModulePath"
     }

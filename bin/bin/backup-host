@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-# Backs up files
-
-DATE=$(date '+%Y%m%D-%H:%M')
-echo $DATE
-# ssh rasp1 "sudo tar cf - /etc /home /var/www | gzip" > rasp1.backup.tgz
-
-ssh rasp1 "sudo tar cf - /etc /home /var/www | gzip" > rasp1.backup.tgz

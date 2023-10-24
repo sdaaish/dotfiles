@@ -7,14 +7,14 @@
 #+options: timestamp:t title:t toc:t todo:t |:t
 #+title: emacs
 #+date: <2021-11-14>
-#+email: 
+#+email:
 #+author:
 #+language: en
 #+select_tags: export
 #+exclude_tags: noexport
 #+creator: Emacs 27.2 (Org mode 9.4.4)
 #+cite_export:
-#+startup: show3levels indent  
+#+startup: show3levels indent
 * Emacs config
 ** Org tangle init files
 Untangle init files automatically when save with org-babel.
@@ -85,12 +85,14 @@ Garbage collection
         '(("a" . "export ascii\n")
           ("c" . "center\n")
           ("C" . "comment\n")
-          ("e" . "src emacs-lisp\n")
-          ("E" . "example\n")
+          ("em" . "src emacs-lisp\n")
+          ("ex" . "example\n")
           ("x" . "export")
           ("h" . "export html\n")
           ("l" . "export latex\n")
-          ("p" . "src powershell\n")
+          ("pp" . "src powershell\n")
+          ("ps" . "src shell\n")
+          ("py" . "src python\n")
           ("q" . "quote\n")
           ("s" . "src")
           ("v" . "verse\n")))
@@ -194,7 +196,7 @@ The one and only.
 *** Company
 #+begin_src emacs-lisp
 (use-package company
-  :config 
+  :config
   (setq company-idle-delay
         (lambda () (if (company-in-string-or-comment) nil 0.3)))
   :bind ("C-." . #'company-indent-or-complete-common)
@@ -300,4 +302,3 @@ Rename scratch and no startup screen.
 #+begin_src emacs-lisp
 (customize-set-variable 'org-confirm-babel-evaluate nil)
 #+end_src
-

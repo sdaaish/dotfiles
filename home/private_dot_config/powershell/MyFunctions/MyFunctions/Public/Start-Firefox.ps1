@@ -8,7 +8,7 @@ Function Start-Firefox {
 
     # Default install
     if (Test-Path 'C:\Program Files\Mozilla FireFox\firefox.exe') {
-        $firefox =  'C:\Program Files\Mozilla FireFox\firefox.exe'
+        $firefox = 'C:\Program Files\Mozilla FireFox\firefox.exe'
     }
     # Scoop install
     elseif (Test-Path ${env:USERPROFILE}/scoop/apps/firefox/current/firefox.exe) {
@@ -17,7 +17,7 @@ Function Start-Firefox {
     # Modern MSStore/Winget install
     else {
         $package = Get-AppxPackage Mozilla.MozillaFirefox
-        [xml]$AppManifest = Get-Content ([System.IO.Path]::Combine($package.InstallLocation,"AppxManifest.xml"))
+        [xml]$AppManifest = Get-Content ([System.IO.Path]::Combine($package.InstallLocation, "AppxManifest.xml"))
         $firefox = Join-Path $package.InstallLocation $AppManifest.Package.Applications.Application.Executable
     }
     $options = @(

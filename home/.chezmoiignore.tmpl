@@ -1,19 +1,23 @@
 # Ignore file for chezmoi
 
 # No linux files on Windows.
-{{ if eq .chezmoi.os "windows" }}
+{{ if ne .chezmoi.os "linux" }}
 .*rc
 .X*
 .bash*
 .hushlogin
+.mg
 .profile
 .tmux*
 .x*
 .config/bash/
 .config/base16-shell/
+.config/pip/
+.config/tmux/
+.config/zsh/
 {{ end }}
 
 # No Windows files on Linux.
-{{ if eq .chezmoi.os "linux" }}
+{{ if ne .chezmoi.os "windows" }}
 AppData/
 {{ end}}
