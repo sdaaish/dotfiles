@@ -14,7 +14,7 @@ Function Upgrade-PipPackage {
     param(
         [string]$Package
     )
-    if ($Package){
+    if ($Package) {
         python --no-cache-dir -m $Package install --upgrade
     }
     else {
@@ -51,7 +51,7 @@ Function Enable-Env {
 }
 Function Check-PythonVersion {
 
-    if ($isLinux){
+    if ($isLinux) {
         $exe = "python"
     }
     else {
@@ -61,15 +61,15 @@ Function Check-PythonVersion {
     & $exe -c "import sys;print(sys.executable)"
 }
 Function Install-SystemPip {
-    if ($isLinux){
+    if ($isLinux) {
         $exe = "python"
     }
     else {
         $exe = "python.exe"
     }
 
-    try {$Prg = Get-Command $exe}
-    catch {throw "No such program, $Prg"}
+    try { $Prg = Get-Command $exe }
+    catch { throw "No such program, $Prg" }
 
     & $prg -m pip --isolated install -U $args
 }

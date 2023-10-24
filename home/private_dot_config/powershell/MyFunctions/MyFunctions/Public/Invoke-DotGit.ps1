@@ -1,6 +1,6 @@
 # My local files in a bare git repo
 Function Invoke-DotGit {
-    if  ($isLinux){
+    if ($isLinux) {
     }
     else {
         $gitdir = Join-Path ${env:USERPROFILE} ".dotgit"

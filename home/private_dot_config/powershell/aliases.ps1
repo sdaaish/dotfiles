@@ -62,10 +62,10 @@ Set-Alias -Name wug -Value Update-WinGet
 
 Set-Alias -Name ytp -Value yt-dlp
 
-if (Test-Path Alias:man){
+if (Test-Path Alias:man) {
     Remove-Item Alias:man
 }
-if (-not($isLinux)){
+if (-not($isLinux)) {
     Set-Alias -Name man -Value Search-LinuxMan
 }
 
@@ -125,8 +125,8 @@ function lle {
         $Path
     )
     Get-ChildItem $Path -File -Attributes H, !H, A, !A, S, !S |
-      Group-Object -Property Extension |
-      Sort-Object -Property count -Descending
+        Group-Object -Property Extension |
+        Sort-Object -Property count -Descending
 }
 
 function lls {
@@ -158,10 +158,10 @@ Function emdi {
 function emacs-client() {
     [cmdletbinding()]
     param(
-        [Parameter(Position=0)]
+        [Parameter(Position = 0)]
         [string]$InitDir = $(Join-Path $HOME .config/emacs),
 
-        [Parameter(Position=1, ValueFromRemainingArguments)]
+        [Parameter(Position = 1, ValueFromRemainingArguments)]
         [string[]]$Path
 
         #        [string]$ServerName = "server"
@@ -184,7 +184,7 @@ function emacs-client() {
 
     $cmdline = $options -join " "
     "$cmd {0} {1}" -f $($options -join " "), ($path -join " ")
-    Start-Process $cmd -Argumentlist $cmdline
+    Start-Process $cmd -ArgumentList $cmdline
 }
 
 Function Select-EmacsVersion {
@@ -193,8 +193,8 @@ Function Select-EmacsVersion {
     catch { throw "No such file, 'runemacs.exe'" }
 
     $versions = Get-ChildItem ~/.config -Filter *emacs* -Directory |
-      Where-Object { $_.basename -notmatch "chemacs" } |
-      Select-Object resolvedtarget, basename
+        Where-Object { $_.basename -notmatch "chemacs" } |
+        Select-Object resolvedtarget, basename
 
     $i = 0
     $versions.ForEach(
@@ -251,8 +251,8 @@ function Find-Links {
         $Path
     )
     Get-ChildItem $Path -ErrorAction SilentlyContinue |
-      Where-Object { $_.Linktype } |
-      Select-Object FullName, Target, LastWriteTime, LinkType
+        Where-Object { $_.Linktype } |
+        Select-Object FullName, Target, LastWriteTime, LinkType
 }
 Function Get-CommandSyntax {
     [cmdletbinding()]
@@ -270,8 +270,8 @@ Function Reload-PowershellProfile {
 # Make update of path easier
 Function refreshenv {
     $paths = @(
-				([System.Environment]::GetEnvironmentVariable("Path", "Machine") -split  ([io.path]::PathSeparator))
-				([System.Environment]::GetEnvironmentVariable("Path", "User") -split  ([io.path]::PathSeparator))
+				([System.Environment]::GetEnvironmentVariable("Path", "Machine") -split ([io.path]::PathSeparator))
+				([System.Environment]::GetEnvironmentVariable("Path", "User") -split ([io.path]::PathSeparator))
     )
     $env:path = ($paths | Select-Object -Unique) -join ([io.path]::PathSeparator)
 }
@@ -317,7 +317,7 @@ function Update-Scoop {
         [string]$package
     )
 
-    if ([system.string]::isNullOrWhiteSpace($package)){
+    if ([system.string]::isNullOrWhiteSpace($package)) {
         & scoop update
         & scoop status
     }
@@ -398,17 +398,17 @@ if (Test-Path $PSScriptRoot/local.ps1) {
 Function Get-ChildItemRecursive {
     param(
         [Parameter(
-             Position = 0,
-             ValueFromPipeLine,
-             HelpMessage = "Enter one or more paths to search in."
-         )]
+            Position = 0,
+            ValueFromPipeLine,
+            HelpMessage = "Enter one or more paths to search in."
+        )]
         [string[]]$Path = ".",
 
         [Parameter(
-             Position = 1,
-             ValueFromPipeLine,
-             HelpMessage = "Enter the filter to search for, default='*'."
-         )]
+            Position = 1,
+            ValueFromPipeLine,
+            HelpMessage = "Enter the filter to search for, default='*'."
+        )]
         [string]$Filter = "*"
     )
 
@@ -420,7 +420,7 @@ Function Get-ChildItemRecursive {
     }
 
     $selectOptions = @{
-        Property = @("FullName", "Length", @{Label = "LastWriteTime"; Expression = { Get-Date $_.LastWriteTime -UFormat "%F %T" }})
+        Property = @("FullName", "Length", @{Label = "LastWriteTime"; Expression = { Get-Date $_.LastWriteTime -UFormat "%F %T" } })
     }
 
     Get-ChildItem @dirOptions | Select-Object @selectOptions
@@ -430,10 +430,10 @@ Function Get-ChildItemRecursive {
 Function Resolve-LocalDnsName {
     [cmdletbinding()]
     param(
-        [Parameter(Mandatory,Position=0)]
+        [Parameter(Mandatory, Position = 0)]
         [string]$Name,
 
-        [Parameter(Position=1)]
+        [Parameter(Position = 1)]
         [string]$NameServer
     )
 

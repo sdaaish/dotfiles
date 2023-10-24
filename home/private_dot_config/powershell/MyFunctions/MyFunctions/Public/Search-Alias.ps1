@@ -4,8 +4,8 @@ Function Search-Alias {
         [string]$alias
     )
 
-    if ($alias){
-        Get-Alias| Where DisplayName -Match $alias
+    if ($alias) {
+        Get-Alias | Where-Object DisplayName -Match $alias
     }
     else {
         Get-Alias

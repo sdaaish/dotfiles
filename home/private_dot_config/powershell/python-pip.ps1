@@ -9,12 +9,12 @@ if ((Test-Path Function:\TabExpansion) -and -not `
 }
 
 function TabExpansion($line, $lastWord) {
-    $exe = (get-command python.exe).source
+    $exe = (Get-Command python.exe).source
     $lastBlock = [regex]::Split($line, '[|;]')[-1].TrimStart()
     if ($lastBlock.StartsWith("$exe -m pip ")) {
-        $Env:COMP_WORDS=$lastBlock
-        $Env:COMP_CWORD=$lastBlock.Split().Length - 1
-        $Env:PIP_AUTO_COMPLETE=1
+        $Env:COMP_WORDS = $lastBlock
+        $Env:COMP_CWORD = $lastBlock.Split().Length - 1
+        $Env:PIP_AUTO_COMPLETE = 1
         (& $exe -m pip).Split()
         Remove-Item Env:COMP_WORDS
         Remove-Item Env:COMP_CWORD
@@ -26,4 +26,3 @@ function TabExpansion($line, $lastWord) {
     }
 }
 # pip powershell completion end
-

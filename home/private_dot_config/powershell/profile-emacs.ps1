@@ -13,10 +13,9 @@ function prompt {
 
     # The at sign creates an array in case only one history item exists.
     $history = @(Get-History)
-    if($history.Count -gt 0)
-    {
-	      $lastItem = $history[$history.Count - 1]
-	      $lastId = $lastItem.Id
+    if ($history.Count -gt 0) {
+        $lastItem = $history[$history.Count - 1]
+        $lastId = $lastItem.Id
     }
 
     $nextCommand = $lastId + 1
@@ -28,9 +27,9 @@ function prompt {
     $adminRole = [Security.Principal.WindowsBuiltInRole]::Administrator
 
     $context = $(if (Test-Path variable:/PSDebugContext) { "[DBG]" }
-                 elseif($principal.IsInRole($adminRole)) { "[ADMIN]" }
-                 else { '' }
-                )
+        elseif ($principal.IsInRole($adminRole)) { "[ADMIN]" }
+        else { '' }
+    )
 
     $prompt1 = @(
         "$($PSStyle.Foreground.Cyan)${time}$($PSStyle.Reset)"
@@ -51,12 +50,12 @@ function prompt {
     )
 
     Write-Host $($prompt1 -join "")
-    Write-Host $($prompt2) -NoNewLine
+    Write-Host $($prompt2) -NoNewline
     return " "
 }
 
 # Use the same aliases here as in the Terminal version.
-if (Test-Path $PSScriptRoot\aliases.ps1){
+if (Test-Path $PSScriptRoot\aliases.ps1) {
     . $PSScriptRoot\aliases.ps1
 }
 
