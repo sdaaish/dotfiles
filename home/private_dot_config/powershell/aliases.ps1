@@ -62,8 +62,12 @@ Set-Alias -Name wug -Value Update-WinGet
 
 Set-Alias -Name ytp -Value yt-dlp
 
-Remove-Item Alias:/man
-Set-Alias -Name man -Value Search-LinuxMan
+if (Test-Path Alias:man){
+    Remove-Item Alias:man
+}
+if (-not($isLinux)){
+    Set-Alias -Name man -Value Search-LinuxMan
+}
 
 # Utilities
 Set-Alias -Name fdq -Value Format-DoubleQuote
