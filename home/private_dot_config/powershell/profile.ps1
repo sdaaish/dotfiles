@@ -1,4 +1,12 @@
-# Local version of Powershell profile
+#
+## Local version of Powershell profile
+#
+
+# Workaroud for Linux, loads this file directly
+if (-not($starttime)){
+    $starttime = Get-date
+}
+
 Import-Module $(Join-Path $PSScriptRoot MyFunctions\MyFunctions\MyFunctions.psd1) -Force
 "{0,-20}: {1}ms" -f "Entering profile",(Get-RunningTime $starttime)
 
@@ -31,7 +39,7 @@ Set-PSReadlineOption @PSReadLineOptions
 "{0,-20}: {1}ms" -f "After PSReadLine",(Get-RunningTime $starttime)
 
 if (Test-Path $Psscriptroot\PSReadLineProfile.ps1) {
-    . $(Join-Path $psscriptroot PsreadlineProfile.ps1)
+    . $(Join-Path $psscriptroot PSReadLineProfile.ps1)
 }
 # Add output of all commands to $__, set as default value
 $PSDefaultParameterValues["Out-Default:OutVariable"] = "__"
