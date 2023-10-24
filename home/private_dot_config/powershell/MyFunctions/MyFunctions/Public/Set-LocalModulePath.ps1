@@ -35,13 +35,13 @@ Function Set-LocalModulePath {
                 New-Item -Path $NewModuleDirectory -ItemType Directory -Force|Out-Null
             }
 
-            $OldModulePath = $env:PSModulePath -split(";")
+            $OldModulePath = $env:PSModulePath -split([io.path]::PathSeparator)
             [string[]]$NewModulePath = $NewModuleDirectory
             $NewModulePath += $OldModulePath
         }
     }
     end {
-        $NewModulePath -join(";")
+        $NewModulePath -join([io.path]::PathSeparator)
         Write-Verbose "Old module path: $env:PSModulePath"
         Write-Verbose "New module path: $NewModulePath"
     }

@@ -270,10 +270,10 @@ Function Reload-PowershellProfile {
 # Make update of path easier
 Function refreshenv {
     $paths = @(
-				([System.Environment]::GetEnvironmentVariable("Path", "Machine") -split ";")
-				([System.Environment]::GetEnvironmentVariable("Path", "User") -split ";")
+				([System.Environment]::GetEnvironmentVariable("Path", "Machine") -split  ([io.path]::PathSeparator))
+				([System.Environment]::GetEnvironmentVariable("Path", "User") -split  ([io.path]::PathSeparator))
     )
-    $env:path = ($paths | Select-Object -Unique) -join ";"
+    $env:path = ($paths | Select-Object -Unique) -join ([io.path]::PathSeparator)
 }
 
 Function mysudo {

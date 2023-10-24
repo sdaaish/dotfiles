@@ -21,10 +21,10 @@ Function Add-ProgToLocalPath {
 				throw "No such Path, $Path"
 		}
 
-		$oldenv = ([system.environment]::GetEnvironmentVariable("Path",$Scope)) -split ";"
+		$oldenv = ([system.environment]::GetEnvironmentVariable("Path",$Scope)) -split  ([io.path]::PathSeparator)
 		$oldenv += $Path
 
-		$newpath = ((($oldenv | Select-Object -Unique) -join ";") + ";") -replace ';;+',';'
+		$newpath = ((($oldenv | Select-Object -Unique) -join  ([io.path]::PathSeparator)) +  ([io.path]::PathSeparator)) -replace ';;+',';' -replace '::',':'
 		[System.Environment]::SetEnvironmentVariable("Path",$newpath,$Scope)
 		"New path set`n{0}`nfor Scope={1}" -f [system.environment]::GetEnvironmentVariable("Path",$Scope),$Scope
 }
