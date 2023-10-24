@@ -75,25 +75,25 @@ function .. {
     Set-Location ..
 }
 function ... {
-    Set-Location ..\..
+    Set-Location $(Join-Path .. ..)
 }
 function cdh {
     Set-Location ~
 }
 function cdm {
-    Set-Location ~\Videos
+    Set-Location $(Join-Path $HOME Videos)
 }
 function cdr {
-    Set-Location ~\repos
+    Set-Location $(Join-Path $HOME repos)
 }
 function cdrw {
-    Set-Location ~\Work
+    Set-Location $(Join-Path $HOME Work)
 }
 function cdw {
-    Set-Location ~\Downloads
+    Set-Location $(Join-Path $HOME Downloads)
 }
 function cdv {
-    Set-Location ~\Vagrantdir
+    Set-Location $(Join-Path $HOME Vagrantdir)
 }
 function ls {
     Get-ChildItem $args -Attributes H, !H, A, !A, S, !S
@@ -155,7 +155,7 @@ function emacs-client() {
     [cmdletbinding()]
     param(
         [Parameter(Position=0)]
-        [string]$InitDir = "~/.config/emacs",
+        [string]$InitDir = $(Join-Path $HOME .config/emacs),
 
         [Parameter(Position=1, ValueFromRemainingArguments)]
         [string[]]$Path
@@ -381,13 +381,13 @@ Function New-List {
 }
 
 # Load python aliases
-if (Test-Path $PSScriptRoot\PythonAlias.ps1) {
-    . $PSScriptRoot\PythonAlias.ps1
+if (Test-Path $PSScriptRoot/PythonAlias.ps1) {
+    . $(Join-Path $PSScriptRoot PythonAlias.ps1)
 }
 
 # Load local aliases
-if (Test-Path $PSScriptRoot\local.ps1) {
-    . $PSScriptRoot\local.ps1
+if (Test-Path $PSScriptRoot/local.ps1) {
+    . $(Join-Path $PSScriptRoot local.ps1)
 }
 
 # Find files recursive with pattern

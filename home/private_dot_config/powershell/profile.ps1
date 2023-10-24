@@ -1,5 +1,5 @@
 # Local version of Powershell profile
-Import-Module $PSScriptRoot\MyFunctions\MyFunctions\MyFunctions.psd1 -Force
+Import-Module $(Join-Path $PSScriptRoot MyFunctions\MyFunctions\MyFunctions.psd1) -Force
 "{0,-20}: {1}ms" -f "Entering profile",(Get-RunningTime $starttime)
 
 if (Test-Admin) {
@@ -30,8 +30,8 @@ $PSReadLineOptions = @{
 Set-PSReadlineOption @PSReadLineOptions
 "{0,-20}: {1}ms" -f "After PSReadLine",(Get-RunningTime $starttime)
 
-if (Test-Path $Psscriptroot\PsreadlineProfile.ps1) {
-    . $psscriptroot\PsreadlineProfile.ps1
+if (Test-Path $Psscriptroot\PSReadLineProfile.ps1) {
+    . $(Join-Path $psscriptroot PsreadlineProfile.ps1)
 }
 # Add output of all commands to $__, set as default value
 $PSDefaultParameterValues["Out-Default:OutVariable"] = "__"
@@ -51,7 +51,7 @@ function Invoke-Starship-PreCommand {
 
 $env:ROOT = $true
 
-$ENV:STARSHIP_CONFIG = Join-Path ${env:UserProfile} ".config\starship\starship.toml"
+$ENV:STARSHIP_CONFIG = Join-Path ${HOME} ".config\starship\starship.toml"
 Invoke-Expression (&starship init powershell)
 "{0,-20}: {1}ms" -f "After starship",(Get-RunningTime $starttime)
 
@@ -70,18 +70,18 @@ catch {
     }
 }
 
-$ColorTheme = Join-Path ${env:UserProfile} ".config\ColorThemes\MyColorTheme.psd1"
+$ColorTheme = Join-Path ${HOME} ".config\ColorThemes\MyColorTheme.psd1"
 Add-TerminalIconsColorTheme -Path $ColorTheme -Force
 Set-TerminalIconsTheme -ColorTheme MyColorTheme
 
 "{0,-20}: {1}ms" -f "Before alias",(Get-RunningTime $starttime)
 
 if (Test-Path $PSScriptRoot\aliases.ps1) {
-    . $PSScriptRoot\aliases.ps1
+    . $(Join-Path $PSScriptRoot aliases.ps1)
 }
 
 if (Test-Path $PSScriptRoot\python-pip.ps1){
-    . $PSScriptRoot\python-pip.ps1
+    . $(Join-Path $PSScriptRoot python-pip.ps1)
 }
 
 "{0,-20}: {1}ms" -f "Start time",(Get-RunningTime $starttime)

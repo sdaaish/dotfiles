@@ -50,11 +50,25 @@ Function Enable-Env {
     }
 }
 Function Check-PythonVersion {
-    py -c "import sys;print(sys.version)"
-    py -c "import sys;print(sys.executable)"
+
+    if ($isLinux){
+        $exe = "python"
+    }
+    else {
+        $exe = "py"
+    }
+    & $exe -c "import sys;print(sys.version)"
+    & $exe -c "import sys;print(sys.executable)"
 }
 Function Install-SystemPip {
-    try {$Prg = Get-Command "python.exe"}
+    if ($isLinux){
+        $exe = "python"
+    }
+    else {
+        $exe = "python.exe"
+    }
+
+    try {$Prg = Get-Command $exe}
     catch {throw "No such program, $Prg"}
 
     & $prg -m pip --isolated install -U $args
