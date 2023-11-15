@@ -3,7 +3,9 @@
 [alias]
 	a = "!git alias"
 	alias = "!git config --list | grep alias|cut -c 7-"
-	br = branch
+	b = branch
+	br = branch -v -a
+	brm = branch --merged
 	cat = cat-file
 	changelog = log --pretty=format:"\\ *\\ %s"
 	changes = log --pretty=format:"%h\\ %cr\\ %cn\\ %Cgreen%s%Creset" --name-status
