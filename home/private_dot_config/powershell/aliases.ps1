@@ -384,16 +384,6 @@ Function New-List {
     $args
 }
 
-# Load python aliases
-if (Test-Path $PSScriptRoot/PythonAlias.ps1) {
-    . $(Join-Path $PSScriptRoot PythonAlias.ps1)
-}
-
-# Load local aliases
-if (Test-Path $PSScriptRoot/local.ps1) {
-    . $(Join-Path $PSScriptRoot local.ps1)
-}
-
 # Find files recursive with pattern
 Function Get-ChildItemRecursive {
     param(
@@ -450,4 +440,17 @@ Function Resolve-LocalDnsName {
         }
     }
     $response
+}
+
+
+# Load python aliases
+$pythonAlias = Join-Path $PSScriptRoot PythonAlias.ps1
+if (Test-Path $pythonAlias) {
+    . $pythonAlias
+}
+
+# Load local aliases
+$localAlias = Join-Path $PSScriptRoot aliases-local.ps1
+if (Test-Path $localAlias) {
+    . $localAlias
 }

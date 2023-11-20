@@ -7,7 +7,8 @@ if (-not($starttime)) {
     $starttime = Get-Date
 }
 
-Import-Module $(Join-Path $PSScriptRoot MyFunctions\MyFunctions\MyFunctions.psd1) -Force
+$module = "MyFunctions{0}MyFunctions{0}MyFunctions.psd1" -f [io.path]::DirectorySeparatorChar
+Import-Module $(Join-Path $PSScriptRoot $module) -Force
 "{0,-20}: {1}ms" -f "Entering profile", (Get-RunningTime $starttime)
 
 if (Test-Admin) {
@@ -59,7 +60,8 @@ function Invoke-Starship-PreCommand {
 
 $env:ROOT = $true
 
-$ENV:STARSHIP_CONFIG = Join-Path ${HOME} ".config\starship\starship.toml"
+$starshipConfig = ".config{0}starship{0}starship.toml" -f [io.path]::DirectorySeparatorChar
+$ENV:STARSHIP_CONFIG = Join-Path ${HOME} $starshipConfig
 Invoke-Expression (&starship init powershell)
 "{0,-20}: {1}ms" -f "After starship", (Get-RunningTime $starttime)
 
@@ -78,18 +80,23 @@ catch {
     }
 }
 
-$ColorTheme = Join-Path ${HOME} ".config\ColorThemes\MyColorTheme.psd1"
+$themeFile = ".config{0}ColorThemes{0}MyColorTheme.psd1" -f [io.path]::DirectorySeparatorChar
+$ColorTheme = Join-Path ${HOME} $themeFile
 Add-TerminalIconsColorTheme -Path $ColorTheme -Force
 Set-TerminalIconsTheme -ColorTheme MyColorTheme
 
-"{0,-20}: {1}ms" -f "Before alias", (Get-RunningTime $starttime)
+"{0,-20}: {1}ms" -f "Before aliases", (Get-RunningTime $starttime)
 
-if (Test-Path $PSScriptRoot\aliases.ps1) {
-    . $(Join-Path $PSScriptRoot aliases.ps1)
+# Source local aliases and functions
+$alias = Join-Path $PSScriptRoot aliases.ps1
+if (Test-Path $alias) {
+    . $alias
 }
 
-if (Test-Path $PSScriptRoot\python-pip.ps1) {
-    . $(Join-Path $PSScriptRoot python-pip.ps1)
-}
+## Exclude this for now
+# $pip = Join-Path $PSScriptRoot python-pip.ps1
+# if (Test-Path $pip) {
+#     . $pip
+# }
 
 "{0,-20}: {1}ms" -f "Start time", (Get-RunningTime $starttime)
