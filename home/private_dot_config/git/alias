@@ -31,6 +31,7 @@
 	lso = ls-files --others --directory --no-empty-directory
 	lst = ls-tree
 	lt = log --graph --oneline --decorate --all
+	ltt = log --graph --stat --decorate --all
 	nah = reset --hard
 	norm = "!echo '* text=auto' >.gitattributes && git add --renormalize ."
 	ps = -p status
