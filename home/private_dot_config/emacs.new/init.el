@@ -193,6 +193,9 @@
     (read-abbrev-file abbrev-en-file))
 (setq-default abbrev-mode t)
 
+(require 'init-magit)
+(require 'init-chezmoi)
+
 ;; Fix things below here
 
 
