@@ -204,6 +204,7 @@
 (require 'init-display)
 (require 'init-help)
 (require 'init-eglot)
+(require 'init-powershell)
 (require 'init-golang)
 
 ;; Fix things below here
