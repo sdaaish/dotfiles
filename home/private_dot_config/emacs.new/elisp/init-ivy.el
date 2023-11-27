@@ -50,8 +50,6 @@
 (use-package counsel
   :diminish
   :config
-  (setq counsel-describe-function-function #'helpful-callable
-        counsel-describe-variable-function #'helpful-variable)
   (counsel-mode 1)
   :bind
   ("M-x" . counsel-M-x)
