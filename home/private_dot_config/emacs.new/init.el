@@ -76,6 +76,8 @@
 (when (file-exists-p lispdir)
   (add-to-list 'load-path lispdir))
 
+(require 'init-settings)
+
 (display-time-mode t)
 (setq display-time-24hr-format t)
 
@@ -100,31 +102,32 @@
 ;;(straight-use-package 'modus-themes :source '(melpa))
 
 (use-package modus-themes
- :custom (modus-themes-italic-constructs t
-      modus-themes-bold-constructs t
-      modus-themes-org-blocks 'tinted-background
-      modus-themes-variable-pitch-ui t
-      modus-themes-hl-line '(accented intense)
-      modus-themes-paren-match '(bold intense)
-      modus-themes-mixed-fonts t
-      modus-themes-prompts '(regular bold)
-      modus-themes-to-toggle '(modus-operandi modus-vivendi)
-      modus-themes-completions
-      '((matches . (extrabold underline))
-        (selection . (semibold italic)))
-      modus-themes-mode-line '(moody borderless accented)
-      modus-themes-subtle-line-numbers t
-      modus-themes-headings
-      '((0 . (background overline 1.5))
-              (1 . (background overline 1.3))
-        (2 . (overline rainbow 1.2))
-        (3 . (overline 1.1))
-        (t . (monochrome))))
- :config
- (load-theme 'modus-vivendi t t)
- (load-theme 'modus-operandi t nil)
- (enable-theme 'modus-operandi)
- :bind ("S-<f5>" . 'modus-themes-toggle))
+  :custom
+  (modus-themes-italic-constructs t)
+  (modus-themes-bold-constructs t)
+  (modus-themes-org-blocks 'tinted-background)
+  (modus-themes-variable-pitch-ui t)
+  (modus-themes-hl-line '(accented intense))
+  (modus-themes-paren-match '(bold intense))
+  (modus-themes-mixed-fonts t)
+  (modus-themes-prompts '(regular bold))
+  (modus-themes-to-toggle '(modus-operandi modus-vivendi))
+  (modus-themes-completions   '(((matches . (extrabold underline)))
+                                ((selection . (semibold italic)))))
+  (modus-themes-mode-line '(moody borderless accented))
+  (modus-themes-subtle-line-numbers t)
+  (modus-themes--disable-themes t)
+  (modus-themes-headings
+   '((0 . (background overline 1.5))
+     (1 . (background overline 1.3))
+     (2 . (overline rainbow 1.2))
+     (3 . (overline 1.1))
+     (t . (monochrome))))
+:config
+  (load-theme 'modus-vivendi t t)
+  (load-theme 'modus-operandi t nil)
+  (enable-theme 'modus-operandi)
+  :bind ("S-<f5>" . 'modus-themes-toggle))
 
 (setq mode-line-compact t)
 (size-indication-mode 1)
@@ -193,8 +196,15 @@
     (read-abbrev-file abbrev-en-file))
 (setq-default abbrev-mode t)
 
+
 (require 'init-magit)
 (require 'init-chezmoi)
+(require 'init-ivy)
+(require 'init-snippets)
+(require 'init-eglot)
+(require 'init-golang)
+(require 'init-display)
+
 
 ;; Fix things below here
 
