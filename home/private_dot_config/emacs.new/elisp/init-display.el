@@ -19,6 +19,7 @@
 ;;; Code:
 
 (use-package golden-ratio
+  :diminish
   :custom
   (golden-ratio-recenter t)
   (golden-ratio-auto-scale t)

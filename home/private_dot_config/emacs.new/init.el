@@ -201,10 +201,10 @@
 (require 'init-chezmoi)
 (require 'init-ivy)
 (require 'init-snippets)
+(require 'init-display)
+(require 'init-help)
 (require 'init-eglot)
 (require 'init-golang)
-(require 'init-display)
-
 
 ;; Fix things below here
 

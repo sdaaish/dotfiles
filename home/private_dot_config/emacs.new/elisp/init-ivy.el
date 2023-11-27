@@ -38,25 +38,25 @@
   ("C-c G" . counsel-google))
 
 
-  (use-package swiper
-    :config
-    (setq ivy-use-selectable-prompt t
-          swiper-action-recenter t
-          swiper-include-line-number-in-search t
-          swiper-goto-start-of-match t
-          swiper-stay-on-quit nil)
-    (set-face-background 'swiper-line-face "Light Slate Grey"))
+(use-package swiper
+  :config
+  (setq ivy-use-selectable-prompt t
+        swiper-action-recenter t
+        swiper-include-line-number-in-search t
+        swiper-goto-start-of-match t
+        swiper-stay-on-quit nil)
+  (set-face-background 'swiper-line-face "Light Slate Grey"))
 
-  (use-package counsel
-    :diminish
-    :config
-    (setq counsel-describe-function-function #'helpful-callable
-          counsel-describe-variable-function #'helpful-variable)
-    (counsel-mode 1)
-    :bind
-    ("M-x" . counsel-M-x)
-    ("C-h f" . counsel-describe-function)
-    ("C-h v" . counsel-describe-variable))
+(use-package counsel
+  :diminish
+  :config
+  (setq counsel-describe-function-function #'helpful-callable
+        counsel-describe-variable-function #'helpful-variable)
+  (counsel-mode 1)
+  :bind
+  ("M-x" . counsel-M-x)
+  ("C-h f" . counsel-describe-function)
+  ("C-h v" . counsel-describe-variable))
 
 (use-package ivy-rich
   :init  (ivy-rich-mode 1)
