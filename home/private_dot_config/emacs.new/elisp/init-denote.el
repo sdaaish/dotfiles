@@ -52,7 +52,7 @@
 (use-package denote
   :commands (hydra-denote/body denote)
   :custom
-  (denote-directory denotedir)
+  (denote-directory my/denotedir)
   (denote-dired-directories (list denote-directory))
   (denote-date-prompt-use-org-read-date t)
   (denote-known-keywords '("emacs" "project" "powershell"))

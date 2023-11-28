@@ -59,17 +59,16 @@
 (use-package bind-key)
 (use-package diminish)
 
-;; Modules
-(when (not (file-exists-p "modules"))
-  (make-directory (concat user-emacs-directory "modules") t))
-(add-to-list 'load-path (concat user-emacs-directory "modules"))
+;; Load org early when using straight
+(straight-use-package 'org)
+(require 'init-org)
 
-;; LISP directories
+;; Emacs LISP directory for configuration
 (when (not (file-exists-p "elisp"))
   (make-directory (concat user-emacs-directory "elisp") t))
 (add-to-list 'load-path (concat user-emacs-directory "elisp"))
 
-;; Shared LISP directory
+;; Shared Emacs LISP directory
 (setq lispdir (let (lispdir)
                 (expand-file-name ".config/lisp/" (getenv "HOME"))))
 (when (file-exists-p lispdir)
@@ -211,7 +210,6 @@
 (require 'init-hydra)
 (require 'init-denote)
 (require 'init-fonts)
-(require 'init-org)
 
 ;; Fix things below here
 
