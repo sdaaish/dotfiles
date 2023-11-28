@@ -26,10 +26,14 @@
   (beginning-of-line))
 
 (use-package org
-  :bind (:map org-mode-map
-              ("C-c C-<tab>" . org-force-cycle-archived)
-              ("C-c C-h" . org-tags-view)
-              ("C-*" . org-jump-to-heading-beginning))
+  :bind (("C-c a" . org-agenda)
+         ("C-c c" . org-capture)
+         ("C-c l" . org-store-link)
+         (:map org-mode-map
+               ("C-c C-<tab>" . org-force-cycle-archived)
+               ("C-c C-h" . org-tags-view)
+               ("C-*" . org-jump-to-heading-beginning)))
+  
   :hook (org-mode . (lambda ()
                       (customize-set-variable 'org-use-speed-commands t)))
   :custom

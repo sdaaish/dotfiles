@@ -59,10 +59,6 @@
 (use-package bind-key)
 (use-package diminish)
 
-;; Load org early when using straight
-(straight-use-package 'org)
-(require 'init-org)
-
 ;; Emacs LISP directory for configuration
 (when (not (file-exists-p "elisp"))
   (make-directory (concat user-emacs-directory "elisp") t))
@@ -73,6 +69,11 @@
                 (expand-file-name ".config/lisp/" (getenv "HOME"))))
 (when (file-exists-p lispdir)
   (add-to-list 'load-path lispdir))
+
+;; Load org early when using straight
+(straight-use-package 'org)
+(require 'init-org)
+
 
 (require 'init-settings)
 
