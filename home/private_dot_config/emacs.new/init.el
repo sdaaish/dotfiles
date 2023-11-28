@@ -55,7 +55,6 @@
                         '((github . "sdaaish")
                           (gitlab . "sdaaish"))))
 
-(straight-use-package 'org)
 
 (use-package bind-key)
 (use-package diminish)
@@ -86,10 +85,13 @@
   :diminish)
 
 ;; Key bindings
-(bind-key "<f8> i" (lambda()
+(bind-key "<f8> e i" (lambda()
+                       "Load the user init file."
                      (interactive)
                      (find-file user-init-file)))
-
+(bind-key "<f8> e r" (lambda()
+                     (interactive)
+                     (load-file user-init-file)))
 
 ;; Emacs customize in separate file
 (setq custom-file (expand-file-name "emacs-custom.el" user-emacs-directory))
@@ -124,9 +126,9 @@
      (3 . (overline 1.1))
      (t . (monochrome))))
 :config
-  (load-theme 'modus-vivendi t t)
-  (load-theme 'modus-operandi t nil)
-  (enable-theme 'modus-operandi)
+  (load-theme 'modus-vivendi t nil)
+  (load-theme 'modus-operandi t t)
+  (enable-theme 'modus-vivendi)
   :bind ("S-<f5>" . 'modus-themes-toggle))
 
 (setq mode-line-compact t)
@@ -206,6 +208,10 @@
 (require 'init-eglot)
 (require 'init-powershell)
 (require 'init-golang)
+(require 'init-hydra)
+(require 'init-denote)
+(require 'init-fonts)
+(require 'init-org)
 
 ;; Fix things below here
 
@@ -255,14 +261,6 @@
 
 (setq initial-scratch-message ";; scratch!\n\n")
 (setq initial-major-mode 'emacs-lisp-mode)
-
-;; Setup an emoji font depending on OS
-(cond ((member "Segoe UI Emoji" (font-family-list))
-       (set-fontset-font t 'symbol (font-spec :family "Segoe UI Emoji" :fontified t) nil 'prepend)
-       (set-fontset-font t 'unicode (font-spec :family "Segoe UI Emoji" :fontified t) nil 'prepend))
-      ((member "Noto Color Emoji" (font-family-list))
-       (set-fontset-font t 'symbol (font-spec :family "Noto color emoji" :fontified t) nil 'prepend)
-       (set-fontset-font t 'unicode (font-spec :family "Noto color emoji" :fontified t) nil 'prepend)))
 
 
 ;; Python settings
