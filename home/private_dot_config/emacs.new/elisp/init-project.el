@@ -62,7 +62,7 @@
 (use-package projectile
   :diminish projectile-mode
   :init (when (file-directory-p "~/repos")
-          (setq projectile-project-search-path '("~/repos")))
+          (setq projectile-project-search-path '("~/repos" "~/code" "~/work")))
   :config
   (projectile-mode t)
   (setq projectile-completion-system 'ivy)
