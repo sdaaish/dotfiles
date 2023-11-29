@@ -1,3 +1,24 @@
+;;; INIT-MAGIC --- Summary
+;;
+;; Author:  Stig Dahl
+;; Created: tisdag november 2023-11-28
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;;; Commentary:
+;;
+;;  
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;;; Change log:
+;;
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;;; Code:
+
+;; The extremely useful git interface
 (use-package magit
   :diminish magit-status
   :bind ("C-x g" . magit-status)
@@ -30,4 +51,16 @@
               ((:right-align t)
                (:sort <))))))
 
+;; Get the link to GitHub/GitLab from a buffer
+(use-package git-link
+  :config
+  (defhydra hydra-git-link (:color blue)
+    "Copy git-link"
+    ("h" git-link-homepage "Copy homepage")
+    ("l" git-link "Copy link")
+    ("c" git-link-commit "Copy commit"))
+  :bind ("C-c L" . hydra-git-link/body))
+
 (provide 'init-magit)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; init-magit.el ends here

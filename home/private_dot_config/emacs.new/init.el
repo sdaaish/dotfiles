@@ -18,12 +18,44 @@
 ;;; Code:
 ;;
 
+(message "*** Reading from %s ***" (buffer-name))
+
+;; Debug startup
+(setq debug-on-error t)
+(setq debug-on-quit t)
+
 ;; Startup optimization
-(setq gc-cons-threshold (* 50 1000 1000))
+(setq gc-cons-threshold (* 50 1024 1024))
+(setq garbage-collection-messages nil)
+
 (defun gc/set-after-start ()
   "Set a sane value after starting Emacs."
-  (setq gc-cons-threshold (* 2 1000 1000)))
+  (setq gc-cons-threshold (* 2 1024 1024)))
 (setq after-init-hook 'gc/set-after-start)
+
+;; From emacs-from-scratch https://github.com/daviwil/emacs-from-scratch/blob/master/init.el
+(defun efs/display-startup-time ()
+  "Prints the startup time for Emacs."
+  (message "*** Emacs loaded in %s with %d garbage collections."
+           (format "%.2f seconds"
+                   (float-time
+                    (time-subtract after-init-time before-init-time)))
+           gcs-done))
+
+(add-hook 'emacs-startup-hook #'efs/display-startup-time)
+
+(defvar start-time (float-time (current-time)))
+
+(defun my/format-time (time)
+  "Displays formatted TIME."
+  (format-time-string "%Y-%m-%d %H:%M:%S" time))
+
+(defun my/startup-timer ()
+  "Measures time differences."
+  (format-time-string "%M:%S.%3N" (- (float-time (current-time)) start-time)))
+
+(message "*** Started emacs @ %s" (my/format-time start-time))
+(message "*** Reading configuration from init.el...")
 
 (if (>= emacs-major-version 29)
     (require 'bind-key))
@@ -49,12 +81,15 @@
 
 (use-package straight
   :custom 
-(straight-recipes-emacsmirror-use-mirror t)
-(straight-use-package-by-default t)
-(straight-host-usernames
-                        '((github . "sdaaish")
-                          (gitlab . "sdaaish"))))
+  (straight-recipes-emacsmirror-use-mirror t)
+  (straight-use-package-by-default t)
+  (straight-host-usernames
+   '((github . "sdaaish")
+     (gitlab . "sdaaish"))))
 
+;; Keep Emacs directory tidy
+(use-package no-littering
+  :config (no-littering-theme-backups))
 
 (use-package bind-key)
 (use-package diminish)
@@ -74,7 +109,7 @@
 (straight-use-package 'org)
 (require 'init-org)
 
-
+(require 'init-common)
 (require 'init-settings)
 
 (display-time-mode t)
@@ -85,13 +120,6 @@
   :diminish)
 
 ;; Key bindings
-(bind-key "<f8> e i" (lambda()
-                       "Load the user init file."
-                     (interactive)
-                     (find-file user-init-file)))
-(bind-key "<f8> e r" (lambda()
-                     (interactive)
-                     (load-file user-init-file)))
 
 ;; Emacs customize in separate file
 (setq custom-file (expand-file-name "emacs-custom.el" user-emacs-directory))
@@ -125,7 +153,7 @@
      (2 . (overline rainbow 1.2))
      (3 . (overline 1.1))
      (t . (monochrome))))
-:config
+  :config
   (load-theme 'modus-vivendi t nil)
   (load-theme 'modus-operandi t t)
   (enable-theme 'modus-vivendi)
@@ -198,34 +226,43 @@
     (read-abbrev-file abbrev-en-file))
 (setq-default abbrev-mode t)
 
+;; From https://stackoverflow.com/questions/17557186/turn-off-abbrev-mode-in-emacs-minibuffer
+;; Disable abbrev in minibuffer.
+(defun conditionally-disable-abbrev ()
+  ""
+  (abbrev-mode -1))
 
+(add-hook 'minibuffer-setup-hook 'conditionally-disable-abbrev)
+(add-hook 'minibuffer-exit-hook (lambda () (abbrev-mode 1)))
+
+(diminish 'org-indent-mode)
+(diminish 'abbrev-mode)
+(diminish 'visual-line-mode)
+
+
+(require 'init-utils)
+(require 'init-dired)
+(require 'init-edit)
+(require 'init-search)
 (require 'init-magit)
 (require 'init-chezmoi)
 (require 'init-ivy)
+(require 'init-hydra)
 (require 'init-snippets)
 (require 'init-display)
 (require 'init-help)
 (require 'init-eglot)
 (require 'init-powershell)
 (require 'init-golang)
-(require 'init-hydra)
 (require 'init-denote)
 (require 'init-fonts)
+(require 'init-project)
+(require 'init-python)
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Fix things below here
 
-
-;; Dired
-(add-hook 'dired-mode-hook
-          (lambda ()
-            (keymap-set dired-mode-map "'" 'dired-up-directory)
-            (dired-hide-details-mode 1)))
-(put 'dired-find-alternate-file 'disabled nil)
-(setq dired-kill-when-opening-new-dired-buffer t)
-
-;; Info mode
-(with-eval-after-load 'info
-  (keymap-set Info-mode-map "'" 'Info-up))
 
 ;; Initial size of the frame, if wide screen, center the frame.
 ;; Else, maximize it (not full screen).
@@ -258,14 +295,15 @@
 (add-hook 'org-shiftdown-final-hook 'windmove-down)
 (add-hook 'org-shiftright-final-hook 'windmove-right)
 
-(setq initial-scratch-message ";; scratch!\n\n")
-(setq initial-major-mode 'emacs-lisp-mode)
 
 
-;; Python settings
-(setq python-indent-guess-indent-offset-verbose nil)
-(add-hook 'python-mode-hook 'eglot-ensure)
+;; Turn of debug
+(setq debug-on-error nil)
+(setq debug-on-quit nil)
 
+;;; Measure the startup time
+(message "*** Finished emacs @ %s in %s" (my/format-time (current-time)) (my/startup-timer))
+(message "*** This is the last line of the config. Startup time=%3.5s ***" (emacs-init-time))
 
-(provide 'init.el)
+(provide 'init)
 ;;; init.el ends here

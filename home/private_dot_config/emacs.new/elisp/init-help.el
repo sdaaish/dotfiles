@@ -18,11 +18,19 @@
 ;;
 ;;; Code:
 
+;; Info mode
+(with-eval-after-load 'info
+  (keymap-set Info-mode-map "'" 'Info-up))
+
 (use-package which-key
   :diminish
   :config
   (which-key-mode t)
-  (setq which-key-idle-delay 0))
+  :custom
+  (which-key-idle-delay 0)
+  (which-key-idle-delay 0.2)
+  (which-key-sort-order 'which-key-key-order-alpha))
+
 
 (diminish 'eldoc-mode)
 

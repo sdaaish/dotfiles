@@ -1,7 +1,7 @@
 ;;; `(upcase (file-name-nondirectory (file-name-sans-extension (buffer-file-name))))` --- Summary
 ;;
 ;; Author: `(concat user-full-name)` <`(concat user-mail-address)`>
-;; Created: `(format-time-string "%A %B %Y-%m-%d")`
+;; Created: `(format-time-string "%Y-%m-%d")`
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -20,5 +20,6 @@
 
 $0
 
+(provide '`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; `(file-name-nondirectory (buffer-file-name))` ends here
