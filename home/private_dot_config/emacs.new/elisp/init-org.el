@@ -235,15 +235,6 @@
   "Don't confirm code execution for these languages."
   (not (member lang '("python" "emacs-lisp" "shell" "powershell" "perl" "elisp" "eshell"))))
 
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((shell      . t)
-   (eshell     . t)
-   (python     . t)
-   (lisp       . t)
-   (powershell . t)
-   (perl       . t)
-   (emacs-lisp . t)))
 
 (provide 'init-org)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

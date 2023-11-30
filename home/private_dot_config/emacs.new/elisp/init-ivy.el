@@ -18,15 +18,6 @@
 ;;
 ;;; Code:
 
-(defhydra hydra-ivy (:color blue)
-  "Counsel search commands"
-  ("a" counsel-ag "Ag")
-  ("f" counsel-fzf "FzF")
-  ("g" counsel-grep "Grep")
-  ("j" counsel-git-grep "Git Grep")
-  ("r" counsel-rg "RipGrep")
-  ("s" counsel-search "Search Engine"))
-
 (use-package ivy
   :diminish
   :config

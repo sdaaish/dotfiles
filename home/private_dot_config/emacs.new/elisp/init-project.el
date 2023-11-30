@@ -71,8 +71,8 @@
   :config
   (projectile-mode t)
   :custom
-  (projectile-completion-system ivy)
-  (projectile-switch-project-action projectile-dired)
+  (projectile-completion-system 'ivy)
+  (projectile-switch-project-action 'projectile-dired)
   :bind (("C-c p" . hydra-projectile/body)
          (:map projectile-mode-map
                ("C-c P" . projectile-command-map))))

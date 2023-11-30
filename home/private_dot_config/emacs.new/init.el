@@ -107,10 +107,10 @@
 
 ;; Load org early when using straight
 (straight-use-package 'org)
-(require 'init-org)
 
 (require 'init-common)
 (require 'init-settings)
+(require 'init-org)
 
 (display-time-mode t)
 (setq display-time-24hr-format t)
@@ -258,7 +258,7 @@
 (require 'init-fonts)
 (require 'init-project)
 (require 'init-python)
-
+(require 'init-babel)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Fix things below here
