@@ -7,7 +7,7 @@
 ;;
 ;;; Commentary:
 ;;
-;;  
+;;
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -21,6 +21,7 @@
 
 
 (use-package yasnippet
+  :diminish
   :init
   (yas-global-mode 1)
   :bind (("C-c y" . hydra-yasnippet/body)

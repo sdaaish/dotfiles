@@ -7,7 +7,7 @@
 ;;
 ;;; Commentary:
 ;;
-;;  
+;;
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -33,7 +33,7 @@
                ("C-c C-<tab>" . org-force-cycle-archived)
                ("C-c C-h" . org-tags-view)
                ("C-*" . org-jump-to-heading-beginning)))
-  
+
   :hook (org-mode . (lambda ()
                       (customize-set-variable 'org-use-speed-commands t)))
   :custom
@@ -97,8 +97,14 @@
 (require 'ob-python)
 (require 'ob-C)
 
+;; Enable habits
 (with-eval-after-load 'org
   (add-to-list 'org-modules 'org-habit t))
+
+;; Diminish org indent
+(with-eval-after-load 'org-indent
+  (require 'diminish)
+  (diminish 'org-indent-mode))
 
 (setq org-todo-keywords
       '((sequence "TODO(t!)" "IN-PROGRESS(p!)" "NEXT(n!)" "WAITING(w@/!)" "|" "DONE(d@)")
