@@ -73,6 +73,18 @@
   :config
   (super-save-mode))
 
+(use-package macrostep
+  :bind ("C-c e" . macrostep-mode))
+
+;; From Steve Yegge's talk on emacs. [[https://youtu.be/6ZWp05OW1c0][Stevey's Tech Talk E41: Emacs Part 2 - Emergency Emacs]]
+
+(defun my/steal-mouse ()
+  "Move the mouse to the upper right corner."
+  (interactive)
+  (and window-system
+       (set-mouse-position
+        (selected-frame)
+        (1- (frame-width)) -1)))
 
 (provide 'init-utils)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

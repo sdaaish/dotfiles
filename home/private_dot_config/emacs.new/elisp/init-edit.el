@@ -47,6 +47,11 @@
             (define-key reb-mode-map "C-c C-q" 'reb-quit)))
 
 
+(use-package hungry-delete
+  :config
+  (global-hungry-delete-mode t)
+  :custom (hungry-delete-except-modes '(minibuffer-mode)))
+
 (provide 'init-edit)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-edit.el ends here

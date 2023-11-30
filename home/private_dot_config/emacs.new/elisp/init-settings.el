@@ -26,9 +26,14 @@
 
 (message "Setup Denote home directory to: %s" my/denotedir)
 
+;; Use work version of Onedrive if it exists
+(if (getenv "OneDriveCommercial")
+    (defconst my/onedrive-dir (getenv "OneDriveCommercial"))
+  (defconst my/onedrive-dir (getenv "OneDrive")))
+
 
 ;; Local settings per device
-(setq my/private-elfile (expand-file-name "personal.el" user-emacs-directory))
+(setq my/private-elfile (expand-file-name "local/personal.el" user-emacs-directory))
 (if (file-exists-p my/private-elfile)
     (load-file my/private-elfile))
 

@@ -7,7 +7,7 @@
 ;;
 ;;; Commentary:
 ;;
-;;  
+;;
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -19,12 +19,20 @@
 ;;; Code:
 
 ;; Dired
+
+(use-package dired
+  :straight (:type built-in)
+  :hook ( dired-mode . dired-hide-details-mode)
+  :bind ("C-x C-d" . dired)
+  :custom (dired-kill-when-opening-new-dired-buffer t))
+
 (add-hook 'dired-mode-hook
           (lambda ()
             (keymap-set dired-mode-map "'" 'dired-up-directory)
             (dired-hide-details-mode 1)))
+
 (put 'dired-find-alternate-file 'disabled nil)
-(setq dired-kill-when-opening-new-dired-buffer t)
+
 
 (use-package dired-single
   :bind (("C-x d" . dired-single-magic-buffer)

@@ -114,8 +114,8 @@ Prompt for title and keywords of the new note."
                                                       "- Subject:\n"
                                                       "- Date:\n"
                                                       "- Attendees:\n"))))
-  (when (file-readable-p (expand-file-name "denote-templates.el" user-emacs-directory))
-    (load-file (expand-file-name "denote-templates.el" user-emacs-directory))))
+  (when (file-readable-p (expand-file-name "local/denote-templates.el" user-emacs-directory))
+    (load-file (expand-file-name "local/denote-templates.el" user-emacs-directory))))
 
 
 (provide 'init-denote)

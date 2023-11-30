@@ -64,8 +64,24 @@
 
 (put 'narrow-to-region 'disabled nil)
 (put 'narrow-to-page   'disabled nil)
+(put 'upcase-region 'disabled nil)
 
+;; No popup notifications
 (customize-set-variable 'use-dialog-box nil)
+(customize-set-variable 'use-file-dialog nil)
+
+(global-set-key
+ (kbd "<f5>")
+ (lambda (&optional force-reverting)
+   "Interactive call to revert-buffer. Ignoring the auto-save
+  file and not requesting for confirmation. When the current buffer
+  is modified, the command refuses to revert it, unless you specify
+  the optional argument: force-reverting to true."
+   (interactive "P")
+   ;;(message "force-reverting value is %s" force-reverting)
+   (if (or force-reverting (not (buffer-modified-p)))
+       (revert-buffer :ignore-auto :noconfirm)
+     (error "The buffer has been modified"))))
 
 (provide 'init-common)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
