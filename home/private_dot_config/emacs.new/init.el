@@ -80,7 +80,7 @@
 (straight-use-package 'use-package)
 
 (use-package straight
-  :custom 
+  :custom
   (straight-recipes-emacsmirror-use-mirror t)
   (straight-use-package-by-default t)
   (straight-host-usernames
@@ -198,12 +198,25 @@
 (setq delete-old-versions t
       version-control t
       vc-make-backup-files t
-      backup-by-copying t
+      backup-by-copying nil
+      backup-by-copying-when-linked t
+      backup-by-copying-when-mismatch t
       kept-new-versions 10
       kept-old-versions 10
       auto-save-interval 40
       delete-by-moving-to-trash t
       save-silently t)
+
+(setq savehist-file (expand-file-name ".savehist" no-littering-var-directory))
+(savehist-mode 1)
+(setq
+ history-length 50
+ history-delete-duplicates t
+ savehist-save-minibuffer-history t
+ savehist-additional-variables
+ '(kill-ring
+   search-ring
+   regexp-search-ring))
 
 (global-auto-revert-mode 1)
 (setq global-auto-revert-non-file-buffers t)
