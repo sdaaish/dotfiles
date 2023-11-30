@@ -1,7 +1,7 @@
 ;;; INIT-IVY --- Summary
 ;;
 ;; Author:  Stig Dahl
-;; Created: 27 November 2023-11-27
+;; Created: 2023-11-27
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -18,6 +18,15 @@
 ;;
 ;;; Code:
 
+(defhydra hydra-ivy (:color blue)
+  "Counsel search commands"
+  ("a" counsel-ag "Ag")
+  ("f" counsel-fzf "FzF")
+  ("g" counsel-grep "Grep")
+  ("j" counsel-git-grep "Git Grep")
+  ("r" counsel-rg "RipGrep")
+  ("s" counsel-search "Search Engine"))
+
 (use-package ivy
   :diminish
   :config
@@ -31,11 +40,7 @@
   ("C-c C-S-R" . ivy-resume)
   ("C-s" . swiper)
   ("C-r" . swiper)
-  ("C-c g" . counsel-git)
-  ("C-c j" . counsel-git-grep)
-  ("C-c k" . counsel-ag)
-  ("C-c r" . counsel-rg)
-  ("C-c G" . counsel-google))
+  ("C-c j" . hydra-ivy/body))
 
 
 (use-package swiper
@@ -61,6 +66,9 @@
   :config
   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
   (customize-set-variable 'ivy-rich-path-style 'abbrev))
+
+;; For use with counsel-search
+(use-package request)
 
 (provide 'init-ivy)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
