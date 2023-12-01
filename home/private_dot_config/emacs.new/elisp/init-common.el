@@ -86,7 +86,7 @@
 
 ;; Add more timezones to the world-clock
 (customize-set-variable 'world-clock-list t)
-(customize-set-variable 'world-clock-time-format "%F %T, %A/%B")
+(customize-set-variable 'world-clock-time-format "%F %T, %A/%B %Z %z")
 (customize-set-variable 'legacy-style-world-list '(("PST8PDT" "Seattle")
                                                    ("EST5EDT" "New York")
                                                    ("UTC0" "UTC")
