@@ -7,4 +7,6 @@
   (add-hook 'before-save-hook #'eglot-format-buffer -10 t))
 (add-hook 'go-mode-hook #'eglot-format-buffer-on-save)
 
+(use-package flycheck)
+
 (provide 'init-eglot)

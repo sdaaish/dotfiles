@@ -83,6 +83,20 @@
        (revert-buffer :ignore-auto :noconfirm)
      (error "The buffer has been modified"))))
 
+
+;; Add more timezones to the world-clock
+(customize-set-variable 'world-clock-list t)
+(customize-set-variable 'world-clock-time-format "%F %T, %A/%B")
+(customize-set-variable 'legacy-style-world-list '(("PST8PDT" "Seattle")
+                                                   ("EST5EDT" "New York")
+                                                   ("UTC0" "UTC")
+                                                   ("GMT0BST" "London")
+                                                   ("CET-1CDT" "Stockholm")
+                                                   ("EET-2EDT" "Sofia")
+                                                   ("IST-5:30" "Bangalore")
+                                                   ("PST-8" "Manila")
+                                                   ("AET-11" "Sydney")))
+
 (provide 'init-common)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-common.el ends here
