@@ -23,8 +23,9 @@
   :diminish
   :config
   (global-undo-tree-mode 1)
-  (setq undo-tree-visualizer-diff t)
-  :bind (("C-z" . undo)
+  :custom (undo-tree-visualizer-diff t)
+  :bind (("C-x u" . undo-tree-visualize)
+         ("C-z" . undo)
          ("C-S-z" . undo-tree-redo)))
 
 (use-package smartparens
