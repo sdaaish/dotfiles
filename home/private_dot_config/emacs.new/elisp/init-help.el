@@ -27,12 +27,10 @@
   :config
   (which-key-mode t)
   :custom
-  (which-key-idle-delay 0)
-  (which-key-idle-delay 0.2)
+  (which-key-show-early-on-C-h t)
+  (which-key-idle-delay 100)
+  (which-key-idle-secondary-delay 0.05)
   (which-key-sort-order 'which-key-key-order-alpha))
-
-
-(diminish 'eldoc-mode)
 
 (use-package amx
   :config (amx-mode t))

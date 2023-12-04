@@ -25,12 +25,12 @@
 (setq debug-on-quit t)
 
 ;; Startup optimization
-(setq gc-cons-threshold (* 50 1024 1024))
+(setq gc-cons-threshold (* 500 1024 1024))
 (setq garbage-collection-messages nil)
 
 (defun gc/set-after-start ()
   "Set a sane value after starting Emacs."
-  (setq gc-cons-threshold (* 2 1024 1024)))
+  (setq gc-cons-threshold (* 5 1024 1024)))
 (setq after-init-hook 'gc/set-after-start)
 
 ;; From emacs-from-scratch https://github.com/daviwil/emacs-from-scratch/blob/master/init.el
@@ -92,7 +92,9 @@
   :config (no-littering-theme-backups))
 
 (use-package bind-key)
-(use-package diminish)
+(use-package diminish
+  :config
+  (diminish 'eldoc-mode))
 
 ;; Emacs LISP directory for configuration
 (when (not (file-exists-p "elisp"))
@@ -113,7 +115,8 @@
 (require 'init-org)
 
 (display-time-mode t)
-(setq display-time-24hr-format t)
+(setq display-time-24hr-format t
+      display-time-default-load-average nil)
 
 (use-package company
   :config (global-company-mode 1)

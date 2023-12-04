@@ -86,6 +86,13 @@
         (selected-frame)
         (1- (frame-width)) -1)))
 
+
+
+(use-package speed-type
+  :custom
+  (speed-type-min-chars 150)
+  (speed-type-max-chars 350))
+
 (provide 'init-utils)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-utils.el ends here

@@ -21,7 +21,7 @@
 
 
 (use-package yasnippet
-  :diminish
+  :diminish (yas-global-mode yas-minor-mode)
   :init
   (yas-global-mode 1)
   :bind (("C-c y" . hydra-yasnippet/body)
