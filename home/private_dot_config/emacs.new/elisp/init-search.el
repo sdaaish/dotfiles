@@ -27,6 +27,19 @@
 (use-package macrostep
   :bind ("C-c e" . macrostep-mode))
 
+(use-package orderless
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles basic partial-completion)))))
+
+(defun my/match-components-literally ()
+  "Components match literally for the rest of the session."
+  (interactive)
+  (setq-local orderless-matching-styles '(orderless-literal)
+              orderless-style-dispatchers nil))
+
+(define-key minibuffer-local-completion-map (kbd "C-l")
+            #'my/match-components-literally)
 
 (provide 'init-search)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -20,11 +20,17 @@
 
 (use-package ivy
   :diminish
+
+  :custom
+  (ivy-re-builders-alist '((t . orderless-ivy-re-builder)))
+  (ivy-use-virtual-buffers t)
+  (ivy-count-format "(%d/%d) ")
+  (enable-recursive-minibuffers t)
+
   :config
   (ivy-mode 1)
-  (setq ivy-use-virtual-buffers t
-        ivy-count-format "(%d/%d) "
-        enable-recursive-minibuffers t)
+  (add-to-list 'ivy-highlight-functions-alist '(orderless-ivy-re-builder . orderless-ivy-highlight))
+
   :bind
   ("C-x C-f" . counsel-find-file)
   ("C-c C-S-F" . counsel-recentf)
@@ -32,7 +38,6 @@
   ("C-s" . swiper)
   ("C-r" . swiper)
   ("C-c j" . hydra-ivy/body))
-
 
 (use-package swiper
   :config
