@@ -12,6 +12,7 @@ switch ($env:TERM){
     "dumb" { . ~/.config/powershell/profile-emacs.ps1 }
     default { . ~/.config/powershell/profile.ps1 }
 }
+
 '@
 
 if ($env:OneDriveConsumer){
@@ -29,7 +30,7 @@ $path = Join-Path $BaseDir "Documents"
 "PowerShell", "WindowsPowerShell" | foreach {
     $parent = Join-Path $path $_
     $config = Join-Path $parent "profile.ps1"
-    Set-Content -Path $config -Value $content -Force
+    Set-Content -Path $config -Value $content -Encoding UTF8 -NoNewLine -Force
 }
 
 {{ end }}
