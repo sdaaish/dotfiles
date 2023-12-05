@@ -285,6 +285,7 @@
 (require 'init-project)
 (require 'init-python)
 (require 'init-babel)
+(require 'init-eshell)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Fix things below here
