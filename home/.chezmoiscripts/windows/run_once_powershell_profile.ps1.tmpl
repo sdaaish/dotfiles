@@ -1,0 +1,35 @@
+{{ if eq .chezmoi.os "windows"}}
+
+# Setup the powershell profile for CurrentUserAllHosts.
+# For both Desktop and Core version.
+
+$content = @'
+# This file is managed by Chezmoi, don't edit it
+$starttime = Get-Date
+
+switch ($env:TERM){
+    "emacs" { . ~/.config/powershell/profile-emacs.ps1 }
+    "dumb" { . ~/.config/powershell/profile-emacs.ps1 }
+    default { . ~/.config/powershell/profile.ps1 }
+}
+'@
+
+if ($env:OneDriveConsumer){
+    $BaseDir = $env:OneDriveConsumer
+}
+elseif ($env:OneDriveCommercial){
+    $BaseDir = $env:OneDriveCommercial
+}
+else {
+    $BaseDir = $env:UserProfile
+}
+
+$path = Join-Path $BaseDir "Documents"
+
+"PowerShell", "WindowsPowerShell" | foreach {
+    $parent = Join-Path $path $_
+    $config = Join-Path $parent "profile.ps1"
+    Set-Content -Path $config -Value $content -Force
+}
+
+{{ end }}
