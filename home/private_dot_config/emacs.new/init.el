@@ -156,6 +156,16 @@
      (2 . (overline rainbow 1.2))
      (3 . (overline 1.1))
      (t . (monochrome))))
+  (modus-themes-common-palette-overrides
+   '((date-common cyan)
+     (date-deadline red-warmer)
+     (date-event green)
+     (date-holiday blue)
+     (date-now yellow-warmer)
+     (date-scheduled blue-warmer)
+     (date-weekday cyan-warmer)
+     (date-weekend blue-faint)))
+
   :config
   (load-theme 'modus-vivendi t nil)
   (load-theme 'modus-operandi t t)

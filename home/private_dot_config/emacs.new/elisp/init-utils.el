@@ -49,14 +49,18 @@
   :bind ("C-x z" . ztree-dir)
   :config (setq-default ztree-dir-show-filtered-files t))
 
+;; Multi colored matching delimiters
 (use-package rainbow-delimiters
+  :custom-face (rainbow-delimiters-depth-1-face ((t (:foreground "Yellow"))))
   :hook
   ((org-mode prog-mode) . rainbow-delimiters-mode))
 
+;; To highlight colors in text
 (use-package rainbow-mode
   :diminish rainbow-mode
   :hook (help-mode . rainbow-mode))
 
+;; Save automatically
 (use-package super-save
   :diminish
   :custom
