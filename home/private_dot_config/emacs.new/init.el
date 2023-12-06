@@ -286,6 +286,7 @@
 (require 'init-python)
 (require 'init-babel)
 (require 'init-eshell)
+(require 'init-formatting)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Fix things below here
