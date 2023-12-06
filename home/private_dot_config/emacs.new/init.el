@@ -197,12 +197,11 @@
   (make-directory (concat user-emacs-directory ".cache") t))
 
 ;; Backup and saving place in files
-(when (not (file-exists-p "backups"))
-  (make-directory (concat user-emacs-directory "backups") t))
-(setq backup-directory-alist
-      `((".*" . ,(expand-file-name "backups" user-emacs-directory))))
-;;(setq auto-save-file-name-transforms
-;;      `((".*" ,(expand-file-name "backups" user-emacs-directory) t)))
+;; (when (not (file-exists-p "backups"))
+;;   (make-directory (concat user-emacs-directory "backups") t))
+;; (setq backup-directory-alist
+;;       `((".*" . ,(expand-file-name "backups" user-emacs-directory))))
+
 (save-place-mode 1)
 (auto-save-mode 1)
 (setq save-place-file (expand-file-name ".cache/saveplace" user-emacs-directory))

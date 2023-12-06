@@ -44,7 +44,8 @@
 
 (setq mode-require-final-newline t
       next-line-add-newlines nil
-      require-final-newline t)
+      require-final-newline t
+      sentence-end-double-space nil)
 
 (recentf-mode 1)
 (setq recentf-max-menu-items 25)
@@ -83,6 +84,9 @@
        (revert-buffer :ignore-auto :noconfirm)
      (error "The buffer has been modified"))))
 
+(when (eq system-type 'windows-nt)
+  (setq w32-capslock-is-shiftlock nil)
+  (setq w32-enable-caps-lock nil))
 
 ;; Add more timezones to the world-clock
 (customize-set-variable 'world-clock-list t)
