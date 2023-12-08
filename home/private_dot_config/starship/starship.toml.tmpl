@@ -4,7 +4,7 @@
 # This part works for Windows.
 
 format = """
-[$status$battery$time$os${env_var.root}${env_var.starship}:${env_var.user}$hostname  $git_status$git_branch$git_commit$git_state $directory$all](bold blue)
+[$status$battery$time$os${env_var.root}${env_var.starship} ${env_var.psversion}:${env_var.user}$hostname  $git_status$git_branch$git_commit$git_state $directory$all](bold blue)
 [$shell ](bold blue)"""
 
 {{ else if eq .chezmoi.os "linux" }}
@@ -87,6 +87,10 @@ variable = "STARSHIP_SHELL"
 format = "[$env_value]($style)"
 variable = "USERNAME"
 style = '#0099ff'
+
+[env_var.psversion]
+format = "[$env_value](#9933ff)"
+variable = "PSVERSION"
 
 [shell]
 powershell_indicator = "ﲵ"

@@ -36,6 +36,7 @@ $PSReadLineOptions = @{
         Selection = "#fd625d"
     }
 }
+
 Set-PSReadLineOption @PSReadLineOptions
 "{0,-20}: {1}ms" -f "After PSReadLine", (Get-RunningTime $starttime)
 
@@ -58,7 +59,18 @@ function Invoke-Starship-PreCommand {
     $host.ui.RawUi.WindowTitle = "PS> $($psversiontable.PSEdition)@$env:USERNAME"
 }
 
+# Enable showing symbols for the root user in starship.
 $env:ROOT = $true
+
+# Show the powershell version number in starship
+$version = $PSVersionTable.PSVersion
+if ($version -gt [version]"6.0"){
+    $env:PSVERSION = $version
+}
+else {
+    $value = "{0}.{1}" -f $version.major,$version.minor
+    $env:PSVERSION = $value
+}
 
 $starshipConfig = ".config{0}starship{0}starship.toml" -f [io.path]::DirectorySeparatorChar
 $ENV:STARSHIP_CONFIG = Join-Path ${HOME} $starshipConfig
