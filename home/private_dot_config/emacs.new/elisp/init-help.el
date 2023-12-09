@@ -50,6 +50,12 @@
          ([remap describe-symbol] . helpful-callable)
          ([remap describe-command] . helpful-command)))
 
+(use-package info-colors
+  :hook (Info-selection . info-colors-fontify-node)
+  :custom-face
+  (info-colors-lisp-code-block ((t (:foreground "LightSkyBlue" :weight normal))))
+  (info-xref ((t (:foreground "DeepSkyBlue" :weight normal))))
+  (Info-quoted ((t (:foreground "SkyBlue" :weight normal)))))
 
 (provide 'init-help)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

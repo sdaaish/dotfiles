@@ -28,6 +28,15 @@
    (perl       . t)
    (emacs-lisp . t)))
 
+(require 'ox-publish)
+(use-package ox-gfm
+  :after ox)
+
+(use-package ox-jira
+  :after ox)
+
+(use-package ox-confluence
+  :after ox)
 
 
 (provide 'init-babel)

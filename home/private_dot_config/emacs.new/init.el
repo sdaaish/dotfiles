@@ -127,7 +127,7 @@
 ;; Emacs customize in separate file
 (setq custom-file (expand-file-name "emacs-custom.el" user-emacs-directory))
 (when (file-exists-p custom-file)
-  (load custom-file))
+  (load custom-file 'noerror))
 
 
 ;; Modus themes settings
@@ -271,7 +271,6 @@
 (require 'init-edit)
 (require 'init-search)
 (require 'init-magit)
-(require 'init-chezmoi)
 (require 'init-ivy)
 (require 'init-hydra)
 (require 'init-snippets)
@@ -287,6 +286,8 @@
 (require 'init-babel)
 (require 'init-eshell)
 (require 'init-formatting)
+(require 'init-code)
+(require 'init-chezmoi)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Fix things below here
@@ -317,6 +318,11 @@
 (windmove-mode 1)
 (when (fboundp 'windmove-default-keybindings)
   (windmove-default-keybindings))
+
+;; Start Emacs as server
+(require 'server)
+(unless (server-running-p)
+  (server-start))
 
 ;; Turn of debug
 (setq debug-on-error nil)
