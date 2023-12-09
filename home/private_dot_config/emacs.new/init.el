@@ -167,11 +167,11 @@
      (date-weekend blue-faint)))
 
   :config
-  (load-theme 'modus-vivendi-tinted t nil)
+  (load-theme 'modus-vivendi-tinted t t)
   (load-theme 'modus-operandi-tinted t nil)
   (load-theme 'modus-vivendi t nil)
-  (load-theme 'modus-operandi t t)
-  (enable-theme 'modus-vivendi))
+  (load-theme 'modus-operandi t nil)
+  (enable-theme 'modus-vivendi-tinted))
 
 (setq mode-line-compact t)
 (size-indication-mode 1)
