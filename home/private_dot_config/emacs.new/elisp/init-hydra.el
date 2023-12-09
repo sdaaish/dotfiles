@@ -7,7 +7,7 @@
 ;;
 ;;; Commentary:
 ;;
-;;  
+;;
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -121,6 +121,18 @@
   ("j" counsel-git-grep "Git Grep")
   ("r" counsel-rg "RipGrep")
   ("s" counsel-search "Search Engine"))
+
+;; Switch between Modus themes
+(defhydra hydra-theme-chooser (:color blue :columns 2 :timeout 2)
+  "Switch between Modus themes"
+  ("v t" (modus-themes-select 'modus-vivendi-tinted) "Vivendi Tinted")
+  ("o t" (modus-themes-select 'modus-operandi-tinted) "Operandi Tinted")
+  ("v v" (modus-themes-select 'modus-vivendi) "Vivendi")
+  ("o o" (modus-themes-select 'modus-operandi) "Operandi")
+  ("t" (modus-themes-toggle) "Toggle theme")
+  ("q" nil "Quit"))
+
+(bind-key "S-<f5>" 'hydra-theme-chooser/body)
 
 (provide 'init-hydra)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
