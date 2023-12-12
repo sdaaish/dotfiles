@@ -68,8 +68,10 @@
   ("e" (find-file (expand-file-name "early-init.el" user-emacs-directory)) "early-init.el")
   ("i" (find-file user-init-file) "init.el")
   ("k" my/server-shutdown "Save&kill emacs")
+  ("l" (dired-at-point (expand-file-name "elisp/" user-emacs-directory)) "Elisp directory")
   ("m" (start-kbd-macro) "Start kbd macro")
   ("r" (load-file user-init-file) "Reload emacs")
+  ("s" (end-kbd-macro) "Stop kbd macro")
   ("q" nil "cancel"))
 (bind-key "<f8> i" 'hydra-config-files/body)
 
@@ -133,6 +135,17 @@
   ("q" nil "Quit"))
 
 (bind-key "S-<f5>" 'hydra-theme-chooser/body)
+
+;; A hydra for devdocs.io
+(defhydra hydra-devdocs (:color blue :columns 2)
+  "Lookup DevDocs.IO information"
+  ("i" devdocs-install "Install language")
+  ("l" devdocs-lookup "Lookup")
+  ("p" devdocs-peruse "Open first page")
+  ("s" devdocs-search "Search devdocs web")
+  ("u" devdocs-update-all "Update all docs")
+  ("q" nil "Quit"))
+
 
 (provide 'init-hydra)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
