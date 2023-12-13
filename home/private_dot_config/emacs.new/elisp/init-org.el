@@ -69,7 +69,8 @@
   (org-log-reschedule 'time)
   (org-outline-path-complete-in-steps nil)
   (org-refile-allow-creating-parent-nodes 'confirm)
-  (org-refile-targets '((nil :maxlevel . 3)(org-agenda-files :maxlevel . 3)))
+  (org-target-files (expand-file-name ".target-files" my/orgdir))
+  (org-refile-targets '((nil . (:maxlevel . 3))(my/org-refile-targets . (:maxlevel . 2))))
   (org-refile-use-outline-path 'file)
   (org-src-preserve-indentation t)
   (org-support-shift-select 'always)
@@ -89,7 +90,22 @@
   (org-clock-persistence-insinuate))
 
 (with-eval-after-load 'org
-  (add-to-list 'org-modules 'org-habit t))
+  (add-to-list 'org-modules 'org-habit t)
+
+  (defun my/org-refile-target-list()
+    "Read the target file and use the content as to refile targets."
+    (when (file-directory-p my/org-target-files)
+      (error "`my/org-target-files' cannot be a single directory"))
+    (with-temp-buffer
+      (insert-file-contents my/org-target-files)
+      (mapcar
+       (lambda (f)
+	       (let ((e (expand-file-name (substitute-in-file-name f)
+				                            org-directory)))
+	         e))
+       (org-split-string (buffer-string) "[ \t\r\n]*?[\r\n][ \t\r\n]*"))))
+
+  (setq my/org-refile-targets (my/org-refile-target-list)))
 
 (use-package org-contrib)
 

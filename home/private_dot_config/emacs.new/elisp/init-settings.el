@@ -42,6 +42,6 @@
 (defconst my/notes-file (expand-file-name "notes.org" my/orgdir))
 (defconst my/diary-file (expand-file-name "diary.org" my/orgdir))
 (defconst my/org-agenda-files (expand-file-name ".agenda-files" my/orgdir))
-
+(defconst my/org-target-files (expand-file-name ".target-files" my/orgdir))
 
 (provide 'init-settings)
