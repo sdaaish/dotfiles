@@ -7,7 +7,7 @@
 ;;
 ;;; Commentary:
 ;;
-;;  
+;;
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -22,7 +22,6 @@
   :diminish
 
   :custom
-  (ivy-re-builders-alist '((t . orderless-ivy-re-builder)))
   (ivy-use-virtual-buffers t)
   (ivy-count-format "(%d/%d) ")
   (enable-recursive-minibuffers t)
@@ -30,6 +29,7 @@
   :config
   (ivy-mode 1)
   (add-to-list 'ivy-highlight-functions-alist '(orderless-ivy-re-builder . orderless-ivy-highlight))
+  (setq ivy-re-builders-alist '((t . orderless-ivy-re-builder)))
 
   :bind
   ("C-x C-f" . counsel-find-file)
