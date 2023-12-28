@@ -7,7 +7,7 @@
 ;;
 ;;; Commentary:
 ;;
-;;  
+;;
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -20,13 +20,14 @@
 
 
 ;; Python settings
-(setq python-indent-guess-indent-offset-verbose nil)
-(add-hook 'python-mode-hook 'eglot-ensure)
 
+;; Use tree-sitter for Python
 
 (use-package highlight-indent-guides
   :hook ((yaml-mode python-mode) . highlight-indent-guides-mode)
-  :custom (highlight-indent-guides-method 'character))
+  :custom
+  (highlight-indent-guides-method 'character)
+  (python-indent-guess-indent-offset-verbose nil))
 
 
 (provide 'init-python)

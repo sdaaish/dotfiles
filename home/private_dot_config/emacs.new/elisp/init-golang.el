@@ -1,21 +1,16 @@
 ;; Go lang settings for eglot.
 (require 'project)
 
-(use-package go-mode)
-
 (defun project-find-go-module (dir)
   (when-let ((root (locate-dominating-file dir "go.mod")))
     (cons 'go-module root)))
 
-(cl-defmethod project-root ((project (head go-module)))
-  (cdr project))
+(use-package go-mode
+  :config (add-to-list 'major-mode-remap-alist '(go-mode . go-ts-mode)))
 
 (add-hook 'project-find-functions #'project-find-go-module)
 
-(setq-default eglot-workspace-configuration
-    '((:gopls .
-        ((staticcheck . t)
-         (matcher . "CaseSensitive")))))
-
+(cl-defmethod project-root ((project (head go-module)))
+  (cdr project))
 
 (provide 'init-golang)
