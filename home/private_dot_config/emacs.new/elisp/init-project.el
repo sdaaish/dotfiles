@@ -7,7 +7,7 @@
 ;;
 ;;; Commentary:
 ;;
-;;  
+;;
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -54,7 +54,7 @@
   ("j"   counsel-projectile-git-grep)
   ("k"   projectile-kill-buffers)
   ("m"   projectile-multi-occur)
-  ("p"   counsel-projectile-switch-project "switch project")
+  ("p"   projectile-switch-project "switch project")
   ("r"   counsel-projectile-rg)
   ("R"   projectile-recentf)
   ("T"   ggtags-update-tags)
