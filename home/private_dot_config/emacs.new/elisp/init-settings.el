@@ -11,7 +11,7 @@
        (defconst my/orgdir (expand-file-name "Org/" (getenv "OneDriveCommercial"))))
       ((getenv "OneDrive")
        (defconst my/orgdir (expand-file-name "Org/" (getenv "OneDrive"))))
-      (defconst my/orgdir (expand-file-name "Org/" (getenv "HOME"))))
+      (t (defconst my/orgdir (expand-file-name "Org/" (getenv "HOME")))))
 
 (message "Setup Org home directory to: %s" my/orgdir)
 
@@ -22,7 +22,7 @@
        (defconst my/denotedir (expand-file-name "notes/" (getenv "OneDriveCommercial"))))
       ((getenv "OneDrive")
        (defconst my/denotedir (expand-file-name "notes/" (getenv "OneDrive"))))
-      (defconst my/denotedir (expand-file-name "notes/" (getenv "HOME"))))
+      (t (defconst my/denotedir (expand-file-name "notes/" (getenv "HOME")))))
 
 (message "Setup Denote home directory to: %s" my/denotedir)
 
