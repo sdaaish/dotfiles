@@ -62,8 +62,10 @@ Set-Alias -Name wug -Value Update-WinGet
 
 Set-Alias -Name ytp -Value yt-dlp
 
+# FZF aliases
 Set-Alias -Name rgz -Value Invoke-RgFzf
-Set-Alias -name fz -Value Invoke-FuzzyZLocation
+Set-Alias -name fuset -Value Invoke-FuzzySetLocation
+Set-Alias -name fuzet -Value Invoke-FuzzyZLocation
 
 if (Test-Path Alias:man) {
     Remove-Item Alias:man
