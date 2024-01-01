@@ -62,6 +62,9 @@ Set-Alias -Name wug -Value Update-WinGet
 
 Set-Alias -Name ytp -Value yt-dlp
 
+Set-Alias -Name rgz -Value Invoke-RgFzf
+Set-Alias -name fz -Value Invoke-FuzzyZLocation
+
 if (Test-Path Alias:man) {
     Remove-Item Alias:man
 }
@@ -453,4 +456,12 @@ if (Test-Path $pythonAlias) {
 $localAlias = Join-Path $PSScriptRoot aliases-local.ps1
 if (Test-Path $localAlias) {
     . $localAlias
+}
+
+# A RipGrep and FZF wrapper
+function Invoke-RgFzf {
+    param (
+        $Search
+    )
+    Invoke-PsFzfRipgrep -SearchString $Search -NoEditor
 }

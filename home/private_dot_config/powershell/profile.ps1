@@ -105,6 +105,9 @@ if (Test-Path $alias) {
     . $alias
 }
 
+# FZF
+$env:FZF_DEFAULT_OPTS = "--height=40% --layout=reverse --info=inline --border --margin=1 --padding=1"
+
 ## Exclude this for now
 # $pip = Join-Path $PSScriptRoot python-pip.ps1
 # if (Test-Path $pip) {
