@@ -26,6 +26,7 @@
         _a_ abbrev-mode:       %`abbrev-mode
         _c_ flycheck-mode:     %`flycheck-mode
         _d_ debug-on-error:    %`debug-on-error
+        _e_ editorconfig-mode: %`editorconfig-mode
         _f_ auto-fill-mode:    %`auto-fill-function
         _t_ truncate-lines:    %`truncate-lines
         _v_ visual-lines:      %`visual-line-mode
@@ -39,6 +40,7 @@
   ("c" flycheck-mode nil)
   ("C" rainbow-mode nil)
   ("d" toggle-debug-on-error nil)
+  ("e" editorconfig-mode nil)
   ("f" auto-fill-mode nil)
   ("l" my/line-number-t nil)
   ("r" my/line-number-relative nil)

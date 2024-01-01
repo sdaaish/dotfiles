@@ -19,9 +19,7 @@
 ;;; Code:
 
 (use-package editorconfig
-  :diminish
-  :hook (prog-mode . editorconfig-mode))
-
+  :diminish)
 
 (use-package zig-mode)
 

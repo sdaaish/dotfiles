@@ -7,7 +7,7 @@
 ;;
 ;;; Commentary:
 ;;
-;;  
+;;
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -58,7 +58,7 @@
 ;; To highlight colors in text
 (use-package rainbow-mode
   :diminish rainbow-mode
-  :hook (help-mode . rainbow-mode))
+  :hook ((prog-mode help-mode) . rainbow-mode))
 
 ;; Save automatically
 (use-package super-save
@@ -89,8 +89,6 @@
        (set-mouse-position
         (selected-frame)
         (1- (frame-width)) -1)))
-
-
 
 (use-package speed-type
   :custom
