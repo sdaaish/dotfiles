@@ -35,10 +35,6 @@
 (use-package ox-jira
   :after ox)
 
-(use-package ox-confluence
-  :after ox)
-
-
 (provide 'init-babel)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-babel.el ends here
