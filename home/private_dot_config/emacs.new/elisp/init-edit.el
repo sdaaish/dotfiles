@@ -7,7 +7,7 @@
 ;;
 ;;; Commentary:
 ;;
-;;  
+;;
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -39,7 +39,8 @@
   :hook ((prog-mode org-mode conf-mode) . ws-butler-mode))
 
 (use-package aggressive-indent
-  :config (global-aggressive-indent-mode t))
+  :config (global-aggressive-indent-mode t)
+  (add-to-list 'aggressive-indent-excluded-modes 'go-mode))
 
 
 (setq reb-re-syntax 'string)
