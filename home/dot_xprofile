@@ -3,3 +3,6 @@
 /usr/bin/gpg-connect-agent updatestartuptty /bye
 export GPG_TTY=$(tty)
 export SSH_AUTH_SOCK
+
+# Set ZSH config directory
+export ZDOTDIR=$HOME/.config/zsh
