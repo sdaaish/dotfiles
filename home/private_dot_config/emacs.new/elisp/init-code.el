@@ -35,7 +35,8 @@
 
 
 ;; Remember to copy the libraries to the correct folder and rename them.
-(use-package tree-sitter)
+(use-package tree-sitter
+  :config (add-to-list 'treesit-extra-load-path (expand-file-name "tree-sitter/" "~/.config")))
 (use-package tree-sitter-langs)
 
 (provide 'init-code)
