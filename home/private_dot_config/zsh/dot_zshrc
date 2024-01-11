@@ -1,3 +1,15 @@
+# -*- mode: shell-script; -*-
+
+# This file, $ZDOTDIR/.zshrc, is read after the global /etc/zsh/zshrc.
+# It will be always read if it is an interactive shell, after .zshenv and possibly .zprofile.
+
+# Here is where all user interactive stuff goes.
+
+# Create directories
+COMP_DIR=$HOME/.config/zsh/completions
+[[ -d $COMP_DIR ]] ||
+    mkdir -p $COMP_DIR
+
 # Set up the prompt
 autoload -Uz promptinit
 promptinit
@@ -44,7 +56,15 @@ source ~/.cache/znap/znap.zsh  # Start Znap
 znap source marlonrichert/zsh-autocomplete
 zstyle ':autocomplete:*' delay 0.1  # seconds (float)
 
-# Use starship as prompt
-eval "$(starship init zsh)"
+
+# Chezmoi completion
+CHEZMOI_COMP="$HOME/.config/zsh/completions/chezmoi.zsh"
+[[ -r $CHEZMOI_COMP ]] ||
+    chezmoi completion zsh --output=$CHEZMOI_COMP
+source $CHEZMOI_COMP
 
 source "${HOME}/.config/bash/aliases"
+source "${HOME}/.config/bash/functions"
+
+# Use starship as prompt
+eval "$(starship init zsh)"

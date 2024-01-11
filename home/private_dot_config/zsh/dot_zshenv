@@ -1,2 +1,7 @@
+# -*- mode: shell-script; -*-
+
+# This file, $ZDOTDIR/.zshenv, is read after the global /etc/zsh/zshenv.
+# It will be always read regardless if it is interactive and a login shell or not.
+
 export ZDOTDIR="${HOME}/.config/zsh"
 skip_global_compinit=1
