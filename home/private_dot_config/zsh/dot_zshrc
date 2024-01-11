@@ -65,6 +65,7 @@ source $CHEZMOI_COMP
 
 source "${HOME}/.config/bash/aliases"
 source "${HOME}/.config/bash/functions"
+source "${HOME}/.config/bash/exports"
 
 # Use starship as prompt
 eval "$(starship init zsh)"

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # load shell dotfiles
-for file in ${HOME}/.config/bash/*
+for file in ${HOME}/.config/bash/{aliases,functions,exports}
 do
     if [ -r "${file}" ]
     then
