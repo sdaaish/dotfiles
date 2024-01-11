@@ -67,6 +67,11 @@
 (put 'narrow-to-page   'disabled nil)
 (put 'upcase-region 'disabled nil)
 
+(customize-set-variable 'auto-save-no-message t)
+(customize-set-variable 'auto-save-interval 40)
+(setq-default auto-save-default t)
+(setq-default default-directory my/auto-save-dir)
+
 ;; No popup notifications
 (customize-set-variable 'use-dialog-box nil)
 (customize-set-variable 'use-file-dialog nil)

@@ -110,8 +110,8 @@
 ;; Load org early when using straight
 (straight-use-package 'org)
 
-(require 'init-common)
 (require 'init-settings)
+(require 'init-common)
 (require 'init-org)
 
 (display-time-mode t)
@@ -204,7 +204,6 @@
 ;;       `((".*" . ,(expand-file-name "backups" user-emacs-directory))))
 
 (save-place-mode 1)
-(auto-save-mode 1)
 (setq save-place-file (expand-file-name ".cache/saveplace" user-emacs-directory))
 (setq recentf-save-file (expand-file-name ".cache/recentfiles" user-emacs-directory))
 
@@ -216,7 +215,6 @@
       backup-by-copying-when-mismatch t
       kept-new-versions 10
       kept-old-versions 10
-      auto-save-interval 40
       delete-by-moving-to-trash t
       save-silently t)
 

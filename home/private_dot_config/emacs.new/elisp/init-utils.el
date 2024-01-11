@@ -68,8 +68,6 @@
   (super-save-idle-duration 8)
   (super-save-remote-files nil)
   (super-save-exclude '(".gpg"))
-  (auto-save-default nil)
-  (auto-save-no-message t)
   (add-to-list 'super-save-triggers 'ace-window)
   (add-to-list 'super-save-triggers 'magit-status)
   (add-to-list 'super-save-hook-triggers 'find-file-hook)
