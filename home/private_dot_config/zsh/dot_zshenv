@@ -1,7 +1,16 @@
 # -*- mode: shell-script; -*-
 
-# This file, $ZDOTDIR/.zshenv, is read after the global /etc/zsh/zshenv.
+# To get zsh to read $HOME/.config/zsh/.zshenv, edit /etc/zsh/zshenv and add this line to it:
+# export ZDOTDIR=$HOME/.config/zsh
+
+# This file, $ZDOTDIR/.zshenv, is read after the global /etc/zsh/zshenv. (If set as above.)
 # It will be always read regardless if it is interactive and a login shell or not.
 
-export ZDOTDIR="${HOME}/.config/zsh"
+# Fix for XDG settings not being correct.
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
+export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
+
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 skip_global_compinit=1

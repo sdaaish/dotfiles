@@ -1,20 +1,9 @@
 # -*- mode: shell-script; -*-
 
 # This file, $ZDOTDIR/.zprofile, is read after the global /etc/zsh/zprofile.
-# It is read after /etc/zsh/zshenv  and .zshenv.
+# It is read after /etc/zsh/zshenv and .zshenv.
 
 # This will be read if it is a login shell, and only then.
 # Put interactive stuff in .zshrc instead and only add the non-interactive to this file.
 
-# Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
-HISTSIZE=10000
-SAVEHIST=10000
-bindkey -e
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
-zstyle :compinstall filename '/home/sdaa/.zshrc'
-
-autoload -Uz compinit
-compinit
-# End of lines added by compinstall
+# A login shell will read this plus .zshrc, a non-interactive only .zshrc
