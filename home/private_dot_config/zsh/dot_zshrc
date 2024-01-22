@@ -6,7 +6,7 @@
 # Here is where all user interactive stuff goes.
 
 # Create directories
-COMP_DIR=$HOME/.config/zsh/completions
+COMP_DIR="$XDG_CONFIG_HOME/zsh/completions"
 [[ -d $COMP_DIR ]] ||
     mkdir -p $COMP_DIR
 
@@ -14,7 +14,7 @@ COMP_DIR=$HOME/.config/zsh/completions
 autoload -Uz promptinit
 promptinit
 
-setopt histignorealldups sharehistory
+setopt histignorealldups sharehistory incappendhistory
 
 # Use emacs keybindings even if our EDITOR is set to vi
 bindkey -e
@@ -22,11 +22,14 @@ bindkey -e
 # Keep N lines of history within the shell and save it
 HISTSIZE=10000
 SAVEHIST=10000
-HISTFILE=~/.cache/custom/zsh_history
+HISTFILE="$XDG_CACHE_HOME/custom/zsh_history"
 
 # Use modern completion system
 autoload -Uz compinit
 compinit
+
+autoload -Uz colors
+colors
 
 zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' completer _expand _complete _correct _approximate
@@ -46,18 +49,30 @@ zstyle ':completion:*' verbose true
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/.zcompcache"
+
+zstyle ':completion:*:*:*:*:descriptions' format '%F{green}-- %d --%f'
+zstyle ':completion:*:*:*:*:corrections' format '%F{yellow}!- %d (errors: %e) -!%f'
+zstyle ':completion:*:*:*:*:messages' format ' %F{purple} -- %d --%f'
+zstyle ':completion:*:*:*:*:warnings' format ' %F{red}-- no matches found --%f'
+
+zstyle ':completion:*' group-name ''
+
+zstyle ':completion:*' squeeze-slashes true
+
 # Download Znap, if it's not there yet.
-[[ -r ~/.cache/znap/znap.zsh ]] ||
+[[ -r "$XDG_CACHE_HOME/znap/znap.zsh" ]] ||
     git clone --depth 1 -- \
-        https://github.com/marlonrichert/zsh-snap.git ~/.cache/znap
-source ~/.cache/znap/znap.zsh  # Start Znap
+        https://github.com/marlonrichert/zsh-snap.git "$XDG_CACHE_HOME/znap"
+source "$XDG_CACHE_HOME/znap/znap.zsh"  # Load Znap
 
 # Use real time auto complete
 znap source marlonrichert/zsh-autocomplete
 zstyle ':autocomplete:*' delay 0.1  # seconds (float)
 
 # Chezmoi completion
-CHEZMOI_COMP="$HOME/.config/zsh/completions/chezmoi.zsh"
+CHEZMOI_COMP="$XDG_CONFIG_HOME/zsh/completions/chezmoi.zsh"
 [[ -r $CHEZMOI_COMP ]] ||
     chezmoi completion zsh --output=$CHEZMOI_COMP
 source $CHEZMOI_COMP
@@ -65,13 +80,13 @@ source $CHEZMOI_COMP
 # Use LXD/LXC autocomplete
 znap source endaaman/lxd-completion-zsh
 
-source "${HOME}/.config/bash/aliases"
-source "${HOME}/.config/zsh/zsh_aliases"
+source "$XDG_CONFIG_HOME/bash/aliases"
+source "$XDG_CONFIG_HOME/zsh/zsh_aliases"
 
-source "${HOME}/.config/bash/functions"
-source "${HOME}/.config/zsh/zsh_functions"
+source "$XDG_CONFIG_HOME/bash/functions"
+source "$XDG_CONFIG_HOME/zsh/zsh_functions"
 
-source "${HOME}/.config/bash/exports"
+source "$XDG_CONFIG_HOME/bash/exports"
 
 # Use starship as prompt
 eval "$(starship init zsh)"
