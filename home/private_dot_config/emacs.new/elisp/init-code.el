@@ -29,9 +29,9 @@
   ("C-h D" . hydra-devdocs/body)
   :hook
   (emacs-lisp-mode . (lambda () (setq-local devdocs-current-docs '("elisp"))))
-  (python-mode . (lambda () (setq-local devdocs-current-docs '("python~3.12"))))
-  (zig-mode . (lambda () (setq-local devdocs-current-docs '("zig"))))
-  (go-mode . (lambda () (setq-local devdocs-current-docs '("go")))))
+  ((python-mode python-ts-mode) . (lambda () (setq-local devdocs-current-docs '("python~3.12"))))
+  ((zig-mode zig-tz-mode) . (lambda () (setq-local devdocs-current-docs '("zig"))))
+  ((go-mode go-ts-mode) . (lambda () (setq-local devdocs-current-docs '("go")))))
 
 
 ;; Remember to copy the libraries to the correct folder and rename them.
