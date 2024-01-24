@@ -61,15 +61,25 @@ zstyle ':completion:*' group-name ''
 
 zstyle ':completion:*' squeeze-slashes true
 
-# Download Znap, if it's not there yet.
-[[ -r "$XDG_CACHE_HOME/znap/znap.zsh" ]] ||
-    git clone --depth 1 -- \
-        https://github.com/marlonrichert/zsh-snap.git "$XDG_CACHE_HOME/znap"
-source "$XDG_CACHE_HOME/znap/znap.zsh"  # Load Znap
+#zstyle ':autocomplete:*' delay 0.1  # seconds (float)
 
-# Use real time auto complete
-znap source marlonrichert/zsh-autocomplete
-zstyle ':autocomplete:*' delay 0.1  # seconds (float)
+source "$XDG_CONFIG_HOME/bash/aliases"
+source "$XDG_CONFIG_HOME/zsh/aliases.zsh"
+
+source "$XDG_CONFIG_HOME/bash/functions"
+source "$XDG_CONFIG_HOME/zsh/functions.zsh"
+
+source "$XDG_CONFIG_HOME/bash/exports"
+
+# Use plugins
+#export ZPLUGIN_DIR="$XDG_CACHE_HOME/zsh/plugins"
+add-plugin "zsh-users/zsh-syntax-highlighting"
+add-plugin "zsh-users/zsh-autosuggestions"
+add-plugin "zsh-users/zsh-history-substring-search"
+
+# Substring search key bindings
+bindkey -M emacs '^P' history-substring-search-up
+bindkey -M emacs '^N' history-substring-search-down
 
 # Chezmoi completion
 CHEZMOI_COMP="$XDG_CONFIG_HOME/zsh/completions/chezmoi.zsh"
@@ -78,15 +88,7 @@ CHEZMOI_COMP="$XDG_CONFIG_HOME/zsh/completions/chezmoi.zsh"
 source $CHEZMOI_COMP
 
 # Use LXD/LXC autocomplete
-znap source endaaman/lxd-completion-zsh
-
-source "$XDG_CONFIG_HOME/bash/aliases"
-source "$XDG_CONFIG_HOME/zsh/zsh_aliases"
-
-source "$XDG_CONFIG_HOME/bash/functions"
-source "$XDG_CONFIG_HOME/zsh/zsh_functions"
-
-source "$XDG_CONFIG_HOME/bash/exports"
+add-plugin "endaaman/lxd-completion-zsh"
 
 # Use starship as prompt
 eval "$(starship init zsh)"

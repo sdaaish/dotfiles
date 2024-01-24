@@ -1,7 +1,0 @@
-# -*- mode: shell-script; -*-
-
-# Add things that differs from Bash file syntax to ZSH.
-
-src() {
-    source "$HOME/.config/zsh/.zshrc"
-}
