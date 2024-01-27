@@ -9,6 +9,16 @@ export STARSHIP_CONFIG="${HOME}/.config/starship/starship.toml"
 export ZDOTDIR="${HOME}/.config/zsh"
 export FZF_DEFAULT_OPTS="--height=40% --layout=reverse --info=inline --border --margin=1 --padding=1"
 
+# My repositories
+export REPODIR="$HOME/repos"
+if [[ ! -d "$REPODIR" ]]
+then
+    mkdir -m 0755 "$REPODIR"
+fi
+
+# GnuPG stuff
+export GPG_TTY=$(tty)
+
 # http://askubuntu.com/questions/466198/how-do-i-change-the-color-for-directories-with-ls-in-the-console
 # http://linux-sxs.org/housekeeping/lscolors.html
 export TERM=xterm-256color
@@ -94,16 +104,6 @@ then
 
         # Set this to WSL for local use
         export DISTRO=WSL
-    fi
-
-    # GnuPG stuff
-    export GPG_TTY=$(tty)
-
-    # My repositories
-    export REPODIR="$HOME/repos"
-    if [[ ! -d "$REPODIR" ]]
-    then
-        mkdir -m 0755 "$REPODIR"
     fi
 
     # Use npiperelay for SSH
