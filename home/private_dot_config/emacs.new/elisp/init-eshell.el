@@ -38,7 +38,6 @@
 
 ;; Trying out this
 (use-package eshell-prompt-extras
-  :commands eshell
   :custom (eshell-highlight-prompt nil)
   (eshell-prompt-function 'epe-theme-dakrone)
   (epe-git-dirty-char "💩"))
