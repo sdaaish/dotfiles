@@ -16,7 +16,7 @@ Set-Alias -Name alias -Value Search-Alias
 
 Set-Alias -Name em -Value emacs-client
 Set-Alias -Name emx -Value emacs-client
-Set-Alias -Name emc -Value Select-EmacsVersion
+Set-Alias -Name emv -Value Select-EmacsVersion
 Set-Alias -Name emq -Value EmacsQ
 
 Set-Alias -Name gs -Value Get-CommandSyntax
@@ -159,37 +159,71 @@ Function emdi {
     emacs.exe --debug-init
 }
 
-# Start emacsclient with custom emacs server
+# Start emacsclient with emacs server in custom init dir
+# The Emacs config need to have (server-start) for this to work
+# Otherwise a standalone version of Emacs will be started
 function emacs-client() {
     [cmdletbinding()]
     param(
         [Parameter(Position = 0)]
-        [string]$InitDir = $(Join-Path $HOME .config/emacs),
+        [string]$Path,
 
-        [Parameter(Position = 1, ValueFromRemainingArguments)]
-        [string[]]$Path
-
-        #        [string]$ServerName = "server"
+        [Parameter(Position = 1)]
+        [string]$InitDir
     )
 
-    # Default servername is "server" but you can run Emacs with multiple different servernames.
-    #    $ServerName = "server/${ServerName}"
-    $ServerName = "server/server"
+    # Use default
+    if (-not $InitDir){
+        $InitDir = $(Resolve-path (Join-Path $HOME .config/emacs))
+    }
+
+    $msg = "Path: {0} InitDir: ${1}" -f $Path, $InitDir
+    Write-Verbose "$msg"
+
     $date = Get-Date -Format 'yyyyMMdd-HH.mm.ss'
     $logfile = Join-Path $(Resolve-Path ~/tmp) "emacs-client-${date}.log"
-    $serverfile = Join-Path $(Resolve-Path $InitDir) $ServerName -ErrorAction ignore
+
+    $serverdir = join-path $initdir server
+    $serverfile = (get-childitem -Path $serverdir -file |
+      sort -property lastwritetime -desc -top 1 |
+      select fullname).fullname
+
+    $msg = "Using server: {0}" -f $serverfile
+    Write-Verbose "$msg"
 
     $cmd = Get-Command emacsclientw.exe
+
+    # Build the command line
     $options = @(
         "--quiet"
-        "--alternate-editor=runemacs.exe"
         "--server-file=${serverfile}"
         "--create-frame"
+        "--alternate-editor=""runemacs.exe"""
     )
 
     $cmdline = $options -join " "
-    "$cmd {0} {1}" -f $($options -join " "), ($path -join " ")
-    Start-Process $cmd -ArgumentList $cmdline
+    $msg = "$cmd {0} {1}" -f $($options -join " "), $path
+    Write-Verbose "$msg"
+
+    Start-Process $cmd -ArgumentList $cmdline, $path
+}
+
+# For my default configured version
+function emc {
+    param(
+        [Parameter(Position = 0)]
+        $Path
+    )
+    emacs-client -Path $Path -InitDir ~/.config/emacs.new
+}
+
+# Alias for the minimal config emacs
+function emd {
+    param(
+        [Parameter(Position = 0)]
+        $Path
+    )
+    emacs-client -Path $Path
 }
 
 Function Select-EmacsVersion {

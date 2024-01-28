@@ -225,5 +225,8 @@
 (setq python-indent-guess-indent-offset-verbose nil)
 (add-hook 'python-mode-hook 'eglot-ensure)
 
+;; Start the server
+(server-start)
+
 (provide 'init)
 ;;; init.el ends here
