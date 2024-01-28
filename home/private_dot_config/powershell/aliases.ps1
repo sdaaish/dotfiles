@@ -501,3 +501,11 @@ function Invoke-RgFzf {
     )
     Invoke-PsFzfRipgrep -SearchString $Search -NoEditor
 }
+
+# Edit LXC files with Emacs
+Function lfe {
+    $oldenv = $env:EDITOR
+    $env:EDITOR = "runemacs -wait"
+    lxc file edit $args[0]
+    $env:EDITOR = $oldenv
+}
