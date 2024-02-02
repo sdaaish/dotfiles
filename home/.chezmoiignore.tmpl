@@ -14,10 +14,12 @@
 .config/base16-shell/
 .config/pip/
 .config/tmux/
+.config/tree-sitter/*.so
 .config/zsh/
 {{ end }}
 
 # No Windows files on Linux.
 {{ if ne .chezmoi.os "windows" }}
 AppData/
+.config/tree-sitter/*.dll
 {{ end}}

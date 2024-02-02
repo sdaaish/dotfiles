@@ -36,8 +36,24 @@
 
 ;; Remember to copy the libraries to the correct folder and rename them.
 (use-package tree-sitter
-  :config (add-to-list 'treesit-extra-load-path (expand-file-name "tree-sitter/" "~/.config")))
-(use-package tree-sitter-langs)
+  :straight (:type built-in)
+  :config (add-to-list 'treesit-extra-load-path (expand-file-name "tree-sitter/" "~/.config"))
+  (setq major-mode-remap-alist
+        '((bash-mode . bash-ts-mode)
+          (css-mode . css-ts-mode)
+          (csv-mode . csv-ts-mode)
+          (dockerfile-mode . dockerfile-ts-mode)
+          (go-mode . go-ts-mode)
+          (html-mode . html-ts-mode)
+          (mermaid-mode . mermaid-ts-mode)
+          (js2-mode . js-ts-mode)
+          (json-mode . json-ts-mode)
+          (python-mode . python-ts-mode)
+          (typescript-mode . typescript-ts-mode)
+          (yaml-mode . yaml-ts-mode))))
+
+;; Leave this out for now
+;;(use-package tree-sitter-langs)
 
 (provide 'init-code)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
