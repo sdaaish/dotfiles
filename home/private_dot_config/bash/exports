@@ -48,9 +48,9 @@ export LESS_TERMCAP_ZW=$(tput rsupm)
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # Local go
-if [ -d "$HOME/bin" ]
+if [ -d "$HOME/go/bin" ]
 then
-    PATH="$HOME/bin:/sbin:/usr/sbin:$HOME/go/bin:$PATH"
+    PATH="$PATH:$HOME/go/bin"
 fi
 
 export GOPATH="$HOME/go"
