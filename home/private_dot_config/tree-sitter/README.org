@@ -1,0 +1,7 @@
+* Tree-sitter langs
+Put all =tree-sitter= executable (.dll/.so) language files in this folder.
+Download from https://github.com/emacs-tree-sitter/tree-sitter-langs/releases/ or build them
+
+They should be renamed to have =libtree-sitter-= as prefix.
+
+See also [[https://www.masteringemacs.org/article/how-to-get-started-tree-sitter][Mastering Emacs]].
