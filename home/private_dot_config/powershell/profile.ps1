@@ -108,6 +108,9 @@ if (Test-Path $alias) {
 # FZF
 $env:FZF_DEFAULT_OPTS = "--height=40% --layout=reverse --info=inline --border --margin=1 --padding=1"
 
+# Ripgrep
+$env:RIPGREP_CONFIG_PATH = $(Resolve-path "$HOME/.config/ripgrep/config")
+
 ## Exclude this for now
 # $pip = Join-Path $PSScriptRoot python-pip.ps1
 # if (Test-Path $pip) {
