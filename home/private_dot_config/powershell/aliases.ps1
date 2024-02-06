@@ -11,6 +11,8 @@ Set-Alias -Name cmr -Value Chezmoi-RecursiveDiff
 
 Set-Alias -Name dirr -Value Get-ChildItemRecursive
 
+Set-Alias -Name e -Value explorer.exe
+
 Set-Alias -Name src -Value Reload-PowershellProfile
 Set-Alias -Name alias -Value Search-Alias
 
@@ -130,8 +132,8 @@ function lle {
         $Path
     )
     Get-ChildItem $Path -File -Attributes H, !H, A, !A, S, !S |
-        Group-Object -Property Extension |
-        Sort-Object -Property count -Descending
+      Group-Object -Property Extension |
+      Sort-Object -Property count -Descending
 }
 
 function lls {
@@ -232,8 +234,8 @@ Function Select-EmacsVersion {
     catch { throw "No such file, 'runemacs.exe'" }
 
     $versions = Get-ChildItem ~/.config -Filter *emacs* -Directory |
-        Where-Object { $_.basename -notmatch "chemacs" } |
-        Select-Object resolvedtarget, basename
+      Where-Object { $_.basename -notmatch "chemacs" } |
+      Select-Object resolvedtarget, basename
 
     $i = 0
     $versions.ForEach(
@@ -290,8 +292,8 @@ function Find-Links {
         $Path
     )
     Get-ChildItem $Path -ErrorAction SilentlyContinue |
-        Where-Object { $_.Linktype } |
-        Select-Object FullName, Target, LastWriteTime, LinkType
+      Where-Object { $_.Linktype } |
+      Select-Object FullName, Target, LastWriteTime, LinkType
 }
 Function Get-CommandSyntax {
     [cmdletbinding()]
@@ -427,17 +429,17 @@ Function New-List {
 Function Get-ChildItemRecursive {
     param(
         [Parameter(
-            Position = 0,
-            ValueFromPipeLine,
-            HelpMessage = "Enter one or more paths to search in."
-        )]
+             Position = 0,
+             ValueFromPipeLine,
+             HelpMessage = "Enter one or more paths to search in."
+         )]
         [string[]]$Path = ".",
 
         [Parameter(
-            Position = 1,
-            ValueFromPipeLine,
-            HelpMessage = "Enter the filter to search for, default='*'."
-        )]
+             Position = 1,
+             ValueFromPipeLine,
+             HelpMessage = "Enter the filter to search for, default='*'."
+         )]
         [string]$Filter = "*"
     )
 
