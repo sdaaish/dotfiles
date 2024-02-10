@@ -35,5 +35,5 @@ Function Add-ProgToLocalPath {
 
 	  $newenv = ((($oldenv | Select-Object -Unique) -join ([io.path]::PathSeparator)) + ([io.path]::PathSeparator)) -replace ';;+', ';' -replace '::', ':'
 	  [System.Environment]::SetEnvironmentVariable("Path", $newenv, $Scope)
-	  "New path set`n{0}`nfor Scope={1}" -f [system.environment]::GetEnvironmentVariable("Path", $Scope), $Scope
+	  "New path set in scope: {1}`n{0}`n" -f [system.environment]::GetEnvironmentVariable("Path", $Scope), $Scope
 }

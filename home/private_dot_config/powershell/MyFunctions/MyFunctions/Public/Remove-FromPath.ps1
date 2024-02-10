@@ -39,18 +39,18 @@ function Remove-FromPath {
         Write-Verbose "$msg"
 
         # Search for matching part, and replace up to and including \; if it exists
-        if ($oldenv -match $rpath){
+        if ($oldenv -match "$rpath(\\)?;"){
             $rpath = "({0})(\\;)?" -f $rpath
             $newenv = $oldenv -replace $rpath,""
-            $newenv = ($newenv) -replace ';;+', ';' -replace '::+', ':' -replace '\;', ''
+            $newenv = ($newenv) -replace ';;+', ';' -replace '::+', ':' -replace ';\\;', ';'
             $msg = "{0}New environment: {1}" -f [Environment]::NewLine,$newenv
             Write-Verbose "$msg"
 
        	    [System.Environment]::SetEnvironmentVariable("Path", $newenv, $Scope)
-            "New path set`n{0}`nfor Scope={1}" -f [system.environment]::GetEnvironmentVariable("Path", $Scope), $Scope
+            "New path set in scope: {1}`n{0}`n" -f [system.environment]::GetEnvironmentVariable("Path", $Scope), $Scope
         }
         else {
-            $msg = "No such path in evironment, {0}" -f $Path
+            $msg = "No such path in environment, {0}" -f $Path
             Write-Error $msg
         }
     }
