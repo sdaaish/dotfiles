@@ -143,3 +143,11 @@ then
 else
     printf "Using default prompt\n"
 fi
+
+# Attach to tmux if running, start it otherwise
+if [[ $(pgrep tmux) ]]
+then
+    [[ -z ${TMUX} ]] 2>&1 >/dev/null && tmux attach -t 0
+else
+    tmux
+fi

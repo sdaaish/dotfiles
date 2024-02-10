@@ -92,3 +92,11 @@ add-plugin "endaaman/lxd-completion-zsh"
 
 # Use starship as prompt
 eval "$(starship init zsh)"
+
+# Attach to tmux if running, start it otherwise
+if [[ $(pgrep tmux) ]]
+then
+    [[ -z ${TMUX} ]] 2>&1 >/dev/null && tmux attach -t 0
+else
+    tmux
+fi
