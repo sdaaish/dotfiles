@@ -35,7 +35,7 @@
 
 
 ;; Remember to copy the libraries to the correct folder and rename them.
-(use-package tree-sitter
+(use-package treesit
   :straight (:type built-in)
   :config (add-to-list 'treesit-extra-load-path (expand-file-name "tree-sitter/" "~/.config"))
   (setq major-mode-remap-alist
