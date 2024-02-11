@@ -290,20 +290,34 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Fix things below here
 
+;; Center the frame
+;; https://christiantietze.de/posts/2022/04/emacs-center-window-current-monitor-simplified/
+(defun my/frame-recenter (&optional frame)
+  "Center FRAME on the screen.
+FRAME can be a frame name, a terminal name, or a frame.
+If FRAME is omitted or nil, use currently selected frame."
+  (interactive)
+  (unless (eq 'maximised (frame-parameter nil 'fullscreen))
+    (modify-frame-parameters
+     frame '((user-position . t) (top . 0.5) (left . 0.5)))))
 
 ;; Initial size of the frame, if wide screen, center the frame.
 ;; Else, maximize it (not full screen).
 (defun my/set-frame-size (p1 p2 x y)
   "Set the frame size when Emacs starts up.  Depending on display-size,
   the frame try to adjust to that."
-  (set-frame-position nil p1 p2)
-  (set-frame-width nil x)
-  (set-frame-height nil y))
+  ;;  (set-frame-position nil p1 p2)
+  (set-frame-width nil x nil t)
+  (set-frame-height nil y nil t)
+  (my/frame-recenter))
 
+;; Depending on the screen, size the fram accordingly
 (cond ((>= (nth 3 (assq 'geometry (frame-monitor-attributes))) 5000)
-       (my/set-frame-size 1000 20 200 40))
-      ((>= (nth 3 (assq 'geometry (frame-monitor-attributes))) 3000)
-       (my/set-frame-size 600 20 200 50))
+       (my/set-frame-size 100 20 4000 1400))
+      ((>= (nth 3 (assq 'geometry (frame-monitor-attributes))) 3400)
+       (my/set-frame-size 100 20 3000 1200))
+      ((>= (nth 3 (assq 'geometry (frame-monitor-attributes))) 1900)
+       (my/set-frame-size 100 20 1600 800))
       (t (toggle-frame-maximized nil)))
 
 (add-hook 'window-size-change-functions
