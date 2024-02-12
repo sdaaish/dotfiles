@@ -35,6 +35,7 @@
 	nah = reset --hard
 	norm = "!echo '* text=auto' >.gitattributes && git add --renormalize ."
 	ps = -p status
+	rl = reflog show
 	ru = remote -v update
 	save = "!git add -A && git commit -m 'chore: commit save point'"
 	short = log --pretty=format:"%h\\ %cr\\ %cn\\ %Cgreen%s%Creset"
