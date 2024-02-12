@@ -9,6 +9,9 @@ Set-Alias -Name cmg -Value Chezmoi-GitStatus
 Set-Alias -Name cmu -Value Chezmoi-UnManaged
 Set-Alias -Name cmr -Value Chezmoi-RecursiveDiff
 
+Set-Alias -Name cth -Value ConvertTo-HtmlPage
+Set-Alias -Name cte -Value ConvertTo-Excel
+
 Set-Alias -Name dirr -Value Get-ChildItemRecursive
 
 Set-Alias -Name e -Value explorer.exe
@@ -510,4 +513,53 @@ Function lfe {
     $env:EDITOR = "runemacs -wait"
     lxc file edit $args[0]
     $env:EDITOR = $oldenv
+}
+
+# Quick format as HTML. Requires PSWriteHTML
+Function ConvertTo-HtmlPage {
+    param(
+        $Path
+    )
+
+    try {
+        $Path = (resolve-path $path).path
+    }
+    catch {
+        throw "No such file: $path"
+    }
+
+    $options = @{
+        PagingLength =  25
+        PagingOptions = @(15,25,50,100)
+    }
+
+    Import-Csv $Path|Out-HtmlView @options
+}
+
+# Quick format as Excel. Requires ImportExcel
+Function ConvertTo-Excel {
+
+    param(
+        $path
+    )
+
+    try {
+        $Path = (resolve-path $path).path
+    }
+    catch {
+        throw "No such file: $path"
+    }
+
+    $csv = import-csv $path
+
+    $exceloptions = @{
+        Path = ($path -replace ".csv",".xlsx")
+        TableStyle = "Medium16"
+        AutoSize = $true
+        MaxAutoSizeRows = 100
+        NoNumberConversion = "*"
+        show = $true
+    }
+
+    $csv | Export-Excel @excelOptions
 }
