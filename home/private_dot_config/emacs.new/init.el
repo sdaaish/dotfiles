@@ -108,7 +108,8 @@
   (add-to-list 'load-path lispdir))
 
 ;; Load org early when using straight
-(straight-use-package 'org)
+(use-package org
+  :straight (org :type git :host github :repo	"emacs-straight/org-mode"))
 
 (require 'init-settings)
 (require 'init-common)
