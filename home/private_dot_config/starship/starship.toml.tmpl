@@ -19,11 +19,11 @@ format = """
 continuation_prompt = '[](green) '
 
 [battery]
-full_symbol = ' '
-charging_symbol = ' '
-discharging_symbol = ' '
-unknown_symbol = ' '
-empty_symbol = ' '
+full_symbol = '󰁹 '
+charging_symbol = '󰂄 '
+discharging_symbol = '󰂃 '
+unknown_symbol = '󰂑 '
+empty_symbol = '󰁺 '
 disabled = false
 format = '[$symbol$percentage]($style) '
 
@@ -93,9 +93,9 @@ format = "[$env_value](#9933ff)"
 variable = "PSVERSION"
 
 [shell]
-powershell_indicator = "ﲵ"
+powershell_indicator = ""
 bash_indicator = "🐧  "
-zsh_indicator = "🐧鈴 "
+zsh_indicator = "🐧󰒲 "
 style = "(bold blue)"
 format = "[$indicator]($style)"
 disabled = false
@@ -130,7 +130,7 @@ symbol = " "
 symbol = " "
 
 [directory]
-read_only = " "
+read_only = " 󰉐"
 truncation_length = 3
 truncation_symbol = ".../"
 
