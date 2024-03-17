@@ -93,6 +93,8 @@
   (speed-type-min-chars 150)
   (speed-type-max-chars 350))
 
+(use-package restclient)
+
 (provide 'init-utils)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-utils.el ends here
