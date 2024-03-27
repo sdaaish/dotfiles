@@ -142,8 +142,8 @@ get-chezmoi() {
 
 # Get Nerd Fonts
 get-nerd-fonts(){
-    VERSION="v2.2.2"
-    url="https://github.com/ryanoasis/nerd-fonts/releases/download/${VERSION}/"
+    VERSION="v3.1.1"
+    url="https://github.com/ryanoasis/nerd-fonts/releases/download/${VERSION}"
     fonts="SourceCodePro CascadiaCode Inconsolata JetBrainsMono"
 
     fontarchive="fontstmp.zip"
@@ -152,13 +152,16 @@ get-nerd-fonts(){
     for font in $fonts
     do
         printf "Downloading font %s.\n" "$font"
-        download="${url}${font}.zip"
+        download="${url}/${font}.zip"
         curl -s -fLo "${fontarchive}" "${download}"
         printf "Installing %s.\n" "$font"
         unzip -o -qq ${fontarchive}
         rm -f ${fontarchive}
         printf "Downloaded and extracted font %s.\n" "$font"
     done
+
+    # Remove Windows fonts
+    rm "$HOME/.local/share/fonts/*Windows*Compatible*"
     printf "Updating font cache."
     fc-cache -fv
     popd||exit 1
