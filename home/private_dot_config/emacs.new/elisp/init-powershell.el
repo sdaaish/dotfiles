@@ -7,7 +7,7 @@
 ;;
 ;;; Commentary:
 ;;
-;;  
+;;
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -34,6 +34,13 @@
   :custom (ob-powershell-powershell-command "pwsh -NoLogo -NoProfile")
   :config (require 'ob-powershell))
 
+;; Install Treesitter for PowerShell
+;; Need to compile https://github.com/airbus-cert/tree-sitter-powershell
+(use-package powershell-ts-mode
+  :straight (:host github :repo "dmille56/powershell-ts-mode")
+  :config
+  ;; Optional: if you want to disable top-level vars from being shown in imenu
+  (setq powershell-ts-enable-imenu-top-level-vars nil))
 
 (provide 'init-powershell)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
