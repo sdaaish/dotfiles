@@ -7,13 +7,17 @@ $content = @'
 # This file is managed by Chezmoi, don't edit it
 $starttime = Get-Date
 
-switch ($env:TERM){
-    "emacs" { . ~/.config/powershell/profile-emacs.ps1 }
-    "dumb" { . ~/.config/powershell/profile-emacs.ps1 }
-    "vscode" { . ~/.config/powershell/profile-emacs.ps1 }
-    default { . ~/.config/powershell/profile.ps1 }
+# Exclude Powershell ISE from profiles and aliases for now.
+if ($Host -match ISE){
 }
-
+else {
+    switch ($env:TERM){
+        "emacs" { . ~/.config/powershell/profile-emacs.ps1 }
+        "dumb" { . ~/.config/powershell/profile-emacs.ps1 }
+        "vscode" { . ~/.config/powershell/profile-emacs.ps1 }
+        default { . ~/.config/powershell/profile.ps1 }
+    }
+}
 '@
 
 if ($env:OneDriveConsumer){
