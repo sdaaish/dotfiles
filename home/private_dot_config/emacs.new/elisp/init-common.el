@@ -66,6 +66,7 @@
 (put 'narrow-to-region 'disabled nil)
 (put 'narrow-to-page   'disabled nil)
 (put 'upcase-region 'disabled nil)
+(put 'downcase-region 'disabled nil)
 
 (customize-set-variable 'auto-save-no-message t)
 (customize-set-variable 'auto-save-interval 40)
