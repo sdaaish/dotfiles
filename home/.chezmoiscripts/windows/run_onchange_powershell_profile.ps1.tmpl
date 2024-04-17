@@ -8,7 +8,7 @@ $content = @'
 $starttime = Get-Date
 
 # Exclude Powershell ISE from profiles and aliases for now.
-if ($Host -match ISE){
+if ($Host -match "ISE"){
 }
 else {
     switch ($env:TERM){
