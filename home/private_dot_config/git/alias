@@ -46,5 +46,6 @@
 	subr = "!git submodule foreach --recursive 'git ls-remote --heads;printf \"\n\"'"
 	subu = "!git submodule foreach --recursive 'git pull'"
 	sw = switch
+	tl = for-each-ref --format="%(if:equals=tag)%(objecttype)%(then)a\\ %(else)%(if:equals=blob)%(objecttype)%(then)b\\ %(else)\\ \\ %(end)%(end)%(align:20,right)%(refname:short)%09%(objectname:short)%(end)%09%(if:equals=tag)%(objecttype)%(then)@%(object)\\ %(contents:subject)%(else)%(end)" --sort=taggerdate refs/tags
 	undo = reset HEAD~1 --mixed
 	unstage = reset HEAD --
