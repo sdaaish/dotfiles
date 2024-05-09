@@ -40,7 +40,8 @@
 
 (use-package aggressive-indent
   :config (global-aggressive-indent-mode t)
-  (add-to-list 'aggressive-indent-excluded-modes 'go-mode))
+  (add-to-list 'aggressive-indent-excluded-modes 'go-mode)
+  (add-to-list 'aggressive-indent-excluded-modes 'go-ts-mode))
 
 
 (setq reb-re-syntax 'string)
