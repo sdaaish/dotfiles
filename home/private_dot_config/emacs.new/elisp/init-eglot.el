@@ -4,6 +4,7 @@
   (add-hook 'before-save-hook #'eglot-format-buffer -10 t))
 
 (use-package eglot
+  :straight (:type built-in)
   :init (add-to-list 'major-mode-remap-alist '(python-mode . python-ts-mode))
   :config (setq-default eglot-workspace-configuration
                         '(
