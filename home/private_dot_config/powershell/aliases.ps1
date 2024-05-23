@@ -72,6 +72,9 @@ Set-Alias -Name rgz -Value Invoke-RgFzf
 Set-Alias -name fuset -Value Invoke-FuzzySetLocation
 Set-Alias -name fuzet -Value Invoke-FuzzyZLocation
 
+# Zoxide
+Set-Alias -Name zox -Value zoxide
+
 if (Test-Path Alias:man) {
     Remove-Item Alias:man
 }
