@@ -117,4 +117,8 @@ $env:RIPGREP_CONFIG_PATH = $(Resolve-path "$HOME/.config/ripgrep/config")
 #     . $pip
 # }
 
+# Use zoxide for navigation
+$env:_ZO_ECHO = 1
+Invoke-Expression (& { (zoxide init powershell | Out-String) })
+
 "{0,-20}: {1}ms" -f "Start time", (Get-RunningTime $starttime)
