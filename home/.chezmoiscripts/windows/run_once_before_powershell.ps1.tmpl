@@ -1,0 +1,25 @@
+{{ if eq .chezmoi.os "windows"}}
+
+
+$directories = @(
+    "PowerShell"
+    "WindowsPowerShell"
+)
+
+if ($env:OneDriveConsumer){
+    $BaseDir = $env:OneDriveConsumer
+}
+elseif ($env:OneDriveCommercial){
+    $BaseDir = $env:OneDriveCommercial
+}
+else {
+    $BaseDir = $env:UserProfile
+}
+
+foreach($dir in $directories){
+    $path = Join-Path $Home .local
+    New-Item -Path $path -Name $dir -ItemType Directory -Force|Out-Null
+    New-Item -Path $BaseDir -Name $dir -ItemType Directory -Force|Out-Null
+}
+
+{{ end }}

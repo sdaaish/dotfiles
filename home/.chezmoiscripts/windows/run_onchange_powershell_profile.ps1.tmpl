@@ -33,6 +33,10 @@ else {
 $path = Join-Path $BaseDir "Documents"
 
 "PowerShell", "WindowsPowerShell" | foreach {
+
+    if(-not(Test-Path (Join-Path $path $_) -PathType Container)){
+        New-Item -Path $path -Name $_ -ItemType Directory
+    }
     $parent = Join-Path $path $_
     $config = Join-Path $parent "profile.ps1"
     Set-Content -Path $config -Value $content -Encoding UTF8 -NoNewLine -Force
