@@ -14,6 +14,8 @@
       (t (defconst my/orgdir (expand-file-name "Org/" (getenv "HOME")))))
 
 (message "Setup Org home directory to: %s" my/orgdir)
+(when (not (file-exists-p my/orgdir))
+  (make-directory my/orgdir))
 
 ;; Denote mode directory
 (cond ((getenv "DENOTE_DIR")
@@ -25,6 +27,8 @@
       (t (defconst my/denotedir (expand-file-name "notes/" (getenv "HOME")))))
 
 (message "Setup Denote home directory to: %s" my/denotedir)
+(when (not (file-exists-p my/denotedir))
+  (make-directory my/denotedir))
 
 ;; Use work version of Onedrive if it exists
 (if (getenv "OneDriveCommercial")
@@ -45,6 +49,6 @@
 ;; Store auto-saved bufferes here
 (defconst my/auto-save-dir (expand-file-name ".cache/autosave/" user-emacs-directory))
 (when (not (file-exists-p my/auto-save-dir))
-  (make-directory my/auto-save-dir))
+  (make-directory my/auto-save-dir t))
 
 (provide 'init-settings)
