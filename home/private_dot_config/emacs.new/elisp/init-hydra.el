@@ -120,6 +120,7 @@
 (defhydra hydra-ivy (:color blue)
   "Counsel search commands"
   ("a" counsel-ag "Ag")
+  ("e" elgrep "elGrep")
   ("f" counsel-fzf "FzF")
   ("g" counsel-grep "Grep")
   ("j" counsel-git-grep "Git Grep")

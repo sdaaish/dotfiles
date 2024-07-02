@@ -7,7 +7,7 @@
 ;;
 ;;; Commentary:
 ;;
-;;  
+;;
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -40,6 +40,8 @@
 
 (define-key minibuffer-local-completion-map (kbd "C-l")
             #'my/match-components-literally)
+
+(use-package elgrep)
 
 (provide 'init-search)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
