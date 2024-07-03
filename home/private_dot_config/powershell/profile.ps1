@@ -55,8 +55,15 @@ $PSDefaultParameterValues["Out-Default:OutVariable"] = "__"
 #oh-my-posh.exe --init --shell pwsh --config jandedobbeleer | Invoke-Expression
 #Enable-PoshTransientPrompt
 
+# Starship config
 function Invoke-Starship-PreCommand {
     $host.ui.RawUi.WindowTitle = "PS> $($psversiontable.PSEdition)@$env:USERNAME"
+}
+
+# Replace previous prompts with a leaner symbol, transient.
+# Might show artifacts if PSReadLine history is long.
+function Invoke-Starship-TransientFunction {
+    &starship module character
 }
 
 # Enable showing symbols for the root user in starship.
@@ -75,6 +82,7 @@ else {
 $starshipConfig = ".config{0}starship{0}starship.toml" -f [io.path]::DirectorySeparatorChar
 $ENV:STARSHIP_CONFIG = Join-Path ${HOME} $starshipConfig
 Invoke-Expression (&starship init powershell)
+Enable-TransientPrompt
 "{0,-20}: {1}ms" -f "After starship", (Get-RunningTime $starttime)
 
 # Colorthemes for files
