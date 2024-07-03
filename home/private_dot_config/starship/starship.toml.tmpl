@@ -52,6 +52,7 @@ style = '#3399ff'
 
 [hostname]
 ssh_only = false
+ssh_symbol = " "
 trim_at = '.'
 format = '[@$hostname]($style)'
 style = '#3399ff'
@@ -114,7 +115,18 @@ time_range = '-'
 disabled = false
 
 [os.symbols]
+Alpine = " "
+Arch = " "
+Debian = " "
+Kali = " "
+Linux = " "
+Mint = " "
+NixOS = " "
+openSUSE = "[ ](#006400)"
+Raspbian = " "
+SUSE = "[ ](#006400)"
 Ubuntu = "[ ](#ff6600)"
+Unknown = " "
 Windows = "[ ](#00FFFF)"
 
 [sudo]
@@ -123,6 +135,9 @@ format = "as [$symbol]($style)"
 
 [aws]
 symbol = "  "
+
+[c]
+symbol = " "
 
 [conda]
 symbol = " "
@@ -154,6 +169,9 @@ up_to_date = "[](bold green)"
 [golang]
 symbol = " "
 
+[guix_shell]
+symbol = " "
+
 [hg_branch]
 symbol = " "
 
@@ -163,14 +181,20 @@ symbol = " "
 [julia]
 symbol = " "
 
+[kotlin]
+symbol = " "
+
 [line_break]
 disabled = true
 
+[lua]
+symbol = " "
+
 [memory_usage]
-symbol = " "
+symbol = "󰍛 "
 
 [nim]
-symbol = " "
+symbol = "󰆥 "
 
 [nix_shell]
 symbol = " "
@@ -178,8 +202,11 @@ symbol = " "
 [nodejs]
 symbol = " "
 
+[ocaml]
+symbol = " "
+
 [package]
-symbol = " "
+symbol = "󰏗 "
 
 [perl]
 symbol = " "
@@ -204,3 +231,6 @@ symbol = " "
 
 [swift]
 symbol = "ﯣ "
+
+[zig]
+symbol = " "
