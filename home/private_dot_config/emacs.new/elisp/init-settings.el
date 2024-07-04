@@ -46,9 +46,15 @@
 (defconst my/org-agenda-files (expand-file-name ".agenda-files" my/orgdir))
 (defconst my/org-target-files (expand-file-name ".target-files" my/orgdir))
 
-;; Store auto-saved bufferes here
+;; Create a .target-file if it does not exist
+(when (not (file-exists-p my/org-target-files))
+  (write-region "Add org target files to this file." nil myfile t nil nil 'excl))
+
+;; Store auto-saved buffers here
 (defconst my/auto-save-dir (expand-file-name ".cache/autosave/" user-emacs-directory))
 (when (not (file-exists-p my/auto-save-dir))
   (make-directory my/auto-save-dir t))
 
 (provide 'init-settings)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; init-settings.el ends here
