@@ -1,6 +1,14 @@
 {{ if eq .chezmoi.os "windows"}}
 
+$DATE = Get-Date -Format "yyyyMMddTHHmmss"
+
 if (Test-Path ${env:UserProfile}/.ssh/config ){
-    Copy-Item ${env:UserProfile}/.ssh/config ${env:UserProfile}/.ssh/config.bak
+    Copy-Item ${env:UserProfile}/.ssh/config ${env:UserProfile}/.ssh/config.${DATE}.bak
 }
+
+if (Test-Path ${env:UserProfile}/.ssh/known_hosts ){
+    Copy-Item ${env:UserProfile}/.ssh/known_hosts ${env:UserProfile}/.ssh/known_hosts.${DATE}.bak
+    ssh-keyscan github.com >> ${env:UserProfile}/.ssh/known_hosts
+}
+
 {{ end }}
