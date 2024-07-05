@@ -8,7 +8,8 @@ if (Test-Path ${env:UserProfile}/.ssh/config ){
 
 if (Test-Path ${env:UserProfile}/.ssh/known_hosts ){
     Copy-Item ${env:UserProfile}/.ssh/known_hosts ${env:UserProfile}/.ssh/known_hosts.${DATE}.bak
-    ssh-keyscan github.com >> ${env:UserProfile}/.ssh/known_hosts
+    $text = $(ssh-keyscan github.com) 2> $null
+    Add-Content -Path ${env:UserProfile}/.ssh/known_hosts -value $text
 }
 
 {{ end }}

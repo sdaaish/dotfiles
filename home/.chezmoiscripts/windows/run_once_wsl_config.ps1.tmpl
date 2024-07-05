@@ -11,16 +11,16 @@ memory=4GB
 processors=2
 
 # Specify a custom Linux kernel to use with your installed distros. The default kernel used can be found at https://github.com/microsoft/WSL2-Linux-Kernel
-kernel=C:\\temp\\myCustomKernel
+# kernel=C:\\temp\\myCustomKernel
 
 # Sets additional kernel parameters, in this case enabling older Linux base images such as Centos 6
-kernelCommandLine = vsyscall=emulate
+# kernelCommandLine = vsyscall=emulate
 
 # Sets amount of swap storage space to 8GB, default is 25% of available RAM
 swap=8GB
 
 # Sets swapfile path location, default is %USERPROFILE%\AppData\Local\Temp\swap.vhdx
-swapfile=C:\\temp\\wsl-swap.vhdx
+# swapfile=C:\\temp\\wsl-swap.vhdx
 
 # Disable page reporting so WSL retains all allocated memory claimed from Windows and releases none back when free
 pageReporting=false
@@ -29,7 +29,7 @@ pageReporting=false
 localhostforwarding=true
 
 # Disables nested virtualization
-nestedVirtualization=false
+# nestedVirtualization=false
 
 # Turns on output console showing contents of dmesg when opening a WSL 2 distro for debugging
 debugConsole=true
@@ -37,10 +37,11 @@ debugConsole=true
 # Enable experimental features
 [experimental]
 sparseVhd=true
+
 "@
 
 if(-not(test-path $HOME/.wslconfig)){
-    Set-content -Path $HOME/.wslconfig -Value $text
+    Set-content -Path $HOME/.wslconfig -Value $text -NoNewline
 }
 
 {{end}}
