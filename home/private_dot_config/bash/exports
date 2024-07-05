@@ -130,5 +130,5 @@ fi
 
 
 #  Remove duplicates from the PATH
-PATH=$(echo $PATH|sed -E 's/(:){1,}/\n/g'|uniq|tr '\n' ':')
+PATH=$(printf "$PATH"|sed -E 's/(:){1,}/\n/g'|sed -E 's/^$//g'|uniq|tr '\n' ':')
 export PATH

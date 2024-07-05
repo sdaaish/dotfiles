@@ -59,7 +59,8 @@ shopt -s checkwinsize
 #[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 # set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]
+then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
@@ -73,8 +74,10 @@ esac
 # should be on the output of commands, not on the prompt
 force_color_prompt=yes
 
-if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+if [ -n "$force_color_prompt" ]
+then
+    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null
+    then
         # We have color support; assume it's compliant with Ecma-48
         # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
         # a case would tend to support setf rather than setaf.)
@@ -144,10 +147,13 @@ else
     printf "Using default prompt\n"
 fi
 
-# Attach to tmux if running, start it otherwise
-if [[ $(pgrep tmux) ]]
+# Attach to tmux if running (and is installed), start it otherwise
+if [[ -x $(which tmux) ]]
 then
-    [[ -z ${TMUX} ]] 2>&1 >/dev/null && tmux attach -t 0
-else
-    tmux
+    if [[ $(pgrep tmux) ]]
+    then
+        [[ -z ${TMUX} ]] 2>&1 >/dev/null && tmux attach -t 0
+    else
+        tmux
+    fi
 fi
