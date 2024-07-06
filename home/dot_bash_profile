@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
-if [ -f $HOME/.bashrc ];then
-   source $HOME/.bashrc
+
+# Don't import anything if this is non-interactive
+[[ $- == *i* ]] || return 0
+
+# Source everything from .bashrc
+if [ -f $HOME/.bashrc ]
+then
+    source $HOME/.bashrc
 fi
    

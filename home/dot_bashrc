@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Set default umask
+umask 027
+
 # load shell dotfiles
 for file in ${HOME}/.config/bash/{aliases,functions,exports}
 do
@@ -143,17 +146,15 @@ BASE16_SHELL="${HOME}/.config/base16-shell/"
 if [ -x "$(which starship)" ]
 then
     eval "$(starship init bash)"
-else
-    printf "Using default prompt\n"
 fi
 
-# Attach to tmux if running (and is installed), start it otherwise
+# Attach to tmux if running (and is installed), start it otherwise as a new session
 if [[ -x $(which tmux) ]]
 then
     if [[ $(pgrep tmux) ]]
     then
-        [[ -z ${TMUX} ]] 2>&1 >/dev/null && tmux attach -t 0
+        [[ -z ${TMUX} ]] 2>&1 >/dev/null && tmux new-session -A -s default
     else
-        tmux
+        tmux new-session -s default
     fi
 fi
