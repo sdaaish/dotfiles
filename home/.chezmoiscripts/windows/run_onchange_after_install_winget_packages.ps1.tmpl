@@ -43,7 +43,15 @@ if ($prp.IsInRole($adm)) {
         Write-Verbose "Verifying $name"
         if (-not ($id -in $installed.id)) {
             Write-Verbose "Installing $name $id"
-            Start-Job -ScriptBlock { Install-WingetPackage -Id $id -Source winget} -Name $name
+
+            $opt = @{
+                Id = $id
+                Source = "winget"
+                MatchOption = "Equals"
+                Mode = "Silent"
+            }
+
+            Start-Job -ScriptBlock {Install-WingetPackage @using:opt} -Name $name
             Get-Job | Wait-Job
         }
         else {
