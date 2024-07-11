@@ -48,7 +48,7 @@
 
 ;; Create a .target-file if it does not exist
 (when (not (file-exists-p my/org-target-files))
-  (write-region "Add org target files to this file." nil myfile t nil nil 'excl))
+  (write-region "Add org target files to this file." nil my/org-target-files t nil nil 'excl))
 
 ;; Store auto-saved buffers here
 (defconst my/auto-save-dir (expand-file-name ".cache/autosave/" user-emacs-directory))
