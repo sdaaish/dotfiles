@@ -30,7 +30,7 @@
 (use-package orderless
   :custom
   (completion-styles '(orderless-flex basic))
-  (completion-category-overrides '((file (styles basic partial-completion)))))ta
+  (completion-category-overrides '((file (styles basic partial-completion)))))
 
 (defun my/match-components-literally ()
   "Components match literally for the rest of the session."
