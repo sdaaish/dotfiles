@@ -7,7 +7,7 @@
 ;;
 ;;; Commentary:
 ;;
-;;  
+;;
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -58,7 +58,7 @@
   (denote-known-keywords '("emacs" "project" "powershell"))
   :hook
   ((dired-mode . denote-dired-mode-in-directories)
-   (find-file . denote-link-buttonize-buffer))
+   (find-file . denote-fontify-links-mode))
   :bind (("C-c n" . hydra-denote/body)
          (:map dired-mode-map
                ("C-c C-d C-i" . #'denote-link-dired-marked-notes)
