@@ -142,9 +142,9 @@ get-chezmoi() {
 
 # Get Nerd Fonts
 get-nerd-fonts(){
-    VERSION="v3.1.1"
+    VERSION="v3.2.1"
     url="https://github.com/ryanoasis/nerd-fonts/releases/download/${VERSION}"
-    fonts="SourceCodePro CascadiaCode Inconsolata JetBrainsMono"
+    fonts="SourceCodePro Inconsolata JetBrainsMono ComicShannsMono"
 
     fontarchive="fontstmp.zip"
     pushd "${HOME}/.local/share/fonts/"||exit 1
