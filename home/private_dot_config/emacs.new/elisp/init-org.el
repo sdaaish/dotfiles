@@ -162,17 +162,27 @@
                     (org-deadline-warning-days 90))))
          ((org-agenda-compact-blocks t)))
 
+        ("p" "Planning"
+         ((tags-todo "+@planning"
+                     ((org-agenda-overriding-header "Planning Tasks")))
+          (tags-todo "-{.*}"
+                     ((org-agenda-overriding-header "Untagged Tasks")))
+          (todo "" ((org-agenda-files `(,org-default-notes-file))
+                    (org-agenda-overriding-header "Unprocessed Inbox Items")))))
+
         ("d" "Upcoming dates"
          ((agenda ""
-                  ((org-agenda-entry-types '(:deadline))))
+                  ((org-agenda-overriding-header "Deadlines")
+                   (org-agenda-entry-types '(:deadline))))
           (agenda ""
-                  ((org-agenda-entry-types '(:scheduled)))))
+                  ((org-agenda-overriding-header "Scheduled Tasks")
+                   (org-agenda-entry-types '(:scheduled)))))
          ((org-agenda-time-grid nil)
           (org-agenda-start-on-weekday nil)
           (org-agenda-span 1)
-          (org-deadline-warning-days 14)
+          (org-deadline-warning-days 7)
           (org-agenda-time-grid nil)
-          (org-agenda-compact-blocks t)))
+          (org-agenda-compact-blocks nil)))
 
         ("l" "Log for last week"
          ((agenda ""
@@ -182,8 +192,8 @@
                    (org-agenda-include-inactive-timestamps t))))
          ((org-agenda-compact-blocks t)))
 
-        ("h" . "Hemma|Huset")
-        ("hh" "Agenda and Home-related tasks" tags-todo "Hemma|Huset"
+        ("h" . "@home")
+        ("hh" "Agenda for @home-related tasks" tags-todo "@home"
          ((agenda "")
           (org-agenda-sorting-strategy '(priority-up effort-down))))
         ("hc" "Todo" tags-todo "Cyklar"
@@ -199,7 +209,7 @@
           (todo "TODO|IN-PROGRESS")
           (org-agenda-sorting-strategy '(priority-up effort-down))))
 
-        ("w" "Agenda and Office-related tasks" tags-todo "work|office"
+        ("w" "Agenda for Office-related tasks" tags-todo "work|office"
          ((agenda "")
           (todo "TODO|IN-PROGRESS")
           (org-agenda-sorting-strategy '(priority-up effort-down))))))
