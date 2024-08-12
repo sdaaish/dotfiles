@@ -7,7 +7,7 @@
 ;;
 ;;; Commentary:
 ;;
-;;  
+;;
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -20,10 +20,10 @@
 
 ;; Setup custom fonts
 (set-face-attribute 'default nil :family "Cascadia Code NF" :foundry "outline" :slant 'normal :weight 'regular :height 140 :width 'normal)
-(set-face-attribute 'fixed-pitch nil :family "Cascadia Code" :height 140)
+(set-face-attribute 'fixed-pitch nil :family "Cascadia Code NF" :height 140)
 (set-face-attribute 'fixed-pitch-serif nil :family "Cascadia Code NF" :height 140)
-(add-to-list 'default-frame-alist '(font . "Cascadia Code"))
-(set-frame-font "Cascadia Code NF" nil t)
+;;(add-to-list 'default-frame-alist '(font . "Cascadia Code NF"))
+;;(set-frame-font "Cascadia Code NF" nil t)
 
 ;; Chose font based on os
 (cond ((eq system-type 'gnu/linux)
