@@ -28,9 +28,11 @@
          :map yas-minor-mode-map
          ("C-c i" . yas-expand))
   :commands (yasnippet)
-  :config (yas-reload-all)
-  (add-to-list 'yas-snippet-dirs (expand-file-name ".config/snippets/" "~"))
+
+  :config
+  (setq yas-snippet-dirs (list (expand-file-name ".config/snippets/" "~")))
   (add-to-list 'hippie-expand-try-functions-list 'yas-hippie-try-expand)
+  (yas-reload-all)
   :hook ((prog-mode org-mode) . (lambda ()
                                   (yas-minor-mode 1))))
 
@@ -67,7 +69,7 @@
 
 (defun my/autoinsert-yas-expand()
   "Replace text in yasnippet template."
-  (yas/expand-snippet (buffer-string) (point-min) (point-max)))
+  (yas-expand-snippet (buffer-string) (point-min) (point-max)))
 
 (use-package autoinsert
   :custom
