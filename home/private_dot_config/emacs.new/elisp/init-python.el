@@ -24,7 +24,7 @@
 ;; Use tree-sitter for Python
 
 (use-package highlight-indent-guides
-  :hook ((yaml-mode python-mode) . highlight-indent-guides-mode)
+  :hook ((yaml-mode yaml-ts-mode python-mode python-ts-mode) . highlight-indent-guides-mode)
   :custom
   (highlight-indent-guides-method 'character)
   (python-indent-guess-indent-offset-verbose nil))
