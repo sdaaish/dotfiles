@@ -7,7 +7,7 @@ Set-Alias -Name pv -Value Enable-Env
 Set-Alias -Name penv -Value New-PythonEnv
 Set-Alias -Name de -Value deactivate
 Set-Alias -Name pycheck -Value Check-PythonVersion
-Set-Alias -Name syspip -Value Install-SystemPip
+Set-Alias -Name syspip -Value Invoke-SystemPip
 
 # Functions
 Function Upgrade-PipPackage {
@@ -60,16 +60,41 @@ Function Check-PythonVersion {
     & $exe -c "import sys;print(sys.version)"
     & $exe -c "import sys;print(sys.executable)"
 }
-Function Install-SystemPip {
+Function Invoke-SystemPip {
+    param(
+        $command,
+
+        [string[]]$packages
+    )
+
     if ($isLinux) {
         $exe = "python"
     }
     else {
-        $exe = "python.exe"
+        $exe = "py.exe"
     }
 
-    try { $Prg = Get-Command $exe }
+    try { $prg = Get-Command $exe }
     catch { throw "No such program, $Prg" }
 
-    & $prg -m pip --isolated install -U $args
+    if ($command -eq "install"){
+        $options = @(
+            "-m", "pip"
+            "--isolated"
+            $command
+            "-U"
+            $packages
+        )
+    }
+    else {
+        $options = @(
+            "-m", "pip"
+            "--isolated"
+            $command
+        )
+
+    }
+
+    "{0} {1}" -f $prg, ($options -join " ")
+    & $prg @options
 }
