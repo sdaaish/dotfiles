@@ -61,7 +61,7 @@
 
 ;; Flymake
 (bind-key "M-n" #'flymake-goto-next-error 'flymake-mode-map)
-(bind-key "M-p" #'flymake-goto-previous-error 'flymake-mode-map)
+(bind-key "M-p" #'flymake-goto-prev-error 'flymake-mode-map)
 
 (provide 'init-code)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
