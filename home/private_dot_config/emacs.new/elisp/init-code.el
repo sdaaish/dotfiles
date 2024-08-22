@@ -27,6 +27,10 @@
 (use-package devdocs
   :bind ("C-," . devdocs-lookup)
   ("C-h D" . hydra-devdocs/body)
+  (:map devdocs-mode-map
+        ("b" . 'devdocs-go-back)
+        ("f" . 'devdocs-go-forward)
+        ("M-p" . 'devdocs-peruse))
   :hook
   (emacs-lisp-mode . (lambda () (setq-local devdocs-current-docs '("elisp"))))
   ((python-mode python-ts-mode) . (lambda () (setq-local devdocs-current-docs '("python~3.12"))))
@@ -54,6 +58,10 @@
 
 ;; Leave this out for now
 ;;(use-package tree-sitter-langs)
+
+;; Flymake
+(bind-key "M-n" #'flymake-goto-next-error 'flymake-mode-map)
+(bind-key "M-p" #'flymake-goto-previous-error 'flymake-mode-map)
 
 (provide 'init-code)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
