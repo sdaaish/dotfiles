@@ -225,6 +225,10 @@
 (setq python-indent-guess-indent-offset-verbose nil)
 (add-hook 'python-mode-hook 'eglot-ensure)
 
+;; Flymake
+(define-key flymake-mode-map (kbd "M-n") 'flymake-goto-next-error)
+(define-key flymake-mode-map (kbd "M-p") 'flymake-goto-prev-error)
+
 ;; Start the server
 (server-start)
 
