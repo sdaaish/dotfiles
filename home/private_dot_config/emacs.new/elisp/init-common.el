@@ -105,6 +105,7 @@
                                                    ("EET-2EDT" "Sofia")
                                                    ("IST-5:30" "Bangalore")
                                                    ("PST-8" "Manila")
+                                                   ("KST-9" "Seoul")
                                                    ("AET-11" "Sydney")))
 
 (provide 'init-common)
