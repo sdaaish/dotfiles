@@ -182,10 +182,29 @@ get-powerline-fonts(){
     fi
 }
 
+# Get Microsoft Cascadia Code Nerd Fonts
+get-microsoft-fonts(){
+    version="2404.23"
+    url="https://github.com/microsoft/cascadia-code/releases/download/v${version}/CascadiaCode-${version}.zip"
+    filename="CascadiaCode-${version}.zip"
+    tmpdir=$(mktemp -d)
+    pushd "${tmpdir}" || exit 1
+    wget "$url"
+    unzip -d Cascadia "${filename}"
+    cp -a "Cascadia/ttf" "$HOME/.local/share/fonts/"
+    fc-cache -fv
+    popd || exit 1
+    rm -rf "${tmpdir}"
+}
+
 # Alias for fonts
 get-fonts(){
+    echo "Getting Nerd Fonts."
     get-nerd-fonts
+    echo "Getting Powerline Fonts"
     get-powerline-fonts
+    echo "Gettng Microsoft Fonts."
+    get-microsoft-fonts
 }
 
 # find links
