@@ -10,3 +10,7 @@ See also [[https://www.masteringemacs.org/article/how-to-get-started-tree-sitter
 
 To get powershell, go to [[https://github.com/airbus-cert/tree-sitter-powershell][Github]] and clone it, then build it with make.
 This folder contains a locally built copy.
+
+Add this Emacs package from [[https://github.com/dmille56/powershell-ts-mode?tab=readme-ov-file][Melpa]].
+
+Alternativly, download the pre-built binaries from [[https://github.com/kiennq/treesit-langs/releases][Github Kiennq]].
