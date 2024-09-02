@@ -5,3 +5,8 @@ Download from https://github.com/emacs-tree-sitter/tree-sitter-langs/releases/ o
 They should be renamed to have =libtree-sitter-= as prefix.
 
 See also [[https://www.masteringemacs.org/article/how-to-get-started-tree-sitter][Mastering Emacs]].
+
+** Powershell
+
+To get powershell, go to [[https://github.com/airbus-cert/tree-sitter-powershell][Github]] and clone it, then build it with make.
+This folder contains a locally built copy.
