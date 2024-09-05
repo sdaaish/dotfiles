@@ -15,8 +15,9 @@ alias llt='ls -ltrah'
 alias llh='ls -lah'
 alias lls='ls -lAhSrG'
 alias lll='find-links'
-
 alias rehash='hash -r'
+alias poff='sudo shutdown --poweroff now'
+alias poffr='sudo shutdown --reboot now'
 
 # Stupid stuff
 alias sl='sl -ea'
