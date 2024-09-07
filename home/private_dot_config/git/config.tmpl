@@ -68,7 +68,7 @@
 
 [url "ssh://git@gitlab.com/"]
 	pushInsteadOf = https://gitlab.com/
-	
+
 #
 # Include local or personal stuff from these files.
 [include]
@@ -90,6 +90,9 @@
 	path = ~/.config/git/private
 
 [includeIf "gitdir/i:~/.config/**"]
+	path = ~/.config/git/private
+
+[includeIf "gitdir/i:~/.local/**"]
 	path = ~/.config/git/private
 
 [includeIf "gitdir/i:~/AppData/**"]
