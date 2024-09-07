@@ -30,7 +30,9 @@
   (:map devdocs-mode-map
         ("b" . 'devdocs-go-back)
         ("f" . 'devdocs-go-forward)
-        ("M-p" . 'devdocs-peruse))
+        ("M-p" . 'devdocs-peruse)
+        ("SPC" . 'scroll-up-command)
+        ("S-SPC" . 'scroll-down-command))
   :hook
   (emacs-lisp-mode . (lambda () (setq-local devdocs-current-docs '("elisp"))))
   ((python-mode python-ts-mode) . (lambda () (setq-local devdocs-current-docs '("python~3.12"))))
