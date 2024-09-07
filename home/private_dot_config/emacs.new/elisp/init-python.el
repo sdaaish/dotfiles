@@ -48,8 +48,11 @@
 ;; (use-package ruff-format)
 
 (use-package pet
-  :config
-  (add-hook 'python-base-mode-hook 'pet-mode -10))
+  :hook
+  (python-base-mode . (lambda () (pet-mode -10)))
+  ((python-mode python-ts-mode) . (lambda ()
+                                    (setq-local python-shell-interpreter (pet-executable-find "python")
+                                                python-shell-virtualenv-root (pet-virtualenv-root)))))
 
 (provide 'init-python)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
