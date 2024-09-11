@@ -18,5 +18,7 @@ jobs:
       - name: Run ShellCheck
         uses: ludeeus/action-shellcheck@master
         with:
-         scandir: './home/private_dot_config/bash'
-         additional_files: 'executable_*'
+          severity: error
+          ignore_paths: ./home/private_dot_config/bash/*completion* ./home/private_dot_config/bash/*prompt*
+          scandir: ./home/private_dot_config/bash
+          additional_files: 'aliases exports functions'
