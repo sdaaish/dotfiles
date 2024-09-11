@@ -260,7 +260,7 @@ ssa() {
 }
 # Add all local keys
 ssk() {
-    for key in $(ls ~/.ssh/*.pub)
+    for key in $(*.pub)
     do
         ssh-add ${key%.pub}
     done
@@ -873,15 +873,15 @@ create-wsl-backup(){
 
 # Start mitmproxy in docker
 start_mitmproxy(){
-    if [ ! -d ${HOME}/.mitmproxy ]
+    if [ ! -d "${HOME}"/.mitmproxy ]
     then
-        mkdir ${HOME}/.mitmproxy
+        mkdir "${HOME}"/.mitmproxy
     fi
 
     # Start the container
     docker run --rm -it \
-           -v ${HOME}/.mitmproxy:/home/mitmproxy/.mitmproxy \
-           -v ${HOME}/tmp:/home/mitmproxy/tmp \
+           -v "${HOME}"/.mitmproxy:/home/mitmproxy/.mitmproxy \
+           -v "${HOME}"/tmp:/home/mitmproxy/tmp \
            -v /etc/timezone:/etc/timezone:ro \
            -p 127.0.0.1:8080:8080 mitmproxy/mitmproxy mitmproxy
 }

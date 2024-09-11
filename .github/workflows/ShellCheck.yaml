@@ -20,5 +20,5 @@ jobs:
         with:
           severity: error
           ignore_paths: ./home/private_dot_config/bash/*completion* ./home/private_dot_config/bash/*prompt*
-          scandir: ./home/private_dot_config/bash
-          additional_files: 'aliases exports functions'
+          scandir: ./home
+          additional_files: 'dot_bashrc dot_bash_logout dot_bash_profile dot_profile'
