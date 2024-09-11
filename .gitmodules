@@ -5,6 +5,7 @@
 [submodule "home/private_dot_config/crafted-emacs"]
 	path = home/private_dot_config/crafted-emacs
 	url = https://github.com/SystemCrafters/crafted-emacs.git
+	branch = master
 [submodule "home/private_dot_config/snippets"]
 	path = home/private_dot_config/snippets
 	url = https://github.com/sdaaish/snippets.git
