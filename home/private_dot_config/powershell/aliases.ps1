@@ -23,6 +23,7 @@ Set-Alias -Name em -Value emacs-client
 Set-Alias -Name emx -Value emacs-client
 Set-Alias -Name emv -Value Select-EmacsVersion
 Set-Alias -Name emq -Value EmacsQ
+Set-Alias -Name mg -Value micro
 
 Set-Alias -Name gs -Value Get-CommandSyntax
 

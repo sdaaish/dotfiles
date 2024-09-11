@@ -1,4 +1,18 @@
 {
-    "Alt-/": "lua:comment.comment",
-    "CtrlUnderscore": "lua:comment.comment"
+  "Alt-/": "lua:comment.comment",
+  "CtrlUnderscore": "lua:comment.comment",
+  "Ctrl-b" : "CursorLeft",
+  "Ctrl-f" : "CursorRight",
+  "Ctrl-p" : "CursorUp",
+  "Ctrl-n" : "CursorDown",
+  "Ctrl-g" : "None",
+  "Ctrl-k" : "CutLine",
+  "Ctrl-y" : "Paste",
+  "Ctrl-d" : "Delete",
+  "Alt-f" : "WordRight",
+  "Alt-b" : "WordLeft",
+  "Alt-a" : "StartOfLine",
+  "Alt-e" : "EndOfLine",
+  "Alt-d" :"DeleteWordRight",
+  "Alt-x" :"CommandMode"
 }
