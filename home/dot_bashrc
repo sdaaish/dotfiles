@@ -1,27 +1,27 @@
 #!/usr/bin/env bash
 
-# Set default umask
-umask 027
-
-# load shell dotfiles
-for file in ${HOME}/.config/bash/{aliases,functions,exports}
-do
-    if [ -r "${file}" ]
-    then
-        source "${file}"
-    fi
-done
-unset file
-
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
+
+# To test with shellcheck, run with:
+##  shellcheck -x -P $(pwd) .bashrc
+
+# Set default umask
+umask 027
 
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
     *) return;;
 esac
+
+# load shell dotfiles
+for file in "${HOME}"/.config/bash/{aliases,functions,exports}
+do
+    # shellcheck source=/dev/null # Ignore SC1090, SC1091 for these files
+    source "${file}"
+done
 
 #
 ## HISTORY stuff
@@ -117,37 +117,41 @@ if ! shopt -oq posix
 then
     if [ -f /usr/share/bash-completion/bash_completion ]
     then
-        . /usr/share/bash-completion/bash_completion
+        # shellcheck disable=SC1091
+        source /usr/share/bash-completion/bash_completion
     elif [ -f /etc/bash_completion ]
     then
-        . /etc/bash_completion
+        # shellcheck disable=SC1091
+        source /etc/bash_completion
     fi
 fi
 
 # Completion for pip
-compfile="$HOME/.config/bash/pip-completion.bash"
-if [ -f ${compfile} ]
+compfile="${HOME}/.config/bash/pip-completion.bash"
+if [ -f "${compfile}" ]
 then
-    source ${compfile}
+    # shellcheck source=.config/bash/pip-completion.bash
+    source "${compfile}"
 fi
 
 # Completion for Chezmoi
-compfile="$HOME/.config/bash/chezmoi-completion.sh"
-if [ -f ${compfile} ]
+compfile="${HOME}/.config/bash/chezmoi-completion.sh"
+if [ -f "${compfile}" ]
 then
-    source ${compfile}
+    # shellcheck source=.config/bash/chezmoi-completion.sh
+    source "${compfile}"
 fi
 
 # From https://github.com/chriskempson/base16-shell
 BASE16_SHELL="${HOME}/.config/base16-shell/"
-[ -n "$PS1" ] && [ -s "$BASE16_SHELL/profile_helper.sh" ] && eval "$(${BASE16_SHELL}/profile_helper.sh)"
+[ -n "$PS1" ] && [ -s "$BASE16_SHELL/profile_helper.sh" ] && eval "$("${BASE16_SHELL}/profile_helper.sh")"
 
 # Use starship as prompt, https://starship.rs
-[[ -x "$(which starship)" ]] && eval "$(starship init bash)"
+[[ -x "$(command -v starship)" ]] && eval "$(starship init bash)"
 
 
 # Attach to tmux if running (and is installed), start it otherwise as a new session
-if [[ -x $(which tmux) ]]
+if [[ -x $(command -v tmux) ]]
 then
     if [[ $(pgrep tmux) ]]
     then
