@@ -737,6 +737,27 @@ install-starship () {
     curl -sS https://starship.rs/install.sh | sh
 }
 
+# Micro, the minimal editor
+install-micro (){
+    url="https://getmic.ro/"
+
+    pushd "${HOME}/bin" > /dev/null || exit 1
+    if [[ $(which curl)  ]]
+    then
+        curl -s "${url}" -o - | bash
+    elif [[ $(which wget) ]]
+    then
+        wget  -q -nv "${url}" -O - 2>/dev/null| bash
+    else
+        printf "Curl or Wget not installed\n"
+        popd > /dev/null
+        exit 1
+    fi
+
+    popd > /dev/null
+    printf "Micro installed to %s\n" "${HOME}/bin/micro"
+}
+
 # password-manager functions
 pf(){
     pass find "$1"
