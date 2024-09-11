@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
+# -*- mode: bash; -*-
 
 #
 # Alias file
+#
 
 # Remove old aliases
 unalias emx &>/dev/null

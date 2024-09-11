@@ -1,11 +1,9 @@
 #!/usr/bin/env bash
+# -*- mode: bash; -*-
 
 # Don't import anything if this is non-interactive
 [[ $- == *i* ]] || return 0
 
 # Source everything from .bashrc
-if [ -f $HOME/.bashrc ]
-then
-    source $HOME/.bashrc
-fi
-   
+# shellcheck source=.bashrc
+[[ -f "$HOME"/.bashrc ]] && source "$HOME"/.bashrc

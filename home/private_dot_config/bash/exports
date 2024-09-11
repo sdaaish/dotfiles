@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# -*- mode: bash; -*-
 
 export ALTERNATE_EDITOR=""
 export EDITOR="emacsclient -t"

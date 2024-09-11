@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# -*- mode: bash; -*-
 
 DOTFILES=$HOME/.config/dotfiles
 EMACSDIR=$HOME/.config/emacs.default

@@ -1,4 +1,6 @@
-# -*- mode: sh; -*-
+#!/usr/bin/env bash
+# -*- mode: bash; -*-
+
 # ~/.profile: executed by the command interpreter for login shells.
 # This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login
 # exists.
@@ -15,7 +17,7 @@ umask 027
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ]
 then
-   PATH="$PATH:$HOME/bin"
+    PATH="$PATH:$HOME/bin"
 fi
 export PATH
 
@@ -23,6 +25,7 @@ export PATH
 if [ -n "$BASH_VERSION" ]; then
     # include .bashrc if it exists
     if [ -f "$HOME/.bashrc" ]; then
-	. "$HOME/.bashrc"
+        # shellcheck source=.bashrc
+	      source "$HOME/.bashrc"
     fi
 fi
