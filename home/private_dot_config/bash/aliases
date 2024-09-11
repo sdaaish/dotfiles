@@ -66,6 +66,8 @@ alias emq='emacs -Q \
 --eval "(toggle-frame-fullscreen)"'
 alias doom='~/.config/emacs/bin/doom'
 
+alias mg='mg -n -u ~/.config/mg/config'
+
 # binary support
 alias bbk='bbk_cli'
 

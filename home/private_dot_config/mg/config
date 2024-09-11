@@ -2,7 +2,7 @@
 
 ;; Make backup files but in a separate directory (~/.mg.d)
 backup-to-home-directory 1
-make-backup-files 1
+make-backup-files 0
 
 ;; Visual feedback
 audible-bell 0
