@@ -151,8 +151,10 @@ if [[ -x $(which tmux) ]]
 then
     if [[ $(pgrep tmux) ]]
     then
-        [[ -z ${TMUX} ]] 2>&1 >/dev/null && tmux new-session -A -s default
+        # If we are in the session, dont start a new session, otherwise attach to it
+        [[ -z ${TMUX} ]] 2>&1 >/dev/null && tmux new-session -A -s default || echo "Reused the TMUX session" >/dev/null
     else
+        # Tmux is not running, start a new session
         tmux new-session -s default
     fi
 fi
