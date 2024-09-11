@@ -1,3 +1,4 @@
+#!/usr/bin/env zsh
 # -*- mode: shell-script; -*-
 
 # Add things that differs from Bash file syntax to ZSH.

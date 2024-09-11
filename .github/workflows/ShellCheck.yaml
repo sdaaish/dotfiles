@@ -19,6 +19,6 @@ jobs:
         uses: ludeeus/action-shellcheck@master
         with:
           severity: error
-          ignore_paths: ./home/private_dot_config/bash/*completion* ./home/private_dot_config/bash/*prompt*
+          ignore_paths: ./home/private_dot_config/bash/*completion* ./home/private_dot_config/bash/*prompt* ./home/private_dot_config/zsh/**
           scandir: ./home
           additional_files: 'dot_bashrc dot_bash_logout dot_bash_profile dot_profile'

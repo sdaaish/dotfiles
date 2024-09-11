@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 # -*- mode: shell-script; -*-
 
 # Override alias from the commonly shared bash alias file.
