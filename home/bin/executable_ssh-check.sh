@@ -1,5 +1,5 @@
-
-#!/bin/bash
+#!/usr/bin/env bash
+# -*- mode: bash; -*-
 
 # Example to generate SHA256+Base64 fingerprints from public key
 ## From https://www.lastbreach.com/en/blog/ssh-public-key-verification-with-fingerprinthash
