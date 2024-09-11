@@ -69,6 +69,10 @@ export GIT_PS1_SHOWUPSTREAM=auto
 export GIT_PS1_SHOWCOLORHINTS=true
 #export GIT_PS1_HIDE_IF_PWD_IGNORED
 
+# Source git prompt and completions
+[ -f "${HOME}/.config/bash/git-completion.bash" ] && source "${HOME}/.config/bash/git-completion.bash"
+[ -f "${HOME}/.config/bash/git-prompt.sh" ] && source "${HOME}/.config/bash/git-prompt.sh"
+
 # Overrides PS1
 if [ ${TERM} = "dumb" ]
 then
