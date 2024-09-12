@@ -14,6 +14,7 @@
 	conf = config --list --show-origin
 	dl = "!git ll -1"
 	dlc = diff --cached HEAD^
+	duh = reset --soft
 	eol = ls-files --eol
 	f = "!git ls-files | grep -i"
 	fl = log -u
@@ -32,6 +33,7 @@
 	lst = ls-tree
 	lt = log --graph --oneline --decorate --all
 	ltt = log --graph --stat --decorate --all
+	meh = reset --mixed
 	nah = reset --hard
 	norm = "!echo '* text=auto' >.gitattributes && git add --renormalize ."
 	ps = -p status
@@ -40,7 +42,8 @@
 	save = "!git add -A && git commit -m 'chore: commit save point'"
 	short = log --pretty=format:"%h\\ %cr\\ %cn\\ %Cgreen%s%Creset"
 	shortnocolor = log --pretty=format:"%h\\ %cr\\ %cn\\ %s"
-	st = status -sb
+	sb = status -sb
+	st = ls-files --stage
 	stl = stash list --pretty=format:"%C(blue)%gd\\ %C(red)*\\ %C(yellow)%s"
 	subc = "!git submodule foreach --recursive 'git checkout $(git config -f $toplevel/.gitmodules submodule.$name.branch || echo master)'"
 	subr = "!git submodule foreach --recursive 'git ls-remote --heads;printf \"\n\"'"
