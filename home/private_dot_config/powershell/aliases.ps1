@@ -567,10 +567,10 @@ Function ConvertTo-Excel {
 
     $csv | Export-Excel @excelOptions
 }
-    # Use a custom prompt when presenting
-    function demo-prompt {
-        $ENV:STARSHIP_CONFIG = (Resolve-Path ~/.config/starship/demo.toml)
-    }
-    function demo-profile {
-        . (resolve-Path (Join-Path $PSScriptRoot demo.ps1))
-    }
+# Use a custom prompt when presenting
+function demo-prompt {
+    $ENV:STARSHIP_CONFIG = (Resolve-Path ~/.config/starship/demo.toml)
+}
+function demo-profile {
+    . (resolve-Path (Join-Path $PSScriptRoot demo.ps1))
+}
