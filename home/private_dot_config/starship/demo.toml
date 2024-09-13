@@ -1,0 +1,105 @@
+# A version of starship config used for presentations. Symbols mostly chosen from CaskaydiaCove Nerd Font and Inconsolata.
+#
+
+format = """
+[$time$os${env_var.starship} $git_status$git_branch$git_commit$git_state  $all$directory $status](bold green)
+
+[$shell  ](bold blue)"""
+
+continuation_prompt = '[](green) '
+command_timeout = 1000
+
+[character]
+format = "$symbol"
+success_symbol = "[ ](bold blue)"
+error_symbol = "[ ](bold red)"
+disabled = true
+
+[cmd_duration]
+format = " [$duration]($style)"
+style = '#3399ff'
+
+[directory]
+format = '[$path]($style)[$read_only]($read_only_style) '
+style = "bold blue"
+truncation_symbol = ".../"
+
+[git_branch]
+always_show_remote = true
+format = 'on [$symbol$branch(:$remote_branch)]($style)'
+
+[hostname]
+ssh_only = false
+ssh_symbol = " "
+trim_at = '.'
+format = '[@$hostname]($style)'
+style = '#3399ff'
+disabled = true
+
+[line_break]
+disabled = true
+
+[username]
+format = '[$user]($style)'
+style_root = 'red bold'
+style_user = '#66b3ff'
+show_always = false
+disabled = true
+
+[status]
+disabled = false
+format = "[$symbol]($style) "
+symbol = '[](bold red)'
+style = ''
+success_symbol = '[](bold green)'
+
+[env_var.starship]
+format = "[$env_value](#9933ff)"
+variable = "STARSHIP_SHELL"
+disabled = true
+
+[env_var.psversion]
+format = "[$env_value](#9933ff)"
+variable = "PSVERSION"
+disabled = true
+
+
+[shell]
+powershell_indicator = ""
+pwsh_indicator = ""
+bash_indicator = "🐧  "
+zsh_indicator = "🐧󰒲 "
+style = "(bold blue)"
+format = "[$indicator]($style)"
+disabled = false
+
+[time]
+format = '[$time]($style) '
+style = '#9999ff'
+use_12hr = false
+disabled = true
+utc_time_offset = 'local'
+time_format = '%T'
+time_range = '-'
+
+[os]
+disabled = false
+
+[os.symbols]
+Alpine = " "
+Arch = " "
+Debian = " "
+Kali = " "
+Linux = " "
+Mint = " "
+NixOS = " "
+openSUSE = "[ ](#006400)"
+Raspbian = " "
+SUSE = "[ ](#006400)"
+Ubuntu = "[ ](#ff6600)"
+Unknown = " "
+Windows = "[ ](#00FFFF)"
+
+[sudo]
+disabled = false
+format = "as [$symbol]($style)"
