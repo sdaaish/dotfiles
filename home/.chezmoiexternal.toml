@@ -1,7 +1,7 @@
-#[".config/lisp/sv-kalender.el"]
-#    type = "file"
-#    url = "https://bigwalter.net/daniel/elisp/sv-kalender.el"
-#    refreshPeriod = "168h"
+[".config/lisp/sv-kalender.el"]
+  type = "file"
+  url = "https://www.emacswiki.org/emacs/download/sv-kalender.el"
+  refreshPeriod = "168h"
 
 [".config/lisp/sv-kalender-namnsdagar.el"]
   type = "file"
@@ -12,4 +12,22 @@
 ["www/css/simple.css"]
   type = "file"
   url = "https://raw.githubusercontent.com/kevquirk/simple.css/main/simple.css"
+  refreshPeriod = "168h"
+
+# Git prompt
+[".config/bash/git-prompt.sh"]
+  type = "file"
+  url = "https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh"
+  refreshPeriod = "168h"
+
+# Bash git completions
+[".config/bash/git-completion.bash"]
+  type = "file"
+  url = "https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash"
+  refreshPeriod = "168h"
+
+# Zsh git completions
+[".config/zsh/completions/git-completion.zsh"]
+  type = "file"
+  url = "https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.zsh"
   refreshPeriod = "168h"
