@@ -1,8 +1,10 @@
+# Emacs Swedish calendar
 [".config/lisp/sv-kalender.el"]
   type = "file"
   url = "https://www.emacswiki.org/emacs/download/sv-kalender.el"
   refreshPeriod = "168h"
 
+# Emacs names calendar
 [".config/lisp/sv-kalender-namnsdagar.el"]
   type = "file"
   url = "https://raw.githubusercontent.com/matsl/sv-kalender-namnsdagar/master/sv-kalender-namnsdagar.el"
