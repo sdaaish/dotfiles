@@ -71,7 +71,12 @@ export GIT_PS1_SHOWCOLORHINTS=true
 #export GIT_PS1_HIDE_IF_PWD_IGNORED
 
 # Source git prompt and completions
-[ -f "${HOME}/.config/bash/git-completion.bash" ] && source "${HOME}/.config/bash/git-completion.bash"
+if [[ ! -z "${ZSH_VERSION}" ]]
+then
+    [ -f "${HOME}/.config/zsh/git-completion.zsh" ] && source "${HOME}/.config/zsh/git-completion.zsh"
+else
+    [ -f "${HOME}/.config/bash/git-completion.bash" ] && source "${HOME}/.config/bash/git-completion.bash"
+fi
 [ -f "${HOME}/.config/bash/git-prompt.sh" ] && source "${HOME}/.config/bash/git-prompt.sh"
 
 # Overrides PS1
