@@ -66,6 +66,15 @@
 ;; For use with counsel-search
 (use-package request)
 
+;; Use posframe to create a frame for Ivy
+(use-package ivy-posframe
+  :config (ivy-posframe-mode 1)
+  :custom (ivy-posframe-display-functions-alist '((t . ivy-posframe-display)))
+  (ivy-posframe-height-alist '((swiper . 15)
+                               (t . 25)))
+  (ivy-posframe-parameters '((left-fringe . 5)
+                             (right-fringe . 5))))
+
 (provide 'init-ivy)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-ivy.el ends here
