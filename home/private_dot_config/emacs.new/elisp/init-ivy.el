@@ -68,6 +68,7 @@
 
 ;; Use posframe to create a frame for Ivy
 (use-package ivy-posframe
+  :diminish
   :config (ivy-posframe-mode 1)
   :custom (ivy-posframe-display-functions-alist '((t . ivy-posframe-display)))
   (ivy-posframe-height-alist '((swiper . 15)
