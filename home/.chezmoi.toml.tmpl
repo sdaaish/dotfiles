@@ -2,12 +2,14 @@
 {{- $name := promptStringOnce . "name" "Fullname:" -}}
 {{- $githubname := promptStringOnce . "githubname" "Github username:" -}}
 {{- $personal := promptBoolOnce . "personal" "Personal device, (T)rue/(F)alse:" -}}
+{{- $proxy := promptBoolOnce . "proxy" "Use proxy, (T)rue/(F)alse:" -}}
 
 [data]
     email = {{ $email | quote }}
     name = {{ $name | quote }}
     githubname = {{ $githubname | quote }}
     personal = {{ $personal }}
+    proxy = {{ $proxy }}
     umask = 0o22
 
 [interpreters.ps1]

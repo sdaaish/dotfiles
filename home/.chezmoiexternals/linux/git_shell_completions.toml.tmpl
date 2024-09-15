@@ -1,0 +1,23 @@
+# Git completions for Bash and Zsh, and the git prompt
+
+{{ if eq .chezmoi.os "linux" }}
+
+# Git prompt
+[".config/bash/git-prompt.sh"]
+  type = "file"
+  url = "https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh"
+  refreshPeriod = "672h"
+
+# Bash git completions
+[".config/bash/git-completion.bash"]
+  type = "file"
+  url = "https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash"
+  refreshPeriod = "672h"
+
+# Zsh git completions
+[".config/zsh/completions/git-completion.zsh"]
+  type = "file"
+  url = "https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.zsh"
+  refreshPeriod = "672h"
+
+{{ end }}
