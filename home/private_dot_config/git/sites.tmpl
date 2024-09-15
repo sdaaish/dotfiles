@@ -3,7 +3,7 @@
 # Custom settings for sites that require exceptions to work properly.
 
 [http]
-	{{- if not .personal }}
+	{{- if .proxy }}
 	sslCAInfo = ~/.config/git/CACerts/CA-chain.crt
 	{{ end }}
 
