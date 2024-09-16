@@ -42,17 +42,21 @@
   (python-indent-offset 4))
 
 ;; Save for future use, read the pet man page
-;; (use-package python-pytest)
-;; (use-package python-black)
-;; (use-package python-isort)
-;; (use-package ruff-format)
+;;(use-package blacken)
+;;(use-package py-autopep8)
+;;(use-package yapfify)
+(use-package python-pytest)
+(use-package isortify
+  :hook (python-ts-mode . isortify-mode))
+(use-package ruff-format
+  :hook (python-ts-mode . 'ruff-format-on-save-mode))
 
 (use-package pet
   :hook
-  (python-base-mode . (lambda () (pet-mode -10)))
-  ((python-mode python-ts-mode) . (lambda ()
-                                    (setq-local python-shell-interpreter (pet-executable-find "python")
-                                                python-shell-virtualenv-root (pet-virtualenv-root)))))
+  (python-base-mode . (lambda () (pet-mode -10))))
+;;  ((python-mode python-ts-mode) . (lambda ()
+;;                                    (setq-local python-shell-interpreter (pet-executable-find "python")
+;;                                                python-shell-virtualenv-root (pet-virtualenv-root)))))
 
 (provide 'init-python)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
