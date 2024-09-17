@@ -4291,6 +4291,11 @@
     ("ytou" "you" nil :count 1)
     ("yuo" "you" nil :count 1)
     ("zeebra" "zebra" nil :count 1)
+
+    ))
+(define-abbrev-table 'org-mode-abbrev-table
+  '(
     ("emacs" "Emacs" nil :count 1)
     ("python" "Python" nil :count 1)
+    ("rtfm" "Read The Friendly Manual" nil :count 1)
     ))

@@ -249,7 +249,7 @@
 (setq save-abbrevs 'silently
       abbrev-en-file (expand-file-name "abbrev_english_defs" "~/.config/lisp/"))
 (if (file-readable-p abbrev-en-file)
-    (read-abbrev-file abbrev-en-file))
+    (quietly-read-abbrev-file abbrev-en-file))
 (setq-default abbrev-mode t)
 
 ;; From https://stackoverflow.com/questions/17557186/turn-off-abbrev-mode-in-emacs-minibuffer
