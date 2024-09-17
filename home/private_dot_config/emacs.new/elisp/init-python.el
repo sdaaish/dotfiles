@@ -42,12 +42,15 @@
   (python-indent-offset 4))
 
 ;; Save for future use, read the pet man page
-;;(use-package blacken)
 ;;(use-package py-autopep8)
 ;;(use-package yapfify)
+(use-package blacken)
+
 (use-package python-pytest)
-(use-package isortify
-  :hook (python-ts-mode . isortify-mode))
+
+(use-package python-isort
+  :hook (python-ts-mode 'python-isort-on-save-mode))
+
 (use-package ruff-format
   :hook (python-ts-mode . 'ruff-format-on-save-mode))
 
