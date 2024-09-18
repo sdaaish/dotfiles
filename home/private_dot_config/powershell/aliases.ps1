@@ -87,6 +87,7 @@ if (-not($isLinux)) {
 Set-Alias -Name fdq -Value Format-DoubleQuote
 Set-Alias -Name cl -Value New-List
 Set-Alias -Name gopass -Value $env:localappdata\gopass\gopass.exe
+Set-Alias -Name wta -Value Start-AdminTerminal
 
 # Some functions
 function .. {
@@ -573,4 +574,11 @@ function demo-prompt {
 }
 function demo-profile {
     . (resolve-Path (Join-Path $PSScriptRoot demo.ps1))
+}
+
+# Start a terminal as admin
+function Start-AdminTerminal {
+    param()
+
+    Start-Process -FilePath wt.exe -Argumentlist "--pos 30,30 --size 200,50 " -Verb RunAs
 }
