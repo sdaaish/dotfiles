@@ -1,0 +1,51 @@
+# Install scoop packages
+
+{{ if eq .chezmoi.os "windows"}}
+
+$DATE = Get-Date -Format "yyyyMMddTHHmmss"
+
+Import-Module Microsoft.Winget.Client -Force
+
+#  Get installed packages
+$installed = Get-WinGetPackage | Where-Object source -eq winget
+
+# Install these packages
+$scoopPackages = @{
+ 
+}
+
+# Test for privilege
+$wid = [System.Security.Principal.WindowsIdentity]::GetCurrent()
+$prp = New-Object System.Security.Principal.WindowsPrincipal($wid)
+$adm = [System.Security.Principal.WindowsBuiltInRole]::Administrator
+
+# Test and install if administrator
+if ($prp.IsInRole($adm)) {
+    Write-Verbose "Running as Administrator, installing packages..."
+    foreach ($pkg in $wingetpackages.GetEnumerator()){
+        $name = $pkg.name
+        $id = $pkg.value
+        Write-Verbose "Verifying $name"
+        if (-not ($id -in $installed.id)) {
+            Write-Verbose "Installing $name $id"
+
+            $opt = @{
+                Id = $id
+                Source = "winget"
+                MatchOption = "Equals"
+                Mode = "Silent"
+            }
+
+            Start-Job -ScriptBlock {Install-WingetPackage @using:opt} -Name $name
+            Get-Job | Wait-Job
+        }
+        else {
+            Write-Verbose "Package $name $id already installed"
+        }
+    }
+}
+else {
+    throw "You need to run this as administrator."
+}
+
+{{ end }}
