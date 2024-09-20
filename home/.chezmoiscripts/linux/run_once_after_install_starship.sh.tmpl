@@ -4,12 +4,12 @@
 
 set -eufo pipefail
 
-[ $(command -v starship) ] && exit 0
+[ -x $(command -v starship) ] && exit 0
 
-if [[ $(command -v curl) ]]
+if [[ -x $(command -v curl) ]]
 then
     curl -sSLf https://starship.rs/install.sh | sh
-elif [[ $(command -v wget) ]]
+elif [[ -x $(command -v wget) ]]
 then
     wget https://starship.rs/install.sh -O - | sh
 else
