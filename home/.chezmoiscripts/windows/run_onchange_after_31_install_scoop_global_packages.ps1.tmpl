@@ -1,0 +1,53 @@
+# Install scoop global packages
+
+{{ if eq .chezmoi.os "windows"}}
+
+# Test for privilege
+$wid = [System.Security.Principal.WindowsIdentity]::GetCurrent()
+$prp = New-Object System.Security.Principal.WindowsPrincipal($wid)
+$adm = [System.Security.Principal.WindowsBuiltInRole]::Administrator
+
+# Test and install if administrator
+if (-not ($prp.IsInRole($adm))) {
+    throw "You need to run this as administrator."
+}
+
+$DATE = Get-Date -Format "yyyyMMddTHHmmss"
+Import-Module Microsoft.PowerShell.Utility
+
+if (-not (Get-Command scoop)) {
+    Write-Verbose "Scoop not installed, installing."
+    Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+}
+
+#  Get installed packages
+$config = scoop export|convertfrom-json
+$installed = $config.apps.name
+
+$globalPackages = @(
+    "AnonymousPro-NF"
+    "CodeNewRoman-NF"
+    "DejaVuSansMono-NF"
+    "Delugia-Mono-Nerd-Font-complete"
+    "Delugia-Nerd-Font-complete"
+    "FiraCode-NF"
+    "FiraMono-NF"
+    "RobotoMono-NF"
+    "SourceCodePro-NF"
+    "Terminus-NF"
+    "Ubuntu-NF"
+)
+
+# Install Global packages as administrator
+Write-Verbose "Installing Global packages"
+foreach ($pkg in $globalPackages){
+    if ($pkg -in $installed) {
+        "Already installed: {0}" -f $pkg
+    }
+    else {
+        "Installing: {0}" -f $pkg
+        scoop install $pkg --no-update-scoop
+    }
+}
+
+{{ end }}

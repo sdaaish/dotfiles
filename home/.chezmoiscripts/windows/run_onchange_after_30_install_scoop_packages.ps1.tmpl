@@ -1,8 +1,9 @@
-# Install scoop packages
+# Install scoop user packages
 
 {{ if eq .chezmoi.os "windows"}}
 
 $DATE = Get-Date -Format "yyyyMMddTHHmmss"
+Import-Module Microsoft.PowerShell.Utility
 
 if (-not (Get-Command scoop)) {
     Write-Verbose "Scoop not installed, installing."
@@ -29,24 +30,12 @@ if (-not ("nerd-fonts" -in $buckets)) {
 # Install these packages
 $packages = @(
     "aspell"
+    "dasel"
     "gcc"
     "sudo"
     "sysinternals"
     "xsv"
     "zstd"
-)
-$globalPackages = @(
-    "AnonymousPro-NF"
-    "CodeNewRoman-NF"
-    "DejaVuSansMono-NF"
-    "Delugia-Mono-Nerd-Font-complete"
-    "Delugia-Nerd-Font-complete"
-    "FiraCode-NF"
-    "FiraMono-NF"
-    "RobotoMono-NF"
-    "SourceCodePro-NF"
-    "Terminus-NF"
-    "Ubuntu-NF"
 )
 
 # Install user mode packages
@@ -59,29 +48,6 @@ foreach ($pkg in $packages){
         "Installing: {0}" -f $pkg
         scoop install $pkg --no-update-scoop
     }
-}
-
-# Test for privilege
-$wid = [System.Security.Principal.WindowsIdentity]::GetCurrent()
-$prp = New-Object System.Security.Principal.WindowsPrincipal($wid)
-$adm = [System.Security.Principal.WindowsBuiltInRole]::Administrator
-
-# Test and install if administrator
-if ($prp.IsInRole($adm)) {
-    # Install Global packages as administrator
-    Write-Verbose "Installing Global packages"
-    foreach ($pkg in $globalPackages){
-        if ($pkg -in $installed) {
-            "Already installed: {0}" -f $pkg
-        }
-        else {
-            "Installing: {0}" -f $pkg
-            scoop install $pkg --no-update-scoop
-        }
-    }
-}
-else {
-    throw "You need to run this as administrator."
 }
 
 {{ end }}
