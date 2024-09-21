@@ -22,7 +22,7 @@ if (-not (Get-Command scoop)) {
 
 #  Get installed packages
 $config = scoop export|convertfrom-json
-$installed = ($config.apps|? info -match global|? info -notmatch failed).name
+$installed = ($config.apps|Where-Object info -match global|Where-Object info -notmatch failed).name
 
 $globalPackages = @(
     "AnonymousPro-NF"
