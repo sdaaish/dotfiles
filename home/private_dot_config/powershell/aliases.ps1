@@ -8,6 +8,7 @@ Set-Alias -Name cms -Value Chezmoi-Status
 Set-Alias -Name cmg -Value Chezmoi-GitStatus
 Set-Alias -Name cmu -Value Chezmoi-UnManaged
 Set-Alias -Name cmr -Value Chezmoi-RecursiveDiff
+Set-Alias -Name cmclear -Value Chezmoi-ClearState
 
 Set-Alias -Name cth -Value ConvertTo-HtmlPage
 Set-Alias -Name cte -Value ConvertTo-Excel
@@ -406,6 +407,10 @@ Function Chezmoi-RecursiveDiff {
     )
     $Path = $Path -replace "\\$", ""
     chezmoi diff --recursive $Path
+}
+Function Chezmoi-ClearState {
+    chezmoi state delete-bucket --bucket=scriptState
+    chezmoi state delete-bucket --bucket=entryState
 }
 
 # Show current week
