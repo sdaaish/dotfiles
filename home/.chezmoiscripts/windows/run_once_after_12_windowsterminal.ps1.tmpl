@@ -1,5 +1,6 @@
-{{ if eq .chezmoi.os "windows"-}}
+{{ if eq .chezmoi.os "windows" -}}
 
-winget install "windows terminal" --source "msstore" --accept-source-agreements --accept-package-agreements
+try { Get-Command wt.exe -ErrorAction Stop | Out-Null}
+catch { winget install "windows terminal" --source "msstore" --accept-source-agreements --accept-package-agreements }
 
 {{end}}
