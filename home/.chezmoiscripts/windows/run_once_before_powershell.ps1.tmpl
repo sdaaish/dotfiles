@@ -10,23 +10,4 @@ foreach($dir in $directories){
     New-Item -Path $path -Name $dir -ItemType Directory -Force|Out-Null
 }
 
-# Setup the config file for PowerShell 7
-[string]$path = "{0}{1}" -f $HOME,"\.local\share\PowerShell\Modules"
-$path = $path -replace "\\","\\"
-
-$content = @"
-{
-    "Microsoft.PowerShell:ExecutionPolicy":"RemoteSigned",
-    "PSModulePath":$path
-}
-"@
-
-[string]$config = @(
-    (Split-Path $profile.CurrentUserAllHosts)
-    [IO.Path]::DirectorySeparatorChar
-    "powershell.config.json"
-) -Join ""
-
-Set-Content -Path $config -Value $content
-
 {{ end }}

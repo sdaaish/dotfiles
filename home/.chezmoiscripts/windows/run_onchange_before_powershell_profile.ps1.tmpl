@@ -20,26 +20,32 @@ else {
 }
 '@
 
-if ($env:OneDriveConsumer){
-    $BaseDir = $env:OneDriveConsumer
-}
-elseif ($env:OneDriveCommercial){
-    $BaseDir = $env:OneDriveCommercial
-}
-else {
-    $BaseDir = $env:UserProfile
-}
-
-$path = Join-Path $BaseDir "Documents"
+$BaseDir = [System.Environment]::GetFolderPath([System.Environment+SpecialFolder]::Mydocuments)
 
 "PowerShell", "WindowsPowerShell" | foreach {
 
-    if(-not(Test-Path (Join-Path $path $_) -PathType Container)){
-        New-Item -Path $path -Name $_ -ItemType Directory
+    if(-not(Test-Path (Join-Path $BaseDir $_) -PathType Container)){
+        New-Item -Path $BaseDir -Name $_ -ItemType Directory
     }
-    $parent = Join-Path $path $_
+    $parent = Join-Path $BaseDir $_
     $config = Join-Path $parent "profile.ps1"
     Set-Content -Path $config -Value $content -Encoding UTF8 -NoNewLine -Force
 }
+
+# Setup the config file for PowerShell 7
+[string]$path = "{0}{1}" -f $HOME,"\.local\share\PowerShell\Modules"
+$path = $path -replace "\\","\\"
+
+$content = @"
+{
+    "Microsoft.PowerShell.ExecutionPolicy" : "RemoteSigned",
+    "PSModulePath" : "$path"
+}
+"@
+
+$config = Join-Path $BaseDir PowerShell
+$config = Join-Path $config "powershell.config.json"
+
+Set-Content -Path $config -Value $content
 
 {{ end }}
