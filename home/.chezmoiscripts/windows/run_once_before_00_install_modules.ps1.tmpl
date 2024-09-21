@@ -1,0 +1,42 @@
+{{ if eq .chezmoi.os "windows" -}}
+
+# Test for privilege
+$wid = [System.Security.Principal.WindowsIdentity]::GetCurrent()
+$prp = New-Object System.Security.Principal.WindowsPrincipal($wid)
+$adm = [System.Security.Principal.WindowsBuiltInRole]::Administrator
+
+# Test and install if administrator
+if (-not ($prp.IsInRole($adm))) {
+    throw "You need to run this as administrator."
+}
+
+try {
+    Get-PackageProvider -Name NuGet -ForceBootStrap -ErrorAction Stop| Out-Null
+}
+catch {
+    Install-PackageProvider -Name NuGet -Scope CurrentUser -Force -ForceBootStrap
+}
+finally {
+    Register-PackageSource -Name nuget.org -Location https://www.nuget.org/api/v2 -ProviderName NuGet
+    Set-PackageSource -Name nuget.org -Trusted
+}
+
+Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+
+$modules = Get-Modules -ListAvailable
+
+if (($modules|Where-Object Name -match PowerShellGet|Select-Object -first 1).Version -lt [version]"2.2.5"){
+    Install-Module -Name PowerShellGet -Scope AllUsers -Repository PSGallery -MinimumVersion 2.2.5 -Force
+}
+
+if (-not ("Microsoft.Winget.Client" -in $modules.name)){
+    Install-Module -Name Microsoft.Winget.Client -Scope AllUsers -Repository PSGallery -Force
+}
+
+if (-not ("Microsoft.PowerShell.PSResourceGet") -in $modules.name){
+    Install-Module -Name Microsoft.PowerShell.PSResourceGet -Scope AllUsers -Repository PSGallery -Force
+}
+
+Set-PSResourceRepository -Name PSGallery -Trusted -Priority 40
+
+{{ end }}

@@ -1,0 +1,11 @@
+{{ if eq .chezmoi.os "windows" -}}
+
+if (-not (Get-Command scoop)) {
+    Write-Verbose "Scoop not installed, installing."
+    Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+}
+else {
+    "Scoop already installed"
+}
+
+{{ end }}
