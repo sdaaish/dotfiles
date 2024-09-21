@@ -16,7 +16,7 @@ else {
 
 #  Get installed packages
 $config = scoop.ps1 export|convertfrom-json
-$installed = $config.apps.name
+$installed = ($config.apps|? info -notmatch global|? info -notmatch failed).name
 $buckets = $config.buckets.name
 
 if (-not ("extras" -in $buckets)) {
@@ -46,7 +46,7 @@ foreach ($pkg in $packages){
     }
     else {
         "Installing: {0}" -f $pkg
-        scoop install $pkg --no-update-scoop
+        scoop install $pkg
     }
 }
 
