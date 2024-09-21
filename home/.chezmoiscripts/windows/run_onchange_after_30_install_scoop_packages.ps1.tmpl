@@ -1,27 +1,39 @@
 {{ if eq .chezmoi.os "windows"}}
 
-# Install scoop user packages
+Function refreshenv {
+    $paths = @(
+				([System.Environment]::GetEnvironmentVariable("Path", "Machine") -split ([io.path]::PathSeparator))
+				([System.Environment]::GetEnvironmentVariable("Path", "User") -split ([io.path]::PathSeparator))
+    )
+    $env:path = ($paths | Select-Object -Unique) -join ([io.path]::PathSeparator)
+}
 
-$DATE = Get-Date -Format "yyyyMMddTHHmmss"
+refreshenv
+# Install scoop user packages
 Import-Module Microsoft.PowerShell.Utility
 
-if (-not (Get-Command scoop)) {
+try {
+    Get-Command scoop
+}
+catch {
     Write-Verbose "Scoop not installed, installing."
     Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
 }
-elseif  (Test-Path ${env:USERPROFILE}/scoop/shims/scoop.ps1) {
-    $env:PATH = "{0}{2}{1}" -f "${env:USERPROFILE}/scoop/shims",${env:PATH}, [System.IO.Path]::PathSeparator
-    scoop update --quiet
+
+try {
+    Get-Command git.exe
 }
-else {
-    throw "Scoop not installed"
+catch {
+    throw "Git not installed"
 }
+
+refreshenv
 
 # Update repository
 scoop update --quiet
 
 #  Get installed packages
-$config = scoop.ps1 export|convertfrom-json
+$config = scoop.ps1 export|ConvertFrom-Json
 $installed = ($config.apps|Where-Object info -notmatch global|Where-Object info -notmatch failed).name
 $buckets = $config.buckets.name
 

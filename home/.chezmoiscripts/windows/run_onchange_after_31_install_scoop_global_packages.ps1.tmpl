@@ -1,6 +1,15 @@
 {{ if eq .chezmoi.os "windows"}}
-
 # Install scoop global packages
+
+Function refreshenv {
+    $paths = @(
+				([System.Environment]::GetEnvironmentVariable("Path", "Machine") -split ([io.path]::PathSeparator))
+				([System.Environment]::GetEnvironmentVariable("Path", "User") -split ([io.path]::PathSeparator))
+    )
+    $env:path = ($paths | Select-Object -Unique) -join ([io.path]::PathSeparator)
+}
+
+refreshenv
 
 # Test for privilege
 $wid = [System.Security.Principal.WindowsIdentity]::GetCurrent()
@@ -12,23 +21,18 @@ if (-not ($prp.IsInRole($adm))) {
     throw "You need to run this as administrator."
 }
 
-$DATE = Get-Date -Format "yyyyMMddTHHmmss"
 Import-Module Microsoft.PowerShell.Utility
 
-if (Get-Command scoop) {
-    # Update repository
-    scoop update --quiet
-}
-elseif  (Test-Path $env:USERPROFILE/scoop/shims/scoop.ps1) {
-    $env:PATH = "{0}{2}{1}" -f "${env:USERPROFILE}/scoop/shims",${env:PATH}, [System.IO.Path]::PathSeparator
-    scoop update --quiet
-}
-else {
-    throw "Scoop not installed"
-}
+try { Get-Command git.exe -ErrorAction Stop}
+catch { throw "Git not installed" }
+
+try { Get-Command scoop -ErrorAction Stop}
+catch { throw "Scoop not installed" }
+
+scoop update --quiet
 
 #  Get installed packages
-$config = scoop export|convertfrom-json
+$config = scoop export|Convertfrom-Json
 $installed = ($config.apps|Where-Object info -match global|Where-Object info -notmatch failed).name
 
 $globalPackages = @(
