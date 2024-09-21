@@ -24,7 +24,7 @@ Function Set-LocalModulePath {
             }
 
             # Resolve the path to modules depending on version of Powershell
-            $LocalDirectory = [System.IO.Path]::GetFullPath((Join-Path -Path $env:USERPROFILE -ChildPath ".local"))
+            $LocalDirectory = [System.IO.Path]::GetFullPath((Join-Path -Path $env:USERPROFILE -ChildPath ".local/share"))
             $NewModuleDirectory = Join-Path -Path $LocalDirectory -ChildPath $version
             Write-Verbose "New module directory: $NewModuleDirectory"
 

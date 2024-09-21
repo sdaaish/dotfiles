@@ -12,6 +12,7 @@ refreshenv
 # Install scoop user packages
 Import-Module Microsoft.PowerShell.Utility
 
+$ErrorActionPreference = "Stop"
 try {
     Get-Command scoop
 }

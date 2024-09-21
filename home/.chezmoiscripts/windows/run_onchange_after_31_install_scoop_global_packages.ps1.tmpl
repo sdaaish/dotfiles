@@ -23,10 +23,11 @@ if (-not ($prp.IsInRole($adm))) {
 
 Import-Module Microsoft.PowerShell.Utility
 
-try { Get-Command git.exe -ErrorAction Stop}
+$ErrorActionPreference = "Stop"
+try { Get-Command git.exe}
 catch { throw "Git not installed" }
 
-try { Get-Command scoop -ErrorAction Stop}
+try { Get-Command scoop}
 catch { throw "Scoop not installed" }
 
 scoop update --quiet
