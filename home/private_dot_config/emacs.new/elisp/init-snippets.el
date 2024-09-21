@@ -81,7 +81,9 @@
                        (("\\.go\\'" . "Go script") . ["template.go" my/autoinsert-yas-expand])
                        (("\\.py\\'" . "Python script") . ["template.py" my/autoinsert-yas-expand])
                        (("\\.ps1\\'" . "Powershell script") . ["template.ps1" my/autoinsert-yas-expand])
-                       (("\\.psm1\\'" . "Powershell Module") . ["template.psm1" my/autoinsert-yas-expand])))
+                       (("\\.psm1\\'" . "Powershell Module") . ["template.psm1" my/autoinsert-yas-expand])
+                       (("windows.*\\.tmpl\\'" . "Chezmoi Windows Template") . ["template-win.chezmoi" my/autoinsert-yas-expand])
+                       (("linux.*\\.tmpl\\'" . "Chezmoi Linux Template") . ["template-lin.chezmoi" my/autoinsert-yas-expand])))
   :config (auto-insert-mode 1))
 
 (provide 'init-snippets)
