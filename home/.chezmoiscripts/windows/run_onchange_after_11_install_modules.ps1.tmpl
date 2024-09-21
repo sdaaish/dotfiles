@@ -1,0 +1,10 @@
+{{ if eq .chezmoi.os "windows" -}}
+
+$ModulePath = Join-Path (Resolve-Path ~) ".local/share/WindowsPowerShell/Modules"
+
+Save-Module -Name BuildHelpers -Path $ModulePath -Repository PSGallery -Force
+Save-Module -Name Posh-Git -Path $ModulePath -Repository PSGallery -Force
+Save-Module -Name Terminal-Icons -Path $ModulePath -Repository PSGallery -Force
+
+
+{{end}}

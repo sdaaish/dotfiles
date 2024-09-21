@@ -9,8 +9,6 @@ $installed = Get-WinGetPackage | Where-Object source -eq winget
 
 # Install these packages
 $wingetpackages = @{
-    "Git" = "Git.Git"
-    "7Zip" = "7zip.7zip"
     "Zoxide" = "ajeetdsouza.zoxide"
     "Eza" = "eza-community.eza"
     "Less" = "jftuga.less"
@@ -33,6 +31,9 @@ $wingetpackages = @{
     "Age" = "FiloSottile.age"
     "MKCert" = "FiloSottile.mkcert"
     "Glow" = "charmbracelet.glow"
+    "Starship" = "Starship.Starship"
+    "PowerShell" = "Microsoft.PowerShell"
+    "WindowsTerminal" = "Microsoft.WindowsTerminal"
 }
 
 # Test for privilege
