@@ -16,9 +16,12 @@ try {
 catch {
     Install-PackageProvider -Name NuGet -Scope CurrentUser -Force -ForceBootStrap
 }
-finally {
-    Register-PackageSource -Name nuget.org -Location https://www.nuget.org/api/v2 -Provider NuGet
-    Set-PackageSource -Name nuget.org -Trusted
+
+try {
+    Get-PackageSource -Name Nuget.org -ErrorAction Stop
+}
+catch {
+    Register-PackageSource -Name Nuget.org -Location https://www.nuget.org/api/v2 -Provider NuGet -Trusted
 }
 
 Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
@@ -33,10 +36,11 @@ if (-not ("Microsoft.Winget.Client" -in $modules.name)){
     Install-Module -Name Microsoft.Winget.Client -Scope AllUsers -Repository PSGallery -Force
 }
 
-if (-not ("Microsoft.PowerShell.PSResourceGet") -in $modules.name){
+if (-not ("Microsoft.PowerShell.PSResourceGet" -in $modules.name)){
     Install-Module -Name Microsoft.PowerShell.PSResourceGet -Scope AllUsers -Repository PSGallery -Force
 }
 
+Import-Module Microsoft.PowerShell.PSResourceGet -Force
 Set-PSResourceRepository -Name PSGallery -Trusted -Priority 40
 
 {{ end }}
