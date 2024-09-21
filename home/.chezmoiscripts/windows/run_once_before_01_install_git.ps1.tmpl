@@ -45,4 +45,7 @@ foreach ($pkg in $wingetpackages.GetEnumerator()){
     }
 }
 
+Import-Module ${env:UserProfile}/.config/powershell/MyFunctions/MyFunctions/MyFunctions.psd1
+Add-ProgToLocalPath "C:\Program Files\7-Zip\7z.exe"
+
 {{end}}
