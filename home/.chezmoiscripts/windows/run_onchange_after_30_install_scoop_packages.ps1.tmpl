@@ -5,17 +5,20 @@
 $DATE = Get-Date -Format "yyyyMMddTHHmmss"
 Import-Module Microsoft.PowerShell.Utility
 
-if (Get-Command scoop) {
-    # Update repository
-    scoop update --quiet
+if (-not (Get-Command scoop)) {
+    Write-Verbose "Scoop not installed, installing."
+    Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
 }
-elseif  (Test-Path $env:USERPROFILE/scoop/shims/scoop.ps1) {
-    $env:PATH = "{0}{2}{1}" -f $env:USERPROFILE/scoop/shims,${env:PATH}, [System.IO.Path]::PathSeparator
+elseif  (Test-Path ${env:USERPROFILE}/scoop/shims/scoop.ps1) {
+    $env:PATH = "{0}{2}{1}" -f "${env:USERPROFILE}/scoop/shims",${env:PATH}, [System.IO.Path]::PathSeparator
     scoop update --quiet
 }
 else {
     throw "Scoop not installed"
 }
+
+# Update repository
+scoop update --quiet
 
 #  Get installed packages
 $config = scoop.ps1 export|convertfrom-json

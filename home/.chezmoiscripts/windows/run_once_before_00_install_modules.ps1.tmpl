@@ -11,19 +11,19 @@ if (-not ($prp.IsInRole($adm))) {
 }
 
 try {
-    Get-PackageProvider -Name NuGet -ForceBootStrap -ErrorAction Stop| Out-Null
+    Get-PackageProvider -Name NuGet -ErrorAction Stop| Out-Null
 }
 catch {
     Install-PackageProvider -Name NuGet -Scope CurrentUser -Force -ForceBootStrap
 }
 finally {
-    Register-PackageSource -Name nuget.org -Location https://www.nuget.org/api/v2 -ProviderName NuGet
+    Register-PackageSource -Name nuget.org -Location https://www.nuget.org/api/v2 -Provider NuGet
     Set-PackageSource -Name nuget.org -Trusted
 }
 
 Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
 
-$modules = Get-Modules -ListAvailable
+$modules = Get-Module -ListAvailable
 
 if (($modules|Where-Object Name -match PowerShellGet|Select-Object -first 1).Version -lt [version]"2.2.5"){
     Install-Module -Name PowerShellGet -Scope AllUsers -Repository PSGallery -MinimumVersion 2.2.5 -Force
