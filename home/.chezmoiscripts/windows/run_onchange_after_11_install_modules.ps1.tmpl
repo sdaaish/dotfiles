@@ -1,8 +1,10 @@
 {{ if eq .chezmoi.os "windows" -}}
 
+Import-Module PowerShellGet -Force
+
 # Use a shared location for User level modules
 $ModulePath = Join-Path (Resolve-Path ~) ".local/share/PowerShell/Modules"
-$currentModules = Get-Modules -ListAvailable
+$currentModules = Get-Module -ListAvailable
 
 $newModules = @(
     "BuildHelpers"
