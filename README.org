@@ -9,30 +9,40 @@
 #+filetags: :dotfiles:chezmoi:
 
 * Description
+
 Dotfiles needs some place to stay.
 
-Scrips and shell-settings that are useful for me. Based on many examples from other people's dotfiles and configuration scripts.
+Scripts and settings that are useful for me. Based on many examples from other people's dotfiles and configuration scripts.
 
-Moving to a *Chezmoi* managed installation, since it was a bit tricky to maintain dotfiles on many devices with various configs. And want to use the same dotfiles directory for both Windows and Linux was an obstacle. But [[https://www.chezmoi.io/][Chezmoi]] seems to be the right tool for this.
-Have started using it for my systems, still things that needs to be configured.
+Have moved to a [[https://www.chezmoi.io][Chezmoi]] managed installation, since it was a bit tricky to maintain dotfiles on many devices with various configs. And I want to use the same dotfiles directory for both Windows and Linux was an obstacle. But [[https://www.chezmoi.io/][Chezmoi]] is the right tool for this.
+My workflow today is to use Chezmoi to control my setup of my systems, and I am less dependent on external scripts to do configuration and installation.
 
 ** Install
-Some test of chezmoi required the =.local/share= folder to be created before it worked. And also to have *Git* installed for submodules to clone properly.
+
+Install Chezmoi first, using file download, =Scoop=, =Winget=, =Chocolatey= or other methods.
+
 *** Linux
+Backup the existing dotfiles directory before installing the new repository.
+
 #+begin_src shell
-chezmoi archive --output=tmp/dotfiles.tar.gz
 sh -c "$(curl -fsLS get.chezmoi.io)" -- -b "${HOME}/bin"
 mkdir -p "${HOME}/.local/share"
 chezmoi init --verbose sdaaish
+chezmoi archive --output=tmp/dotfiles.tar.gz
+chezmoi apply
 #+end_src
+
 *** Windows
-*Chezmoi* can be downloaded directly or installed with *Scoop* or *Chocolatey*.
+*
+Chezmoi* can be downloaded directly or installed with *Scoop* or *Chocolatey*.
+
 #+begin_src powershell
-chezmoi archive --output=tmp/dotfiles.zip
 New-Item -Path $HOME -Name .local/share -ItemType Directory
 New-Item -Path $HOME -Name bin -ItemType Directory
 (irm -useb https://get.chezmoi.io/ps1) | powershell -c -
 chezmoi init --verbose sdaaish
+chezmoi archive --output=tmp/dotfiles.zip
+chezmoi apply
 #+end_src
 
 * Other info
@@ -48,6 +58,7 @@ To make things /easier/, (sort of), I moved to a Chezmoi setup where I can share
 Moving from two separate dotfiles setups to one common with Chezmoi is a bit tricky, but the overall experience is that it's both fairly straightforward and worth the extra work.
 
 But finally, a shared repository for Windows and Linux for my dotfiles, using *Chezmoi*.
+
 ** Linux
 Need to install fonts with =get-nerd-fonts= before they are working with xterm.
 - [[https://www.futurile.net/2016/06/14/xterm-setup-and-truetype-font-configuration/]]
