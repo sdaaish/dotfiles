@@ -1,10 +1,37 @@
 {{ if eq .chezmoi.os "windows" -}}
 
-$ModulePath = Join-Path (Resolve-Path ~) ".local/share/WindowsPowerShell/Modules"
+# Use a shared location for User level modules
+$ModulePath = Join-Path (Resolve-Path ~) ".local/share/PowerShell/Modules"
+$currentModules = Get-Modules -ListAvailable
 
-Save-Module -Name BuildHelpers -Path $ModulePath -Repository PSGallery -Force
-Save-Module -Name Posh-Git -Path $ModulePath -Repository PSGallery -Force
-Save-Module -Name Terminal-Icons -Path $ModulePath -Repository PSGallery -Force
+$newModules = @(
+    "BuildHelpers"
+    "Posh-Git"
+    "Terminal-Icons"
+    "DnsClient-PS"
+    "Get-ChildItemColor"
+    "ImportExcel"
+    "PSScriptAnalyzer"
+    "Microsoft.PowerShell.SecretManagement"
+    "Microsoft.PowerShell.SecretsStore"
+    "Microsoft.PowerShell.ConsoleGuiTools"
+    "PSFzf"
+    "PSScaffold"
+    "Pester"
+    "PSScriptAnalyzer"
+    "PSScriptTools"
+    "Watch-Command"
+    "WindowsSandboxTools"
+    "BurntToast"
+    "SecretManagement.KeePass"
+)
 
+foreach ($module in $newModules) {
+
+    if (-not ($module -in $currentModules.Name)) {
+        Save-Module -Name $module -Path $ModulePath -Repository PSGallery -Force
+    }
+
+}
 
 {{end}}

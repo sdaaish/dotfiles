@@ -17,15 +17,8 @@ Function Set-LocalModulePath {
         }
         else {
 
-            # Check wich version of Powershell
-            switch ($PSVersionTable.PSEdition) {
-                "Core" { $version = "PowerShell/Modules" }
-                "Desktop" { $version = "WindowsPowerShell/Modules" }
-            }
-
-            # Resolve the path to modules depending on version of Powershell
-            $LocalDirectory = [System.IO.Path]::GetFullPath((Join-Path -Path $env:USERPROFILE -ChildPath ".local/share"))
-            $NewModuleDirectory = Join-Path -Path $LocalDirectory -ChildPath $version
+            # Resolve the path
+            $NewModuleDirectory = [System.IO.Path]::GetFullPath((Join-Path -Path $env:USERPROFILE -ChildPath ".local/share/PowerShell/Modules"))
             Write-Verbose "New module directory: $NewModuleDirectory"
 
             try {
@@ -41,8 +34,9 @@ Function Set-LocalModulePath {
         }
     }
     end {
-        $NewModulePath -join ([io.path]::PathSeparator)
+        $ModulePath = ($NewModulePath | Select-Object -Unique) -join ([io.path]::PathSeparator)
         Write-Verbose "Old module path: $env:PSModulePath"
-        Write-Verbose "New module path: $NewModulePath"
+        Write-Verbose "New module path: $ModulePath"
+        $ModulePath
     }
 }
