@@ -6,34 +6,44 @@ Import-Module PowerShellGet -Force
 $ModulePath = Join-Path (Resolve-Path ~) ".local/share/PowerShell/Modules"
 $currentModules = Get-Module -ListAvailable
 
-$newModules = @(
+# Stable modules, normal install
+$stableModules = @(
     "BuildHelpers"
-    "Posh-Git"
-    "Terminal-Icons"
+    "BurntToast"
     "DnsClient-PS"
     "Get-ChildItemColor"
     "ImportExcel"
-    "PSScriptAnalyzer"
-    "Microsoft.PowerShell.SecretManagement"
-    "Microsoft.PowerShell.SecretsStore"
     "Microsoft.PowerShell.ConsoleGuiTools"
+    "Microsoft.PowerShell.SecretManagement"
+    "Microsoft.PowerShell.SecretStore"
     "PSFzf"
     "PSScaffold"
-    "Pester"
     "PSScriptAnalyzer"
     "PSScriptTools"
+    "Pester"
+    "Posh-Git"
+    "Terminal-Icons"
     "Watch-Command"
     "WindowsSandboxTools"
-    "BurntToast"
+)
+
+# Pre-release modules
+$betaModules = @(
     "SecretManagement.KeePass"
 )
 
-foreach ($module in $newModules) {
-
+foreach ($module in $stableModules) {
     if (-not ($module -in $currentModules.Name)) {
-        Save-Module -Name $module -Path $ModulePath -Repository PSGallery -Force
+        $Jobs = Start-Job -Name $module -ScriptBlock { Save-Module -Name $using:module -Path $using:ModulePath -Repository PSGallery -Force }
+        Get-Job|Wait-Job -TimeOut 120|Remove-Job
     }
+}
 
+foreach ($module in $betaModules) {
+    if (-not ($module -in $currentModules.Name)) {
+        $Jobs = Start-Job -Name $module -ScriptBlock { Save-Module -Name $using:module -Path $using:ModulePath -Repository PSGallery -AllowPrerelease -Force }
+        Get-Job|Wait-Job -TimeOut 120|Remove-Job
+    }
 }
 
 {{end}}
