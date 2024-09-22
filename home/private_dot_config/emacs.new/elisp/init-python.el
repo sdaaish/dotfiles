@@ -38,7 +38,7 @@
               ("C-x C-e" . python-shell-send-statement))
   :custom
   (python-indent-guess-indent-offset-verbose nil)
-  ;;  (python-check-command "poetry run pyright")
+  (python-check-command "ruff check")
   (python-indent-offset 4))
 
 ;; Save for future use, read the pet man page
