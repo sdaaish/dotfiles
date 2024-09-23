@@ -126,12 +126,12 @@ $env:RIPGREP_CONFIG_PATH = $(Resolve-path "$HOME/.config/ripgrep/config")
 # }
 
 # Detect Emacs and set the editor environment to use emacsclient with the server
-if (get-process |? name -match emacs| ? path -match emacs.exe){
+if (Get-Process |? Name -Match emacs| ? Path -match emacs.exe){
     $serverPath = Resolve-Path (Join-Path ${env:USERPROFILE} .config\emacs.new\server)
     $server = Resolve-Path (Get-Childitem -Path $serverPath -File -Filter server* |
         Sort -Property LastWriteTime |
-        Select -Last 1)
-    $env:editor="emacsclientw.exe -f $($server.path)"
+        Select -Property FullName -Last 1).Fullname
+    $env:editor="emacsclientw.exe -f $($server.path) -c"
 }
 elseif (($env:editor).length -gt 0){
     $env:editor = [System.Environment]::GetEnvironmentVariable("EDITOR","USER")

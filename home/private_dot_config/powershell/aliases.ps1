@@ -185,19 +185,24 @@ function emacs-client() {
 
     # Use default
     if (-not $InitDir){
-        $InitDir = $(Resolve-path (Join-Path $HOME .config/emacs))
+        $InitDir = Resolve-path (Join-Path $HOME .config/emacs)
     }
 
-    $msg = "Path: {0} InitDir: ${1}" -f $Path, $InitDir
+    # Change initdir based on alias used to call the script
+    if ($MyInvocation.InvocationName -eq "emx" ) {
+        $InitDir = Resolve-path (Join-Path $HOME .config/emacs.new)
+    }
+
+    $msg = "Invoked as: {2}, Path: {0}, InitDir: {1}" -f $Path, $InitDir,($MyInvocation.InvocationName)
     Write-Verbose "$msg"
 
     $date = Get-Date -Format 'yyyyMMdd-HH.mm.ss'
     $logfile = Join-Path $(Resolve-Path ~/tmp) "emacs-client-${date}.log"
 
-    $serverdir = join-path $initdir server
-    $serverfile = (get-childitem -Path $serverdir -file |
-      sort -property lastwritetime -desc -top 1 |
-      select fullname).fullname
+    $serverdir = Join-Path $initdir server
+    $serverfile = (Get-Childitem -Path $serverdir -file |
+        sort -property lastwritetime -desc -top 1 |
+        select fullname).fullname
 
     $msg = "Using server: {0}" -f $serverfile
     Write-Verbose "$msg"

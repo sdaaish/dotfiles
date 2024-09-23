@@ -3,8 +3,15 @@
 # Setup the powershell profile for CurrentUserAllHosts.
 # For both Desktop and Core version.
 
-$content = @'
+$DATE = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+
+$content1 = @"
 # This file is managed by Chezmoi, don't edit it
+# Updated at ${DATE}
+"@
+
+$content2 = @'
+
 $starttime = Get-Date
 
 # Exclude Powershell ISE from profiles and aliases for now.
@@ -18,7 +25,15 @@ else {
         default { . ~/.config/powershell/profile.ps1 }
     }
 }
+if (Test-Path "C:\Program Files (x86)\GnuWin32\bin\find.exe") {
+    $TMPPATH = "C:\Program Files (x86)\GnuWin32\bin;${env:PATH}"
+    $NEWPATH = ($TMPPATH -split ";" | Select-Object -Unique) -join ";"
+}
+
+${env:PATH} = ${NEWPATH}
 '@
+
+$content =  $content1 + $content2
 
 # Find the base of the Documents folder
 $BaseDir = [System.Environment]::GetFolderPath([System.Environment+SpecialFolder]::Mydocuments)
