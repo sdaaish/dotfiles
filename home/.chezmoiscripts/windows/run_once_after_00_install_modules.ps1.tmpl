@@ -5,12 +5,12 @@ $wid = [System.Security.Principal.WindowsIdentity]::GetCurrent()
 $prp = New-Object System.Security.Principal.WindowsPrincipal($wid)
 $adm = [System.Security.Principal.WindowsBuiltInRole]::Administrator
 
+"Installing Modules, this will take a while. Hang on...."
+
 # Test and install if administrator
 if (-not ($prp.IsInRole($adm))) {
     throw "You need to run this as administrator."
 }
-
-Set-ExecutionPolicy -Scope LocalMachine -ExecutionPolicy ByPass -Force
 
 try {
     Get-PackageProvider -Name NuGet -ListAvailable -ErrorAction Stop| Out-Null
@@ -20,14 +20,13 @@ catch {
 }
 
 try {
-    Get-PackageSource -Name Nuget.org -ErrorAction Stop
+    Get-PackageSource -Name Nuget.org -ErrorAction Stop | Out-Null
 }
 catch {
     Register-PackageSource -Name Nuget.org -Location https://www.nuget.org/api/v2 -Provider NuGet -Trusted
 }
 
 Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
-
 $modules = Get-Module -ListAvailable
 
 if (($modules|Where-Object Name -match PowerShellGet|Select-Object -First 1).Version -lt [version]"2.2.5"){
@@ -47,7 +46,7 @@ if (-not ("Microsoft.PowerShell.PSResourceGet" -in $modules.name)){
     Install-Module -Name Microsoft.PowerShell.PSResourceGet -Scope AllUsers -Repository PSGallery -Force
 }
 
-Import-Module Microsoft.PowerShell.PSResourceGet -Force
+Import-Module Microsoft.PowerShell.PSResourceGet -Force | Out-Null
 Set-PSResourceRepository -Name PSGallery -Trusted -Priority 40
 
 # Register my repository for PowerShellGet
@@ -57,7 +56,8 @@ $RepoSource = @{
     ScriptSourceLocation = "https://pkgs.dev.azure.com/sdaaish/PSModules/_packaging/AzurePSModuleRepo/nuget/v2"
     InstallationPolicy = "Trusted"
 }
-Register-PSRepository @RepoSource -ErrorAction Ignore
+try { Get-PSRepository -Name AzurePowershellModules -ErrorAction Stop | Out-Null}
+catch { Register-PSRepository @RepoSource -ErrorAction Ignore }
 
 # Register the repository for Microsoft.PowerShell.PSResourceGet
 # This supports version 3
@@ -67,6 +67,7 @@ $RepoSource = @{
     Trusted = $true
     Priority = 60
 }
-Register-PSResourceRepository @RepoSource
+try { Get-PSResourceRepository -Name AzurePowershellModules -ErrorAction Stop | Out-Null}
+catch { Register-PSResourceRepository @RepoSource -ErrorAction Ignore }
 
 {{ end }}

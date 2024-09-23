@@ -18,7 +18,7 @@
 
 {{ if eq .chezmoi.os "windows" -}}
 [env]
-    PSModulePath = "C:\\Program Files\\WindowsPowerShell\\Modules;C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules;C:\\Program Files\\PowerShell\\Modules;C:\\Program Files\\Powershell\\7\\Modules;C:\\Users\\sdahl\\.local\\share\\PowerShell\\Modules;"
+    PSModulePath = "C:\\Program Files\\WindowsPowerShell\\Modules;C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules;C:\\Program Files\\PowerShell\\Modules;C:\\Program Files\\Powershell\\7\\Modules;%USERPROFILE%\\.local\\share\\PowerShell\\Modules;"
 
 [cd]
      command = "powershell.exe"
