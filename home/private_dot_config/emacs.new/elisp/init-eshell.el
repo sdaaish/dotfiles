@@ -42,6 +42,10 @@
   (eshell-prompt-function 'epe-theme-dakrone)
   (epe-git-dirty-char "💩"))
 
+;; Not eshell, but put it here anyway
+(when (eq system-type 'windows-nt)
+  (setq shell-file-name "pwsh"))
+
 (provide 'init-eshell)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-eshell.el ends here

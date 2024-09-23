@@ -234,6 +234,7 @@
 (global-auto-revert-mode 1)
 (setq global-auto-revert-non-file-buffers t)
 (setq auto-revert-verbose nil)
+(global-so-long-mode t)
 
 (setq-default indent-tabs-mode nil)
 (setq inhibit-startup-message t
@@ -244,6 +245,8 @@
 (global-set-key (kbd "C-<kp-subtract>") 'text-scale-decrease)
 (setq text-scale-mode-step 1.05)
 (defalias 'yes-or-no-p 'y-or-n-p)
+(setq use-short-answers t)
+(setq confirm-kill-emacs 'yes-or-no-p)
 
 ;; Abbreviations
 (setq save-abbrevs 'silently

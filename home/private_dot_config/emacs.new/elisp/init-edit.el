@@ -39,12 +39,12 @@
   :hook ((prog-mode org-mode conf-mode) . ws-butler-mode))
 
 (use-package aggressive-indent
-  :config (global-aggressive-indent-mode t)
+  :config (global-aggressive-indent-mode nil)
   (add-to-list 'aggressive-indent-excluded-modes 'go-mode)
   (add-to-list 'aggressive-indent-excluded-modes 'go-ts-mode)
   (add-to-list 'aggressive-indent-excluded-modes 'python-mode)
   (add-to-list 'aggressive-indent-excluded-modes 'python-ts-mode)
-  :hook ((python-ts-mode go-ts-mode) . (lambda () (aggressive-indent-mode 0))))
+  :hook ((emacs-lisp-mode) . (lambda () (aggressive-indent-mode t))))
 
 
 (setq reb-re-syntax 'string)
