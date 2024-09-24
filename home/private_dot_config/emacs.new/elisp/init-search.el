@@ -31,7 +31,7 @@
     (setq grep-program "rg")
     (grep-apply-setting
      'grep-find-command
-     '("rg -n -H --color always --no-heading -e '' $(git rev-parse --show-toplevel || pwd)" . 27))))
+     '("rg -n -H --color always --no-heading -e '' $(git rev-parse --show-toplevel || pwd)" . 42))))
 
 (use-package macrostep
   :bind ("C-c e" . macrostep-mode))
