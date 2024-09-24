@@ -30,16 +30,20 @@
   (python-indent-guess-indent-offset-verbose nil))
 
 (use-package python
-  :bind (:map python-mode-map
-              ("C-c M-j" . run-python)
-              ("C-c C-k" . python-shell-send-buffer)
-              ("C-c C-c" . python-shell-send-defun)
-              ("C-c C-p" . python-shell-send-defun)
-              ("C-x C-e" . python-shell-send-statement))
+  :bind (:map python-ts-mode-map
+              ("C-c S-C-c" . 'compile)
+              ("C-c S-C-r" . 'recompile))
   :custom
   (python-indent-guess-indent-offset-verbose nil)
   (python-check-command "ruff check")
-  (python-indent-offset 4))
+  (python-indent-offset 4)
+  :hook ((python-mode python-ts-mode) .
+         (lambda ()
+           (setq-local compile-command
+		                   (concat "mypy "
+			                         (if buffer-file-name
+			                             (shell-quote-argument
+			                              (file-name-sans-extension buffer-file-name))))))))
 
 ;; Save for future use, read the pet man page
 ;;(use-package py-autopep8)

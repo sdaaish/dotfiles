@@ -6,6 +6,9 @@
 (use-package eglot
   :straight (:type built-in)
   :init (add-to-list 'major-mode-remap-alist '(python-mode . python-ts-mode))
+  :custom (eglot-ignored-server-capabilities '(:documentHighlightProvider))
+  (eglot-report-progress nil)
+
   :config (setq-default eglot-workspace-configuration
                         '(
                           :jedi-language-server (

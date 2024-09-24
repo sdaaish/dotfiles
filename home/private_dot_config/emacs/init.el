@@ -124,6 +124,7 @@
 ;;      `((".*" ,(expand-file-name "backups" user-emacs-directory) t)))
 (save-place-mode 1)
 (auto-save-mode 1)
+
 (setq save-place-file (expand-file-name ".cache/saveplace" user-emacs-directory))
 (setq recentf-save-file (expand-file-name ".cache/recentfiles" user-emacs-directory))
 
@@ -134,6 +135,7 @@
       kept-new-versions 10
       kept-old-versions 10
       auto-save-interval 40
+      auto-save-no-message t
       delete-by-moving-to-trash t
       save-silently t)
 
@@ -221,14 +223,31 @@
        (set-fontset-font t 'unicode (font-spec :family "Noto color emoji" :fontified t) nil 'prepend)))
 
 
+(add-hook 'prog-mode-hook (electric-pair-mode t))
+
 ;; Python settings
 (setq python-indent-guess-indent-offset-verbose nil)
 (add-hook 'python-mode-hook 'eglot-ensure)
+(add-hook 'python-ts-mode-hook
+          (lambda ()
+	    (setq-local compile-command
+		        (concat "mypy "
+			        (if buffer-file-name
+			            (shell-quote-argument
+			             (file-name-sans-extension buffer-file-name)))))))
+(with-eval-after-load 'python
+  (define-key python-mode-map (kbd "C-c S-C-c") 'compile)
+    (define-key python-mode-map (kbd "C-c S-C-r") 'recompile))
 
 ;; Flymake
 (with-eval-after-load 'flymake
   (define-key flymake-mode-map (kbd "M-n") 'flymake-goto-next-error)
-  (define-key flymake-mode-map (kbd "M-p") 'flymake-goto-prev-error))
+  (define-key flymake-mode-map (kbd "M-p") 'flymake-goto-prev-error)
+  (define-key flymake-mode-map (kbd "C-c C-g") 'flymake-show-buffer-diagnostics))
+
+;; Eglot
+(setq eglot-ignored-server-capabilities '(:documentHighlightProvider)
+      eglot-report-progress nil)
 
 ;; Start the server
 (server-start)
