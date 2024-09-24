@@ -18,8 +18,9 @@ $starttime = Get-Date
 if ($Host -match "ISE"){
 }
 else {
-    switch ($env:TERM){
-        "emacs" { . ~/.config/powershell/profile-emacs.ps1 }
+    switch -regex ($env:TERM){
+        "^emacs-" { [void]|Out-Null}
+        "^emacs$" { . ~/.config/powershell/profile-emacs.ps1 }
         "dumb" { . ~/.config/powershell/profile-emacs.ps1 }
         "vscode" { . ~/.config/powershell/profile-emacs.ps1 }
         default { . ~/.config/powershell/profile.ps1 }
