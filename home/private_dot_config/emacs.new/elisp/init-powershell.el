@@ -26,7 +26,7 @@
     (setq powershell-location-of-exe "pwsh.exe"))
   ;;  (setq explicit-powershell\.exe-args '("-NoLogo" "-NoProfile" "-Command" "-"))
   ;;  (setq explicit-pwsh\.exe-args '("-NoLogo" "-NoProfile" "-Command" "-"))
-  (customize-set-variable 'powershell-indent 4)
+  :custom  (powershell-indent 2)
   :custom-face (font-lock-variable-name-face ((t (:foreground "#d98026" :weight normal)))))
 
 

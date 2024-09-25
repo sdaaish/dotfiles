@@ -42,9 +42,10 @@
   (eshell-prompt-function 'epe-theme-dakrone)
   (epe-git-dirty-char "💩"))
 
-;; Not eshell, but put it here anyway
-;;(when (eq system-type 'windows-nt)
-;;  (setq shell-file-name (default-value 'shell-file-name)))
+;; Not eshell, but put it here anyway. This is for the interactive shell, not the shell-command.
+;; Changing the `shell-file-name`, i.e. `shell-command` did break things.
+(when (eq system-type 'windows-nt)
+  (setq explicit-shell-file-name "pwsh.exe"))
 
 (provide 'init-eshell)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
