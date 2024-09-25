@@ -38,8 +38,15 @@
 
 (use-package orderless
   :custom
-  (completion-styles '(orderless-flex basic))
-  (completion-category-overrides '((file (styles basic partial-completion)))))
+  (completion-styles '(orderless basic))
+  (orderless-matching-styles '(orderless-flex orderless-literal orderless-regexp))
+  (completion-category-overrides '((file (styles basic partial-completion))))
+  (orderless-component-separator "[ &]")
+  :config (defun just-one-face(fn &rest args)
+            (let ((orderless-match-faces [completions-common-part]))
+              (apply fn args)))
+  (advice-add 'company-capf--candidates :around #'just-one-face))
+
 
 (defun my/match-components-literally ()
   "Components match literally for the rest of the session."
