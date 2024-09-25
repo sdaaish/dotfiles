@@ -64,7 +64,8 @@
 ;; Flymake
 (with-eval-after-load 'flymake
   (bind-key "M-n" #'flymake-goto-next-error 'flymake-mode-map)
-  (bind-key "M-p" #'flymake-goto-prev-error 'flymake-mode-map))
+  (bind-key "M-p" #'flymake-goto-prev-error 'flymake-mode-map)
+  (bind-key "C-c m" #'flymake-show-buffer-diagnostics 'flymake-mode-map))
 
 (provide 'init-code)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
