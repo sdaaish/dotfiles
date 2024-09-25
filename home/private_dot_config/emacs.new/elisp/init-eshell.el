@@ -43,8 +43,8 @@
   (epe-git-dirty-char "💩"))
 
 ;; Not eshell, but put it here anyway
-(when (eq system-type 'windows-nt)
-  (setq shell-file-name "pwsh"))
+;;(when (eq system-type 'windows-nt)
+;;  (setq shell-file-name (default-value 'shell-file-name)))
 
 (provide 'init-eshell)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
