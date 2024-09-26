@@ -233,15 +233,6 @@ src() {
     source "$HOME/.bashrc"
 }
 
-srca() {
-    printf "Udates %s, %s and %s\n" "$EMACSDIR" "$DOTFILES" "$DOTPRIVATE"
-    printf "Pulling dotfiles: "; git -C "$DOTFILES" pull
-    printf "Pulling emacs-config: "; git -C "$EMACSDIR" pull
-    printf "Pulling dotfiles: "; git -C "$DOTPRIVATE" pull
-    (cd "$DOTFILES" || exit 1 ; ./setup.sh)
-    make -C "$EMACSDIR"
-    src
-}
 # Starts ssh-agent
 # Workaround for WSL
 # See https://github.com/Microsoft/WSL/issues/3183
