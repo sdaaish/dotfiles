@@ -69,7 +69,12 @@ alias emq='emacs -Q \
 
 alias doom='~/.config/emacs/bin/doom'
 
-alias mg='mg -n -u ~/.config/mg/config'
+if [[ (${OS_VERSION} == "20.04") || (${OS_VERSION} == "11") ]]
+then
+    alias mg='mg -n'
+else
+    alias mg='mg -n -u ~/.config/mg/config'
+fi
 
 # binary support
 alias bbk='bbk_cli'

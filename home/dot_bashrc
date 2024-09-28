@@ -5,6 +5,9 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+[ -f /etc/os-release ] &&  OS_VERSION=$(awk -F= '/VERSION_ID/{gsub("\"","",$2);print $2}' /etc/os-release)
+export OS_VERSION
+
 # To test with shellcheck, run with:
 ##  shellcheck -x -P $(pwd) .bashrc
 
