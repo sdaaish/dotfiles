@@ -30,7 +30,7 @@
 
 (defun gc/set-after-start ()
   "Set a sane value after starting Emacs."
-  (setq gc-cons-threshold (* 5 1024 1024)))
+  (setq gc-cons-threshold (* 80 1024 1024)))
 (setq after-init-hook 'gc/set-after-start)
 
 ;; From emacs-from-scratch https://github.com/daviwil/emacs-from-scratch/blob/master/init.el
