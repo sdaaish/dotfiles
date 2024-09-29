@@ -120,8 +120,7 @@
       display-time-default-load-average nil)
 
 (use-package company
-  :config (global-company-mode 1)
-  :diminish)
+  :config (global-company-mode 1))
 
 ;; Key bindings
 

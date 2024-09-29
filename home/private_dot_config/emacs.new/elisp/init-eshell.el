@@ -22,6 +22,13 @@
 (when (eq system-type 'gnu/linux)
   (setenv "PAGER" "cat"))
 
+(defun shell-mode-company-init ()
+  "Company for terminal shell."
+  (setq-local company-backends '((company-capf
+                                  company-keywords
+                                  company-files
+                                  company-dabbrev-code))))
+
 (use-package eshell
   :straight (:type built-in)
   :custom
@@ -34,7 +41,8 @@
   (eshell-aliases-file (my/setup-dirs ".config/eshell/alias" (getenv "HOME")) (getenv "HOME"))
   (password-cache t)
   (password-cache-expiry 3600)
-  :bind ("C-c RET" . eshell))
+  :bind ("C-c RET" . eshell)
+  :hook (eshell-mode . shell-mode-company-init))
 
 ;; Trying out this
 (use-package eshell-prompt-extras
@@ -46,6 +54,10 @@
 ;; Changing the `shell-file-name`, i.e. `shell-command` did break things.
 (when (eq system-type 'windows-nt)
   (setq explicit-shell-file-name "pwsh.exe"))
+
+(use-package shell
+  :straight (:type built-in)
+  :hook (shell-mode . shell-mode-company-init))
 
 (provide 'init-eshell)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
