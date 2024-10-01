@@ -58,6 +58,10 @@
   (global-hungry-delete-mode t)
   :custom (hungry-delete-except-modes '(minibuffer-mode)))
 
+;; Hide/show code blocks
+(add-hook 'prog-mode-hook (lambda() (hs-minor-mode 1)))
+(bind-key "<f8> h" 'hydra-hideshow/body)
+
 (provide 'init-edit)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-edit.el ends here

@@ -21,13 +21,14 @@
 (use-package hydra)
 
 ;; Hydra for changes to display
-(defhydra hydra-toggle (:color pink :timeout 3)
+(defhydra hydra-toggle (:color pink :timeout 4)
   "
         _a_ abbrev-mode:       %`abbrev-mode
         _c_ flycheck-mode:     %`flycheck-mode
         _d_ debug-on-error:    %`debug-on-error
         _e_ editorconfig-mode: %`editorconfig-mode
         _f_ auto-fill-mode:    %`auto-fill-function
+        _h_ hs-minor-mode:     %`hs-minor-mode
         _t_ truncate-lines:    %`truncate-lines
         _v_ visual-lines:      %`visual-line-mode
         _w_ whitespace-mode:   %`whitespace-mode
@@ -35,6 +36,7 @@
         _r_ relative-lines:    %`display-line-numbers-type
         _R_ rainbow-delimiters %`rainbow-delimiters-mode
         _C_ rainbow-mode       %`rainbow-mode
+        _q_ Quit
   "
   ("a" abbrev-mode nil)
   ("c" flycheck-mode nil)
@@ -42,6 +44,7 @@
   ("d" toggle-debug-on-error nil)
   ("e" editorconfig-mode nil)
   ("f" auto-fill-mode nil)
+  ("h" hs-minor-mode nil)
   ("l" my/line-number-t nil)
   ("r" my/line-number-relative nil)
   ("R" rainbow-delimiters-mode nil)
@@ -128,7 +131,7 @@
   ("s" counsel-search "Search Engine"))
 
 ;; Switch between Modus themes
-(defhydra hydra-theme-chooser (:color blue :columns 2 :timeout 2)
+(defhydra hydra-theme-chooser (:color blue :columns 2 :timeout 3)
   "Switch between Modus themes"
   ("v t" (modus-themes-select 'modus-vivendi-tinted) "Vivendi Tinted")
   ("o t" (modus-themes-select 'modus-operandi-tinted) "Operandi Tinted")
@@ -149,6 +152,16 @@
   ("u" devdocs-update-all "Update all docs")
   ("q" nil "Quit"))
 
+;; Hydra for hs-minor-mode commands
+(defhydra hydra-hideshow (:color blue :columns 2)
+  "Hide and show code and comments blocks"
+  ("b" hs-hide-block "Hide block")
+  ("c" hs-show-block "Show block")
+  ("l" hs-hide-level "Hide level")
+  ("h" hs-hide-all "Hide all")
+  ("s" hs-show-all "Show all")
+  ("t" hs-toggle-hiding "Toggle hiding")
+  ("q" nil "Quit"))
 
 (provide 'init-hydra)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
