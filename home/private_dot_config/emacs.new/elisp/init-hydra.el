@@ -163,6 +163,13 @@
   ("t" hs-toggle-hiding "Toggle hiding")
   ("q" nil "Quit"))
 
+
+(defhydra hydra-zoom (global-map "<f2>" :timeout 3)
+  "Increase or decrease text size"
+  ("i" text-scale-increase "Zoom in")
+  ("o" text-scale-decrease "Zoom out")
+  ("q" nil "Quit"))
+
 (provide 'init-hydra)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-hydra.el ends here
