@@ -78,6 +78,7 @@ fi
 
 # binary support
 alias bbk='bbk_cli'
+alias ff='firefox -P'
 
 # system stuff
 alias myver='lsb_release -a'
