@@ -21,7 +21,12 @@
 (use-package editorconfig
   :diminish)
 
+;; Zig code support
 (use-package zig-mode)
+
+(use-package zig-ts-mode
+  :straight (zig-ts-mode :type git :host codeberg :repo "meow_king/zig-ts-mode")
+  :config (add-to-list 'auto-mode-alist '("\\.zig\\'" . zig-ts-mode)))
 
 ;; devdocs.io viewer
 (use-package devdocs
@@ -56,7 +61,8 @@
           (json-mode . json-ts-mode)
           (python-mode . python-ts-mode)
           (typescript-mode . typescript-ts-mode)
-          (yaml-mode . yaml-ts-mode))))
+          (yaml-mode . yaml-ts-mode)
+          (zig-mode . zig-ts-mode))))
 
 ;; Leave this out for now
 ;;(use-package tree-sitter-langs)
