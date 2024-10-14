@@ -45,7 +45,13 @@
   :config (defun just-one-face(fn &rest args)
             (let ((orderless-match-faces [completions-common-part]))
               (apply fn args)))
-  (advice-add 'company-capf--candidates :around #'just-one-face))
+  (advice-add 'company-capf--candidates :around #'just-one-face)
+  (defun my/match-components-literally ()
+    "Components match literally for the rest of the session."
+    (interactive)
+    (setq-local orderless-matching-styles '(orderless-literal)
+                orderless-style-dispatchers nil))
+  :bind (:map swiper-map ("C-0" . my/match-components-literally)))
 
 
 (defun my/match-components-literally ()
