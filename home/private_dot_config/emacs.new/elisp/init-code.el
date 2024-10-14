@@ -26,7 +26,13 @@
 
 (use-package zig-ts-mode
   :straight (zig-ts-mode :type git :host codeberg :repo "meow_king/zig-ts-mode")
-  :config (add-to-list 'auto-mode-alist '("\\.zig\\'" . zig-ts-mode)))
+  :config (add-to-list 'auto-mode-alist '("\\.zig\\'" . zig-ts-mode))
+  :bind (:map zig-ts-mode-map
+              ("C-c C-b" . zig-compile)
+              ("C-c C-r" . zig-run)
+              ("C-c C-f" . zig-format-buffer)
+              ("C-c C-t" . zig-test-buffer))
+  :hook (zig-ts-mode . (lambda() (zig-format-on-save-mode 1))))
 
 ;; devdocs.io viewer
 (use-package devdocs
@@ -41,7 +47,7 @@
   :hook
   (emacs-lisp-mode . (lambda () (setq-local devdocs-current-docs '("elisp"))))
   ((python-mode python-ts-mode) . (lambda () (setq-local devdocs-current-docs '("python~3.12"))))
-  ((zig-mode zig-tz-mode) . (lambda () (setq-local devdocs-current-docs '("zig"))))
+  ((zig-mode zig-ts-mode) . (lambda () (setq-local devdocs-current-docs '("zig"))))
   ((go-mode go-ts-mode) . (lambda () (setq-local devdocs-current-docs '("go")))))
 
 
