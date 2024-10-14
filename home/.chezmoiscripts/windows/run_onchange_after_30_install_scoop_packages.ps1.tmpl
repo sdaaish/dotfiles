@@ -28,9 +28,17 @@ catch {
     throw "Git not installed"
 }
 
+try {
+  Get-Command 7z.exe
+}
+catch {
+  throw "7-Zip not installed"
+}
+
 refreshenv
 
 # Update repository
+scoop config use_external_7zip $true
 scoop update --quiet
 
 #  Get installed packages
