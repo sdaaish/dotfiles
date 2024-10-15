@@ -27,6 +27,7 @@ Set-Alias -Name emq -Value EmacsQ
 Set-Alias -Name mg -Value micro
 
 Set-Alias -Name gs -Value Get-CommandSyntax
+Set-Alias -Name gch -Value Get-CommandHelp
 
 # Listing files
 Set-Alias -Name lll -Value Find-Links
@@ -161,7 +162,7 @@ function llt {
     Get-ChildItem $Path -Attributes H, !H, A, !A, S, !S | Sort-Object lastwritetime
 }
 # Alias for help-command
-function gh([string]$help) {
+function Get-CommandHelp([string]$help) {
     $ErrorActionPreference = "Ignore"
     Get-Help -Name $help -Online
 }
