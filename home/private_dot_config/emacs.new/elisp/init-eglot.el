@@ -41,9 +41,8 @@
   (python-ts-mode . superword-mode)
   (python-ts-mode . hs-minor-mode)
   (python-ts-mode . (lambda () (set-fill-column 88)))
-  ((go-ts-mode python-ts-mode) . eglot-ensure)
-  ((go-ts-mode python-ts-mode) . eglot-format-buffer-on-save)
-  ((go-ts-mode python-ts-mode) . eglot-format-buffer-on-save))
+  ((go-ts-mode python-ts-mode zig-mode) . eglot-ensure)
+  ((go-ts-mode python-ts-mode zig-mode) . eglot-format-buffer-on-save))
 
 
 (use-package flycheck)

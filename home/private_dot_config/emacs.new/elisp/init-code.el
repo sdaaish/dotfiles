@@ -22,17 +22,18 @@
   :diminish)
 
 ;; Zig code support
-(use-package zig-mode)
+(use-package zig-mode
+  :config (add-to-list 'auto-mode-alist '("\\.zig\\'" . zig-mode)))
 
-(use-package zig-ts-mode
-  :straight (zig-ts-mode :type git :host codeberg :repo "meow_king/zig-ts-mode")
-  :config (add-to-list 'auto-mode-alist '("\\.zig\\'" . zig-ts-mode))
-  :bind (:map zig-ts-mode-map
-              ("C-c C-b" . zig-compile)
-              ("C-c C-r" . zig-run)
-              ("C-c C-f" . zig-format-buffer)
-              ("C-c C-t" . zig-test-buffer))
-  :hook (zig-ts-mode . (lambda() (zig-format-on-save-mode 1))))
+;; (use-package zig-ts-mode
+;;   :disabled
+;;   :straight (zig-ts-mode :type git :host codeberg :repo "meow_king/zig-ts-mode")
+;;   :bind (:map zig-ts-mode-map
+;;               ("C-c C-b" . zig-compile)
+;;               ("C-c C-r" . zig-run)
+;;               ("C-c C-f" . zig-format-buffer)
+;;               ("C-c C-t" . zig-test-buffer))
+;;   :hook (zig-ts-mode . (lambda() (zig-format-on-save-mode 1))))
 
 ;; devdocs.io viewer
 (use-package devdocs
@@ -67,8 +68,7 @@
           (json-mode . json-ts-mode)
           (python-mode . python-ts-mode)
           (typescript-mode . typescript-ts-mode)
-          (yaml-mode . yaml-ts-mode)
-          (zig-mode . zig-ts-mode))))
+          (yaml-mode . yaml-ts-mode))))
 
 ;; Leave this out for now
 ;;(use-package tree-sitter-langs)
