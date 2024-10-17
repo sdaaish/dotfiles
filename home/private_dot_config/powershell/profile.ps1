@@ -126,18 +126,28 @@ $env:RIPGREP_CONFIG_PATH = $(Resolve-path "$HOME/.config/ripgrep/config")
 # }
 
 # Detect Emacs and set the editor environment to use emacsclient with the server
-if (Get-Process |? Name -Match emacs| ? Path -match emacs.exe){
-    $serverPath = Resolve-Path (Join-Path ${env:USERPROFILE} .config\emacs.new\server)
-    $server = Resolve-Path (Get-Childitem -Path $serverPath -File -Filter server* |
-        Sort -Property LastWriteTime |
-        Select -Property FullName -Last 1).Fullname
-    $env:editor="emacsclientw.exe -f $($server.path) -c"
+$emacsDir = Join-Path ${env:USERPROFILE} .config\emacs.new\server
+if (Get-Process |? Name -Match emacs| ? Path -match emacs.exe) {
+    # Edge case: Test if emacs has written to the server directory
+    if (Test-Path $emacsDir){
+        $serverPath = Resolve-Path $emacsDir
+        $server = Resolve-Path (Get-Childitem -Path $serverPath -File -Filter server* |
+          Sort -Property LastWriteTime |
+          Select -Property FullName -Last 1).Fullname
+        $env:EDITOR="emacsclientw.exe -f $($server.path) -c"
+    }
+    elseif (($env:EDITOR).length -gt 0){
+        $env:EDITOR = [System.Environment]::GetEnvironmentVariable("EDITOR","USER")
+    }
+    else {
+        $env:EDITOR = "runemacs.exe"
+    }
 }
-elseif (($env:editor).length -gt 0){
-    $env:editor = [System.Environment]::GetEnvironmentVariable("EDITOR","USER")
+elseif (($env:EDITOR).length -gt 0){
+    $env:EDITOR = [System.Environment]::GetEnvironmentVariable("EDITOR","USER")
 }
 else {
-    $env:editor = "runemacs.exe"
+    $env:EDITOR = "runemacs.exe"
 }
 "{0,-20}: {1}ms" -f "After EDITOR", (Get-RunningTime $starttime)
 
