@@ -18,17 +18,12 @@
 ;;
 ;;; Code:
 
-(use-package ag
-  :commands counsel-ag)
-
-(use-package rg
-  :config (rg-enable-default-bindings))
-
 (use-package grep
   :straight (:type built-in)
   :config
   (when (executable-find "rg")
     (setq grep-program "rg")
+    (setq find-program "rg")
     (grep-apply-setting
      'grep-find-command
      '("rg -n -H --color always --no-heading -e '' $(git rev-parse --show-toplevel || pwd)" . 42))))
