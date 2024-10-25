@@ -1,15 +1,23 @@
 * Tree-sitter langs
+
+This directory is a shared folder with the =tree-sitter libraries=, to be able to use it between different =Emacs= installations.
+
+** Installation
+
 Put all =tree-sitter= executable (.dll/.so) language files in this folder.
-Download from https://github.com/emacs-tree-sitter/tree-sitter-langs/releases/ or build them
+Download from https://github.com/emacs-tree-sitter/tree-sitter-langs/releases/ or build them directly from within Emacs.
 
 They should be renamed to have =libtree-sitter-= as prefix.
 
 See also [[https://www.masteringemacs.org/article/how-to-get-started-tree-sitter][Mastering Emacs]].
 
+** Chezmoi
+
+This installation is managed by =Chezmoi= and the binaries are downloaded from  [[https://github.com/kiennq/treesit-langs/releases][Github Kiennq]].
+
 ** Powershell
 
-To get powershell, go to [[https://github.com/airbus-cert/tree-sitter-powershell][Github]] and clone it, then build it with make.
-This folder contains a locally built copy.
+To get =PowerShell=, go to [[https://github.com/airbus-cert/tree-sitter-powershell][Github]] and clone it, then build it with make.
 
 Add this Emacs package from [[https://github.com/dmille56/powershell-ts-mode?tab=readme-ov-file][Melpa]].
 

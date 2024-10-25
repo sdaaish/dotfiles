@@ -1,0 +1,19 @@
+{{ if eq .chezmoi.os "linux" -}}
+# -*- mode: toml; -*-
+
+# Tree-sitter libraries for both Windows and Linux.
+
+# Linux
+[".config/tree-sitter"]
+  type = "archive"
+  url = "https://github.com/kiennq/treesit-langs/releases/download/1.0.169/tree-sitter-grammars.x86_64-unknown-linux-gnu.v1.0.169.tar.gz"
+  refreshPeriod = "672h"
+
+{{ else if eq .chezmoi.os "windows" -}}
+# Windows
+[".config/tree-sitter"]
+  type = "archive"
+  url = "https://github.com/kiennq/treesit-langs/releases/download/1.0.169/tree-sitter-grammars.x86_64-pc-windows-msvc.v1.0.169.tar.gz"
+  refreshPeriod = "672h"
+
+{{ end }}
