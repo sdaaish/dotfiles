@@ -35,22 +35,25 @@ From [[https://github.com/daviwil/emacs-from-scratch/blob/9388cf6ecd9b44c430867a
 #+end_src
 ** Init.el
 #+begin_src emacs-lisp
-  (defvar bootstrap-version)
-  (let ((bootstrap-file
-         (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-        (bootstrap-version 5))
-    (unless (file-exists-p bootstrap-file)
-      (with-current-buffer
-          (url-retrieve-synchronously
-           "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-           'silent 'inhibit-cookies)
-        (goto-char (point-max))
-        (eval-print-last-sexp)))
-    (load bootstrap-file nil 'nomessage))
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name
+        "straight/repos/straight.el/bootstrap.el"
+        (or (bound-and-true-p straight-base-dir)
+            user-emacs-directory)))
+      (bootstrap-version 7))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
 
-  ;; Local customize-file
-  (setq custom-file (expand-file-name "emacs-custom.el" user-emacs-directory))
-  (load custom-file)
+;; Local customize-file
+(setq custom-file (expand-file-name "emacs-custom.el" user-emacs-directory))
+(load custom-file)
 #+end_src
 ** Straight
 #+begin_src emacs-lisp
@@ -133,7 +136,10 @@ Test Emacs packages.
   (setq apropos-do-all t)
   :bind
   ("C-r" . swiper)
-  ("C-s" . swiper))
+  ("C-s" . swiper)
+  ("C-x C-f" . counsel-find-file)
+  ("C-c C-S-F" . counsel-recentf)
+  ("C-c C-S-R" . ivy-resume))
 
 (use-package counsel
   :diminish
@@ -158,7 +164,8 @@ Test Emacs packages.
 #+begin_src emacs-lisp
 (use-package hungry-delete
   :config
-  (global-hungry-delete-mode t))
+  (global-hungry-delete-mode t)
+  :custom (hungry-delete-except-modes '(minibuffer-mode)))
 #+end_src
 *** Rainbow
 #+begin_src emacs-lisp
@@ -268,6 +275,14 @@ The one and only.
   :config (require 'ob-powershell)
   :custom (ob-powershell-powershell-command "pwsh -NoProfile -NoLogo"))
 #+end_src
+*** Powershell with Tree sitter
+#+begin_src emacs-lisp
+(use-package powershell-ts-mode
+  :straight (:host github :repo "dmille56/powershell-ts-mode")
+  :config
+  ;; Optional: if you want to disable top-level vars from being shown in imenu
+  (setq powershell-ts-enable-imenu-top-level-vars nil))
+#+end_src
 *** Dired git
 #+begin_src emacs-lisp
 	(use-package dired-git-info
@@ -301,4 +316,14 @@ Rename scratch and no startup screen.
 ** Org mode
 #+begin_src emacs-lisp
 (customize-set-variable 'org-confirm-babel-evaluate nil)
+#+end_src
+** Tree-sitter
+#+begin_src emacs-lisp
+(use-package treesit
+  :straight (:type built-in)
+  :config (add-to-list 'treesit-extra-load-path (expand-file-name "tree-sitter/" "~/.config"))
+  (setq major-mode-remap-alist
+        '((go-mode . go-ts-mode)
+          (python-mode . python-ts-mode)
+          (yaml-mode . yaml-ts-mode))))
 #+end_src
