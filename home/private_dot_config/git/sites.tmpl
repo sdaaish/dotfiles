@@ -7,9 +7,15 @@
 	sslCAInfo = ~/.config/git/CACerts/CA-chain.crt
 	{{- if eq .chezmoi.os "windows" }}
 	sslbackend = schannel
+	{{ else }}
+	sslbackend = gnutls
 	{{ end }}
 	{{ else }}
+	{{- if eq .chezmoi.os "windows" }}
 	sslbackend = openssl
+	{{ else }}
+	sslbackend = gnutls
+	{{ end }}
 	{{ end }}
 
 # Gnu Emacs needs this for the package manager "straight" to work properly.
