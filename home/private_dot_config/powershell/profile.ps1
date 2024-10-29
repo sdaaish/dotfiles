@@ -46,6 +46,9 @@ if (Test-Path $Psscriptroot\PSReadLineProfile.ps1) {
 # Add output of all commands to $__, set as default value
 $PSDefaultParameterValues["Out-Default:OutVariable"] = "__"
 
+# Set default encoding format
+$PSDefaultParameterValues['*:Encoding'] = 'utf8'
+
 # Oh-my-PoSH https://ohmyposh.dev/docs
 # $Theme = Join-Path ${env:USERPROFILE} ".config\oh-my-posh\my-posh-theme.omp.json"
 # $env:POSH_GIT_ENABLED = $true
