@@ -1,2 +1,8 @@
 # Template file for NuShell
-use ~/.config/starship/init.nu
+
+$env.config = {
+    show_banner: false
+}
+
+# Read the starship prompt
+use ~/.cache/starship/init.nu
