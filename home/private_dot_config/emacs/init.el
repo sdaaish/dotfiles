@@ -78,7 +78,7 @@
         (t . (monochrome))))
 
 (load-theme 'modus-operandi t t)
-(load-theme 'modus-vivendi t t)
+
 (enable-theme 'modus-vivendi)
 (define-key global-map (kbd "S-<f5>") #'modus-themes-toggle)
 (setq mode-line-compact t)
@@ -222,22 +222,29 @@
        (set-fontset-font t 'symbol (font-spec :family "Noto color emoji" :fontified t) nil 'prepend)
        (set-fontset-font t 'unicode (font-spec :family "Noto color emoji" :fontified t) nil 'prepend)))
 
+;; Programming options
+(defun my/display-line-numbers()
+  "Display line numbers in the buffer."
+  (interactive)
+  (setq display-line-numbers-type 'relative)
+  (display-line-numbers-mode 1))
 
 (add-hook 'prog-mode-hook (electric-pair-mode t))
+(add-hook 'prog-mode-hook 'my/display-line-numbers)
 
 ;; Python settings
 (setq python-indent-guess-indent-offset-verbose nil)
 (add-hook 'python-mode-hook 'eglot-ensure)
 (add-hook 'python-ts-mode-hook
           (lambda ()
-	    (setq-local compile-command
-		        (concat "mypy "
-			        (if buffer-file-name
-			            (shell-quote-argument
-			             (file-name-sans-extension buffer-file-name)))))))
+	          (setq-local compile-command
+		                    (concat "mypy "
+			                          (if buffer-file-name
+			                              (shell-quote-argument
+			                               (file-name-sans-extension buffer-file-name)))))))
 (with-eval-after-load 'python
   (define-key python-mode-map (kbd "C-c S-C-c") 'compile)
-    (define-key python-mode-map (kbd "C-c S-C-r") 'recompile))
+  (define-key python-mode-map (kbd "C-c S-C-r") 'recompile))
 
 ;; Flymake
 (with-eval-after-load 'flymake
@@ -248,6 +255,10 @@
 ;; Eglot
 (setq eglot-ignored-server-capabilities '(:documentHighlightProvider)
       eglot-report-progress nil)
+
+;; Tree-sitter language definitions
+(when (file-directory-p "~/.config/tree-sitter/")
+  (setq treesit-extra-load-path (list (expand-file-name "~/.config/tree-sitter/"))))
 
 ;; Start the server
 (server-start)
