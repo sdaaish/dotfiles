@@ -73,9 +73,9 @@ source "$XDG_CONFIG_HOME/bash/exports"
 
 # Use plugins
 #export ZPLUGIN_DIR="$XDG_CACHE_HOME/zsh/plugins"
-add-plugin "zsh-users/zsh-syntax-highlighting"
-add-plugin "zsh-users/zsh-autosuggestions"
-add-plugin "zsh-users/zsh-history-substring-search"
+add-zsh-plugin "zsh-users/zsh-syntax-highlighting"
+add-zsh-plugin "zsh-users/zsh-autosuggestions"
+add-zsh-plugin "zsh-users/zsh-history-substring-search"
 
 # Substring search key bindings
 bindkey -M emacs '^P' history-substring-search-up
@@ -88,15 +88,21 @@ CHEZMOI_COMP="$XDG_CONFIG_HOME/zsh/completions/chezmoi.zsh"
 source $CHEZMOI_COMP
 
 # Use LXD/LXC autocomplete
-add-plugin "endaaman/lxd-completion-zsh"
+add-zsh-plugin "endaaman/lxd-completion-zsh"
 
 # Use starship as prompt
 eval "$(starship init zsh)"
 
+# Use zoxide for navigation
+eval "$(zoxide init zsh)"
+
 # Attach to tmux if running, start it otherwise
 if [[ $(pgrep tmux) ]]
 then
-    [[ -z ${TMUX} ]] 2>&1 >/dev/null && tmux attach -t 0
+    if [[ ${TMUX} = "" ]]  # Workaround for when sourcing the .zshrc file
+    then
+        tmux attach -t 0
+    fi
 else
     tmux
 fi

@@ -9,7 +9,7 @@ src() {
 
 # Function to install plugins for Zsh
 # WIP
-add-plugin() {
+add-zsh-plugin() {
 
     if [[ $# -ne 1 ]]
     then
@@ -35,4 +35,16 @@ add-plugin() {
             git clone "https://github.com/$1.git" $PLUGIN
         fi
     fi
+}
+
+list-zsh-plugin() {
+    PLUGINDIR="$XDG_CACHE_HOME/zsh/plugins"
+
+    if [[ ! -d $PLUGINDIR ]]
+    then
+        echo "No plugin directory, ${PLUGINDIR}"
+        exit 1
+    fi
+
+    find ${PLUGINDIR}/* -maxdepth 1 -mindepth 1 -type d -print0| xargs -0 -I dir basename "dir"
 }

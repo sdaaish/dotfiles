@@ -1,0 +1,20 @@
+{{- if eq .chezmoi.os "linux" -}}
+#!/usr/bin/env bash
+
+set -eufo pipefail
+
+# Check if zoxide exists
+[ -x $(command -v zoxide) ] && exit 0
+
+if [[ -x $(command -v curl) ]]
+then
+    curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+elif [[ -x $(command -v wget) ]]
+then
+    wget https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh -O -| sh
+else
+    echo "Curl or WGET not installed"
+    exit 1
+fi
+
+{{ end }}
