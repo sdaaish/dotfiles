@@ -4,13 +4,15 @@
 set -eufo pipefail
 
 # Check if zoxide exists
-[ -x $(command -v zoxide) ] && exit 0
+[[ -x $(command -v zoxide) ]] && exit 0
 
 if [[ -x $(command -v curl) ]]
 then
+    echo "Install zoxide with curl"
     curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
 elif [[ -x $(command -v wget) ]]
 then
+    echo "Install zoxide with wget"
     wget https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh -O -| sh
 else
     echo "Curl or WGET not installed"

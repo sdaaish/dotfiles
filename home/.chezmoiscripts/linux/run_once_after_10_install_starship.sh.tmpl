@@ -1,16 +1,17 @@
 {{- if eq .chezmoi.os "linux" -}}
-
 #!/usr/bin/env bash
 
 set -eufo pipefail
 
-[ -x $(command -v starship) ] && exit 0
+[[ -x $(command -v starship) ]] && exit 0
 
 if [[ -x $(command -v curl) ]]
 then
+    echo "Install starship with curl"
     curl -sSLf https://starship.rs/install.sh | sh
 elif [[ -x $(command -v wget) ]]
 then
+    echo "Install starship with wget"
     wget https://starship.rs/install.sh -O - | sh
 else
     echo "Curl or WGET not installed"
