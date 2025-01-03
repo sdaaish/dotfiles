@@ -4,6 +4,11 @@
 {{- $personal := promptBoolOnce . "personal" "Personal device, (T)rue/(F)alse:" -}}
 {{- $proxy := promptBoolOnce . "proxy" "Use proxy, (T)rue/(F)alse:" -}}
 
+{{- $osid := .chezmoi.os -}}
+{{- if hasKey .chezmoi.osRelease "id" -}}
+{{-   $osid = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
+{{- end -}}
+
 [data]
     email = {{ $email | quote }}
     name = {{ $name | quote }}
@@ -11,6 +16,7 @@
     personal = {{ $personal }}
     proxy = {{ $proxy }}
     umask = 0o22
+    osid = {{ $osid | quote }}
 
 [interpreters.ps1]
     command = "powershell.exe"
@@ -23,8 +29,8 @@
 [cd]
      command = "powershell.exe"
      args = ["-NoLogo","-NoProfile","-NonInteractive"]
-{{ else }}
+{{ else -}}
 [cd]
      command = "bash"
      args = []
-{{ end }}
+{{- end }}
