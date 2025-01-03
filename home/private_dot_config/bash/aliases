@@ -121,3 +121,9 @@ alias cmdiff='chezmoi git pull -- --autostash --rebase && chezmoi diff'
 
 # APT
 alias apu='apt list --upgradable'
+
+# Incus
+alias i='incus'
+
+# Distrobox
+alias dbx='distrobox'
