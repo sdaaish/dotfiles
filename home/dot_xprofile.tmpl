@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
+{{- if ne .osid "linux-opensuse-tumbleweed" -}}
 /usr/bin/gpg-connect-agent updatestartuptty /bye
 export GPG_TTY=$(tty)
 export SSH_AUTH_SOCK
+{{- end }}
 
 # Set ZSH config directory
 export ZDOTDIR=$HOME/.config/zsh
