@@ -38,10 +38,8 @@ $wingetpackages = @{
     "NuShell" = "Nushell.Nushell"
 }
 
-# Test for privilege
-$wid = [System.Security.Principal.WindowsIdentity]::GetCurrent()
-$prp = New-Object System.Security.Principal.WindowsPrincipal($wid)
-$adm = [System.Security.Principal.WindowsBuiltInRole]::Administrator
+# Test for prvililege
+{{- template "test-for-admin.ps1" -}}
 
 # Test and install if administrator
 if ($prp.IsInRole($adm)) {

@@ -1,14 +1,8 @@
 {{ if eq .chezmoi.os "windows"}}
 
-Function refreshenv {
-    $paths = @(
-				([System.Environment]::GetEnvironmentVariable("Path", "Machine") -split ([io.path]::PathSeparator))
-				([System.Environment]::GetEnvironmentVariable("Path", "User") -split ([io.path]::PathSeparator))
-    )
-    $env:path = ($paths | Select-Object -Unique) -join ([io.path]::PathSeparator)
-}
+# Load function and update PATHS
+{{- template "refreshpath.ps1" -}}
 
-refreshenv
 # Install scoop user packages
 Import-Module Microsoft.PowerShell.Utility
 
@@ -35,7 +29,8 @@ catch {
   throw "7-Zip not installed"
 }
 
-refreshenv
+# Reload PATH environment
+refreshpath
 
 # Update repository
 scoop config use_external_7zip $true

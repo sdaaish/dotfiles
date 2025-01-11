@@ -1,25 +1,11 @@
 {{ if eq .chezmoi.os "windows"}}
 # Install scoop global packages
 
-Function refreshenv {
-    $paths = @(
-				([System.Environment]::GetEnvironmentVariable("Path", "Machine") -split ([io.path]::PathSeparator))
-				([System.Environment]::GetEnvironmentVariable("Path", "User") -split ([io.path]::PathSeparator))
-    )
-    $env:path = ($paths | Select-Object -Unique) -join ([io.path]::PathSeparator)
-}
+# Load function and update PATHS
+{{- template "refreshpath.ps1" -}}
 
-refreshenv
-
-# Test for privilege
-$wid = [System.Security.Principal.WindowsIdentity]::GetCurrent()
-$prp = New-Object System.Security.Principal.WindowsPrincipal($wid)
-$adm = [System.Security.Principal.WindowsBuiltInRole]::Administrator
-
-# Test and install if administrator
-if (-not ($prp.IsInRole($adm))) {
-    throw "You need to run this as administrator."
-}
+# Test for prvililege
+{{- template "test-for-admin.ps1" -}}
 
 Import-Module Microsoft.PowerShell.Utility
 
