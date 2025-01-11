@@ -4,38 +4,16 @@
 DOTFILES=$HOME/.config/dotfiles
 EMACSDIR=$HOME/.config/emacs.default
 DOTPRIVATE=$HOME/.config/dotfiles.private
+BASH_CONFIG_DIR="$HOME/.config/bash"
 
 #
 ## A place for all the functions
 #
-apc() {
-    if [ ${#*} != 0 ]
-    then
-        apt-cache search ${*}
-    else
-	      printf "Searches for available packages.\n"
-	      printf "Usage: apc <1 or more args>\n"
-    fi
-}
-# Upgrade system
-apd() {
-    sudo bash -c  "apt-get update ; apt-get upgrade -y"
-}
-#Do dist-upgrade
-apdd() {
-    sudo bash -c  "apt-get update ; apt-get dist-upgrade -y"
-}
-# Check for outdated packages
-apo() {
-    printf "Checking for upgrades...\n------------------------\n"
-    sudo bash -c "sudo apt-get update >/dev/null; \
-    	 apt-get dist-upgrade --dry-run| grep ^Inst|cut -d\" \" -f2| grep .|sort"
-}
-# Reove unwanted stuff
-apr() {
-    sudo bash -c  "apt-get --yes autoremove"
-}
 
+# Customized commands for packagement
+source "${BASH_CONFIG_DIR}/pkg-mgmt.sh"
+
+# Cd tools
 cdr() {
     cd $REPODIR
     ls -1

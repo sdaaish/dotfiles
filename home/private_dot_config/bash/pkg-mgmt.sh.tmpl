@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+
+# Customize functions to match the distribution for package management
+
+{{ if eq .chezmoi.osRelease.id  "opensuse-tumbleweed" }}
+CMD="zypper"
+alias apt="zypper"
+alias apu="zypper list-updates"
+{{ else }}
+# APT
+CMD="apt-cache"
+alias zypper="apt"
+alias apu='apt list --upgradable'
+{{ end }}
+
+apc() {
+    if [ ${#*} != 0 ]
+    then
+        $CMD search ${*}
+    else
+	      printf "Searches for available packages.\n"
+	      printf "Usage: ${CMD} <1 or more args>\n"
+    fi
+}
+
+# Upgrade system
+apd() {
+    {{ if eq .chezmoi.osRelease.id  "opensuse-tumbleweed" -}}
+    zypper update
+    {{ else -}}
+    sudo bash -c  "apt-get update ; apt-get upgrade -y"
+    {{- end }}
+}
+
+#Do dist-upgrade
+apdd() {
+    {{ if eq .chezmoi.osRelease.id  "opensuse-tumbleweed" -}}
+    zypper dup
+    {{ else -}}
+    sudo bash -c  "apt-get update ; apt-get dist-upgrade -y"
+    {{- end }}
+}
+
+# Check for outdated packages
+apo() {
+    {{ if eq .chezmoi.osRelease.id  "opensuse-tumbleweed" -}}
+    zypper list-updates
+    {{ else -}}
+    printf "Checking for upgrades...\n------------------------\n"
+    sudo bash -c "sudo apt-get update >/dev/null; \
+    	 apt-get dist-upgrade --dry-run| grep ^Inst|cut -d\" \" -f2| grep .|sort"
+
+    {{- end }}
+}
+# Remove unwanted stuff
+apr() {
+    sudo bash -c  "apt-get --yes autoremove"
+}
