@@ -12,7 +12,8 @@ try {
 }
 catch {
     Write-Verbose "Scoop not installed, installing."
-    Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+    # Run scoop as Admin even if the shell is elevated
+    Invoke-Expression "& {$(Invoke-RestMethod -Uri https://get.scoop.sh)} -RunAsAdmin"
 }
 
 try {
@@ -23,10 +24,10 @@ catch {
 }
 
 try {
-  Get-Command 7z.exe
+    Get-Command 7z.exe
 }
 catch {
-  throw "7-Zip not installed"
+    throw "7-Zip not installed"
 }
 
 # Reload PATH environment
