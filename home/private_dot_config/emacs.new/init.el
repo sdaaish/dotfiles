@@ -290,6 +290,7 @@
 (require 'init-formatting)
 (require 'init-code)
 (require 'init-chezmoi)
+(require 'myquotes)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Fix things below here
