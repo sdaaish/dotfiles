@@ -341,6 +341,10 @@ If FRAME is omitted or nil, use currently selected frame."
 (unless (server-running-p)
   (server-start))
 
+;; Test p-search
+(use-package p-search
+  :straight (:repo "https://github.com/zkry/p-search.git"))
+
 ;; Turn of debug
 (setq debug-on-error nil)
 (setq debug-on-quit nil)

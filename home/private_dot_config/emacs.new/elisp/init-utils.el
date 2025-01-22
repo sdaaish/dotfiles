@@ -95,6 +95,14 @@
 
 (use-package restclient)
 
+(use-package incus-tramp
+  :after tramp
+  :config
+  (incus-tramp-add-method)
+  (tramp-set-completion-function
+   incus-tramp-method
+   '((incus-tramp-completion-function-alist))))
+
 (provide 'init-utils)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-utils.el ends here

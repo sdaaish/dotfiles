@@ -21,7 +21,10 @@
 (use-package csv-mode)
 (use-package json-mode)
 (use-package toml-mode)
-(use-package yaml-mode)
+(use-package yaml-mode
+  :hook ((yaml-mode yaml-ts-mode) . (lambda ()
+                                      (my/line-number-relative)
+                                      (ws-butler-mode 1))))
 (use-package markdown-mode)
 (use-package ssh-config-mode)
 (use-package ini-mode)
