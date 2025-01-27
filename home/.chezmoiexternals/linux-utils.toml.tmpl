@@ -7,7 +7,7 @@
     type = "archive-file"
     url = "https://github.com/FiloSottile/age/releases/download/{{ .ageVersion }}/age-{{ .ageVersion }}-{{.chezmoi.os }}-{{ .chezmoi.arch }}.tar.gz"
     path = "age/age"
-    checksum.sha256 = {{ .ageSha256}}
+    checksum.sha256 = "{{ .ageSha256 }}"
     refreshPeriod = "168h"
 
 # Signing tool
@@ -15,6 +15,6 @@
     type = "archive-file"
     url = "https://github.com/jedisct1/minisign/releases/download/{{ .minisignVersion }}/minisign-{{ .minisignVersion }}-{{.chezmoi.os }}.tar.gz"
     path = "minisign-linux/x86_64/minisign"
-    checksum.sha256 = {{ .minisignSha256 }}
+    checksum.sha256 = "{{ .minisignSha256 }}"
     refreshPeriod = "168h"
 {{end}}
