@@ -26,5 +26,14 @@
     checksum.sha256 = "{{ .fzfSha256 }}"
     refreshPeriod = "168h"
 
+# Direnv, managing folder specific environment variables
+[".local/bin/direnv"]
+    type = "file"
+    url = "https://github.com/direnv/direnv/releases/download/{{ .direnvVersion }}/direnv.{{ .chezmoi.os }}-{{ .chezmoi.arch }}"
+    path = "direnv"
+    executable = true
+    checksum.sha256 = "{{ .direnvSha256 }}"
+    refreshPeriod = "168h"
+
 {{end}}
 

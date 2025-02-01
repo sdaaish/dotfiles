@@ -8,3 +8,6 @@ minisignSha256 = "9a599b48ba6eb7b1e80f12f36b94ceca7c00b7a5173c95c3efc88d9822957e
 
 fzfVersion = "0.57.0"
 fzfSha256 = "a3c087a5f40e8bb4d9bfb26faffa094643df111a469646bef53154a54af9ff92"
+
+direnvVersion = "v2.35.0"
+direnvSha256 = "55c294f4376397c68b1f659f049fb104dc2ecd0fcb15a15949d7f748e3f70b66"
