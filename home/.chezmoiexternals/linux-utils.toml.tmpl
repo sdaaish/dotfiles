@@ -17,4 +17,14 @@
     path = "minisign-linux/x86_64/minisign"
     checksum.sha256 = "{{ .minisignSha256 }}"
     refreshPeriod = "168h"
+
+# FZF, fuzzy finder
+[".local/bin/fzf"]
+    type = "archive-file"
+    url = "https://github.com/fuzzy-finder/fzf/releases/download/{{ .fzfVersion }}/fzf-{{ .fzfVersion }}-{{.chezmoi.os }}_{{ .chezmoi.arch }}.tar.gz"
+    path = "fzf"
+    checksum.sha256 = "{{ .fzfSha256 }}"
+    refreshPeriod = "168h"
+
 {{end}}
+

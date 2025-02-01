@@ -67,6 +67,8 @@ alias emq='emacs -Q \
 --no-blinking-cursor \
 --eval "(progn (setq visible-bell t ring-bell-function (quote ignore))(toggle-frame-fullscreen)(toggle-tool-bar-mode-from-frame))"'
 
+alias fzn="fzf --no-preview"
+
 alias doom='~/.config/emacs/bin/doom'
 
 if [[ (${OS_VERSION} == "20.04") || (${OS_VERSION} == "11") ]]

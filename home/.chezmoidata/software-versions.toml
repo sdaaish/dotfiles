@@ -5,3 +5,6 @@ ageSha256 = "7df45a6cc87d4da11cc03a539a7470c15b1041ab2b396af088fe9990f7c79d50"
 
 minisignVersion = "0.12"
 minisignSha256 = "9a599b48ba6eb7b1e80f12f36b94ceca7c00b7a5173c95c3efc88d9822957e73"
+
+fzfVersion = "0.57.0"
+fzfSha256 = "a3c087a5f40e8bb4d9bfb26faffa094643df111a469646bef53154a54af9ff92"

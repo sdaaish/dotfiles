@@ -156,6 +156,9 @@ BASE16_SHELL="${HOME}/.config/base16-shell/"
 # Use zoxide if it exists
 [[ -x "$(command -v zoxide)" ]] && eval "$(zoxide init bash)"
 
+# Use trigger sequence for FZF
+[[ -x "$(command -v fzf)" ]] && eval "$(fzf --bash)"
+
 # Attach to tmux if running (and is installed), start it otherwise as a new session
 if [[ -x $(command -v tmux) ]]
 then

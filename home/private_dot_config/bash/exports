@@ -10,6 +10,12 @@ export STARSHIP_CONFIG="${HOME}/.config/starship/starship.toml"
 export ZDOTDIR="${HOME}/.config/zsh"
 export FZF_DEFAULT_OPTS="--height=40% --layout=reverse --info=inline --border --margin=1 --padding=1"
 
+# Use bat preview if it is installed
+if [ -x $(which bat) ]
+then
+    export FZF_DEFAULT_OPTS='--height=40% --layout=reverse --info=inline --border --margin=1 --padding=1 --preview "bat --color=always --style=numbers --line-range=:500 {}"'
+fi
+
 # My repositories
 export REPODIR="$HOME/repos"
 if [[ ! -d "$REPODIR" ]]
@@ -58,8 +64,8 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 [ -d "$HOME/go/bin" ] && export PATH="$PATH:$HOME/go/bin"
 export GOPATH="$HOME/go"
 
-# Local python stuff
-[ -d "$HOME/.local/bin" ] && export PATH="$PATH:$HOME/.local/bin"
+# Local binaries
+[ -d "$HOME/.local/bin" ] && export PATH="$HOME/.local/bin:$PATH"
 
 # Git stuff, from git-prompt and git-completion
 # https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh

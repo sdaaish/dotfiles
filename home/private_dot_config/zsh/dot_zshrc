@@ -96,6 +96,9 @@ eval "$(starship init zsh)"
 # Use zoxide for navigation
 eval "$(zoxide init zsh)"
 
+# Use trigger sequence for FZF
+[[ -x "$(command -v fzf)" ]] && source <(fzf --zsh)
+
 # Attach to tmux if running, start it otherwise
 if [[ $(pgrep tmux) ]]
 then
