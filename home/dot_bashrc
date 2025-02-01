@@ -171,3 +171,6 @@ then
         tmux new-session -s default
     fi
 fi
+
+# Load direnv in the shell
+[[ -x $(command -v direnv) ]] && eval "$(direnv hook bash)"
