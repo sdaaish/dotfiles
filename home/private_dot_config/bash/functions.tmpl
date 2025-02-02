@@ -735,6 +735,11 @@ install-bat(){
     rm -f "${FILE}"
 }
 
+# Install uv, a Python mgmt tool
+install-uv() {
+    curl -LsSf https://astral.sh/uv/install.sh | env INSTALLER_NO_MODIFY_PATH=1 sh
+}
+
 # password-manager functions
 pf(){
     pass find "$1"
