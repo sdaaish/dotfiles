@@ -6,10 +6,6 @@
 	path = home/private_dot_config/external_crafted-emacs
 	url = https://github.com/SystemCrafters/crafted-emacs.git
 	branch = master
-[submodule "home/private_dot_config/external_snippets"]
-	path = home/private_dot_config/external_snippets
-	url = https://github.com/sdaaish/snippets.git
-	branch = main
 [submodule "home/private_dot_config/vendor/external_org-html-themes"]
 	path = home/private_dot_config/vendor/external_org-html-themes
 	url = https://github.com/fniessen/org-html-themes.git
