@@ -99,7 +99,9 @@
       visible-cursor t
       ring-bell-function 'ignore
       use-dialog-box nil
-      uniquify-buffer-name-style 'forward)
+      uniquify-buffer-name-style 'forward
+      large-file-warning-threshold nil
+      ad-redefinition-action 'accept)
 
 ;; Interactively do things
 (when (not (file-exists-p ".cache"))
@@ -131,6 +133,7 @@
 (setq delete-old-versions t
       version-control t
       vc-make-backup-files t
+      vc-follow-symlinks t
       backup-by-copying t
       kept-new-versions 10
       kept-old-versions 10
@@ -145,7 +148,8 @@
 
 (setq-default indent-tabs-mode nil)
 (setq inhibit-startup-message t
-      tab-always-indent 'complete)
+      tab-always-indent 'complete
+      native-comp-async-report-warnings-errors nil)
 (global-set-key [remap dabbrev-expand] 'hippie-expand)
 (global-set-key (kbd "C-z") 'zap-up-to-char)
 (global-set-key (kbd "C-<kp-add>") 'text-scale-increase)
