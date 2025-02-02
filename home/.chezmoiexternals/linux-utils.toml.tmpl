@@ -41,4 +41,12 @@
     url = "https://github.com/pyenv/pyenv.git"
     refreshPeriod = "168h"
 
+# Zig LSP
+[".local/bin/zls"]
+    type = "archive-file"
+    url = "https://github.com/zigtools/zls/releases/download/{{ .zlsVersion }}/zls-x86_64-{{ .chezmoi.os }}.tar.xz"
+    path = "zls"
+    checksum.sha256 = "{{ .zlsSha256 }}"
+    refreshPeriod = "168h"
+
 {{end}}

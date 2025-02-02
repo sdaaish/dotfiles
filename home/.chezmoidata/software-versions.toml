@@ -11,3 +11,6 @@ fzfSha256 = "a3c087a5f40e8bb4d9bfb26faffa094643df111a469646bef53154a54af9ff92"
 
 direnvVersion = "v2.35.0"
 direnvSha256 = "55c294f4376397c68b1f659f049fb104dc2ecd0fcb15a15949d7f748e3f70b66"
+
+zlsVersion = "0.13.0"
+zlsSha256 = "ec4c1b45caf88e2bcb9ebb16c670603cc596e4f621b96184dfbe837b39cd8410"
