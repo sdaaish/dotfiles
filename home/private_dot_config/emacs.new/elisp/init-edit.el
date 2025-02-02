@@ -32,7 +32,7 @@
   :diminish
   :config (sp-local-pair 'org-mode "=" "=")
   :hook
-  ((org-mode prog-mode shell-mode) . smartparens-mode))
+  ((org-mode prog-mode shell-mode conf-mode) . smartparens-mode))
 
 (use-package ws-butler
   :diminish

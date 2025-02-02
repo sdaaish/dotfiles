@@ -33,10 +33,13 @@
 (customize-set-variable 'show-paren-style 'mixed)
 (setq-default line-spacing 1)
 (setq-default show-trailing-whitespace nil)
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
 (setq-default indicate-empty-lines t)
 (customize-set-variable 'apropos-do-all t)
 (global-subword-mode t)
 (diminish 'subword-mode)
+
 
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 2)
@@ -49,6 +52,7 @@
 
 (recentf-mode 1)
 (setq recentf-max-menu-items 25)
+(setq ad-redefinition-action 'accept)
 
 (customize-set-variable 'global-auto-revert-mode t)
 (customize-set-variable 'global-auto-revert-non-file-buffers t)

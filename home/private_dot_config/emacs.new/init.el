@@ -192,7 +192,8 @@
       visible-cursor t
       ring-bell-function 'ignore
       use-dialog-box nil
-      uniquify-buffer-name-style 'forward)
+      uniquify-buffer-name-style 'forward
+      native-comp-async-report-warnings-errors nil)
 
 
 (when (not (file-exists-p ".cache"))

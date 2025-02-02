@@ -5,4 +5,5 @@
  (auto-mode-alist . (("\\.chezmoi.*" . toml-mode)))
  (auto-mode-alist . (("\\.ps1\\.tmpl\\'" . powershell-mode)))
  (auto-mode-alist . (("\\.sh\\.tmpl\\'" . sh-mode)))
+ (conf-toml-mode . ((smartparens-mode . 1)))
  (powershell-mode . ((powershell-indent . 4))))
