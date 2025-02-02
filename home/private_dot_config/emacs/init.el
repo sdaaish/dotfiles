@@ -147,6 +147,8 @@
 (setq auto-revert-verbose nil)
 
 (setq-default indent-tabs-mode nil)
+(setq-default show-trailing-whitespace nil)
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 (setq inhibit-startup-message t
       tab-always-indent 'complete
       native-comp-async-report-warnings-errors nil)
