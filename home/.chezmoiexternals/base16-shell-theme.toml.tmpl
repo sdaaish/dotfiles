@@ -1,0 +1,10 @@
+{{ if eq .chezmoi.os "linux" }}
+# -*- mode: toml; -*-
+
+# The base16 color theme
+[".config/base16-shell"]
+  type = "git-repo"
+  url = "https://github.com/chriskempson/base16-shell.git"
+  refreshPeriod = "672h"
+
+{{ end }}
