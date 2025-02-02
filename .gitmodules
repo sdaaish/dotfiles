@@ -1,27 +1,27 @@
-[submodule "home/private_dot_config/emacs.default"]
-	path = home/private_dot_config/emacs.default
+[submodule "home/private_dot_config/external_emacs.default"]
+	path = home/private_dot_config/external_emacs.default
 	url = https://github.com/sdaaish/emacs.d.git
 	branch = master
-[submodule "home/private_dot_config/crafted-emacs"]
-	path = home/private_dot_config/crafted-emacs
+[submodule "home/private_dot_config/external_crafted-emacs"]
+	path = home/private_dot_config/external_crafted-emacs
 	url = https://github.com/SystemCrafters/crafted-emacs.git
 	branch = master
-[submodule "home/private_dot_config/snippets"]
-	path = home/private_dot_config/snippets
+[submodule "home/private_dot_config/external_snippets"]
+	path = home/private_dot_config/external_snippets
 	url = https://github.com/sdaaish/snippets.git
 	branch = main
-[submodule "home/private_dot_config/base16-shell"]
-	path = home/private_dot_config/base16-shell
+[submodule "home/private_dot_config/external_base16-shell"]
+	path = home/private_dot_config/external_base16-shell
 	url = https://github.com/chriskempson/base16-shell.git
-[submodule "home/private_dot_config/vendor/org-html-themes"]
-	path = home/private_dot_config/vendor/org-html-themes
+[submodule "home/private_dot_config/vendor/external_org-html-themes"]
+	path = home/private_dot_config/vendor/external_org-html-themes
 	url = https://github.com/fniessen/org-html-themes.git
 	branch = master
-[submodule "home/private_dot_config/vendor/org-reveal"]
-	path = home/private_dot_config/vendor/org-reveal
+[submodule "home/private_dot_config/vendor/external_org-reveal"]
+	path = home/private_dot_config/vendor/external_org-reveal
 	url = https://github.com/sdaaish/org-reveal.git
 	branch = master
-[submodule "home/private_dot_config/vendor/reveal.js"]
-	path = home/private_dot_config/vendor/reveal.js
+[submodule "home/private_dot_config/vendor/external_reveal.js"]
+	path = home/private_dot_config/vendor/external_reveal.js
 	url = https://github.com/hakimel/reveal.js.git
 	branch = master
