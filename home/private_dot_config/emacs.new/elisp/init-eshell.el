@@ -59,15 +59,12 @@
   :straight (:type built-in)
   :hook (shell-mode . shell-mode-company-init))
 
-
 ;; EAT is a emulating terminal for Emacs. (Emulate A Terminal).
 ;; https://codeberg.org/akib/emacs-eat#headline-3
-
-(unless (package-installed-p 'eat)
-  (package-vc-install 'eat))
-
-;; For `eat-eshell-mode'.
-(add-hook 'eshell-load-hook #'eat-eshell-mode)
+(unless (eq system-type 'windows-nt)
+  (use-package eat
+    ;; For `eat-eshell-mode'.
+    :hook (eshell-load-hook . eat-eshell-mode)))
 
 ;; For `eat-eshell-visual-command-mode'.
 ;;(add-hook 'eshell-load-hook #'eat-eshell-visual-command-mode)
