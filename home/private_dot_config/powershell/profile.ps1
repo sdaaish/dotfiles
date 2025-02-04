@@ -2,6 +2,11 @@
 ## Local version of Powershell profile
 #
 
+Function Print-Debug {
+    param($message)
+    "{0,-20}: {1}ms" -f $Message, (Get-RunningTime $starttime)
+}
+
 # Workaroud for Linux, loads this file directly
 if (-not($starttime)) {
     $starttime = Get-Date
@@ -9,7 +14,7 @@ if (-not($starttime)) {
 
 $module = "MyFunctions{0}MyFunctions{0}MyFunctions.psd1" -f [io.path]::DirectorySeparatorChar
 Import-Module $(Join-Path $PSScriptRoot $module) -Force
-"{0,-20}: {1}ms" -f "Entering profile", (Get-RunningTime $starttime)
+Print-Debug "Entering profile"
 
 if (Test-Admin) {
     $env:SUPERUSER = $true
@@ -38,7 +43,7 @@ $PSReadLineOptions = @{
 }
 
 Set-PSReadLineOption @PSReadLineOptions
-"{0,-20}: {1}ms" -f "After PSReadLine", (Get-RunningTime $starttime)
+Print-Debug "After PSReadLine"
 
 if (Test-Path $Psscriptroot\PSReadLineProfile.ps1) {
     . $(Join-Path $psscriptroot PSReadLineProfile.ps1)
@@ -82,34 +87,13 @@ else {
     $env:PSVERSION = $value
 }
 
+Print-Debug "Before starship"
 $starshipConfig = ".config{0}starship{0}starship.toml" -f [io.path]::DirectorySeparatorChar
 $ENV:STARSHIP_CONFIG = Join-Path ${HOME} $starshipConfig
 Invoke-Expression (&starship init powershell)
 Enable-TransientPrompt
-"{0,-20}: {1}ms" -f "After starship", (Get-RunningTime $starttime)
 
-# Colorthemes for files
-# Local fix for a bug in 5.1, see https://github.com/devblackops/Terminal-Icons/issues/5#issuecomment-1057072605
-try { Get-Command 'Import-PowerShellDataFile' -ErrorAction Stop | Out-Null }
-catch {
-    function Import-PowerShellDataFile {
-        [CmdletBinding()]
-        Param (
-            [Parameter(Mandatory = $true)]
-            [Microsoft.PowerShell.DesiredStateConfiguration.ArgumentToConfigurationDataTransformation()]
-            [hashtable] $Path
-        )
-        return $Path
-    }
-}
-
-$themeFile = ".config{0}ColorThemes{0}MyColorTheme.psd1" -f [io.path]::DirectorySeparatorChar
-$ColorTheme = Join-Path ${HOME} $themeFile
-Add-TerminalIconsColorTheme -Path $ColorTheme -Force
-Set-TerminalIconsTheme -ColorTheme MyColorTheme
-
-"{0,-20}: {1}ms" -f "Before aliases", (Get-RunningTime $starttime)
-
+Print-Debug "Before aliases"
 # Source local aliases and functions
 $alias = Join-Path $PSScriptRoot aliases.ps1
 if (Test-Path $alias) {
@@ -135,8 +119,8 @@ if (Get-Process |? Name -Match emacs| ? Path -match emacs.exe) {
     if (Test-Path $emacsDir){
         $serverPath = Resolve-Path $emacsDir
         $server = Resolve-Path (Get-Childitem -Path $serverPath -File -Filter server* |
-          Sort -Property LastWriteTime |
-          Select -Property FullName -Last 1).Fullname
+            Sort -Property LastWriteTime |
+            Select -Property FullName -Last 1).Fullname
         $env:EDITOR="emacsclientw.exe -f $($server.path) -c"
     }
     elseif (($env:EDITOR).length -gt 0){
@@ -152,10 +136,33 @@ elseif (($env:EDITOR).length -gt 0){
 else {
     $env:EDITOR = "runemacs.exe"
 }
-"{0,-20}: {1}ms" -f "After EDITOR", (Get-RunningTime $starttime)
+
+Print-Debug "After EDITOR"
 
 # Use zoxide for navigation
 $env:_ZO_ECHO = 1
 Invoke-Expression (& { (zoxide init powershell | Out-String) })
 
-"{0,-20}: {1}ms" -f "Start time", (Get-RunningTime $starttime)
+# Colorthemes for files
+# Local fix for a bug in 5.1, see https://github.com/devblackops/Terminal-Icons/issues/5#issuecomment-1057072605
+# try { Get-Command 'Import-PowerShellDataFile' -ErrorAction Stop | Out-Null }
+# catch {
+#     function Import-PowerShellDataFile {
+#         [CmdletBinding()]
+#         Param (
+#             [Parameter(Mandatory = $true)]
+#             [Microsoft.PowerShell.DesiredStateConfiguration.ArgumentToConfigurationDataTransformation()]
+#             [hashtable] $Path
+#         )
+#         return $Path
+#     }
+# }
+
+# Print-Debug "Before ColorThemes"
+# $themeFile = ".config{0}ColorThemes{0}MyColorTheme.psd1" -f [io.path]::DirectorySeparatorChar
+# $ColorTheme = Join-Path ${HOME} $themeFile
+# Import-module Terminal-Icons
+# Add-TerminalIconsColorTheme -Path $ColorTheme -Force
+# Set-TerminalIconsTheme -ColorTheme MyColorTheme
+
+Print-Debug "Start time"
