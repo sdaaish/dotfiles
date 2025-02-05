@@ -111,6 +111,7 @@
 (use-package org
   :straight (org :type git :host github :repo	"emacs-straight/org-mode"))
 
+(require 'init-exec-path)
 (require 'init-settings)
 (require 'init-common)
 (require 'init-org)
