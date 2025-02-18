@@ -725,6 +725,11 @@ install-bat(){
     URL="https://github.com/sharkdp/bat/releases/download/v${VERSION}/bat_${VERSION}_amd64.deb"
     FILE="${HOME}/Downloads/bat_${VERSION}_amd64.deb"
 
+    if [[ ! -d $(dirname "$FILE") ]]
+    then
+        mkdir -p $(dirname "$FILE")
+    fi
+
     curl -sSL --output-dir "$HOME/Downloads" -O "$URL"
 
     if [ -f "${FILE}" ]
