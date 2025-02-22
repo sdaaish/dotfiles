@@ -14,3 +14,6 @@ direnvSha256 = "55c294f4376397c68b1f659f049fb104dc2ecd0fcb15a15949d7f748e3f70b66
 
 zlsVersion = "0.13.0"
 zlsSha256 = "ec4c1b45caf88e2bcb9ebb16c670603cc596e4f621b96184dfbe837b39cd8410"
+
+csvlensVersion = "v0.11.0"
+csvlensSha256 = "3bd99dc7c1cdb08da99b536acd82c49f4e82c3c14d4ccfaeb4cb11e569ea6207"

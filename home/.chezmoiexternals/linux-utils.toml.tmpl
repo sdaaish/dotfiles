@@ -49,4 +49,12 @@
     checksum.sha256 = "{{ .zlsSha256 }}"
     refreshPeriod = "168h"
 
+# csvlens
+[".local/bin/csvlens"]
+    type = "archive-file"
+    url = "https://github.com/YS-L/csvlens/releases/download/{{ .csvlensVersion }}/csvlens-x86_64-unknown-{{ .chezmoi.os }}-gnu.tar.xz"
+    path = "csvlens-x86_64-unknown-linux-gnu/csvlens"
+    checksum.sha256 = "{{ .csvlensSha256 }}"
+    refreshPeriod = "168h"
+
 {{end}}
