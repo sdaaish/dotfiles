@@ -309,6 +309,10 @@ Rename scratch and no startup screen.
 (setq initial-scratch-message "This is scratch....")
 (setq inhibit-startup-screen t)
 #+end_src
+*** Warnings
+#+begin_src emacs-lisp
+(setq native-comp-async-report-warnings-errors nil)
+#+end_src
 ** LSP
 #+begin_src emacs-lisp
 (setq read-process-output-max (* 1024 1024))
