@@ -21,7 +21,7 @@
 # FZF, fuzzy finder
 [".local/bin/fzf"]
     type = "archive-file"
-    url = "https://github.com/fuzzy-finder/fzf/releases/download/{{ .fzfVersion }}/fzf-{{ .fzfVersion }}-{{.chezmoi.os }}_{{ .chezmoi.arch }}.tar.gz"
+    url = "https://github.com/junegunn/fzf/releases/download/v{{ .fzfVersion }}/fzf-{{ .fzfVersion }}-{{.chezmoi.os }}_{{ .chezmoi.arch }}.tar.gz"
     path = "fzf"
     checksum.sha256 = "{{ .fzfSha256 }}"
     refreshPeriod = "168h"
