@@ -279,7 +279,8 @@ The one and only.
 *** Powershell
 #+begin_src emacs-lisp
   (use-package powershell
-  :straight (powershell :fork t))
+  :straight (powershell :fork t)
+  :hook ((powershell-mode powershell-ts-mode) . lsp))
 #+end_src
 *** Babel for powershell
 #+begin_src emacs-lisp
