@@ -65,20 +65,23 @@ From [[https://github.com/daviwil/emacs-from-scratch/blob/9388cf6ecd9b44c430867a
         (bitbucket . "bitbucketUser")))
 #+end_src
 ** Packages
+*** Nolittering
+#+begin_src emacs-lisp
+(use-package no-littering)
+#+end_src
 *** GCMH
 Garbage collection
 #+begin_src emacs-lisp
 (use-package gcmh
-  :diminish gcmh-mode)
+  :diminish gcmh-mode
+  :custom
+  (gcmh-low-cons-threshold (* 100 1024 1024))
+  (gc-cons-threshold (* 100 1024 1024)))
 #+end_src
 *** Melpa
 #+begin_src emacs-lisp
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-#+end_src
-*** Nolittering
-#+begin_src emacs-lisp
-(use-package no-littering)
 #+end_src
 *** Org
 #+begin_src emacs-lisp
@@ -149,6 +152,9 @@ Test Emacs packages.
   (counsel-mode)
   :bind (("C-h f" . counsel-describe-function)
          ("C-h v" . counsel-describe-variable)))
+
+(use-package ivy-rich
+  :custom (ivy-rich-mode 1))
 #+end_src
 *** Aggressive-indent
 #+begin_src emacs-lisp
@@ -207,7 +213,7 @@ The one and only.
   (setq company-idle-delay
         (lambda () (if (company-in-string-or-comment) nil 0.3)))
   :bind ("C-." . #'company-indent-or-complete-common)
-  :hook (after-init-hook . global-company-mode))
+  :hook (after-init . global-company-mode))
 #+end_src
 #+begin_src emacs-lisp
   (use-package ace-window
@@ -252,7 +258,7 @@ The one and only.
 
 (use-package autothemer)
 ;; (load-theme 'Homestead t nil)
-(set-frame-font "Cascadia Code-11" nil t)
+(set-frame-font "Cascadia Code NF-12" nil t)
 #+end_src
 *** Info
 #+begin_src emacs-lisp
@@ -261,7 +267,7 @@ The one and only.
 *** Which-key
 #+begin_src emacs-lisp
   (use-package which-key
-    :config (which-key-mode t)
+    :config (which-key-mode 1)
     (setq which-key-idle-delay 0))
 #+end_src
 *** Powershell
@@ -304,7 +310,9 @@ Rename scratch and no startup screen.
   :config (lsp-enable-which-key-integration t)
   :hook
   ((powershell-mode sh-mode) . lsp-mode)
-  (lsp-mode . lsp-enable-which-key-integration))
+  (lsp-mode . lsp-enable-which-key-integration)
+  :bind ("C-c l" . lsp))
+
 (use-package dap-mode)
 (use-package company-lsp)
 #+end_src
