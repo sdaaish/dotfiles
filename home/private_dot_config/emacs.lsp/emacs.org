@@ -103,6 +103,7 @@ Garbage collection
           ("s" . "src")
           ("v" . "verse\n")))
   :custom (org-src-preserve-indentation t)
+  :bind ("C-c o l" . #'org-store-link)
   :straight org-contrib)
 #+end_src
 *** Org-superstar
@@ -235,6 +236,11 @@ The one and only.
 (use-package diff-hl
   :hook ((prog-mode vc-dir-mode) . diff-hl-mode))
 #+end_src
+** YAS
+#+begin_src emacs-lisp
+(use-package yasnippet)
+(use-package yasnippet-snippets)
+#+end_src
 ** Settings
 *** Menubars
 #+begin_src emacs-lisp
@@ -310,8 +316,9 @@ Rename scratch and no startup screen.
   :config (lsp-enable-which-key-integration t)
   :hook
   ((powershell-mode sh-mode) . lsp-mode)
-  (lsp-mode . lsp-enable-which-key-integration)
-  :bind ("C-c l" . lsp))
+  (lsp-mode . lsp-enable-which-key-integration))
+
+(setopt lsp-keymap-prefix "C-c l")
 
 (use-package dap-mode)
 (use-package company-lsp)
