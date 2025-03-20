@@ -285,6 +285,14 @@ function check-remotes() {
     fi
 }
 
+# Create new Github repo
+function gh-create(){
+    if  gh repo create --private --source=. --remote=origin
+    then
+        git push -u --all && gh browse
+    fi
+}
+
 # Install latest emacs version
 install-emacs-snapshot() {
     sudo apt-add-repository --yes ppa:ubuntu-elisp/ppa
