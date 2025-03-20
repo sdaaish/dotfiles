@@ -113,7 +113,7 @@ $env:RIPGREP_CONFIG_PATH = $(Resolve-path "$HOME/.config/ripgrep/config")
 # }
 
 # Detect Emacs and set the editor environment to use emacsclient with the server
-$emacsDir = Join-Path ${env:USERPROFILE} .config\emacs.new\server
+$emacsDir = Join-Path ${HOME} .config\emacs.new\server
 if (Get-Process |? Name -Match emacs| ? Path -match emacs.exe) {
     # Edge case: Test if emacs has written to the server directory
     if (Test-Path $emacsDir){
@@ -141,7 +141,12 @@ Print-Debug "After EDITOR"
 
 # Use zoxide for navigation
 $env:_ZO_ECHO = 1
-Invoke-Expression (& { (zoxide init powershell | Out-String) })
+try {
+    Invoke-Expression (& { (zoxide init powershell | Out-String) }) -ErrorAction Stop
+}
+catch {
+    "Ignoring zoxide"
+}
 
 # Colorthemes for files
 # Local fix for a bug in 5.1, see https://github.com/devblackops/Terminal-Icons/issues/5#issuecomment-1057072605
