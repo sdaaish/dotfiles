@@ -26,10 +26,10 @@
 ;;; Code:
 
 ;; Startup optimization
-(setq gc-cons-threshold (* 50 1000 1000))
+(setq gc-cons-threshold (* 64 1024 1024))
 (defun gc/set-after-start ()
   "Set a sane value after starting Emacs."
-  (setq gc-cons-threshold (* 2 1000 1000)))
+  (setq gc-cons-threshold (* 16 1024 1024)))
 (setq after-init-hook 'gc/set-after-start)
 
 (if (>= emacs-major-version 29)
