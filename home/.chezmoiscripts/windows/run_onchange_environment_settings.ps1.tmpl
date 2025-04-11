@@ -13,5 +13,6 @@ if (Test-Path "C:\Windows\System32\OpenSSH\ssh.exe"){
 }
 
 [System.Environment]::SetEnvironmentVariable("HOME", $(Resolve-Path ${env:UserProfile}),"User")
+[System.Environment]::SetEnvironmentVariable("JUPYTER_CONFIG_DIR", $(Resolve-Path ${env:UserProfile}\.config\jupyter),"User")
 
 {{ end }}

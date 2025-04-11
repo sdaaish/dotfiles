@@ -9,6 +9,7 @@ export GNUPGHOME="${HOME}/.config/gnupg"
 export STARSHIP_CONFIG="${HOME}/.config/starship/starship.toml"
 export ZDOTDIR="${HOME}/.config/zsh"
 export FZF_DEFAULT_OPTS="--height=40% --layout=reverse --info=inline --border --margin=1 --padding=1"
+export JUPYTER_CONFIG_DIR="${HOME}/.config/jupyter"
 
 # Use bat preview if it is installed
 if [ -x $(which bat) ]
