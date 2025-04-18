@@ -9,10 +9,10 @@ if (Get-Command runemacs.exe -ErrorAction SilentlyContinue){
 }
 
 if (Test-Path "C:\Windows\System32\OpenSSH\ssh.exe"){
-    [System.Environment]::SetEnvironmentVariable("GIT_SSH", $(Resolve-Path "C:\Windows\System32\OpenSSH\ssh.exe"),"User")
+    [System.Environment]::SetEnvironmentVariable("GIT_SSH", "C:\Windows\System32\OpenSSH\ssh.exe", "User")
 }
 
-[System.Environment]::SetEnvironmentVariable("HOME", $(Resolve-Path ${env:UserProfile}),"User")
-[System.Environment]::SetEnvironmentVariable("JUPYTER_CONFIG_DIR", $(Resolve-Path ${env:UserProfile}\.config\jupyter),"User")
+[System.Environment]::SetEnvironmentVariable("HOME", $HOME, "User")
+[System.Environment]::SetEnvironmentVariable("JUPYTER_CONFIG_DIR", "$HOME\.config\jupyter", "User")
 
 {{ end }}
