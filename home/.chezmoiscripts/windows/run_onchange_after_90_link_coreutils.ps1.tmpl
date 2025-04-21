@@ -1,0 +1,29 @@
+{{ if eq .chezmoi.os "windows" -}}
+
+# Link coreutils packages so that they are available in Path.
+
+# Test for privilege
+{{- template "test-for-admin.ps1" -}}
+
+$link = 'C:\Program Files\WinGet\Links\'
+$coreutilsexe = (Get-ChildItem -Path 'C:\Program Files\WinGet\Packages\uutils.coreutils_Microsoft.Winget.Source_8wekyb3d8bbwe' -File -Filter "coreutils.exe" -Recurse).FullName
+$coreutils = @("tr.exe","cut.exe","head.exe")
+
+if ($coreutilsexe.length -eq 0){
+    throw "No version of coreutils installed"
+}
+
+# Test and install if administrator
+$ErrorActionPreference = Continue
+if ($prp.IsInRole($adm)) {
+    Write-Verbose "Running as Administrator, linking uutils..."
+    foreach ($util in $coreutils){
+        New-Item -Path $link -Name $util -ItemType SymbolicLink -Value $coreutilsexe -Force
+        Write-Verbose "Linking $util"
+    }
+}
+else {
+    throw "You need to run this as administrator."
+}
+
+{{end}}
