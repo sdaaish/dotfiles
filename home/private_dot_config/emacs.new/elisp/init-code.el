@@ -72,6 +72,10 @@
   (bind-key "M-p" #'flymake-goto-prev-error 'flymake-mode-map)
   (bind-key "C-c m" #'flymake-show-buffer-diagnostics 'flymake-mode-map))
 
+;; Jinja 2 formatting for Go and Ansible
+(use-package jinja2-mode
+  :config (setq jinja2-enable-indent-on-save t))
+
 (provide 'init-code)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-code.el ends here
