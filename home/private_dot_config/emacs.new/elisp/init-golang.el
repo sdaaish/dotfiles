@@ -7,6 +7,23 @@
 
 (use-package go-mode
   :config (add-to-list 'major-mode-remap-alist '(go-mode . go-ts-mode))
+
+  (defun go-compile()
+    "Compile the current buffer"
+    (interactive)
+    (compile (concat "go run " (file-name-nondirectory (buffer-file-name)))))
+
+  (defun go-build()
+    "Build the current buffer"
+    (interactive)
+    (compile (concat "go build " (file-name-nondirectory (buffer-file-name)))))
+
+  :bind (:map go-ts-mode-map
+              ("C-c C-c" . 'go-compile)
+              ("C-c C-r" . 'recompile)
+              ("C-c C-b" . 'go-build)
+              ("C-c C-a" . 'go-import-add))
+
   :hook ((go-mode go-ts-mode) . 'my/line-number-relative))
 
 (add-hook 'project-find-functions #'project-find-go-module)
