@@ -67,9 +67,11 @@
 (use-package projectile
   :diminish projectile-mode
   :init (when (file-directory-p "~/repos")
-          (setq projectile-project-search-path '("~/repos" "~/code" "~/work")))
+          (setq projectile-project-search-path '(("~/repos" . 1) ("~/code" . 1) ("~/work" . 1))))
   :config
   (projectile-mode t)
+  ;;  (add-to-list 'projectile-ignored-projects "~")
+
   :custom
   (projectile-completion-system 'ivy)
   (projectile-switch-project-action 'projectile-dired)
