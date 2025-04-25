@@ -256,15 +256,48 @@
 (with-eval-after-load 'flymake
   (define-key flymake-mode-map (kbd "M-n") 'flymake-goto-next-error)
   (define-key flymake-mode-map (kbd "M-p") 'flymake-goto-prev-error)
-  (define-key flymake-mode-map (kbd "C-c C-g") 'flymake-show-buffer-diagnostics))
+  (define-key flymake-mode-map (kbd "C-c C-g") 'flymake-show-buffer-diagnostics)
+  (add-to-list 'display-buffer-alist
+               '("^\\*Flymake diagnostics"
+                 (display-buffer-reuse-window display-buffer-pop-up-window)
+                 (window-height . 8))))
 
 ;; Eglot
 (setq eglot-ignored-server-capabilities '(:documentHighlightProvider)
       eglot-report-progress nil)
+(setq-default eglot-workspace-configuration
+              '((:gopls .
+                        ((staticcheck . t)
+                         (matcher . "CaseSensitive")))))
+(defun eglot-format-buffer-on-save ()
+  (add-hook 'before-save-hook #'eglot-format-buffer -10 t))
 
 ;; Tree-sitter language definitions
 (when (file-directory-p "~/.config/tree-sitter/")
   (setq treesit-extra-load-path (list (expand-file-name "~/.config/tree-sitter/"))))
+
+;; Go lang
+(add-to-list 'auto-mode-alist '("/go\\.mod\\'" . go-mod-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.go\\'" . go-ts-mode))
+(add-hook 'go-ts-mode-hook 'eglot-ensure 10)
+(add-hook 'go-ts-mode-hook 'flymake-mode 8)
+(add-hook 'go-ts-mode-hook 'flymake-show-buffer-diagnostics 9)
+(add-hook 'go-ts-mode-hook #'eglot-format-buffer-on-save)
+
+(defun go-compile()
+  "Compile the current buffer"
+  (interactive)
+  (compile (concat "go run " (file-name-nondirectory (buffer-file-name)))))
+
+(defun go-build()
+  "Build the current buffer"
+  (interactive)
+  (compile (concat "go build " (file-name-nondirectory (buffer-file-name)))))
+
+(with-eval-after-load 'go-ts-mode
+  (define-key go-ts-mode-map (kbd "C-c C-c") 'go-compile)
+  (define-key go-ts-mode-map (kbd "C-c C-r") 'recompile)
+  (define-key go-ts-mode-map (kbd "C-c C-b") 'go-build))
 
 ;; Start the server
 (server-start)
