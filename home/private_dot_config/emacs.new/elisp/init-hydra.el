@@ -28,6 +28,7 @@
         _d_ debug-on-error:    %`debug-on-error
         _e_ editorconfig-mode: %`editorconfig-mode
         _f_ auto-fill-mode:    %`auto-fill-function
+        _g_ glasses-mode:      %`glasses-mode
         _h_ hs-minor-mode:     %`hs-minor-mode
         _t_ truncate-lines:    %`truncate-lines
         _v_ visual-lines:      %`visual-line-mode
@@ -44,6 +45,7 @@
   ("d" toggle-debug-on-error nil)
   ("e" editorconfig-mode nil)
   ("f" auto-fill-mode nil)
+  ("g" glasses-mode nil)
   ("h" hs-minor-mode nil)
   ("l" my/line-number-t nil)
   ("r" my/line-number-relative nil)

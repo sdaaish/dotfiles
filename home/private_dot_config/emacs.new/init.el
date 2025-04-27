@@ -183,6 +183,7 @@
 (when (display-graphic-p)
   (scroll-bar-mode -1))
 (tool-bar-mode -1)
+(menu-bar-mode -1)
 (visual-line-mode 1)
 (blink-cursor-mode 2)
 (column-number-mode t)
