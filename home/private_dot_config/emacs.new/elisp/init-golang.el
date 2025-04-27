@@ -1,12 +1,12 @@
 ;; Go lang settings for eglot.
 (require 'project)
 
-(defun project-find-go-module (dir)
-  (when-let ((root (locate-dominating-file dir "go.mod")))
-    (cons 'go-module root)))
-
 (use-package go-mode
-  :config (add-to-list 'major-mode-remap-alist '(go-mode . go-ts-mode))
+  :no-require go-ts-mode
+  :after eglot
+
+  :config
+  (add-to-list 'major-mode-remap-alist '(go-mode . go-ts-mode))
 
   (defun go-compile()
     "Compile the current buffer"
@@ -25,6 +25,11 @@
               ("C-c C-a" . 'go-import-add))
 
   :hook ((go-mode go-ts-mode) . 'my/line-number-relative))
+
+
+(defun project-find-go-module (dir)
+  (when-let ((root (locate-dominating-file dir "go.mod")))
+    (cons 'go-module root)))
 
 (add-hook 'project-find-functions #'project-find-go-module)
 

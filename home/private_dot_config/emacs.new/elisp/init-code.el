@@ -67,10 +67,21 @@
 ;;(use-package tree-sitter-langs)
 
 ;; Flymake
-(with-eval-after-load 'flymake
-  (bind-key "M-n" #'flymake-goto-next-error 'flymake-mode-map)
-  (bind-key "M-p" #'flymake-goto-prev-error 'flymake-mode-map)
-  (bind-key "C-c m" #'flymake-show-buffer-diagnostics 'flymake-mode-map))
+(use-package flymake
+  :straight (:type built-in)
+  :bind (:map flymake-mode-map
+              ("M-n" . #'flymake-goto-next-error)
+              ("M-p" . #'flymake-goto-prev-error)
+              ("C-c m" . #'flymake-show-buffer-diagnostics))
+  :init
+  (add-to-list 'display-buffer-alist
+               '("^\\*Flymake diagnostics"
+                 (display-buffer-reuse-window display-buffer-pop-up-window)
+                 (window-height . 8)))
+  :hook
+  (go-ts-mode . (lambda()
+                  (flymake-mode t)
+                  (flymake-show-buffer-diagnostics))))
 
 ;; Jinja 2 formatting for Go and Ansible
 (use-package jinja2-mode

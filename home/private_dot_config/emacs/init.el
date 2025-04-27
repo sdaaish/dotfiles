@@ -297,7 +297,8 @@
 (with-eval-after-load 'go-ts-mode
   (define-key go-ts-mode-map (kbd "C-c C-c") 'go-compile)
   (define-key go-ts-mode-map (kbd "C-c C-r") 'recompile)
-  (define-key go-ts-mode-map (kbd "C-c C-b") 'go-build))
+  (define-key go-ts-mode-map (kbd "C-c C-b") 'go-build)
+  (define-key go-ts-mode-map (kbd "C-c C-i") 'eglot-code-action-organize-imports))
 
 ;; Start the server
 (server-start)
