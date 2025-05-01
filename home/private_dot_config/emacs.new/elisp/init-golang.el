@@ -21,7 +21,8 @@
               ("C-c C-c" . 'go-compile)
               ("C-c C-r" . 'recompile)
               ("C-c C-b" . 'go-build)
-              ("C-c C-a" . 'go-import-add))
+              ("C-c C-a" . 'go-import-add)
+              ("C-c C-o" . 'eglot-code-action-organize-imports))
 
   :hook (prog-mode . my/line-number-relative))
 
