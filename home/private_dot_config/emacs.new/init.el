@@ -349,8 +349,9 @@ If FRAME is omitted or nil, use currently selected frame."
   :straight (:repo "https://github.com/zkry/p-search.git"))
 
 ;; Turn of debug
-(setq debug-on-error nil)
-(setq debug-on-quit nil)
+(setq debug-on-error nil
+      debug-on-quit nil
+      debug-on-message nil)
 
 ;;; Measure the startup time
 (message "*** Finished emacs @ %s in %s" (my/format-time (current-time)) (my/startup-timer))
