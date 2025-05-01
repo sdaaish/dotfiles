@@ -95,6 +95,14 @@
 
 (use-package restclient)
 
+(use-package company-restclient
+  :config
+  (add-to-list 'company-backends 'company-restclient))
+
+(use-package ob-restclient
+  :config
+  (add-to-list 'org-babel-load-languages '(restclient . t)))
+
 (use-package incus-tramp
   :after tramp
   :config

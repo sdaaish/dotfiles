@@ -266,7 +266,7 @@
 ;; Org babel
 (defun my/org-confirm-babel-evaluate (lang body)
   "Don't confirm code execution for these languages."
-  (not (member lang '("python" "emacs-lisp" "shell" "powershell" "perl" "elisp" "eshell"))))
+  (not (member lang '("python" "emacs-lisp" "shell" "powershell" "perl" "elisp" "eshell" "restclient"))))
 
 
 
