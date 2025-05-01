@@ -1,13 +1,10 @@
 ;; Go lang settings for eglot.
 (require 'project)
 
-(use-package go-mode
-  :no-require go-ts-mode
-  :after eglot
+(use-package go-mode)
 
+(use-package go-ts-mode
   :config
-  (add-to-list 'major-mode-remap-alist '(go-mode . go-ts-mode))
-
   (defun go-compile()
     "Compile the current buffer"
     (interactive)
@@ -18,13 +15,15 @@
     (interactive)
     (compile (concat "go build " (file-name-nondirectory (buffer-file-name)))))
 
+  (my/line-number-relative)
+
   :bind (:map go-ts-mode-map
               ("C-c C-c" . 'go-compile)
               ("C-c C-r" . 'recompile)
               ("C-c C-b" . 'go-build)
               ("C-c C-a" . 'go-import-add))
 
-  :hook ((go-mode go-ts-mode) . 'my/line-number-relative))
+  :hook (prog-mode . my/line-number-relative))
 
 
 (defun project-find-go-module (dir)
@@ -38,6 +37,6 @@
 
 ;; See https://jeffbowman.writeas.com/crafted-emacs-example-adding-go
 (use-package go-eldoc
-  :hook ((go-mode go-ts-mode) . 'go-eldoc-setup))
+  :hook ((go-mode go-ts-mode) . go-eldoc-setup))
 
 (provide 'init-golang)
