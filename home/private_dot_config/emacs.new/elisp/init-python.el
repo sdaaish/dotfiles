@@ -53,14 +53,18 @@
 (use-package python-pytest)
 
 (use-package python-isort
-  :hook (python-ts-mode 'python-isort-on-save-mode))
+  :hook (python-mode . python-isort-on-save-mode))
 
 (use-package ruff-format
-  :hook (python-ts-mode . 'ruff-format-on-save-mode))
+  :hook (python-ts-mode . ruff-format-on-save-mode))
+
+;; (use-package flymake-ruff
+;;   :hook (python-mode . flymake-ruff-load))
 
 (use-package pet
-  :hook
-  (python-base-mode . (lambda () (pet-mode -10))))
+  :config
+  (add-hook 'python-base-mode-hook 'pet-mode -10))
+
 ;;  ((python-mode python-ts-mode) . (lambda ()
 ;;                                    (setq-local python-shell-interpreter (pet-executable-find "python")
 ;;                                                python-shell-virtualenv-root (pet-virtualenv-root)))))
