@@ -19,6 +19,7 @@
 ;;; Code:
 
 (use-package hydra)
+(require 'glasses)
 
 ;; Hydra for changes to display
 (defhydra hydra-toggle (:color pink :timeout 4)
