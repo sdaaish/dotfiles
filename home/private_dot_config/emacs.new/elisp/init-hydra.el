@@ -1,4 +1,4 @@
-;;; INIT-HYDRA --- Summary
+;;; INIT-HYDRA --- Summary  -*- lexical-binding: t; -*-
 ;;
 ;; Author:  Stig Dahl
 ;; Created: tisdag november 2023-11-28
