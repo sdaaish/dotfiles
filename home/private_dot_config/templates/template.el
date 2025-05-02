@@ -1,4 +1,4 @@
-;;; `(upcase (file-name-nondirectory (file-name-sans-extension (buffer-file-name))))` --- Summary
+;;; `(upcase (file-name-nondirectory (file-name-sans-extension (buffer-file-name))))` --- Summary -*- lexical-binding: t; -*-
 ;;
 ;; Author: `(concat user-full-name)` <`(concat user-mail-address)`>
 ;; Created: `(format-time-string "%Y-%m-%d")`
