@@ -7,3 +7,5 @@
 /emacs/.config/chemacs/profile
 /home/private_dot_config/zsh/dot_zcompdump
 /notes.org
+*.elc
+*.eln

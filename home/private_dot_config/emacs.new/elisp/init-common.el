@@ -112,6 +112,13 @@
                                                    ("KST-9" "Seoul")
                                                    ("AET-11" "Sydney")))
 
+(defun my/recompile-emacs-init-dir ()
+  "Recompile files in init-dir"
+  (interactive)
+  (org-save-all-org-buffers)
+  (save-some-buffers t)
+  (byte-recompile-directory (expand-file-name "elisp" user-emacs-directory) 0 t nil))
+
 (provide 'init-common)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-common.el ends here

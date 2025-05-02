@@ -24,6 +24,9 @@
 (setq debug-on-error t)
 (setq debug-on-quit t)
 
+;; Byte compilation
+(setq load-prefer-newer t)
+
 ;; Startup optimization
 (setq gc-cons-threshold (* 500 1024 1024))
 (setq garbage-collection-messages nil)
