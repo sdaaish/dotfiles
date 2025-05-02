@@ -173,6 +173,33 @@
   ("o" text-scale-decrease "Zoom out")
   ("q" nil "Quit"))
 
+;; Hydra for Go code actions
+(defhydra hydra-golang (:hint nil :color blue)
+  "
+   _a_ Goto argument      | _j_  Jump to definition
+   _d_ Goto docstring     | _gj_ Jump to definition other window
+   _f_ Goto function      | _gi_ Insert and indent
+   _i_ Goto imports       | _oi_ Organize imports
+   _m_ Goto method        | _gd_ Describe definition
+   _n_ Goto function name | _gm_ Goto map
+   _r_ Goto return value  |
+"
+  ("a"  go-goto-arguments)
+  ("d"  go-goto-docstring)
+  ("f"  go-goto-function)
+  ("i"  go-goto-imports)
+  ("m"  go-goto-method-receiver)
+  ("n"  go-goto-function-name)
+  ("r"  go-goto-return-values)
+  ("gi" go-mode-insert-and-indent)
+  ("ga" go-import-add)
+  ("j"  godef-jump)
+  ("gj" godef-jump-other-window)
+  ("gd" godef-describe)
+  ("gm" go-goto-map)
+  ("oi" eglot-code-action-organize-imports)
+  ("q"  nil "Quit"))
+
 (provide 'init-hydra)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-hydra.el ends here
