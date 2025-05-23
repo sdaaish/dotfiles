@@ -111,6 +111,11 @@
    incus-tramp-method
    '((incus-tramp-completion-function-alist))))
 
+;; Syntax highlighing for KQL
+(use-package kql-mode
+  :mode ("\\.kql\\'" . kql-mode)
+  :hook (kql-mode . hungry-delete-mode))
+
 (provide 'init-utils)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-utils.el ends here
