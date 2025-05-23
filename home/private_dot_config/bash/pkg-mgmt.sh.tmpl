@@ -3,32 +3,24 @@
 # Customize functions to match the distribution for package management
 
 {{ if eq .chezmoi.osRelease.id  "opensuse-tumbleweed" }}
-CMD="zypper"
+# OpenSuse TumbleWeed
 alias apt="zypper"
 alias apu="zypper list-updates"
 {{ else }}
-# APT
-CMD="apt-cache"
+# APT based distributions
 alias zypper="apt"
-alias apu='apt list --upgradable'
+alias apu="apt list --upgradable | fzf --preview 'apt-cache show {1}'"
+alias aps="apt-cache search . | fzf --preview 'apt-cache show {1}'"
+alias apc="apt-cache search . |  cut --delimiter ' ' --fields 1 | fzf --multi --cycle --reverse --preview 'apt-cache show {1}' | xargs -r sudo apt install -y"
+alias apcc="apt-cache search . | fzf --preview 'apt-cache depends {1}'"
 {{ end }}
-
-apc() {
-    if [ ${#*} != 0 ]
-    then
-        $CMD search ${*}
-    else
-	      printf "Searches for available packages.\n"
-	      printf "Usage: ${CMD} <1 or more args>\n"
-    fi
-}
 
 # Upgrade system
 apd() {
     {{ if eq .chezmoi.osRelease.id  "opensuse-tumbleweed" -}}
     zypper update
     {{ else -}}
-    sudo bash -c  "apt-get update ; apt-get upgrade -y"
+    sudo bash -c  "apt-get update -y ; apt-get upgrade -y"
     {{- end }}
 }
 
@@ -37,7 +29,7 @@ apdd() {
     {{ if eq .chezmoi.osRelease.id  "opensuse-tumbleweed" -}}
     zypper dup
     {{ else -}}
-    sudo bash -c  "apt-get update ; apt-get dist-upgrade -y"
+    sudo bash -c  "apt-get update -y ; apt-get dist-upgrade -y"
     {{- end }}
 }
 

@@ -12,7 +12,7 @@ export FZF_DEFAULT_OPTS="--height=40% --layout=reverse --info=inline --border --
 export JUPYTER_CONFIG_DIR="${HOME}/.config/jupyter"
 
 # Use bat preview if it is installed
-if [ -x $(which bat) ]
+if [[ ! $(command -v bat) ]]
 then
     export FZF_DEFAULT_OPTS='--height=40% --layout=reverse --info=inline --border --margin=1 --padding=1 --preview "bat --color=always --style=numbers --line-range=:500 {}"'
 fi
