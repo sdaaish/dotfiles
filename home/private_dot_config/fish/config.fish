@@ -5,6 +5,7 @@ if status is-interactive
     abbr -a -U -- gco 'git checkout'
     abbr -a -U -- gts 'git status'
     abbr -a -U -- cm 'chezmoi'
+    abbr -a -U -- tldr 'tealdeer'
 
     # Use zoxide
     zoxide init fish | source

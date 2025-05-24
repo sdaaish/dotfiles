@@ -57,4 +57,13 @@
     checksum.sha256 = "{{ .csvlensSha256 }}"
     refreshPeriod = "168h"
 
+# TealDeer, a TLDR implementation
+[".local/bin/tealdeer"]
+    type = "file"
+    url = "https://github.com/tealdeer-rs/tealdeer/releases/download/v{{ .tealdeerVersion }}/tealdeer-{{.chezmoi.os }}-x86_64-musl"
+    path = "tealdeer"
+    checksum.sha256 = "{{ .tealdeerSha256 }}"
+    executable = true
+    refreshPeriod = "168h"
+
 {{end}}
