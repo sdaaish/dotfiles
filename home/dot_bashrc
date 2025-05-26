@@ -160,7 +160,8 @@ BASE16_SHELL="${HOME}/.config/base16-shell/"
 [[ -x "$(command -v fzf)" ]] && eval "$(fzf --bash)"
 
 # Attach to tmux if running (and is installed), start it otherwise as a new session
-if [[ -x $(command -v tmux) ]]
+# And don't start if inside Emacs using Eat
+if [[ -x $(command -v tmux) ]] && [[ -z "${INSIDE_EMACS+x}" ]]
 then
     if [[ $(pgrep tmux) ]]
     then
