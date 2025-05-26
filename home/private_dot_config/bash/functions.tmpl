@@ -951,6 +951,20 @@ function fzf-env-vars() {
 }
 alias fzfe="fzf-env-vars"
 
+# Cheat.sh
+function cht() {
+
+    if [[ $# -eq 0 ]]
+    then
+        cheat -l | \
+            cut --delimiter=' ' --fields=1 | \
+            fzf --preview 'cheat {}' | \
+            xargs cheat
+    else
+        cheat $1
+    fi
+}
+
 # Git and bat
 batdiff() {
     git diff --name-only --relative --diff-filter=d | xargs bat --diff
