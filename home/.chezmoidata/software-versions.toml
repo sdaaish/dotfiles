@@ -18,5 +18,5 @@ zlsSha256 = "ec4c1b45caf88e2bcb9ebb16c670603cc596e4f621b96184dfbe837b39cd8410"
 csvlensVersion = "v0.11.0"
 csvlensSha256 = "3bd99dc7c1cdb08da99b536acd82c49f4e82c3c14d4ccfaeb4cb11e569ea6207"
 
-tealdeerVersion = "1.7.2"
-tealdeerSha256= "d30bbd35b962bfab5cd3aaef2ece5316ee6f732d25e3f665ddb2797f9d64ee0f"
+# tealdeerVersion = "1.7.2"
+# tealdeerSha256= "d30bbd35b962bfab5cd3aaef2ece5316ee6f732d25e3f665ddb2797f9d64ee0f"

@@ -127,5 +127,5 @@ alias i='incus'
 # Distrobox
 alias dbx='distrobox'
 
-# Tealdeer, tldr
-alias tldr="tealdeer"
+# # Tealdeer, tldr
+# alias tldr="tealdeer"
