@@ -55,10 +55,13 @@ $packages = @(
     "aspell"
     "dasel"
     "sudo"
-    "sysinternals"
     "xsv"
     "zstd"
 )
+
+{{ if .personal }}
+$packages += "sysinternals"
+{{end}}
 
 # Install user mode packages
 Write-Verbose "Installing user packages"
