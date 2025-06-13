@@ -349,7 +349,7 @@ If FRAME is omitted or nil, use currently selected frame."
 
 ;; Test p-search
 (use-package p-search
-  :straight (:repo "https://github.com/zkry/p-search.git"))
+  :straight (:host github :repo "zkry/p-search"))
 
 ;; Turn of debug
 (setq debug-on-error nil
