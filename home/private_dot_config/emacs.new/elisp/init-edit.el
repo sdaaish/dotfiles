@@ -34,7 +34,10 @@
   :hook
   ((org-mode prog-mode shell-mode conf-mode) . smartparens-mode))
 
+;; Non GNU Elpa shenanigans
+;; https://github.com/radian-software/straight.el/issues/1191
 (use-package ws-butler
+  :straight (ws-butler :type git :host github :repo "lewang/ws-butler")
   :diminish
   :hook ((prog-mode org-mode conf-mode) . ws-butler-mode))
 
