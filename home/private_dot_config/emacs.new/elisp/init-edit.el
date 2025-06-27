@@ -37,7 +37,7 @@
 ;; Non GNU Elpa shenanigans
 ;; https://github.com/radian-software/straight.el/issues/1191
 (use-package ws-butler
-  :straight (ws-butler :type git :host github :repo "lewang/ws-butler")
+  :straight (ws-butler :type git :host github :repo "lewang/ws-butler" :branch "master")
   :diminish
   :hook ((prog-mode org-mode conf-mode) . ws-butler-mode))
 
