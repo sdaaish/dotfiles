@@ -577,10 +577,10 @@ Function Chezmoi-GitStatus {
             throw "No such file: $path"
         }
 
-        $csv = import-csv $path
+        $csv = Import-Csv $path
 
         $exceloptions = @{
-            Path = ($path -replace ".csv",".xlsx")
+            Path = ($path -replace "\.csv$",".xlsx")
             TableStyle = "Medium16"
             AutoSize = $true
             MaxAutoSizeRows = 100
