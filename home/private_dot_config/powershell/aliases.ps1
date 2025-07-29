@@ -336,6 +336,8 @@ Function Reload-PowershellProfile {
 
 # Make update of path easier
 Function refreshenv {
+    # HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment
+    # HKCU\Environment\
     $paths = @(
 				([System.Environment]::GetEnvironmentVariable("Path", "Machine") -split ([io.path]::PathSeparator))
 				([System.Environment]::GetEnvironmentVariable("Path", "User") -split ([io.path]::PathSeparator))
