@@ -41,6 +41,12 @@
        (set-fontset-font t 'symbol (font-spec :family "Noto color emoji" :fontified t) nil 'prepend)
        (set-fontset-font t 'unicode (font-spec :family "Noto color emoji" :fontified t) nil 'prepend)))
 
+;; See https://ianyepan.github.io/posts/emacs-emojis/
+(use-package emojify
+  :custom
+  (emojify-display-style 'unicode)
+  (emojify-emoji-styles '(unicode))
+  :bind ("C-c ." . #'emojify-insert-emoji))
 
 (provide 'init-fonts)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
