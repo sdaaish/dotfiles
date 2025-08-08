@@ -64,3 +64,6 @@ Thumbs.db
 /.settings/
 /etc/
 demo/
+
+# PowerShell stuff
+mg.authrecord.json
