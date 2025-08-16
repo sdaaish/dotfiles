@@ -119,33 +119,33 @@ function cdv {
 }
 function ls {
     Get-ChildItem $args -Attributes H, !H, A, !A, S, !S
-    }
-    function ll {
-[cmdletbinding()]
-Param (
-    $Path
-)
+}
+function ll {
+    [cmdletbinding()]
+    Param (
+        $Path
+    )
 
     Get-ChildItem $Path -Attributes H, !H, A, !A, S, !S
-    }
+}
 
-    function lla {
-[cmdletbinding()]
-Param (
-    $Path
-)
+function lla {
+    [cmdletbinding()]
+    Param (
+        $Path
+    )
     Get-ChildItem $Path -Attributes H, !H, A, !A, S, !S, C, !C, E, !E
-    }
+}
 
-    function lle {
-        [cmdletbinding()]
-        Param (
-            $Path
-        )
-        Get-ChildItem $Path -File -Attributes H, !H, A, !A, S, !S |
-            Group-Object -Property Extension |
-            Sort-Object -Property count -Descending
-    }
+function lle {
+    [cmdletbinding()]
+    Param (
+        $Path
+    )
+    Get-ChildItem $Path -File -Attributes H, !H, A, !A, S, !S |
+      Group-Object -Property Extension |
+      Sort-Object -Property count -Descending
+}
 
 function lls {
     [cmdletbinding()]
@@ -203,8 +203,8 @@ function emacs-client() {
 
     $serverdir = Join-Path $initdir server
     $serverfile = (Get-Childitem -Path $serverdir -file |
-        sort -property lastwritetime -desc -top 1 |
-        select fullname).fullname
+      sort -property lastwritetime -desc -top 1 |
+      select fullname).fullname
 
     $msg = "Using server: {0}" -f $serverfile
     Write-Verbose "$msg"
@@ -250,10 +250,10 @@ Function Select-EmacsVersion {
     catch { throw "No such file, 'runemacs.exe'" }
 
     $versions = Get-ChildItem ~/.config -Filter *emacs* -Directory |
-        Where-Object { $_.basename -notmatch "chemacs" } |
-        Select-Object resolvedtarget, basename
+      Where-Object { $_.basename -notmatch "chemacs" } |
+      Select-Object resolvedtarget, basename
 
-        $i = 0
+    $i = 0
     $versions.ForEach(
         {
             "[{1}] {0,-20}" -f $_.basename, $i++
@@ -318,9 +318,10 @@ function Find-Links {
         $Path
     )
     Get-ChildItem $Path -ErrorAction SilentlyContinue |
-        Where-Object { $_.Linktype } |
-        Select-Object FullName, Target, LastWriteTime, LinkType
+      Where-Object { $_.Linktype } |
+      Select-Object FullName, Target, LastWriteTime, LinkType
 }
+
 Function Get-CommandSyntax {
     [cmdletbinding()]
     Param (
@@ -405,204 +406,211 @@ function Chezmoi-Diff {
     chezmoi git pull -- --autostash --rebase
     chezmoi diff
 }
+
 Function Chezmoi-Status {
     param(
         $Path = $(Resolve-Path ".")
     )
     chezmoi status $Path
 }
+
 Function Chezmoi-GitStatus {
     chezmoi git status -- -sb
-    }
-    Function Chezmoi-UnManaged {
-        param(
-            $Path = "."
-        )
-        chezmoi unmanaged $(Resolve-Path $Path)
-    }
-    Function Chezmoi-RecursiveDiff {
-        param(
-            $Path = $(Resolve-Path ".")
-        )
-        $Path = $Path -replace "\\$", ""
-        chezmoi diff --recursive $Path
-    }
-    Function Chezmoi-ClearState {
-        chezmoi state delete-bucket --bucket=scriptState
-        chezmoi state delete-bucket --bucket=entryState
-    }
+}
 
-    # Show current week
-    function Get-CurrentWeek {
-        $culture = [System.Globalization.CultureInfo]::CurrentCulture
-        $Calendar = $culture.DateTimeFormat.Calendar
-        $date = Get-Date
-        [int]$week = $Calendar.GetWeekOfYear($date, [System.Globalization.CalendarWeekRule]::FirstFourDayWeek, [DayOfWeek]::Monday)
-        $week
-    }
+Function Chezmoi-UnManaged {
+    param(
+        $Path = "."
+    )
+    chezmoi unmanaged $(Resolve-Path $Path)
+}
 
-    # Take a list of strings and add qoutes.
-    function Format-DoubleQuote {
-        param (
-            [string[]]$List
-        )
+Function Chezmoi-RecursiveDiff {
+    param(
+        $Path = $(Resolve-Path ".")
+    )
+    $Path = $Path -replace "\\$", ""
+    chezmoi diff --recursive $Path
+}
 
-        $tmp = ($list -split ",") -join ""","""
-        $result = """$tmp"""
-        $result
-    }
+Function Chezmoi-ClearState {
+    chezmoi state delete-bucket --bucket=scriptState
+    chezmoi state delete-bucket --bucket=entryState
+}
 
-    # Return a list of objects.
-    Function New-List {
-        $args
-    }
+# Show current week
+function Get-CurrentWeek {
+    $culture = [System.Globalization.CultureInfo]::CurrentCulture
+    $Calendar = $culture.DateTimeFormat.Calendar
+    $date = Get-Date
+    [int]$week = $Calendar.GetWeekOfYear($date, [System.Globalization.CalendarWeekRule]::FirstFourDayWeek, [DayOfWeek]::Monday)
+    $week
+}
 
-    # Find files recursive with pattern
-    Function Get-ChildItemRecursive {
-        param(
-            [Parameter(
+# Take a list of strings and add qoutes.
+function Format-DoubleQuote {
+    param (
+        [string[]]$List
+    )
+
+    $tmp = ($list -split ",") -join ""","""
+    $result = """$tmp"""
+    $result
+}
+
+# Return a list of objects.
+Function New-List {
+    $args
+}
+
+# Find files recursive with pattern
+Function Get-ChildItemRecursive {
+    param(
+        [Parameter(
              Position = 0,
              ValueFromPipeLine,
              HelpMessage = "Enter one or more paths to search in."
-            )]
-            [string[]]$Path = ".",
+         )]
+        [string[]]$Path = ".",
 
-            [Parameter(
+        [Parameter(
              Position = 1,
              ValueFromPipeLine,
              HelpMessage = "Enter the filter to search for, default='*'."
-            )]
-            [string]$Filter = "*"
-        )
+         )]
+        [string]$Filter = "*"
+    )
 
-        $dirOptions = @{
-            Recurse = $true
-            Path    = $Path
-            Filter  = $Filter
-            File    = $true
-        }
-
-        $selectOptions = @{
-            Property = @("FullName", "Length", @{Label = "LastWriteTime"; Expression = { Get-Date $_.LastWriteTime -UFormat "%F %T" } })
-        }
-
-        Get-ChildItem @dirOptions | Select-Object @selectOptions
+    $dirOptions = @{
+        Recurse = $true
+        Path    = $Path
+        Filter  = $Filter
+        File    = $true
     }
 
-    # Lookup a name with DNSClient-PS
-    Function Resolve-LocalDnsName {
-        [cmdletbinding()]
-        param(
-            [Parameter(Mandatory, Position = 0)]
-            [string]$Name,
+    $selectOptions = @{
+        Property = @("FullName", "Length", @{Label = "LastWriteTime"; Expression = { Get-Date $_.LastWriteTime -UFormat "%F %T" } })
+    }
 
-            [Parameter(Position = 1)]
-            [string]$NameServer
-        )
+    Get-ChildItem @dirOptions | Select-Object @selectOptions
+}
 
-        switch -regex ($name) {
-            "([0-9]{1,3}\.){3}[0-9]{1,3}" {
-                $response = (Resolve-Dns -Query $Name -QueryType PTR -NameServer $Nameserver).answers
-            }
-            "/([0-9a-fA-F]{1,4}::?){1,7}([0-9a-fA-F]{1,4})" {
-                $response = (Resolve-Dns -Query $Name -QueryType PTR -NameServer $Nameserver).answers
-            }
+# Lookup a name with DNSClient-PS
+Function Resolve-LocalDnsName {
+    [cmdletbinding()]
+    param(
+        [Parameter(Mandatory, Position = 0)]
+        [string]$Name,
+
+        [Parameter(Position = 1)]
+        [string]$NameServer
+    )
+
+    switch -regex ($name) {
+        "([0-9]{1,3}\.){3}[0-9]{1,3}" {
+            $response = (Resolve-Dns -Query $Name -QueryType PTR -NameServer $Nameserver).answers
+        }
+        "/([0-9a-fA-F]{1,4}::?){1,7}([0-9a-fA-F]{1,4})" {
+            $response = (Resolve-Dns -Query $Name -QueryType PTR -NameServer $Nameserver).answers
+        }
         default {
             $response = (Resolve-Dns -Query $Name -QueryType A -NameServer $Nameserver).answers
             $response += (Resolve-Dns -Query $Name -QueryType AAAA -NameServer $Nameserver).answers
         }
-        }
-        $response
+    }
+    $response
+}
+
+
+# Load python aliases
+$pythonAlias = Join-Path $PSScriptRoot PythonAlias.ps1
+if (Test-Path $pythonAlias) {
+    . $pythonAlias
+}
+
+# Load local aliases
+$localAlias = Join-Path $PSScriptRoot aliases-local.ps1
+if (Test-Path $localAlias) {
+    . $localAlias
+}
+
+# A RipGrep and FZF wrapper
+function Invoke-RgFzf {
+    param (
+        $Search
+    )
+    Invoke-PsFzfRipgrep -SearchString $Search -NoEditor
+}
+
+# Edit LXC files with Emacs
+Function lfe {
+    $oldenv = $env:EDITOR
+    $env:EDITOR = "runemacs -wait"
+    lxc file edit $args[0]
+    $env:EDITOR = $oldenv
+}
+
+# Quick format as HTML. Requires PSWriteHTML
+Function ConvertTo-HtmlPage {
+    param(
+        $Path
+    )
+
+    try {
+        $Path = (resolve-path $path).path
+    }
+    catch {
+        throw "No such file: $path"
     }
 
-
-    # Load python aliases
-    $pythonAlias = Join-Path $PSScriptRoot PythonAlias.ps1
-    if (Test-Path $pythonAlias) {
-        . $pythonAlias
+    $options = @{
+        PagingLength =  25
+        PagingOptions = @(15,25,50,100)
     }
 
-    # Load local aliases
-    $localAlias = Join-Path $PSScriptRoot aliases-local.ps1
-    if (Test-Path $localAlias) {
-        . $localAlias
+    Import-Csv $Path|Out-HtmlView @options
+}
+
+# Quick format as Excel. Requires ImportExcel
+Function ConvertTo-Excel {
+
+    param(
+        $path
+    )
+
+    try {
+        $Path = (resolve-path $path).path
+    }
+    catch {
+        throw "No such file: $path"
     }
 
-    # A RipGrep and FZF wrapper
-    function Invoke-RgFzf {
-        param (
-            $Search
-        )
-        Invoke-PsFzfRipgrep -SearchString $Search -NoEditor
+    $csv = Import-Csv $path
+
+    $exceloptions = @{
+        Path = ($path -replace "\.csv$",".xlsx")
+        TableStyle = "Medium16"
+        AutoSize = $true
+        MaxAutoSizeRows = 100
+        NoNumberConversion = "*"
+        show = $true
     }
 
-    # Edit LXC files with Emacs
-    Function lfe {
-        $oldenv = $env:EDITOR
-        $env:EDITOR = "runemacs -wait"
-        lxc file edit $args[0]
-        $env:EDITOR = $oldenv
-    }
+    $csv | Export-Excel @excelOptions
+}
 
-    # Quick format as HTML. Requires PSWriteHTML
-    Function ConvertTo-HtmlPage {
-        param(
-            $Path
-        )
+# Use a custom prompt when presenting
+function demo-prompt {
+    $ENV:STARSHIP_CONFIG = (Resolve-Path ~/.config/starship/demo.toml)
+}
 
-        try {
-            $Path = (resolve-path $path).path
-        }
-        catch {
-            throw "No such file: $path"
-        }
+function demo-profile {
+    . (resolve-Path (Join-Path $PSScriptRoot demo.ps1))
+}
 
-        $options = @{
-            PagingLength =  25
-            PagingOptions = @(15,25,50,100)
-        }
+# Start a terminal as admin
+function Start-AdminTerminal {
+    param()
 
-        Import-Csv $Path|Out-HtmlView @options
-    }
-
-    # Quick format as Excel. Requires ImportExcel
-    Function ConvertTo-Excel {
-
-        param(
-            $path
-        )
-
-        try {
-            $Path = (resolve-path $path).path
-        }
-        catch {
-            throw "No such file: $path"
-        }
-
-        $csv = Import-Csv $path
-
-        $exceloptions = @{
-            Path = ($path -replace "\.csv$",".xlsx")
-            TableStyle = "Medium16"
-            AutoSize = $true
-            MaxAutoSizeRows = 100
-            NoNumberConversion = "*"
-            show = $true
-        }
-
-        $csv | Export-Excel @excelOptions
-    }
-    # Use a custom prompt when presenting
-    function demo-prompt {
-        $ENV:STARSHIP_CONFIG = (Resolve-Path ~/.config/starship/demo.toml)
-    }
-    function demo-profile {
-        . (resolve-Path (Join-Path $PSScriptRoot demo.ps1))
-    }
-
-    # Start a terminal as admin
-    function Start-AdminTerminal {
-        param()
-
-        Start-Process -FilePath wt.exe -Argumentlist "--pos 30,30 --size 200,50 " -Verb RunAs
-    }
+    Start-Process -FilePath wt.exe -Argumentlist "--pos 30,30 --size 200,50 " -Verb RunAs
+}
