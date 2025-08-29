@@ -111,6 +111,16 @@
                                                    ("PST-8" "Manila")
                                                    ("KST-9" "Seoul")
                                                    ("AET-11" "Sydney")))
+(customize-set-variable 'zoneinfo-style-world-list '(("America/Los_Angeles" "Seattle")
+                                                     ("America/New_York" "New York")
+                                                     ("Etc/UTC" "UTC")
+                                                     ("Europe/London" "London")
+                                                     ("Europe/Stockholm" "Stockholm")
+                                                     ("Europe/Sofia" "Sofia")
+                                                     ("Asia/Calcutta" "Bangalore")
+                                                     ("Asia/Manila" "Manila")
+                                                     ("Asia/Seoul" "Seoul")
+                                                     ("Australia/Sydney" "Sydney")))
 
 (defun my/recompile-emacs-init-dir ()
   "Recompile files in init-dir"
