@@ -10,13 +10,46 @@ unalias emx &>/dev/null
 
 # List alias
 alias dmesg='dmesg -T --color=always| less -R'
-alias l='less'
-alias la='ls -la'
-alias ll='ls -lAhG'
-alias llt='ls -ltrah'
-alias llh='ls -lah'
-alias lls='ls -lAhSrG'
-alias lll='find-links'
+
+if [[ $(command -v bat) ]]
+then
+    alias l='bat'
+else
+    alias l='less'
+fi
+
+# enable color support of ls and also add handy aliases
+if [ $(command -v dircolors) ]
+then
+    #test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# Use eza if installed
+if [[ $(command -v eza) ]]
+then
+    alias ls='eza'
+    alias la='eza -la'
+    alias ll='eza -l'
+    alias llt='eza --long --sort=time'
+    alias lls='eza --long --sort=size'
+    alias llg='eza --long --inode --header --git'
+    alias lt='eza --long --tree --level=3'
+else
+    alias la='ls -la'
+    alias ll='ls -lAhG'
+    alias llt='ls -ltrah'
+    alias llh='ls -lah'
+    alias lls='ls -lAhSrG'
+    alias lll='find-links'
+fi
+
 alias rehash='hash -r'
 alias poff='sudo shutdown --poweroff now'
 alias poffr='sudo shutdown --reboot now'
@@ -30,18 +63,6 @@ alias cd..='cd ..'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias cdh='cd ~'
-
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    #test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    alias dir='dir --color=auto'
-    alias vdir='vdir --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
 
 # Git stuff
 alias gta='git alias'
