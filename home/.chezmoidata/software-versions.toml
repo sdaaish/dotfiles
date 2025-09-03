@@ -6,8 +6,9 @@ ageSha256 = "7df45a6cc87d4da11cc03a539a7470c15b1041ab2b396af088fe9990f7c79d50"
 minisignVersion = "0.12"
 minisignSha256 = "9a599b48ba6eb7b1e80f12f36b94ceca7c00b7a5173c95c3efc88d9822957e73"
 
-fzfVersion = "0.60.3"
-fzfSha256 = "2937a4f10b0f80e0c974d9459df3bc049b068a97212b0d253c36c9da5920b521"
+# https://github.com/junegunn/fzf/releases/
+fzfVersion = "0.65.2"
+fzfSha256 = "5eb8efc0e94aa559f84ea83eeba99bea7dce818e63f92b4b62e60663220f1c14"
 
 direnvVersion = "v2.35.0"
 direnvSha256 = "55c294f4376397c68b1f659f049fb104dc2ecd0fcb15a15949d7f748e3f70b66"
