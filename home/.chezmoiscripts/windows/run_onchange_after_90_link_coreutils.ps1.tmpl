@@ -1,3 +1,7 @@
+# This links the name of an program to the coreutils executable, so it becomes available in Windows.
+# The list of programs that coreutils support depends on its version
+# Note that coreutils supports programs that conflicts with built-in programs in Windows.
+
 {{ if eq .chezmoi.os "windows" -}}
 
 # Link coreutils packages so that they are available in Path.
@@ -7,7 +11,97 @@
 
 $link = 'C:\Program Files\WinGet\Links\'
 $coreutilsexe = (Get-ChildItem -Path 'C:\Program Files\WinGet\Packages\uutils.coreutils_Microsoft.Winget.Source_8wekyb3d8bbwe' -File -Filter "coreutils.exe" -Recurse).FullName
-$coreutils = @("tr.exe","cut.exe","head.exe")
+
+# This list is updated for version 0.1.0 of coreutils
+$coreutils = @(
+    "arch",
+    "b2sum",
+    "b3sum",
+    "base32",
+    "base64",
+    "basename",
+    "basenc",
+    "cat",
+    "cksum",
+    "comm",
+    "cp",
+    "csplit",
+    "cut",
+    "date",
+    "dd",
+    "df",
+    "dircolors",
+    "dirname",
+    "du",
+    "echo",
+    "env",
+    "expand",
+    "expr",
+    "factor",
+    "false",
+    "fmt",
+    "fold",
+    "hashsum",
+    "head",
+    "join",
+    "link",
+    "ln",
+    "ls",
+    "md5sum",
+    "mkdir",
+    "mktemp",
+    "mv",
+    "nl",
+    "nproc",
+    "numfmt",
+    "od",
+    "paste",
+    "pr",
+    "printenv",
+    "printf",
+    "ptx",
+    "pwd",
+    "readlink",
+    "realpath",
+    "rm",
+    "rmdir",
+    "seq",
+    "sha1sum",
+    "sha224sum",
+    "sha256sum",
+    "sha3-224sum",
+    "sha3-256sum",
+    "sha3-384sum",
+    "sha3-512sum",
+    "sha384sum",
+    "sha3sum",
+    "sha512sum",
+    "shake128sum",
+    "shake256sum",
+    "shred",
+    "shuf",
+    "sleep",
+    "sort",
+    "split",
+    "sum",
+    "sync",
+    "tac",
+    "tail",
+    "tee",
+    "test",
+    "touch",
+    "tr",
+    "true",
+    "truncate",
+    "tsort",
+    "uname",
+    "unexpand",
+    "uniq",
+    "unlink",
+    "vdir",
+    "wc",
+    "yes"
+)
 
 if ($coreutilsexe.length -eq 0){
     throw "No version of coreutils installed"
