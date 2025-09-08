@@ -11,6 +11,10 @@
 $link = 'C:\Program Files\WinGet\Links\'
 $coreutilsexe = (Get-ChildItem -Path 'C:\Program Files\WinGet\Packages\uutils.coreutils_Microsoft.Winget.Source_8wekyb3d8bbwe' -File -Filter "coreutils.exe" -Recurse).FullName
 
+if ($coreutilsexe.length -eq 0){
+    throw "No version of coreutils installed"
+}
+
 # This list is updated for version 0.1.0 of coreutils
 $coreutils = @(
     "arch",
@@ -102,21 +106,14 @@ $coreutils = @(
     "yes"
 )
 
-if ($coreutilsexe.length -eq 0){
-    throw "No version of coreutils installed"
-}
-
 # Test and install if administrator
-$ErrorActionPreference = Continue
-if ($prp.IsInRole($adm)) {
-    Write-Verbose "Running as Administrator, linking uutils..."
-    foreach ($util in $coreutils){
-        New-Item -Path $link -Name $util -ItemType SymbolicLink -Value $coreutilsexe -Force
-        Write-Verbose "Linking $util"
-    }
-}
-else {
-    throw "You need to run this as administrator."
+$ErrorActionPreference = "Continue"
+Write-Verbose "Running as Administrator, linking uutils..."
+Write-Host "Starting loop"
+foreach ($util in $coreutils){
+    $prg = "{0}.exe" -f $util
+    New-Item -Path $link -Name $prg -ItemType SymbolicLink -Value $coreutilsexe -Force
+    Write-Verbose "Linking $util"
 }
 
 {{end}}
