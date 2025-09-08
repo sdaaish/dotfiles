@@ -1,10 +1,9 @@
+{{ if eq .chezmoi.os "windows" -}}
+# Link coreutils packages so that they are available in Path.
+
 # This links the name of an program to the coreutils executable, so it becomes available in Windows.
 # The list of programs that coreutils support depends on its version
 # Note that coreutils supports programs that conflicts with built-in programs in Windows.
-
-{{ if eq .chezmoi.os "windows" -}}
-
-# Link coreutils packages so that they are available in Path.
 
 # Test for privilege
 {{- template "test-for-admin.ps1" -}}
