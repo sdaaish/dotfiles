@@ -1,0 +1,7 @@
+# -*- mode: yaml-ts; -*-
+# Aliases allow you to create nicknames for gh commands
+aliases:
+    co: pr checkout
+    new: '!gh repo create --private --source=. --remote=origin; git push -u --all; gh browse'
+    rel: release create "$1" --generate-notes --verify-tag --fail-on-no-commits
+    configure: 'gh alias delete --all;gh alias import --clobber ~/gh/aliases.yml'
