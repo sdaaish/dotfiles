@@ -12,10 +12,7 @@ prefer_editor_prompt: disabled
 pager:
 # Aliases allow you to create nicknames for gh commands
 aliases:
-    co: pr checkout
-    new: '!gh repo create --private --source=. --remote=origin; git push -u --all; gh browse'
-    rel: release create "$1" --generate-notes --verify-tag --fail-on-no-commits
-    configure: 'gh alias delete --all;gh alias import --clobber ~/gh/aliases.yml'
+    configure: '!gh alias delete --all;gh alias import --clobber ~/.config/gh/aliases.yml'
 # The path to a unix socket through which send HTTP connections. If blank, HTTP traffic will be handled by net/http.DefaultTransport.
 http_unix_socket:
 # What web browser gh should use when opening URLs. If blank, will refer to environment.
