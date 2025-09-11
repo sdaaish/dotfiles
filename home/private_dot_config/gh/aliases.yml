@@ -5,3 +5,4 @@ rel: release create "$1" --generate-notes --verify-tag --fail-on-no-commits
 create-draft-pr: pr create --draft --assignee @me
 pyrepo: repo create "$1" --public --add-readme --clone --gitignore=Python --license=bsd-3-clause-clear
 configure: '!gh alias delete --all;gh alias import --clobber ~/.config/gh/aliases.yml'
+gh-create: '!gh repo create --private --source=. --remote=origin; git push -u --all; gh browse'
