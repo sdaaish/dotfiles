@@ -4,7 +4,7 @@
 # Created: `(format-time-string "%Y-%m-%d")`
 
 # Import modules
-import $1
+from pathlib import Path
 
 # Define main function
 def main():
