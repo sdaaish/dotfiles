@@ -1,8 +1,13 @@
 # -*- mode: yaml-ts; -*-
 # Aliases allow you to create nicknames for gh commands
+a: alias list
 co: pr checkout
-rel: release create "$1" --generate-notes --verify-tag --fail-on-no-commits
-create-draft-pr: pr create --draft --assignee @me
-pyrepo: repo create "$1" --public --add-readme --clone --gitignore=Python --license=bsd-3-clause-clear
 configure: '!gh alias delete --all;gh alias import --clobber ~/.config/gh/aliases.yml'
+
+# Release and pull requests
+create-draft-pr: pr create --draft --assignee @me
+rel: release create "$1" --generate-notes --verify-tag --fail-on-no-commits
+
+# Repository management
+pyrepo: repo create "$1" --public --add-readme --clone --gitignore=Python --license=bsd-3-clause-clear
 gh-create: '!gh repo create --private --source=. --remote=origin; git push -u --all; gh browse'

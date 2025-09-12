@@ -159,6 +159,9 @@ BASE16_SHELL="${HOME}/.config/base16-shell/"
 # Use trigger sequence for FZF
 [[ -x "$(command -v fzf)" ]] && eval "$(fzf --bash)"
 
+# Completions for GitHub CLI
+[[ -x "$(command -v gh)" ]] && eval "$(gh completion --shell bash)"
+
 # Attach to tmux if running (and is installed), start it otherwise as a new session
 # And don't start if inside Emacs using Eat
 if [[ -x $(command -v tmux) ]] && [[ -z "${INSIDE_EMACS+x}" ]]
