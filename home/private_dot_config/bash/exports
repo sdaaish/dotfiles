@@ -61,7 +61,10 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 # Add local path to MAN
 [ -d "${HOME}/.local/share/man" ] && export MANPATH="$MANPATH:${HOME}/.local/share/man"
 
-# Local go
+# Rust
+[ -d "$HOME/.cargo/bin" ] && export PATH="$HOME/.cargo/bin:$PATH"
+
+# Golang
 [ -d "$HOME/go/bin" ] && export PATH="$PATH:$HOME/go/bin"
 export GOPATH="$HOME/go"
 
