@@ -6,7 +6,8 @@ configure: '!gh alias delete --all;gh alias import --clobber ~/.config/gh/aliase
 
 # Release and pull requests
 create-draft-pr: pr create --draft --assignee @me
-rel: release create "$1" --generate-notes --verify-tag --fail-on-no-commits
+create-draft-release: '!gh release create $(uv version --short) --generate-notes --verify-tag --prerelease --target $(git branch --show-current) --title "$1"'
+create-release: release create "$1" --generate-notes --verify-tag --fail-on-no-commits
 
 # Repository management
 pyrepo: repo create "$1" --public --add-readme --clone --gitignore=Python --license=bsd-3-clause-clear
