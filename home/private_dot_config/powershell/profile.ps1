@@ -170,4 +170,10 @@ catch {
 # Add-TerminalIconsColorTheme -Path $ColorTheme -Force
 # Set-TerminalIconsTheme -ColorTheme MyColorTheme
 
+# Completion for GitHub Client
+if (Get-Command gh.exe) {
+    Invoke-Expression -Command $(gh completion -s powershell | Out-String)
+}
+
+# Print resulting time
 Print-Debug "Start time"
