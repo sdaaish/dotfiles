@@ -4,6 +4,6 @@
  ("lsp" . ((user-emacs-directory . "~/.config/emacs.lsp/")))
  ("slask" . ((user-emacs-directory . "~/.config/emacs.slask")))
  ("work" . ((user-emacs-directory . "~/.config/emacs.work")))
- ("crafted" . ((user-emacs-directory . "~/.config/crafted-emacs")
+ ("crafted" . ((user-emacs-directory . "~/.config/emacs.crafted")
                (env . (("CRAFTED_EMACS_HOME" . "~/.config/crafted-config")))))
- ("nano" . ((user-emacs-directory . "~/.config/nano-emacs/"))))
+ ("nano" . ((user-emacs-directory . "~/.config/emacs.nano/"))))
