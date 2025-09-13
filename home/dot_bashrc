@@ -131,18 +131,18 @@ then
 fi
 
 # Completion for pip
-compfile="${HOME}/.config/bash/pip-completion.bash"
+compfile="${HOME}/.config/bash/completions/pip"
 if [ -f "${compfile}" ]
 then
-    # shellcheck source=.config/bash/pip-completion.bash
+    # shellcheck source=.config/bash/pip
     source "${compfile}"
 fi
 
 # Completion for Chezmoi
-compfile="${HOME}/.config/bash/chezmoi-completion.sh"
+compfile="${HOME}/.config/bash/completions/chezmoi"
 if [ -f "${compfile}" ]
 then
-    # shellcheck source=.config/bash/chezmoi-completion.sh
+    # shellcheck source=.config/bash/chezmoi
     source "${compfile}"
 fi
 

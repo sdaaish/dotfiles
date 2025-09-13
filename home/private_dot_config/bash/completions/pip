@@ -1,4 +1,4 @@
-# pip bash completion start
+# pip bash completion start                   -*- shell-script -*-
 _pip_completion()
 {
     COMPREPLY=( $( COMP_WORDS="${COMP_WORDS[*]}" \
