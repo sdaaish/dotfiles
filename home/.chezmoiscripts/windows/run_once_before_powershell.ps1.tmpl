@@ -6,7 +6,7 @@ $directories = @(
 )
 
 foreach($dir in $directories){
-    $path = Join-Path $Home .local/share
+    $path = Join-Path $ENV:CHEZMOI_DEST_DIR .local/share
     New-Item -Path $path -Name $dir -ItemType Directory -Force|Out-Null
 }
 

@@ -40,8 +40,9 @@ sparseVhd=true
 
 "@
 
-if(-not(test-path $CHEZMOI_DEST_DIR/.wslconfig)){
-    Set-content -Path $CHEZMOI_DEST_DIR/.wslconfig -Value $text -NoNewline
+$WSL_CONFIG = Join-Path $ENV:CHEZMOI_DEST_DIR .wslconfig
+if(-not (Test-Path $WSL_CONFIG)){
+    Set-Content -Path $WSL_CONFIG -Value $text -NoNewline
 }
 
 {{end}}
