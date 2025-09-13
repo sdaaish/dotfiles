@@ -89,7 +89,7 @@ else
     [ -f "${HOME}/.config/bash/completions/git" ] && source "${HOME}/.config/bash/completions/git"
     [ -f "${HOME}/.config/ludus/bash.completion" ] && "${HOME}/.config/ludus/bash.completion"
 fi
-[ -f "${HOME}/.config/bash/completions/git-prompt" ] && source "${HOME}/.config/bash/git-prompt"
+[ -f "${HOME}/.config/bash/completions/git-prompt" ] && source "${HOME}/.config/bash/completions/git-prompt"
 
 # Overrides PS1
 if [ ${TERM} = "dumb" ]
