@@ -12,7 +12,7 @@ if (Test-Path "C:\Windows\System32\OpenSSH\ssh.exe"){
     [System.Environment]::SetEnvironmentVariable("GIT_SSH", "C:\Windows\System32\OpenSSH\ssh.exe", "User")
 }
 
-[System.Environment]::SetEnvironmentVariable("HOME", $HOME, "User")
-[System.Environment]::SetEnvironmentVariable("JUPYTER_CONFIG_DIR", "$HOME\.config\jupyter", "User")
+[System.Environment]::SetEnvironmentVariable("HOME", $CHEZMOI_DEST_DIR, "User")
+[System.Environment]::SetEnvironmentVariable("JUPYTER_CONFIG_DIR", "$CHEZMOI_DEST_DIR\.config\jupyter", "User")
 
 {{ end }}

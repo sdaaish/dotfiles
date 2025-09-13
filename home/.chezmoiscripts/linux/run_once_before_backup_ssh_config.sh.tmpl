@@ -7,15 +7,15 @@ set -eufo pipefail
 DATE=$(date +"%Y%m%dT%H%M%S")
 
 # Backup existing ssh config one time
-if [ -f "${HOME}/.ssh/config" ]
+if [ -f "${CHEZMOI_DEST_DIR}/.ssh/config" ]
 then
-    cp "${HOME}/.ssh/config" "${HOME}/.ssh/config.${DATE}.bak"
+    cp "${CHEZMOI_DEST_DIR}/.ssh/config" "${CHEZMOI_DEST_DIR}/.ssh/config.${DATE}.bak"
 fi
 
-if [ -f "${HOME}/.ssh/known_hosts" ]
+if [ -f "${CHEZMOI_DEST_DIR}/.ssh/known_hosts" ]
 then
-    cp "${HOME}/.ssh/known_hosts" "${HOME}/.ssh/known_hosts.${DATE}.bak"
-    ssh-keyscan github.com >> "${HOME}/.ssh/known_hosts"
+    cp "${CHEZMOI_DEST_DIR}/.ssh/known_hosts" "${CHEZMOI_DEST_DIR}/.ssh/known_hosts.${DATE}.bak"
+    ssh-keyscan github.com >> "${CHEZMOI_DEST_DIR}/.ssh/known_hosts"
 fi
 
 {{ end }}

@@ -50,7 +50,7 @@ $BaseDir = [System.Environment]::GetFolderPath([System.Environment+SpecialFolder
 }
 
 # Setup the config file for PowerShell 7
-[string]$path = "{0}{1}" -f $HOME,"\.local\share\PowerShell\Modules"
+[string]$path = "{0}{1}" -f $CHEZMOI_DEST_DIR,"\.local\share\PowerShell\Modules"
 $path = $path -replace "\\","\\"
 
 $content = @"

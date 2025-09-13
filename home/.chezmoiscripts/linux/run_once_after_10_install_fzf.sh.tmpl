@@ -8,10 +8,10 @@ set -eufo pipefail
 
 # Download info
 URL="https://github.com/junegunn/fzf/releases/download/v0.57.0/fzf-0.57.0-linux_amd64.tar.gz"
-DEST="${HOME}/tmp/fzf-0.57.0-linux_amd64.tar.gz"
+DEST="${CHEZMOI_DEST_DIR}/tmp/fzf-0.57.0-linux_amd64.tar.gz"
 CHKURL="https://github.com/junegunn/fzf/releases/download/v0.57.0/fzf_0.57.0_checksums.txt"
-CHKSUM="${HOME}/tmp/fzf_0.57.0_checksums.txt"
-FILE="${HOME}/.local/bin/fzf"
+CHKSUM="${CHEZMOI_DEST_DIR}/tmp/fzf_0.57.0_checksums.txt"
+FILE="${CHEZMOI_DEST_DIR}/.local/bin/fzf"
 
 if [[ -x $(command -v curl) ]]
 then
@@ -28,7 +28,7 @@ else
     exit 1
 fi
 
-pushd ${HOME}/tmp || exit 1
+pushd ${CHEZMOI_DEST_DIR}/tmp || exit 1
 
 if [[ $(sha256sum -c ${CHKSUM} --ignore-missing) ]]
 then

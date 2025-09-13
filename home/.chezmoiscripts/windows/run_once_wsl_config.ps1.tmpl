@@ -5,7 +5,7 @@ $text = @"
 [wsl2]
 
 # Limits VM memory to use no more than 4 GB, this can be set as whole numbers using GB or MB
-memory=4GB 
+memory=4GB
 
 # Sets the VM to use two virtual processors
 processors=2
@@ -40,8 +40,8 @@ sparseVhd=true
 
 "@
 
-if(-not(test-path $HOME/.wslconfig)){
-    Set-content -Path $HOME/.wslconfig -Value $text -NoNewline
+if(-not(test-path $CHEZMOI_DEST_DIR/.wslconfig)){
+    Set-content -Path $CHEZMOI_DEST_DIR/.wslconfig -Value $text -NoNewline
 }
 
 {{end}}

@@ -4,6 +4,6 @@
 
 set -eufo pipefail
 
-find "${HOME}/.config/" -name *.elc -type f -exec rm '{}' ';'
+find "${CHEZMOI_DEST_DIR}/.config/" -name *.elc -type f -exec rm '{}' ';'
 
 {{ end }}
