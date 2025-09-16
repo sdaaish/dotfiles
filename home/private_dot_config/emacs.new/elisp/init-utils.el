@@ -91,7 +91,8 @@
 (use-package speed-type
   :custom
   (speed-type-min-chars 150)
-  (speed-type-max-chars 350))
+  (speed-type-max-chars 350)
+  (speed-type-statistic-filename (expand-file-name "speed-type-statistic.el" speed-type-gb-dir)))
 
 (use-package restclient)
 
