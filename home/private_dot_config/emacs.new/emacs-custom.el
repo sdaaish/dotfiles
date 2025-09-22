@@ -9,7 +9,8 @@
      (org-babel-python-command-nonsession . python3)
      (powershell-indent . 4)
      (ansible-vault-password-file
-      (expand-file-name ".vault/ansible-pw")))))
+      (expand-file-name ".vault/ansible-pw"))))
+ '(warning-suppress-types '((straight package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

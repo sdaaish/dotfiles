@@ -20,14 +20,18 @@
 
 (use-package powershell
   :config
-  (setq powershell-eldoc-def-files (list (expand-file-name "eldoc/powershell-eldoc.el" user-emacs-directory)))
   (if (eq system-type 'gnu/linux)
       (setq powershell-location-of-exe "/usr/bin/pwsh")
     (setq powershell-location-of-exe "pwsh.exe"))
   ;;  (setq explicit-powershell\.exe-args '("-NoLogo" "-NoProfile" "-Command" "-"))
   ;;  (setq explicit-pwsh\.exe-args '("-NoLogo" "-NoProfile" "-Command" "-"))
-  :custom  (powershell-indent 2)
-  :custom-face (font-lock-variable-name-face ((t (:foreground "#d98026" :weight normal)))))
+
+  :custom
+  (powershell-indent 2)
+  (powershell-eldoc-def-files . (expand-file-name "eldoc/powershell-eldoc.el" (getenv "HOME")))
+
+  :custom-face
+  (font-lock-variable-name-face ((t (:foreground "#d98026" :weight normal)))))
 
 
 (use-package ob-powershell
