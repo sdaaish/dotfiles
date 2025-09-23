@@ -41,7 +41,8 @@ function Set-MyExplorer {
     Set-ItemProperty $key TaskbarAnimations 1
     Set-ItemProperty $key TaskbarSi 0
     Set-ItemProperty $key TaskbarSmallIcons 1
+    Set-ItemProperty $key UseAutoGrouping 0
     Set-ItemProperty $key WebView 1
-    Stop-Process -processname explorer
+    Stop-Process -ProcessName explorer
     Start-Process explorer
 }
