@@ -61,13 +61,29 @@
 ;; (use-package flymake-ruff
 ;;   :hook (python-mode . flymake-ruff-load))
 
+(defun setup-ipython-shell()
+  "Use iPython as interpreter if found in a project by PET."
+  (interactive)
+  (setq-local python-shell-interpreter (pet-executable-find "ipython")
+              python-shell-interpreter-args "-i --simple-prompt"
+              python-shell-completion-native-enable nil))
+
+(defun setup-python-shell()
+  "Use the Python version that PET finds."
+  (interactive)
+  (setq-local python-shell-interpreter (pet-executable-find "python")))
+
+
 (use-package pet
   :config
-  (add-hook 'python-base-mode-hook 'pet-mode -10))
+  ;;  (add-hook 'python-base-mode-hook 'pet-mode -10))
 
-;;  ((python-mode python-ts-mode) . (lambda ()
-;;                                    (setq-local python-shell-interpreter (pet-executable-find "python")
-;;                                                python-shell-virtualenv-root (pet-virtualenv-root)))))
+  :hook
+  ((python-base-mode) .
+   (lambda ()
+     (cond ((pet-executable-find "ipython") (setup-ipython-shell))
+           (t (setup-python-shell)))
+     python-shell-virtualenv-root (pet-virtualenv-root))))
 
 (provide 'init-python)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
