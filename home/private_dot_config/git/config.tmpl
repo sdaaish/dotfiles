@@ -25,6 +25,7 @@
 [diff]
 	noprefix = true
 	ignoreSubmodules = untracked
+	interHunkContext = 10
 
 [core]
 	excludesFile = ~/.config/git/ignore
@@ -33,6 +34,13 @@
 	autocrlf = input
 	eol = lf
 	filemode = false
+	compression = 9
+	preloadIndex = true
+
+[status]
+	branch = true
+	short = true
+	showStash = true
 
 [color]
 	branch = true
@@ -69,13 +77,19 @@
 [url "ssh://git@github.com/"]
 	pushInsteadOf = https://github.com/
 
+[url "ssh://git@github.com/sdaaish/"]
+	insteadOf = my:
+
+[url "https://github.com/"]
+	insteadOf = gh:
+
 [url "ssh://git@gitlab.com/"]
 	pushInsteadOf = https://gitlab.com/
 
 #
 # Include local or personal stuff from these files.
 [include]
-	path = ~/.config/git/alias	
+	path = ~/.config/git/alias
 
 [include]
 	path = ~/.config/git/local
