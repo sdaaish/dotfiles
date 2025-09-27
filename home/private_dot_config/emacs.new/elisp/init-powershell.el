@@ -25,10 +25,10 @@
     (setq powershell-location-of-exe "pwsh.exe"))
   ;;  (setq explicit-powershell\.exe-args '("-NoLogo" "-NoProfile" "-Command" "-"))
   ;;  (setq explicit-pwsh\.exe-args '("-NoLogo" "-NoProfile" "-Command" "-"))
+  (setq powershell-eldoc-def-files (expand-file-name "eldoc/powershell-eldoc.el" (getenv "HOME")))
 
   :custom
   (powershell-indent 2)
-  (powershell-eldoc-def-files . (expand-file-name "eldoc/powershell-eldoc.el" (getenv "HOME")))
 
   :custom-face
   (font-lock-variable-name-face ((t (:foreground "#d98026" :weight normal)))))
