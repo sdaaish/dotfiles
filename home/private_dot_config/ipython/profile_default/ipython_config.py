@@ -261,7 +261,7 @@ c = get_config()  # noqa
 
 ## Whether to display a banner upon starting IPython.
 #  Default: True
-# c.TerminalIPythonApp.display_banner = True
+c.TerminalIPythonApp.display_banner = False
 
 ## Run the file referenced by the PYTHONSTARTUP environment
 #  See also: InteractiveShellApp.exec_PYTHONSTARTUP
@@ -456,7 +456,7 @@ c = get_config()  # noqa
 ## If True, anything that would be passed to the pager
 #          will be displayed as regular output instead.
 #  Default: False
-# c.InteractiveShell.display_page = False
+c.InteractiveShell.display_page = False
 
 ## (Provisional API) enables html representation in mime bundles sent to pagers.
 #  Default: False
