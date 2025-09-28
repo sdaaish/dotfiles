@@ -49,7 +49,9 @@
 ;;(use-package yapfify)
 (use-package blacken)
 
-(use-package python-pytest)
+(use-package python-pytest
+  :bind (:map python-base-mode-map
+              ("C-c C-a" . python-pytest-dispatch)))
 
 (use-package python-isort
   :hook (python-mode . python-isort-on-save-mode))
@@ -59,6 +61,14 @@
 
 ;; (use-package flymake-ruff
 ;;   :hook (python-mode . flymake-ruff-load))
+
+(use-package pydoc
+  :bind (:map python-base-mode-map
+              ("C-c C-d" . #'pydoc-at-point)))
+
+(use-package dap-mode
+  :custom (dap-python-executable "debugpy")
+  :hook (python-base-mode . dap-mode))
 
 (use-package pet
   :init
@@ -85,10 +95,6 @@
    (lambda ()
      (cond ((pet-executable-find "ipython") (setup-ipython-shell))
            (t (setup-python-shell))))))
-
-(use-package pydoc
-  :bind (:map python-base-mode-map
-              ("C-c C-d" . #'pydoc-at-point)))
 
 (provide 'init-python)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
