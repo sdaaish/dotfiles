@@ -36,15 +36,37 @@
 ;;   :hook (zig-ts-mode . (lambda() (zig-format-on-save-mode 1))))
 
 ;; devdocs.io viewer
+
 (use-package devdocs
-  :bind ("C-," . devdocs-lookup)
+  :init
+  (defun scale-shr-text (scale-factor)
+    "Scale the font size in shr-mode by SCALE-FACTOR."
+    (let ((new-height (truncate (* scale-factor (face-attribute 'shr-text :height)))))
+      (set-face-attribute 'shr-text nil :height new-height)))
+
+  (defun scale-shr-text-increase ()
+    (interactive)
+    (scale-shr-text 1.1))
+
+  (defun scale-shr-text-decrease ()
+    (interactive)
+    (scale-shr-text 0.9))
+
+  :custom-face (shr-text ((t (:height 166))))
+
+  :bind
+  ("C-," . devdocs-lookup)
   ("C-h D" . hydra-devdocs/body)
   (:map devdocs-mode-map
-        ("b" . 'devdocs-go-back)
-        ("f" . 'devdocs-go-forward)
-        ("M-p" . 'devdocs-peruse)
-        ("SPC" . 'scroll-up-command)
-        ("S-SPC" . 'scroll-down-command))
+        ("b" . devdocs-go-back)
+        ("f" . devdocs-go-forward)
+        ("M-p" . devdocs-peruse)
+        ("SPC" . scroll-up-command)
+        ("S-SPC" . scroll-down-command)
+        ("C-<kp-add>" . scale-shr-text-increase)
+        ("C-<kp-subtract>" . scale-shr-text-decrease))
+
+
   :hook
   (emacs-lisp-mode . (lambda () (setq-local devdocs-current-docs '("elisp"))))
   ((python-mode python-ts-mode) . (lambda () (setq-local devdocs-current-docs '("python~3.12"))))
