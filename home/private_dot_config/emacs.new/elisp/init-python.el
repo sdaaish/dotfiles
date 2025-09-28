@@ -86,6 +86,10 @@
      (cond ((pet-executable-find "ipython") (setup-ipython-shell))
            (t (setup-python-shell))))))
 
+(use-package pydoc
+  :bind (:map python-base-mode-map
+              ("C-c C-d" . #'pydoc-at-point)))
+
 (provide 'init-python)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-python.el ends here
