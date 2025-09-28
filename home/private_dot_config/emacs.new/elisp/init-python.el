@@ -42,8 +42,7 @@
            (setq-local compile-command
 		                   (concat "mypy "
 			                         (if buffer-file-name
-			                             (shell-quote-argument
-			                              (file-name-sans-extension buffer-file-name))))))))
+			                             (shell-quote-argument buffer-file-name)))))))
 
 ;; Save for future use, read the pet man page
 ;;(use-package py-autopep8)
@@ -61,20 +60,23 @@
 ;; (use-package flymake-ruff
 ;;   :hook (python-mode . flymake-ruff-load))
 
-(defun setup-ipython-shell()
-  "Use iPython as interpreter if found in a project by PET."
-  (interactive)
-  (setq-local python-shell-interpreter (pet-executable-find "ipython")
-              python-shell-interpreter-args "-i --simple-prompt"
-              python-shell-completion-native-enable nil))
-
-(defun setup-python-shell()
-  "Use the Python version that PET finds."
-  (interactive)
-  (setq-local python-shell-interpreter (pet-executable-find "python")))
-
-
 (use-package pet
+  :init
+  (defun setup-ipython-shell()
+    "Use iPython as interpreter if found in a project by PET."
+    (interactive)
+    (setq-local python-shell-interpreter (pet-executable-find "ipython")
+                python-shell-interpreter-args "-i --simple-prompt"
+                python-shell-completion-native-enable nil
+                python-shell-virtualenv-root (pet-virtualenv-root)))
+
+  (defun setup-python-shell()
+    "Use the Python version that PET finds."
+    (interactive)
+    (setq-local python-shell-interpreter (pet-executable-find "python")
+                python-shell-interpreter-args "-i"
+                python-shell-virtualenv-root (pet-virtualenv-root)))
+
   :config
   ;;  (add-hook 'python-base-mode-hook 'pet-mode -10))
 
@@ -82,8 +84,7 @@
   ((python-base-mode) .
    (lambda ()
      (cond ((pet-executable-find "ipython") (setup-ipython-shell))
-           (t (setup-python-shell)))
-     python-shell-virtualenv-root (pet-virtualenv-root))))
+           (t (setup-python-shell))))))
 
 (provide 'init-python)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
