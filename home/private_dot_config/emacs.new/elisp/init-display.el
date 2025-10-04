@@ -7,7 +7,7 @@
 ;;
 ;;; Commentary:
 ;;
-;;  
+;;
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -33,8 +33,8 @@
   (aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
   (aw-background nil)
   (aw-dispatch-always t)
-  :bind (("M-o" . ace-window)
-         ("C-x o" . aw-flip-window))
+  :bind* (("M-o" . ace-window)
+          ("C-x o" . aw-flip-window))
   :custom-face (aw-leading-char-face
                 ((t (:foreground "light sky blue"
                                  :background "#434343"
