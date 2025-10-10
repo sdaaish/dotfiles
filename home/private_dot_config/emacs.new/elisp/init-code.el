@@ -52,6 +52,14 @@
     (interactive)
     (scale-shr-text 0.9))
 
+  (add-to-list 'display-buffer-alist
+               '("\\*devdocs\\*"
+                 display-buffer-in-side-window
+                 (side . right)
+                 (slot . 3)
+                 (dedicated . t)
+                 (body-function . my/body-select-window)))
+
   :custom-face (shr-text ((t (:height 166))))
 
   :bind

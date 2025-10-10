@@ -134,6 +134,32 @@
 
 (use-package all-the-icons)
 
+(use-package emacs
+  :init
+  ;; From prot, control where buffers are displayed
+  (defun my/body-select-window (window)
+    "Select the window as active, use as body-function for window management"
+    (select-window window))
+
+  (defun my/body-delete-other-window (window)
+    "Select the new window and delete the others, call from body-function."
+    (delete-other-windows window))
+
+  (add-to-list 'display-buffer-alist
+               '("\\*Occur\\*"
+                 (display-buffer-reuse-mode-window
+                  display-buffer-below-selected)
+                 (dedicated . t)
+                 (window-height . fit-window-to-buffer)
+                 (body-function . my/body-select-window)))
+  :custom
+  (switch-to-buffer-obey-display-actions nil)
+  (switch-to-buffer-in-dedicated-window 'pop)
+  (split-height-threshold 80)
+  (split-width-threshold 125))
+
+
+
 (provide 'init-display)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-display.el ends here
