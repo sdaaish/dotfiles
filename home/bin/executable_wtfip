@@ -1,0 +1,44 @@
+#!/usr/bin/env -S uv run --script
+# -*- mode: python; -*-
+
+# /// script
+# requires-python = ">=3.10"
+# dependencies = ["requests","rich"]
+# ///
+
+from datetime import UTC, datetime
+
+import requests
+from rich.console import Console
+from rich.table import Table
+from rich import box
+
+URL = "https://myip.wtf/json"
+
+
+# Define main function
+def main():
+    table = Table(
+        title="External IP Address",
+        title_style="magenta3",
+        title_justify="center",
+        caption=f"Captured: {datetime.now(UTC):%FT%T}Z",
+        caption_justify="left",
+        header_style="magenta3",
+        box=box.HORIZONTALS,
+    )
+    table.add_column("Name", style="magenta")
+    table.add_column("Value", style="white")
+
+    response = requests.get(URL)
+    data = response.json()
+    for k, v in data.items():
+        table.add_row(str(k.replace("YourFucking", "")), str(v))
+
+    console = Console()
+    print()
+    console.print(table)
+
+
+if __name__ == "__main__":
+    main()
