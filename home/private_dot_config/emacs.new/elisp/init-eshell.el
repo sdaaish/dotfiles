@@ -48,7 +48,7 @@
 (use-package eshell-prompt-extras
   :custom (eshell-highlight-prompt nil)
   (eshell-prompt-function 'epe-theme-dakrone)
-  (epe-git-dirty-char "💩"))
+  (epe-git-dirty-char "🔺"))
 
 ;; Not eshell, but put it here anyway. This is for the interactive shell, not the shell-command.
 ;; Changing the `shell-file-name`, i.e. `shell-command` did break things.

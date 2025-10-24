@@ -40,12 +40,12 @@
   :init
   (add-to-list 'display-buffer-alist
                '((derived-mode-p 'helpful-mode)
-                 (display-buffer-reuse-mode-window
-                  display-buffer-in-side-window)
+                 (display-buffer-in-side-window display-buffer-reuse-mode-window)
                  (side . right)
                  (slot . 3)
                  (dedicated . t)
-                 (window-height . fit-window-to-buffer)))
+                 (window-width . 74)
+                 (body-function . (lambda (win) (select-window win)))))
 
   :custom
   (counsel-describe-function-function #'helpful-callable)
