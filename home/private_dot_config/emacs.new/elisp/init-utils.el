@@ -92,7 +92,11 @@
   :custom
   (speed-type-min-chars 150)
   (speed-type-max-chars 350)
-  (speed-type-statistic-filename (expand-file-name "speed-type-statistic.el" speed-type-gb-dir)))
+  (speed-type-statistic-filename (expand-file-name "speed-type-statistic.el" speed-type-gb-dir))
+
+  :hook (speed-type-mode . (lambda ()
+                             (company-mode 0)
+                             (abbrev-mode 0))))
 
 (use-package restclient)
 

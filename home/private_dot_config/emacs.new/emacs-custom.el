@@ -5,7 +5,11 @@
  ;; If there is more than one, they won't work right.
  '(ignored-local-variable-values '((checkdoc-allow-quoting-nil-and-t . t)))
  '(safe-local-variable-values
-   '((org-babel-python-command-nonsession . "python3")
+   '((python-shell-interpreter . "python3")
+     (python-shell-exec-path . "/usr/bin/ipython")
+     (python-shell-interpreter . python3)
+     (python-shell-exec-path . /usr/bin/ipython)
+     (org-babel-python-command-nonsession . "python3")
      (org-babel-python-command-nonsession . python3)
      (powershell-indent . 4)
      (ansible-vault-password-file
