@@ -67,3 +67,9 @@ demo/
 
 # PowerShell stuff
 mg.authrecord.json
+
+# Docker and docker-compose
+.env
+
+# Direnv
+.envrc
