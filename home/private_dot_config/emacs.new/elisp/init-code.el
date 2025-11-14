@@ -77,7 +77,7 @@
 
   :hook
   (emacs-lisp-mode . (lambda () (setq-local devdocs-current-docs '("elisp"))))
-  ((python-mode python-ts-mode) . (lambda () (setq-local devdocs-current-docs '("python~3.12"))))
+  ((python-mode python-ts-mode inferior-python-mode) . (lambda () (setq-local devdocs-current-docs '("python~3.12"))))
   ((zig-mode zig-ts-mode) . (lambda () (setq-local devdocs-current-docs '("zig"))))
   ((go-mode go-ts-mode) . (lambda () (setq-local devdocs-current-docs '("go")))))
 
