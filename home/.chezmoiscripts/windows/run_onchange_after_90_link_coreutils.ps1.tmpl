@@ -15,11 +15,12 @@ if ($coreutilsexe.length -eq 0){
     throw "No version of coreutils installed"
 }
 
-# This list is updated for version 0.1.0 of coreutils
+# This list is updated for version 0.4.0 of coreutils
+# Check the tools included with "coreutils.exe --list"
+# Removed  [, dir, hostname, more from creating links
 $coreutils = @(
     "arch",
     "b2sum",
-    "b3sum",
     "base32",
     "base64",
     "basename",
@@ -72,15 +73,8 @@ $coreutils = @(
     "sha1sum",
     "sha224sum",
     "sha256sum",
-    "sha3-224sum",
-    "sha3-256sum",
-    "sha3-384sum",
-    "sha3-512sum",
     "sha384sum",
-    "sha3sum",
     "sha512sum",
-    "shake128sum",
-    "shake256sum",
     "shred",
     "shuf",
     "sleep",
