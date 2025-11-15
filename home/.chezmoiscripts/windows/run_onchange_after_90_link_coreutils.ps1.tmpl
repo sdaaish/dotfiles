@@ -17,7 +17,7 @@ if ($coreutilsexe.length -eq 0){
 
 # This list is updated for version 0.4.0 of coreutils
 # Check the tools included with "coreutils.exe --list"
-# Removed  [, dir, hostname, more from creating links
+# Removed  [, dir, hostname, more and whoami from created links
 $coreutils = @(
     "arch",
     "b2sum",
@@ -97,7 +97,8 @@ $coreutils = @(
     "unlink",
     "vdir",
     "wc",
-    "yes"
+    "yes",
+    "coreutils"
 )
 
 # Test and install if administrator
