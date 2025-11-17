@@ -5,7 +5,8 @@
  ;; If there is more than one, they won't work right.
  '(ignored-local-variable-values '((checkdoc-allow-quoting-nil-and-t . t)))
  '(safe-local-variable-values
-   '((python-shell-interpreter . "python3")
+   '((ws-butler-global-exempt-modes . markdown-mode)
+     (python-shell-interpreter . "python3")
      (python-shell-exec-path . "/usr/bin/ipython")
      (python-shell-interpreter . python3)
      (python-shell-exec-path . /usr/bin/ipython)
