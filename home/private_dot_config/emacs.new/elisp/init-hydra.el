@@ -200,6 +200,19 @@
   ("oi" eglot-code-action-organize-imports)
   ("q"  nil "Quit"))
 
+;; Hydra for Copilot actions
+(defhydra hydra-gptel (:hint nil :color blue)
+  "
+  GPTel commands, mainly for CoPilot
+  _m_ GPTel menu
+  _e_ Goto end
+  _s_ Send
+"
+  ("m" gptel-menu)
+  ("e" gptel-end-of-response)
+  ("s" gptel-send)
+  ("q" nil "Quit"))
+
 (provide 'init-hydra)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-hydra.el ends here

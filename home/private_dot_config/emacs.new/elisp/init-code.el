@@ -117,6 +117,15 @@
 (use-package jinja2-mode
   :config (setq jinja2-enable-indent-on-save t))
 
+
+;; Copilot
+(use-package gptel
+  :bind (:map gptel-mode-map
+              ("C-c g" . #'hydra-gptel/body))
+  :custom
+  (gptel-model 'gpt-5-mini)
+  (gptel-backend (gptel-make-gh-copilot "Copilot")))
+
 (provide 'init-code)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-code.el ends here
