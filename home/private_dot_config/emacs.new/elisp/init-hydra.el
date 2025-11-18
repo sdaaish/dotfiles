@@ -204,10 +204,12 @@
 (defhydra hydra-gptel (:hint nil :color blue)
   "
   GPTel commands, mainly for CoPilot
-  _m_ GPTel menu
-  _e_ Goto end
+  _m_ GPTel menu   |  _a_ Add
+  _e_ Goto end     |  _A_ Add file
   _s_ Send
 "
+  ("a" gpt-add)
+  ("A" gpt-add-file)
   ("m" gptel-menu)
   ("e" gptel-end-of-response)
   ("s" gptel-send)

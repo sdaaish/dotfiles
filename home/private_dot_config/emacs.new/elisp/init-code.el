@@ -120,11 +120,20 @@
 
 ;; Copilot
 (use-package gptel
-  :bind (:map gptel-mode-map
-              ("C-c g" . #'hydra-gptel/body))
+  :bind
+  (:map gptel-mode-map
+        ("C-c g" . hydra-gptel/body))
+  (:map dired-mode-map
+        ("a" . gptel-add-file))
+
   :custom
   (gptel-model 'gpt-5-mini)
-  (gptel-backend (gptel-make-gh-copilot "Copilot")))
+  (gptel-default-mode 'org-mode)
+
+  :config
+  (setq gptel-backend (gptel-make-gh-copilot "Copilot")))
+
+
 
 (provide 'init-code)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
