@@ -245,13 +245,15 @@
 (setq inhibit-startup-message t
       tab-always-indent 'complete)
 (global-set-key [remap dabbrev-expand] 'hippie-expand)
-(global-set-key (kbd "C-z") 'zap-up-to-char)
-(global-set-key (kbd "C-<kp-add>") 'text-scale-increase)
-(global-set-key (kbd "C-<kp-subtract>") 'text-scale-decrease)
-(setq text-scale-mode-step 1.05)
+(bind-key "C-z") 'zap-up-to-char)
+(bind-key "C-<kp-add>" 'text-scale-increase)
+(bind-key "C-+" 'text-scale-increase)
+(bind-key "C-<kp-subtract>" 'text-scale-decrease)
+(bind-key "C--" 'text-scale-decrease)
 (defalias 'yes-or-no-p 'y-or-n-p)
-(setq use-short-answers t)
-(setq confirm-kill-emacs 'yes-or-no-p)
+(setq use-short-answers t
+      confirm-kill-emacs 'yes-or-no-p
+      text-scale-mode-step 1.05)
 
 ;; Abbreviations
 (setq save-abbrevs 'silently
