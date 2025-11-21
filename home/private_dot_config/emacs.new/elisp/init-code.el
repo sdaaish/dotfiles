@@ -120,7 +120,7 @@
 
 ;; Copilot
 (use-package gptel
-  :bind
+  :bind ("C-c g" . gptel)
   (:map gptel-mode-map
         ("C-c g" . hydra-gptel/body))
   (:map dired-mode-map
