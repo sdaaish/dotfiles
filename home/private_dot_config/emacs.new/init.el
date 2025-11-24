@@ -245,7 +245,7 @@
 (setq inhibit-startup-message t
       tab-always-indent 'complete)
 (global-set-key [remap dabbrev-expand] 'hippie-expand)
-(bind-key "C-z") 'zap-up-to-char)
+(bind-key "C-z" 'zap-up-to-char)
 (bind-key "C-<kp-add>" 'text-scale-increase)
 (bind-key "C-+" 'text-scale-increase)
 (bind-key "C-<kp-subtract>" 'text-scale-decrease)
