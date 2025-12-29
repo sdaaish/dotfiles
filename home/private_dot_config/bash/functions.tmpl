@@ -975,3 +975,13 @@ alias bathelp='bat --plain --language=help'
 help() {
     "$@" --help 2>&1 | bathelp
 }
+
+# Start firefox with a profile
+ff() {
+    if [[ "$1" != "" ]]
+    then
+        firefox -P "$1" &
+    else
+        firefox &
+    fi
+}

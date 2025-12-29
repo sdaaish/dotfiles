@@ -84,7 +84,6 @@ export GIT_PS1_SHOWCOLORHINTS=true
 # Source git prompt and completions
 if [[ ! -z "${ZSH_VERSION}" ]]
 then
-    [ -f "${HOME}/.config/zsh/completions/git" ] && source "${HOME}/.config/zsh/completions/git"
     [ -f "${HOME}/.config/ludus/zsh.completion" ] && "${HOME}/.config/ludus/zsh.completion"
 else
     [ -f "${HOME}/.config/bash/completions/git" ] && source "${HOME}/.config/bash/completions/git"

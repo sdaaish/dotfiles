@@ -24,10 +24,6 @@ HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE="$XDG_CACHE_HOME/custom/zsh_history"
 
-# Use modern completion system
-autoload -Uz compinit
-compinit
-
 autoload -Uz colors
 colors
 
@@ -62,6 +58,14 @@ zstyle ':completion:*' group-name ''
 zstyle ':completion:*' squeeze-slashes true
 
 #zstyle ':autocomplete:*' delay 0.1  # seconds (float)
+
+# Add git completion
+zstyle ':completion:*:*:git:*' script ~/.config/bash/completions/git
+fpath=("$HOME/.config/zsh/completions" $fpath)
+
+# Use modern completion system
+autoload -Uz compinit
+compinit
 
 source "$XDG_CONFIG_HOME/bash/aliases"
 source "$XDG_CONFIG_HOME/zsh/aliases.zsh"
