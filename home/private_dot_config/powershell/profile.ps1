@@ -91,7 +91,7 @@ Print-Debug "Before starship"
 $starshipConfig = ".config{0}starship{0}starship.toml" -f [io.path]::DirectorySeparatorChar
 $ENV:STARSHIP_CONFIG = Join-Path ${HOME} $starshipConfig
 Invoke-Expression (&starship init powershell)
-Enable-TransientPrompt
+# Enable-TransientPrompt
 
 Print-Debug "Before aliases"
 # Source local aliases and functions
