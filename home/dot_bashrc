@@ -178,3 +178,6 @@ fi
 
 # Load direnv in the shell
 [[ -x $(command -v direnv) ]] && eval "$(direnv hook bash)"
+
+# Use marimo shell completion
+[[ -x $(command -v marimo) ]] && eval "$(_MARIMO_COMPLETE=bash_source marimo)"
