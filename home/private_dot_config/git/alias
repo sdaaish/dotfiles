@@ -19,6 +19,7 @@
 	f = "!git ls-files | grep -i"
 	fl = log -u
 	gr = grep -Ii
+	l = "!git log --oneline --format='%cs %h %s' | fzf --preview 'git show --name-status {2} --color=always' | cut -d' ' -f2 | xargs git show --pretty=short"
 	la = log --pretty=format:"%h\\ %cr\\ %cn\\ %Cgreen%s%Creset\\ %C(cyan)auth:%ae%Creset\\ %C(magenta)comm:%cE"
 	last = log -1 HEAD
 	ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cgreen\\ [%cn]%Creset" --decorate --date=relative
