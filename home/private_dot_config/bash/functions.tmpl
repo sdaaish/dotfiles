@@ -943,12 +943,6 @@ fz() {
                  --bind 'ctrl-f:change-prompt(Files> )+reload(find * -type f)'
 }
 
-# Info pages through FZF
-iz(){
-    local _result=$(info -k '' | fzf | awk -F' --' '{print $1}' | xargs echo -n)
-    info "${_result}"
-}
-
 # List environment variables with fzf
 function fzf-env-vars() {
     local out
