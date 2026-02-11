@@ -944,15 +944,35 @@ fz() {
         local FZF_DEFAULT_OPTS='--preview "less -S -N {}"'
     fi
 
-    find * | fzf --prompt 'All> ' \
-                 --header 'CTRL-D: Directories / CTRL-F: Files / CTRL-/: Preview' \
-                 --bind 'ctrl-d:change-prompt(Directories> )+reload(find * -type d)' \
-                 --bind 'ctrl-f:change-prompt(Files> )+reload(find * -type f)' \
-                 --bind 'enter:become($EDITOR {})' \
-                 --bind 'ctrl-/:change-preview-window(right|down|hidden)' \
-                 --height "55%"  \
-                 --reverse
+    fzf --prompt 'All> ' \
+        --header 'CTRL-D: Directories | CTRL-F: Files | CTRL-/: Preview' \
+        --bind 'ctrl-d:change-prompt(Directories> )+reload(find * -type d)' \
+        --bind 'ctrl-f:change-prompt(Files> )+reload(find * -type f)' \
+        --bind 'enter:become($EDITOR {})' \
+        --bind 'ctrl-/:change-preview-window(right|down|hidden)' \
+        --height "55%"  \
+        --reverse
 }
+
+# ripgrep->fzf->editor (From the documentation about fzf)
+rz() (
+    local RELOAD='reload:rg --column --color=always --smart-case {q} || :'
+    local OPENER='if [[ $FZF_SELECT_COUNT -eq 0 ]]; then
+            $EDITOR {1} +{2}     # No selection. Open the current line in Vim.
+          else
+            $EDITOR +cw -q {+f}  # Build quickfix list for the selected items.
+          fi'
+    fzf --disabled --ansi --multi \
+        --header 'Enter: Become | CTRL-r: Execute | M-a: Select All | M-d: Unselect All | CTRL-/: Toggle preview ' \
+        --bind "start:$RELOAD" --bind "change:$RELOAD" \
+        --bind "enter:become:$OPENER" \
+        --bind "ctrl-r:execute:$OPENER" \
+        --bind 'alt-a:select-all,alt-d:deselect-all,ctrl-/:toggle-preview' \
+        --delimiter : \
+        --preview 'bat --style=full --color=always --highlight-line {2} {1}' \
+        --preview-window '~4,+{2}+4/3,<80(up)' \
+        --query "$*"
+)
 
 # List environment variables with fzf
 function fzf-env-vars() {

@@ -13,7 +13,7 @@ export IPYTHONDIR="${HOME}/.config/ipython"
 
 # FZF
 export FZF_DEFAULT_OPTS="--height=55% --layout=reverse --info=inline --border --margin=1 --padding=1"
-if command -v fd
+if command -v fd > /dev/null
 then
     export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
 else
