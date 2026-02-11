@@ -28,6 +28,12 @@
      'grep-find-command
      '("rg -n -H --color always --no-heading -e '' $(git rev-parse --show-toplevel || pwd)" . 42))))
 
+;; Use ripgrep directly
+(use-package rg
+  :bind
+  ("C-c s" . rg-menu)
+  (:map isearch-mode-map ("M-s r" . rg-isearch-menu)))
+
 (use-package macrostep
   :bind ("C-c e" . macrostep-mode))
 

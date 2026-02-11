@@ -123,14 +123,14 @@
 (global-set-key (kbd "C-h P") 'hydra-straight-helper/body)
 
 ;; Hydra for Ivy and Counsel
-(defhydra hydra-ivy (:color blue)
+(defhydra hydra-ivy (:color blue :columns 2)
   "Counsel search commands"
-  ("a" counsel-ag "Ag")
   ("e" elgrep "elGrep")
   ("f" counsel-fzf "FzF")
   ("g" counsel-grep "Grep")
   ("j" counsel-git-grep "Git Grep")
   ("r" counsel-rg "RipGrep")
+  ("R" rg-menu "RipGrep Menu")
   ("s" counsel-search "Search Engine"))
 
 ;; Switch between Modus themes
