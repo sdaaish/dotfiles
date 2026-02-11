@@ -937,10 +937,21 @@ orgit(){
 
 # FZF stuff
 fz() {
+    if command -v bat > /dev/null
+    then
+        local FZF_DEFAULT_OPTS='--preview "bat --style=numbers --color=always --line-range :500 {}"'
+    else
+        local FZF_DEFAULT_OPTS='--preview "less -S -N {}"'
+    fi
+
     find * | fzf --prompt 'All> ' \
-                 --header 'CTRL-D: Directories / CTRL-F: Files' \
+                 --header 'CTRL-D: Directories / CTRL-F: Files / CTRL-/: Preview' \
                  --bind 'ctrl-d:change-prompt(Directories> )+reload(find * -type d)' \
-                 --bind 'ctrl-f:change-prompt(Files> )+reload(find * -type f)'
+                 --bind 'ctrl-f:change-prompt(Files> )+reload(find * -type f)' \
+                 --bind 'enter:become($EDITOR {})' \
+                 --bind 'ctrl-/:change-preview-window(right|down|hidden)' \
+                 --height "55%"  \
+                 --reverse
 }
 
 # List environment variables with fzf
