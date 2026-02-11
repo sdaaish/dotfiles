@@ -954,6 +954,16 @@ fz() {
         --reverse
 }
 
+# Custom for fd
+ffz(){
+    fzf --prompt 'Files> ' \
+        --header 'CTRL-T: Switch between Files/Directories' \
+        --bind 'ctrl-t:transform:[[ ! $FZF_PROMPT =~ Files ]] &&
+              echo "change-prompt(Files> )+reload(fd --type file)" ||
+              echo "change-prompt(Directories> )+reload(fd --type directory)"' \
+                  --preview '[[ $FZF_PROMPT =~ Files ]] && bat --color=always {} || tree -C {}'
+}
+
 # ripgrep->fzf->editor (From the documentation about fzf)
 rz() (
     local RELOAD='reload:rg --column --color=always --smart-case {q} || :'
