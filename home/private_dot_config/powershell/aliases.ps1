@@ -73,8 +73,8 @@ Set-Alias -Name ytp -Value yt-dlp
 
 # FZF aliases
 Set-Alias -Name rgz -Value Invoke-RgFzf
-Set-Alias -name fuset -Value Invoke-FuzzySetLocation
-Set-Alias -name fuzet -Value Invoke-FuzzyZLocation
+Set-Alias -Name hz -Value Invoke-HistoryFzF
+Set-Alias -Name hfz -Value Invoke-PsReadLineFzF
 
 # Zoxide
 Set-Alias -Name zox -Value zoxide
@@ -540,6 +540,17 @@ function Invoke-RgFzf {
         $Search
     )
     Invoke-PsFzfRipgrep -SearchString $Search -NoEditor
+}
+
+# Search the history
+function Invoke-HistoryFzF {
+    $Local:Id
+    Get-History | fzf --with-nth=1,3.. --accept-nth=1 --reverse --header='ENTER to invoke command | ESC Exit' | Out-String -OutVariable Id && Invoke-History -Id $Id[0]
+}
+
+# Read the PSReadLine history file
+function Invoke-PsReadLineFzF {
+    Get-Content (Get-PSReadLineOption).HistorySavePath | fzf --reverse
 }
 
 # Edit LXC files with Emacs

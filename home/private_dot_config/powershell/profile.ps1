@@ -36,6 +36,7 @@ $PSReadLineOptions = @{
     BellStyle                     = "None"
     PredictionSource              = "History"
     PredictionViewStyle           = $view
+    HistoryNoDuplicates           = $true
     HistorySearchCursorMovesToEnd = $true
     Colors                        = @{
         Selection = "#fd625d"
