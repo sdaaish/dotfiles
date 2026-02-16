@@ -56,6 +56,7 @@
 
 (customize-set-variable 'global-auto-revert-mode t)
 (customize-set-variable 'global-auto-revert-non-file-buffers t)
+(customize-set-variable 'auto-revert-interval 1)
 
 (customize-set-variable 'bookmark-save-flag 1)
 (customize-set-variable 'bookmark-version-control t)
