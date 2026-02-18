@@ -7,7 +7,7 @@
 ;;
 ;;; Commentary:
 ;;
-;;  
+;;
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -60,6 +60,11 @@
     ("l" git-link "Copy link")
     ("c" git-link-commit "Copy commit"))
   :bind ("C-c L" . hydra-git-link/body))
+
+;; Integrate with GitHub CLI and magit
+(use-package magit-gh
+  :ensure t
+  :after magit)
 
 (provide 'init-magit)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
