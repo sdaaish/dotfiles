@@ -206,12 +206,13 @@
   GPTel commands, mainly for CoPilot
   _m_ GPTel menu   |  _a_ Add
   _e_ Goto end     |  _A_ Add file
-  _s_ Send
+  _s_ Send         |  _r_ Rewrite
 "
   ("a" gpt-add)
   ("A" gpt-add-file)
   ("m" gptel-menu)
   ("e" gptel-end-of-response)
+  ("r" gptel-rewrite)
   ("s" gptel-send)
   ("q" nil "Quit"))
 

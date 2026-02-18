@@ -122,7 +122,10 @@
 (use-package gptel
   :bind ("C-c g" . gptel)
   (:map gptel-mode-map
-        ("C-c g" . hydra-gptel/body))
+        ("C-c g" . hydra-gptel/body)
+        ("C-c C-c" . gptel-send)
+        ("C-c m" . gptel-menu)
+        ("C-c r" . gptel-rewrite))
   (:map dired-mode-map
         ("a" . gptel-add-file))
 
