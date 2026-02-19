@@ -64,10 +64,19 @@
 (unless (eq system-type 'windows-nt)
   (use-package eat
     ;; For `eat-eshell-mode'.
-    :hook (eshell-load-hook . eat-eshell-mode)))
+    :hook (eshell-load . eat-eshell-mode)))
 
 ;; For `eat-eshell-visual-command-mode'.
 ;;(add-hook 'eshell-load-hook #'eat-eshell-visual-command-mode)
+
+;; Install VTERM for nix systems
+;; Requires cmake, libtool-bin, libvterm
+(unless (eq system-type 'windows-nt)
+  (use-package vterm
+    :hook (vterm-mode-hook .
+                           (lambda ()
+                             (set (make-local-variable 'buffer-face-mode-face) 'fixed-pitch)
+                             (buffer-face-mode t)))))
 
 (provide 'init-eshell)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
