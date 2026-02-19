@@ -8,7 +8,7 @@
 ;; only the already built-in.
 
 ;; This to make it fast and reliable to start, so it is useable as a backup or
-;; spare configuration of the editor.
+;; spare configuration of the editor. (Less than 0.5 seconds on Windows 11.)
 
 ;; It is also a practical way to learn the inner of Emacs and of it's historic
 ;; commands and settings.
@@ -24,6 +24,22 @@
 ;; WIP
 
 ;;; Code:
+
+;; Take note of the startup time
+(message "*** %s @ Reading from init.el ***" (my/format-time (current-time)))
+
+(defun my/startup-timer ()
+  "Measures time differences."
+  (format-time-string "%M:%S.%3N" (- (float-time (current-time)) start-time)))
+
+;; Debug startup
+(when init-file-debug
+  (setq use-package-verbose t
+        use-package-expand-minimally nil
+        use-package-compute-statistics t
+        debug-on-error t
+        debug-on-quit t
+        debug-on-message t))
 
 ;; Startup optimization
 (setq gc-cons-threshold (* 64 1024 1024))
@@ -302,7 +318,18 @@
   (define-key go-ts-mode-map (kbd "C-c C-i") 'eglot-code-action-organize-imports))
 
 ;; Start the server
-(server-start)
+(require 'server)
+(unless (server-running-p)
+  (server-start))
+
+;;; Measure the startup time
+(message "*** %s @ Finished emacs in %s" (my/format-time (current-time)) (my/startup-timer))
+(message "*** This is the last line of the config. Startup time=%3.5s ***" (emacs-init-time))
+
+;; Turn of debug
+(setq debug-on-error nil
+      debug-on-quit nil
+      debug-on-message nil)
 
 (provide 'init)
 ;;; init.el ends here
