@@ -17,12 +17,19 @@
 ;;
 ;;; Code:
 ;;
+(message "*** %s @ Reading init.el" (my/format-time (current-time)))
 
-(message "*** Reading from %s ***" (buffer-name))
+(defun my/startup-timer ()
+  "Measures time differences."
+  (format-time-string "%M:%S.%3N" (- (float-time (current-time)) start-time)))
 
 ;; Debug startup
-(setq debug-on-error t)
-(setq debug-on-quit t)
+(when init-file-debug
+  (setq use-package-verbose t
+        use-package-expand-minimally nil
+        use-package-compute-statistics t
+        debug-on-error t
+        debug-on-quit t))
 
 ;; Byte compilation
 (setq load-prefer-newer t)
@@ -46,19 +53,6 @@
            gcs-done))
 
 (add-hook 'emacs-startup-hook #'efs/display-startup-time)
-
-(defvar start-time (float-time (current-time)))
-
-(defun my/format-time (time)
-  "Displays formatted TIME."
-  (format-time-string "%Y-%m-%d %H:%M:%S" time))
-
-(defun my/startup-timer ()
-  "Measures time differences."
-  (format-time-string "%M:%S.%3N" (- (float-time (current-time)) start-time)))
-
-(message "*** Started emacs @ %s" (my/format-time start-time))
-(message "*** Reading configuration from init.el...")
 
 (if (>= emacs-major-version 29)
     (require 'bind-key))
@@ -353,14 +347,14 @@ If FRAME is omitted or nil, use currently selected frame."
 (use-package p-search
   :straight (:host github :repo "zkry/p-search"))
 
+;;; Measure the startup time
+(message "*** %s @ Finished emacs in %s" (my/format-time (current-time)) (my/startup-timer))
+(message "*** This is the last line of the config. Startup time=%3.5s ***" (emacs-init-time))
+
 ;; Turn of debug
 (setq debug-on-error nil
       debug-on-quit nil
       debug-on-message nil)
-
-;;; Measure the startup time
-(message "*** Finished emacs @ %s in %s" (my/format-time (current-time)) (my/startup-timer))
-(message "*** This is the last line of the config. Startup time=%3.5s ***" (emacs-init-time))
 
 (provide 'init)
 ;;; init.el ends here

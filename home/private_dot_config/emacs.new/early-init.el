@@ -14,8 +14,12 @@
 
 ;;
 ;;; Code:
+(defvar start-time (float-time (current-time)))
+(defun my/format-time (time)
+  "Displays formatted TIME."
+  (format-time-string "%Y-%m-%d %H:%M:%S.%3N" time))
 
-(message "*** Reading early-init.el @ %s" (format-time-string "%Y-%m-%d %H:%M:%S" (current-time)))
+(message "*** %s @ Reading early-init.el" (my/format-time (current-time)))
 
 (setq package-enable-at-startup nil)
 
