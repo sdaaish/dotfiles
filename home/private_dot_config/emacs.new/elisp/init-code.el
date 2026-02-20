@@ -139,19 +139,13 @@
 
 ;; AI code
 (use-package ai-code
-  :config
-  ;; use codex as backend, other options are 'claude-code, 'gemini, 'github-copilot-cli, 'opencode, 'grok, 'cursor, 'kiro, 'codebuddy, 'aider, 'claude-code-ide, 'claude-code-el
-  (ai-code-set-backend 'github-copilot-cli)
-  ;; Enable global keybinding for the main menu
-  ;;(global-set-key (kbd "C-c a") #'ai-code-menu)
-  (setq ai-code-backends-infra-terminal-backend 'eat)
-  ;; Optional: Enable @ file completion in comments and AI sessions
+  :custom
+  (ai-code-selected-backend 'github-copilot-cli)
+  (ai-code-backends-infra-terminal-backend 'vterm)
+  (ai-code-auto-test-type 'ask-me)
   (ai-code-prompt-filepath-completion-mode 1)
-  ;; Optional: Ask AI to run test after code changes, for a tighter build-test loop
-  (setq ai-code-auto-test-type 'ask-me)
-  ;; Optional: Set up Magit integration for AI commands in Magit popups
-  (with-eval-after-load 'magit
-    (ai-code-magit-setup-transients)))
+
+  :hook (magit . ai-code-magit-setup-transients))
 
 (provide 'init-code)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

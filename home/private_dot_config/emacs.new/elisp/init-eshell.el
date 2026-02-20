@@ -73,10 +73,10 @@
 ;; Requires cmake, libtool-bin, libvterm
 (unless (eq system-type 'windows-nt)
   (use-package vterm
-    :hook (vterm-mode-hook .
-                           (lambda ()
-                             (set (make-local-variable 'buffer-face-mode-face) 'fixed-pitch)
-                             (buffer-face-mode t)))))
+    :hook (vterm-mode .
+                      (lambda ()
+                        (set (make-local-variable 'buffer-face-mode-face) 'fixed-pitch)
+                        (buffer-face-mode t)))))
 
 (provide 'init-eshell)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -1,3 +1,4 @@
+
 ;;; INIT --- Summary
 ;;
 ;; Author: Stig Dahl
@@ -176,7 +177,8 @@
 
 ;; Visual preferences
 (require 'uniquify)
-(global-hl-line-mode 1)
+(add-hook 'prog-mode-hook #'hl-line-mode)
+(add-hook 'text-mode-hook #'hl-line-mode)
 (when (display-graphic-p)
   (scroll-bar-mode -1))
 (tool-bar-mode -1)
