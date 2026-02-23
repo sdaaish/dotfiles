@@ -26,9 +26,9 @@
   (beginning-of-line))
 
 (use-package org
-  :bind (("C-c a" . org-agenda)
-         ("C-c c" . org-capture)
-         ("C-c l" . org-store-link)
+  :bind (("C-c o a" . org-agenda)
+         ("C-c o c" . org-capture)
+         ("C-c o l" . org-store-link)
          (:map org-mode-map
                ("C-c C-<tab>" . org-force-cycle-archived)
                ("C-c C-h" . org-tags-view)
