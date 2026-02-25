@@ -1,0 +1,26 @@
+#!/usr/bin/env -S uv run --script
+# -*- mode: python; -*-
+
+# /// script
+# requires-python = ">=3.12"
+# dependencies = []
+# ///
+
+
+import random
+import string
+
+
+def get_random_string(length):
+    letters = string.ascii_letters + string.digits
+    result_str = ''.join(random.choice(letters) for i in range(length))
+    print(result_str,end="")
+
+
+
+def main() -> None:
+    get_random_string(24)
+
+
+if __name__ == "__main__":
+    main()
