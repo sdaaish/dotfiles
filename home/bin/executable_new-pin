@@ -1,0 +1,21 @@
+#!/usr/bin/env -S uv run --script
+# -*- mode: python; -*-
+
+# /// script
+# requires-python = ">=3.12"
+# dependencies = []
+# ///
+
+# This generates a random 6 digit PIN.
+# Usage:
+#  new-pin
+import random
+import string
+
+
+def main() -> None:
+    print("".join([random.choice(string.digits) for i in range(6)]), end="")
+
+
+if __name__ == "__main__":
+    main()
