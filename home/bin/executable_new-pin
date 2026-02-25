@@ -6,15 +6,28 @@
 # dependencies = []
 # ///
 
-# This generates a random 6 digit PIN.
+# This generates a random 4-12 digit PIN (default 6).
 # Usage:
-#  new-pin
+#  new-pin [length]
 import random
 import string
+import sys
 
 
 def main() -> None:
-    print("".join([random.choice(string.digits) for i in range(6)]), end="")
+    length = 6
+    if len(sys.argv) > 1:
+        try:
+            length = int(sys.argv[1])
+        except ValueError:
+            print("Error: PIN length must be an integer", file=sys.stderr)
+            sys.exit(1)
+
+    if not (4 <= length <= 12):
+        print("Error: PIN length must be between 4 and 12", file=sys.stderr)
+        sys.exit(1)
+
+    print("".join([random.choice(string.digits) for i in range(length)]), end="")
 
 
 if __name__ == "__main__":
