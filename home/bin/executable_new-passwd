@@ -9,6 +9,7 @@
 
 import random
 import string
+import sys
 
 
 def get_random_string(length):
@@ -19,7 +20,15 @@ def get_random_string(length):
 
 
 def main() -> None:
-    get_random_string(24)
+    length = 24
+    if len(sys.argv) > 1:
+        try:
+            length = int(sys.argv[1])
+        except ValueError:
+            print("Error: Password length must be an integer", file=sys.stderr)
+            sys.exit(1)
+            
+    get_random_string(length)
 
 
 if __name__ == "__main__":
