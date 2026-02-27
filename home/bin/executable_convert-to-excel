@@ -1,0 +1,46 @@
+#!/usr/bin/env -S uv run --script
+#
+# /// script
+# requires-python = ">=3.12"
+# dependencies = [
+#     "pandas",
+#     "openpyxl",
+# ]
+# ///
+
+import argparse
+import os
+import sys
+import pandas as pd
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Convert CSV to Excel")
+    parser.add_argument("-c", "--csv", required=True, help="Input CSV file")
+    parser.add_argument("-f", "--force", action="store_true", help="Overwrite existing Excel file")
+    args = parser.parse_args()
+
+    csv_path = args.csv
+    if not os.path.exists(csv_path):
+        print(f"Error: CSV file '{csv_path}' does not exist.", file=sys.stderr)
+        sys.exit(1)
+
+    base, _ = os.path.splitext(csv_path)
+    excel_path = f"{base}.xlsx"
+
+    if os.path.exists(excel_path) and not args.force:
+        print(f"Error: Excel file '{excel_path}' already exists. Use -f to overwrite.", file=sys.stderr)
+        sys.exit(1)
+
+    try:
+        # Determine columns from header to handle rows with trailing commas
+        cols = pd.read_csv(csv_path, nrows=0).columns.tolist()
+        df = pd.read_csv(csv_path, usecols=cols)
+        df.to_excel(excel_path, index=False)
+    except Exception as e:
+        print(f"Error during conversion: {e}", file=sys.stderr)
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()
