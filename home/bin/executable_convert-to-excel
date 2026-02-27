@@ -11,7 +11,10 @@
 import argparse
 import os
 import sys
+from datetime import datetime
+
 import pandas as pd
+from openpyxl.styles import Font
 
 
 def main() -> None:
@@ -36,7 +39,16 @@ def main() -> None:
         # Determine columns from header to handle rows with trailing commas
         cols = pd.read_csv(csv_path, nrows=0).columns.tolist()
         df = pd.read_csv(csv_path, usecols=cols)
-        df.to_excel(excel_path, index=False)
+
+        sheet_name = f"{datetime.now().strftime('%Y-%m-%d')}"
+
+        with pd.ExcelWriter(excel_path, engine='openpyxl') as writer:
+            df.to_excel(writer, index=False, sheet_name=sheet_name)
+            # Apply bold font to the header row
+            worksheet = writer.sheets[sheet_name]
+            for cell in worksheet[1]:
+                cell.font = Font(bold=True)
+
     except Exception as e:
         print(f"Error during conversion: {e}", file=sys.stderr)
         sys.exit(1)
