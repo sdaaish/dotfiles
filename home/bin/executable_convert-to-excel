@@ -1,4 +1,5 @@
 #!/usr/bin/env -S uv run --script
+#  -*- mode: python; -*-
 #
 # /// script
 # requires-python = ">=3.12"
@@ -15,6 +16,7 @@ from datetime import datetime
 
 import pandas as pd
 from openpyxl.styles import Font
+from openpyxl.utils import get_column_letter
 
 
 def main() -> None:
@@ -48,6 +50,19 @@ def main() -> None:
             worksheet = writer.sheets[sheet_name]
             for cell in worksheet[1]:
                 cell.font = Font(bold=True)
+
+            # Auto-size columns based on the first 10 rows
+            for i, col in enumerate(df.columns):
+                # Calculate the maximum length in the first 10 rows (including header)
+                # Map everything to str to handle NaNs correctly
+                data_lengths = df[col].head(10).map(str).apply(len)
+                max_len = max(
+                    data_lengths.max() if not data_lengths.empty else 0,
+                    len(str(col))
+                ) + 2  # Add a little extra space
+                column_width = min(max_len, 100)
+                column_letter = get_column_letter(i + 1)
+                worksheet.column_dimensions[column_letter].width = column_width
 
     except Exception as e:
         print(f"Error during conversion: {e}", file=sys.stderr)
