@@ -13,6 +13,7 @@ COMP_DIR="$XDG_CONFIG_HOME/zsh/completions"
 # Set up the prompt
 autoload -Uz promptinit
 promptinit
+export PROMPT_EOL_MARK=""
 
 setopt histignorealldups sharehistory incappendhistory
 
