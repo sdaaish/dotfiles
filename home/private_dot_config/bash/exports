@@ -21,6 +21,9 @@ else
     export FZF_DEFAULT_COMMAND='find -L -type f'
 fi
 
+# Zoxide
+export _ZO_FZF_OPTS="--preview-window=right,40%,40% --preview='ls -1 --color=always {2}'"
+
 # My repositories
 export REPODIR="$HOME/repos"
 if [[ ! -d "$REPODIR" ]]
