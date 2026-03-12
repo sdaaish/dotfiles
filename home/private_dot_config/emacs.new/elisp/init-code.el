@@ -93,6 +93,11 @@
   :config (global-treesit-auto-mode)
   (treesit-auto-add-to-auto-mode-alist 'all))
 
+;; Expand tree-sitter to support structural editing
+(use-package treesit-sexp
+  :straight (treesit-sexp :type git :host github :repo "alexispurslane/treesit-sexp")
+  :custom (global-treesit-sexp-mode 1))
+
 ;; Leave this out for now
 ;;(use-package tree-sitter-langs)
 
