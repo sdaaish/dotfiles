@@ -1,4 +1,5 @@
 {{- if eq .chezmoi.os "linux" -}}
+{{ if ne .chezmoi.osRelease.id "opensuse-tumbleweed" -}}
 #!/usr/bin/env bash
 
 set -eufo pipefail
@@ -19,4 +20,5 @@ else
     exit 1
 fi
 
+{{ end }}
 {{ end }}
