@@ -2,6 +2,9 @@
 
 {{ if eq .chezmoi.os "linux" -}}
 
+# Only install on Debian/Ubuntu due to older packages
+{{ if ne .chezmoi.osRelease.id "opensuse-tumbleweed" }}
+
 # Age encryption tool
 [".local/bin/age"]
     type = "archive-file"
@@ -48,6 +51,8 @@
     path = "zls"
     checksum.sha256 = "{{ .zlsSha256 }}"
     refreshPeriod = "168h"
+
+{{end}}
 
 # csvlens
 [".local/bin/csvlens"]

@@ -1,23 +1,23 @@
 # Version info for software
 
-ageVersion = "v1.2.1"
-ageSha256 = "7df45a6cc87d4da11cc03a539a7470c15b1041ab2b396af088fe9990f7c79d50"
+ageVersion = "v1.3.1"
+ageSha256 = "bdc69c09cbdd6cf8b1f333d372a1f58247b3a33146406333e30c0f26e8f51377"
 
 minisignVersion = "0.12"
 minisignSha256 = "9a599b48ba6eb7b1e80f12f36b94ceca7c00b7a5173c95c3efc88d9822957e73"
 
 # https://github.com/junegunn/fzf/releases/
-fzfVersion = "0.65.2"
-fzfSha256 = "5eb8efc0e94aa559f84ea83eeba99bea7dce818e63f92b4b62e60663220f1c14"
+fzfVersion = "0.70.0"
+fzfSha256 = "8fd0e0b93bdf64ba90081ffb6658d77ea5a024c122b36852b1de30f9d2733754"
 
-direnvVersion = "v2.35.0"
-direnvSha256 = "55c294f4376397c68b1f659f049fb104dc2ecd0fcb15a15949d7f748e3f70b66"
+direnvVersion = "v2.37.1"
+direnvSha256 = "2a9cef8d73521d6a3ec3f2871c4b747b8c4cc038628c1b57a7efa42b393a2d82"
 
-zlsVersion = "0.13.0"
-zlsSha256 = "ec4c1b45caf88e2bcb9ebb16c670603cc596e4f621b96184dfbe837b39cd8410"
+zlsVersion = "0.15.1"
+azlsSha256 = "3bb38f522cb23213e8c075ac6b170273fe49b4274b8c12b034cc496407400067"
 
-csvlensVersion = "v0.11.0"
-csvlensSha256 = "3bd99dc7c1cdb08da99b536acd82c49f4e82c3c14d4ccfaeb4cb11e569ea6207"
+csvlensVersion = "v0.15.1"
+csvlensSha256 = "e4f91427a43b36ccd899d5bbf850020720e6a29c79c6b986757a83039a7fe600"
 
 tealdeerVersion = "1.7.2"
 tealdeerSha256= "d30bbd35b962bfab5cd3aaef2ece5316ee6f732d25e3f665ddb2797f9d64ee0f"
