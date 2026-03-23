@@ -1,4 +1,3 @@
-
 ;;; INIT --- Summary
 ;;
 ;; Author: Stig Dahl
@@ -31,13 +30,6 @@
         use-package-compute-statistics t
         debug-on-error t
         debug-on-quit t))
-
-;; Byte compilation
-(setq load-prefer-newer t)
-
-;; Startup optimization
-(setq gc-cons-threshold (* 500 1024 1024))
-(setq garbage-collection-messages nil)
 
 (defun gc/set-after-start ()
   "Set a sane value after starting Emacs."
@@ -93,6 +85,17 @@
 (use-package diminish
   :config
   (diminish 'eldoc-mode))
+
+;; Byte compilation
+(use-package emacs
+  :custom
+  (native-comp-async-jobs-number (- (num-processors) 2))
+  (native-comp-jit-compilation t)
+  (load-prefer-newer t)
+
+  ;; Startup optimization
+  (gc-cons-threshold (* 500 1024 1024))
+  (garbage-collection-messages nil))
 
 ;; Emacs LISP directory for configuration
 (when (not (file-exists-p "elisp"))
