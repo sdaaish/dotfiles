@@ -92,7 +92,7 @@
   :custom
   (speed-type-min-chars 150)
   (speed-type-max-chars 350)
-  (speed-type-statistic-filename (expand-file-name "speed-type-statistic.el" speed-type-gb-dir))
+  (speed-type-statistic-filename (expand-file-name "speed-type-statistic.el" speed-type-directory))
 
   :hook (speed-type-mode . (lambda ()
                              (company-mode 0)
