@@ -139,7 +139,7 @@
   (gptel-default-mode 'org-mode)
 
   :config
-  (setq gptel-backend (gptel-make-gh-copilot "Copilot")))
+  (setopt gptel-backend (gptel-make-gh-copilot "Copilot")))
 
 
 ;; AI code
@@ -147,11 +147,13 @@
   :bind ("C-c a" . ai-code-menu)
 
   :custom
-  (ai-code-selected-backend 'github-copilot-cli)
   (ai-code-backends-infra-terminal-backend 'vterm)
   (ai-code-auto-test-type 'ask-me)
   (ai-code-prompt-filepath-completion-mode 1)
   ;; (ai-code-gemini-cli-program-switches '("--model" "gemini-3-flash-preview"))
+
+  :config
+  (ai-code-set-backend 'github-copilot-cli)
 
   :hook (magit . ai-code-magit-setup-transients))
 
