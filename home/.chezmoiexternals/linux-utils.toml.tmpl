@@ -78,6 +78,13 @@
     checksum.sha256 = "{{ .age_plugin_tpmSha256 }}"
     refreshPeriod = "168h"
 
+# age-plugin-yubikey
+[".local/bin/age-plugin-yubikey"]
+    type = "archive-file"
+    url = "https://github.com/str4d/age-plugin-yubikey/releases/download/{{ .age_plugin_yubikeyVersion }}/age-plugin-yubikey-{{ .age_plugin_yubikeyVersion }}-x86_64-{{ .chezmoi.os }}.tar.gz"
+    path = "age-plugin-yubikey/age-plugin-yubikey"
+    checksum.sha256 = "{{ .age_plugin_yubikeySha256 }}"
+    refreshPeriod = "168h"
 
 # # TealDeer, a TLDR implementation
 # [".local/bin/tealdeer"]
