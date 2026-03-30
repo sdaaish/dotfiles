@@ -24,3 +24,6 @@ tealdeerSha256= "d30bbd35b962bfab5cd3aaef2ece5316ee6f732d25e3f665ddb2797f9d64ee0
 
 keloraVersion = "v1.4.10"
 keloraSha256 = "2aaf45f497085489dcc14467a8fc7de758c788d3929704ff70d42894c5cdc3ea"
+
+age_plugin_tpmVersion = "v1.0.1"
+age_plugin_tpmSha256 = "ba5930cef12998e1bf5e979bcbb45e4e4cefdac773144b57f7e9e391c8c7e3fe"

@@ -54,7 +54,7 @@
 
 {{end}}
 
-# csvlens
+# CSVLens
 [".local/bin/csvlens"]
     type = "archive-file"
     url = "https://github.com/YS-L/csvlens/releases/download/{{ .csvlensVersion }}/csvlens-x86_64-unknown-{{ .chezmoi.os }}-gnu.tar.xz"
@@ -69,6 +69,16 @@
     path = "kelora"
     checksum.sha256 = "{{ .keloraSha256 }}"
     refreshPeriod = "168h"
+
+# age-plugin-tpm
+[".local/bin/age-plugin-tpm"]
+    type = "archive-file"
+    url = "https://github.com/Foxboron/age-plugin-tpm/releases/download/{{ .age_plugin_tpmVersion }}/age-plugin-tpm-{{ .age_plugin_tpmVersion }}-{{ .chezmoi.os }}-amd64.tar.gz"
+    path = "age-plugin-tpm/age-plugin-tpm"
+    checksum.sha256 = "{{ .age_plugin_tpmSha256 }}"
+    refreshPeriod = "168h"
+
+
 # # TealDeer, a TLDR implementation
 # [".local/bin/tealdeer"]
 #     type = "file"
