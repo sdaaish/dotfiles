@@ -123,7 +123,7 @@
   :config (setq jinja2-enable-indent-on-save t))
 
 
-;; Copilot
+;;LLM support
 (use-package gptel
   :bind ("C-c g" . gptel)
   (:map gptel-mode-map
@@ -153,7 +153,9 @@
   ;; (ai-code-gemini-cli-program-switches '("--model" "gemini-3-flash-preview"))
 
   :config
-  (ai-code-set-backend 'github-copilot-cli)
+  (if (boundp 'my/ai-code-backend)
+      (ai-code-set-backend my/ai-code-backend)
+    (ai-code-set-backend 'github-copilot-cli))
 
   :hook (magit . ai-code-magit-setup-transients))
 
