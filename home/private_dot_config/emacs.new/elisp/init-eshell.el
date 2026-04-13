@@ -63,7 +63,16 @@
 ;; https://codeberg.org/akib/emacs-eat#headline-3
 (unless (eq system-type 'windows-nt)
   (use-package eat
-    ;; For `eat-eshell-mode'.
+    :straight
+    (
+     :type git
+     :host codeberg
+     :repo "akib/emacs-eat"
+     :files ("*.el" ("term" "term/*.el") "*.texi"
+             "*.ti" ("terminfo/e" "terminfo/e/*")
+             ("terminfo/65" "terminfo/65/*")
+             ("integration" "integration/*")
+             (:exclude ".dir-locals.el" "*-tests.el")))
     :hook (eshell-load . eat-eshell-mode)))
 
 ;; For `eat-eshell-visual-command-mode'.

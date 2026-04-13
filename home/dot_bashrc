@@ -181,3 +181,6 @@ fi
 
 # Use marimo shell completion
 [[ -x $(command -v marimo) ]] && eval "$(_MARIMO_COMPLETE=bash_source marimo)" || true
+
+# Integrate with Eat, an Emacs terminal emulator
+[ -n "$EAT_SHELL_INTEGRATION_DIR" ] && source "$EAT_SHELL_INTEGRATION_DIR/bash"
