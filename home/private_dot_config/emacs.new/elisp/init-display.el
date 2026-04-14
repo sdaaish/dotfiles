@@ -18,7 +18,15 @@
 ;;
 ;;; Code:
 
-(mouse-avoidance-mode "banish")
+;; Away mouse!
+(use-package emacs
+  :custom
+  (mouse-avoidance-banish-position '((frame-or-window . frame)
+                                     (side . left) (side-pos . 3)
+                                     (top-or-bottom . bottom)
+                                     (top-or-bottom-pos . 0)))
+  :config
+  (mouse-avoidance-mode 'banish))
 
 (use-package golden-ratio
   :diminish
