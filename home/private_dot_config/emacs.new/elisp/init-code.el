@@ -139,7 +139,12 @@
   (gptel-default-mode 'org-mode)
 
   :config
-  (setopt gptel-backend (gptel-make-gh-copilot "Copilot")))
+  ;; Select backend depending on local variables
+  (if (boundp 'my/gptel-backend)
+      (setopt gptel-backend (gptel-make-gemini "Gemini")
+              gptel-model 'gemini-3-flash-preview)
+    (setopt gptel-backend (gptel-make-gh-copilot "Copilot")
+            gptel-model 'claude-haiku-4.5)))
 
 
 ;; AI code
