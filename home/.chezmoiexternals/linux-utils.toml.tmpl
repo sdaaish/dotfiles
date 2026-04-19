@@ -86,6 +86,15 @@
     checksum.sha256 = "{{ .age_plugin_yubikeySha256 }}"
     refreshPeriod = "168h"
 
+# dotenvx
+[".local/bin/dotenvx"]
+    type = "archive-file"
+    url = "https://github.com/dotenvx/dotenvx/releases/download/{{ .dotenvxVersion }}/dotenvx-{{ .chezmoi.os }}-x86_64.tar.gz"
+    path = "./dotenvx"
+    checksum.sha256 = "{{ .dotenvxSha256 }}"
+    refreshPeriod = "168h"
+
+
 # # TealDeer, a TLDR implementation
 # [".local/bin/tealdeer"]
 #     type = "file"

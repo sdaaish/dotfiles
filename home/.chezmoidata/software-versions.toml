@@ -30,3 +30,6 @@ age_plugin_tpmSha256 = "ba5930cef12998e1bf5e979bcbb45e4e4cefdac773144b57f7e9e391
 
 age_plugin_yubikeyVersion = "v0.5.0"
 age_plugin_yubikeySha256 = "019b35a13fc81be56d73d0723db0a2082fbd04c936c2c6836381111f7f51b2c3"
+
+dotenvxVersion = "v1.61.1"
+dotenvxSha256 = "98c98b203701eb3af7682da4966f221221c58e47a8b6c60f2e9b00b607762a6f"
