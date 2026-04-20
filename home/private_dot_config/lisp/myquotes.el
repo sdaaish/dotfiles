@@ -37,7 +37,8 @@
   (format-replace-strings '(("\x201C" . "\"")
 			                      ("\x201D" . "\"")
 			                      ("\x2018" . "'")
-			                      ("\x2019" . "'"))
+			                      ("\x2019" . "'")
+                            ("\x200B" . ""))
 			                    nil beg end))
 (global-set-key (kbd "C-c q") 'replace-smart-quotes)
 
