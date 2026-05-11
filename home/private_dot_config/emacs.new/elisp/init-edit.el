@@ -65,6 +65,15 @@
 (add-hook 'prog-mode-hook (lambda() (hs-minor-mode 1)))
 (bind-key "<f8> h" 'hydra-hideshow/body)
 
+;; Multiple cursors
+(use-package multiple-cursors
+  :bind
+  ("C-S-c C-S-c" . mc/edit-lines)
+  ("C->" . mc/mark-next-like-this)
+  ("C-<" . mc/mark-previous-like-this)
+  ("C-c C-<" . mc/mark-all-like-this))
+
+
 (provide 'init-edit)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-edit.el ends here
