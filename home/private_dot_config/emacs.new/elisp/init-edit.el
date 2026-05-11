@@ -71,6 +71,8 @@
   ("C-S-c C-S-c" . mc/edit-lines)
   ("C->" . mc/mark-next-like-this)
   ("C-<" . mc/mark-previous-like-this)
+  ("C-M-y" . mc/mark-all-dwim)
+  :bind*
   ("C-c C-<" . mc/mark-all-like-this))
 
 
