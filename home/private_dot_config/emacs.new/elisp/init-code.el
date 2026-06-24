@@ -156,6 +156,7 @@
   (ai-code-auto-test-type 'ask-me)
   (ai-code-prompt-filepath-completion-mode 1)
   (ai-code-mcp-agent-enabled-backends '(github-copilot-cli))
+  (ai-code-github-copilot-cli-program-switches "--allow-all-tools")
   (ai-code-onboarding-seen t)
   ;; (ai-code-gemini-cli-program-switches '("--model" "gemini-3-flash-preview"))
 
