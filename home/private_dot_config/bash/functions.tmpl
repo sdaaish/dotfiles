@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# -*- mode: bash; -*-
+# -*- mode: sh; -*-
 
 DOTFILES=$HOME/.config/dotfiles
 EMACSDIR=$HOME/.config/emacs.default
@@ -121,9 +121,9 @@ get-chezmoi() {
 
 # Get Nerd Fonts
 get-nerd-fonts(){
-    VERSION="v3.2.1"
+    VERSION="v3.4.0"
     url="https://github.com/ryanoasis/nerd-fonts/releases/download/${VERSION}"
-    fonts="SourceCodePro Inconsolata JetBrainsMono ComicShannsMono"
+    fonts="SourceCodePro Inconsolata JetBrainsMono ComicShannsMono FiraCode RobotoMono"
 
     fontarchive="fontstmp.zip"
     pushd "${HOME}/.local/share/fonts/"||exit 1
@@ -163,7 +163,7 @@ get-powerline-fonts(){
 
 # Get Microsoft Cascadia Code Nerd Fonts
 get-microsoft-fonts(){
-    version="2404.23"
+    version="2407.24"
     url="https://github.com/microsoft/cascadia-code/releases/download/v${version}/CascadiaCode-${version}.zip"
     filename="CascadiaCode-${version}.zip"
     tmpdir=$(mktemp -d)
