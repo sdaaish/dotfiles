@@ -30,7 +30,10 @@
   (which-key-show-early-on-C-h t)
   (which-key-idle-delay 100)
   (which-key-idle-secondary-delay 0.05)
-  (which-key-sort-order 'which-key-key-order-alpha))
+  (which-key-sort-order 'which-key-key-order-alpha)
+  (which-key-max-display-columns 4)
+  (which-key-add-column-padding 1)
+  (which-key-max-description-length 40))
 
 (use-package amx
   :config (amx-mode t))
