@@ -987,7 +987,7 @@ rz() (
 # List environment variables with fzf
 function fzf-env-vars() {
     local out
-    out=$(env | fzf --no-preview)
+    out=$(printenv | fzf --no-preview)
     echo $(echo $out | cut -d= -f2)
 }
 alias fzfe="fzf-env-vars"
