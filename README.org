@@ -9,8 +9,8 @@
 #+filetags: :dotfiles:chezmoi:
 
 * Description
-#+CAPTION: Trigger:push
-#+NAME:trigger.push
+#+CAPTION: ShellCheck
+#+NAME: shellcheck
 [[https://github.com/sdaaish/dotfiles/actions/workflows/ShellCheck.yaml][https://github.com/sdaaish/dotfiles/actions/workflows/ShellCheck.yaml/badge.svg]]
 
 Dotfiles needs some place to stay.

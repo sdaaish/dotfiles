@@ -6,12 +6,12 @@ on:
     tags:
       - v0.*
 
-name: "Trigger: Push action"
+name: ShellCheck
 permissions: {}
 
 jobs:
   shellcheck:
-    name: Shellcheck
+    name: Verify with Shellcheck
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
