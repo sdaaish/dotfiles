@@ -83,9 +83,9 @@
       (interactive)
       (let* ((project (projectile-project-name))
              (projectile-project-name (when project (projectile-project-name project)))
-             (new-name (if projectile-project-name
-                           (format "*eat [%s]" projectile-project-name)
-                         (format "*eat %s" (buffer-name)))))
+             (new-name (if (string= projectile-project-name "-")
+                           (format "*eat:<%s>*" (file-name-nondirectory (directory-file-name default-directory)))
+                         (format "*eat:[%s]*" projectile-project-name))))
         (rename-buffer new-name t)))))
 
 ;; For `eat-eshell-visual-command-mode'.
