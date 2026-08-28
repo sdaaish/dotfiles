@@ -80,7 +80,6 @@
     :config
     (defun eat/set-projectile-buffer-name ()
       "Rename the current eat buffer to include the projectile name."
-      (interactive)
       (let* ((project (projectile-project-name))
              (projectile-project-name (when project (projectile-project-name project)))
              (new-name (if (string= projectile-project-name "-")
