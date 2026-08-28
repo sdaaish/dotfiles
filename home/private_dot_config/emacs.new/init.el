@@ -294,7 +294,7 @@
 (require 'init-project)
 (require 'init-python)
 (require 'init-babel)
-(require 'init-eshell)
+(require 'init-shell)
 (require 'init-formatting)
 (require 'init-code)
 (require 'init-chezmoi)

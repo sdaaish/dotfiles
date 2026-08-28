@@ -1,4 +1,4 @@
-;;; INIT-ESHELL --- Summary
+;;; INIT-SHELL --- Summary
 ;;
 ;; Author: Stig Dahl
 ;; Created: 2023-12-05
@@ -73,7 +73,20 @@
              ("terminfo/65" "terminfo/65/*")
              ("integration" "integration/*")
              (:exclude ".dir-locals.el" "*-tests.el")))
-    :hook (eshell-load . eat-eshell-mode)))
+
+    :hook ((eshell-load . eat-eshell-mode)
+           (eat-mode . eat/set-projectile-buffer-name))
+
+    :config
+    (defun eat/set-projectile-buffer-name ()
+      "Rename the current eat buffer to include the projectile name."
+      (interactive)
+      (let* ((project (projectile-project-name))
+             (projectile-project-name (when project (projectile-project-name project)))
+             (new-name (if projectile-project-name
+                           (format "*eat [%s]" projectile-project-name)
+                         (format "*eat %s" (buffer-name)))))
+        (rename-buffer new-name t)))))
 
 ;; For `eat-eshell-visual-command-mode'.
 ;;(add-hook 'eshell-load-hook #'eat-eshell-visual-command-mode)
@@ -87,6 +100,6 @@
                         (set (make-local-variable 'buffer-face-mode-face) 'fixed-pitch)
                         (buffer-face-mode t)))))
 
-(provide 'init-eshell)
+(provide 'init-shell)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-eshell.el ends here
