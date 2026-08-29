@@ -141,8 +141,15 @@
   :config
   ;; Select backend depending on local variables
   (if (boundp 'my/gptel-backend)
-      (setopt gptel-backend (gptel-make-gemini "Gemini")
-              gptel-model 'gemini-3-flash-preview)
+      (setopt
+       gptel-model 'qwen3.6-35b-a3b
+       gptel-backend (gptel-make-openai "llama-swap"
+                       :stream t
+                       :protocol "http"
+                       :host "llama-swap:8080"
+                       :models '(qwen3.6-35b-a3b)))
+    ;;    (setopt gptel-backend (gptel-make-gemini "Gemini")
+    ;;            gptel-model 'gemini-3-flash-preview)
     (setopt gptel-backend (gptel-make-gh-copilot "Copilot")
             gptel-model 'claude-haiku-4.5)))
 
