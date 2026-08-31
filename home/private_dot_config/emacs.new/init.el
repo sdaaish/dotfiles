@@ -299,6 +299,7 @@
 (require 'init-code)
 (require 'init-chezmoi)
 (require 'myquotes)
+(require 'init-elfeed)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Fix things below here
