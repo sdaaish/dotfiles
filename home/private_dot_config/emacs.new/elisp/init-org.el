@@ -1,4 +1,4 @@
-;;; INIT-ORG --- Summary
+;;; INIT-ORG --- Summary  -*- lexical-binding: nil; -*-
 ;;
 ;; Author:  Stig Dahl
 ;; Created: tisdag november 2023-11-28

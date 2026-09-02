@@ -1,4 +1,4 @@
-;;; INIT-ELFEED --- Summary -*- lexical-binding: t; -*-
+;;; INIT-ELFEED --- Summary -*- lexical-binding: nil; -*-
 ;;
 ;; Author: Stig Dahl
 ;; Created: 2026-08-10

@@ -1,4 +1,4 @@
-;;; INIT-UTILS --- Summary
+;;; INIT-UTILS --- Summary  -*- lexical-binding: nil; -*-
 ;;
 ;; Author: Stig Dahl
 ;; Created: 2023-11-29

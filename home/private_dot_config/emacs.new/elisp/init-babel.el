@@ -1,4 +1,4 @@
-;;; INIT-BABEL --- Summary
+;;; INIT-BABEL --- Summary  -*- lexical-binding: nil; -*-
 ;;
 ;; Author: Stig Dahl
 ;; Created: 2023-11-30

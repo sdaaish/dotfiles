@@ -1,4 +1,4 @@
-;;; INIT-PROJECT --- Summary
+;;; INIT-PROJECT --- Summary  -*- lexical-binding: nil; -*-
 ;;
 ;; Author:  Stig Dahl
 ;; Created: tisdag november 2023-11-28

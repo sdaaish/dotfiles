@@ -1,4 +1,4 @@
-;; Go lang settings for eglot.
+;; Go lang settings for eglot.  -*- lexical-binding: nil; -*-
 (require 'project)
 
 (use-package go-mode)

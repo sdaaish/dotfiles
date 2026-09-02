@@ -1,4 +1,4 @@
-;;; INIT-POWERSHELL --- Summary
+;;; INIT-POWERSHELL --- Summary  -*- lexical-binding: nil; -*-
 ;;
 ;; Author: Stig Dahl
 ;; Created: 27 November 2023-11-27

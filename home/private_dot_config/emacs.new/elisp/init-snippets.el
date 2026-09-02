@@ -1,4 +1,4 @@
-;;; INIT-SNIPPETS --- Summary
+;;; INIT-SNIPPETS --- Summary  -*- lexical-binding: nil; -*-
 ;;
 ;; Author:  Stig Dahl
 ;; Created: tisdag november 2023-11-28

@@ -1,4 +1,4 @@
-;;; INIT-SHELL --- Summary
+;;; INIT-SHELL --- Summary  -*- lexical-binding: nil; -*-
 ;;
 ;; Author: Stig Dahl
 ;; Created: 2023-12-05

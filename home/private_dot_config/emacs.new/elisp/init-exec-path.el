@@ -1,4 +1,4 @@
-;;; INIT-EXEC-PATH --- Summary
+;;; INIT-EXEC-PATH --- Summary  -*- lexical-binding: nil; -*-
 ;;
 ;; Author: Stig Dahl
 ;; Created: 2025-02-05

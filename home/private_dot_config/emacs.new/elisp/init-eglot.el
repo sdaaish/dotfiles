@@ -1,4 +1,4 @@
-;; Optional: load other packages before eglot to enable eglot integrations.
+;; Optional: load other packages before eglot to enable eglot integrations.  -*- lexical-binding: nil; -*-
 
 (defun eglot-format-buffer-on-save ()
   (add-hook 'before-save-hook #'eglot-format-buffer -10 t))

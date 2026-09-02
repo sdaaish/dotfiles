@@ -1,4 +1,4 @@
-;;; my-cheats.el --- Summary
+;;; my-cheats.el --- Summary -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;; Cheatsheet for Emacs and commands

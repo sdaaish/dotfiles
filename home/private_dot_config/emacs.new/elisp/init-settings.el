@@ -1,4 +1,4 @@
-;; Setup constants and variables for packages.
+;; Setup constants and variables for packages.  -*- lexical-binding: nil; -*-
 
 (defun my/setup-dirs(dir basedir)
   "Returns an expanded path from DIR and BASEDIR"

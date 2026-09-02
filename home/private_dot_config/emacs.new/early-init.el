@@ -1,4 +1,4 @@
-;;; EARLY-INIT --- Summary
+;;; EARLY-INIT --- Summary  -*- lexical-binding: nil; -*-
 ;;
 ;; Author: Stig Dahl
 ;; Created: 2023-11-25
@@ -26,6 +26,11 @@
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8-unix)
 
+;; Avoid raising the *Messages* buffer if anything is still without
+;; lexical bindings. For Emacs 31.
+(setopt warning-minimum-level :error)
+(setopt warning-suppress-types '((lexical-binding straight package)))
+;; (add-to-list 'warning-suppress-types '(files missing-lexbind-cookie))
 
 ;; From Doom, shaves off a second from startup.
 (setq-default inhibit-redisplay t

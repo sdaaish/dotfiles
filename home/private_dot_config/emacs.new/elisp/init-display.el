@@ -1,4 +1,4 @@
-;;; INIT-DISPLAY --- Summary
+;;; INIT-DISPLAY --- Summary  -*- lexical-binding: nil; -*-
 ;;
 ;; Author:  Stig Dahl
 ;; Created: 27 November 2023-11-27

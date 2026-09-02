@@ -1,4 +1,4 @@
-;;; INIT-EDIT --- Summary
+;;; INIT-EDIT --- Summary  -*- lexical-binding: nil; -*-
 ;;
 ;; Author: Stig Dahl
 ;; Created: 2023-11-29

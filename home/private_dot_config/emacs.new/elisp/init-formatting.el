@@ -1,4 +1,4 @@
-;;; INIT-FORMATTING --- Summary
+;;; INIT-FORMATTING --- Summary  -*- lexical-binding: nil; -*-
 ;;
 ;; Author: Stig Dahl
 ;; Created: 2023-12-06

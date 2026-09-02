@@ -1,4 +1,4 @@
-;;; early-init.el --- Summary
+;;; early-init.el --- Summary -*- lexical-binding: t; -*-
 ;;; Commentary:
 
 ;;; Code:
@@ -15,6 +15,11 @@
 
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8-unix)
+
+;; Avoid raising the *Messages* buffer if anything is still without
+;; lexical bindings. For Emacs 31.
+(setopt warning-minimum-level :error)
+(setopt warning-suppress-types '((lexical-binding straight package)))
 
 (provide 'early-init)
 ;;; early-init.el ends here

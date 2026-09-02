@@ -1,4 +1,4 @@
-;;; INIT-FONTS --- Summary
+;;; INIT-FONTS --- Summary  -*- lexical-binding: nil; -*-
 ;;
 ;; Author:  Stig Dahl
 ;; Created: tisdag november 2023-11-28

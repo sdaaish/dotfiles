@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 (use-package chezmoi
   :config (setq-default chezmoi-template-display-p t)
   :bind

@@ -1,4 +1,4 @@
-;; From https://glyph.twistedmatrix.com/2015/11/editor-malware.html
+;; From https://glyph.twistedmatrix.com/2015/11/editor-malware.html -*- lexical-binding: t; -*-
 (let ((bad-hosts
        (loop for bad
              in `("https://wrong.host.badssl.com/"

@@ -1,4 +1,4 @@
-;;; INIT-CODE --- Summary
+;;; INIT-CODE --- Summary  -*- lexical-binding: nil; -*-
 ;;
 ;; Author: Stig Dahl
 ;; Created: 2023-12-09
@@ -156,6 +156,7 @@
 
 ;; AI code
 (use-package ai-code
+  :disabled
   :bind ("C-c a" . ai-code-menu)
 
   :custom

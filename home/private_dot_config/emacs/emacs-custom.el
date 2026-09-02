@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -15,4 +16,3 @@
  '(fixed-pitch-serif ((t (:height 140 :family "Cascadia Code"))))
  '(mode-line-active ((t (:inherit mode-line :foreground "khaki"))))
  '(variable-pitch ((t (:height 140 :foundry "outline" :family "Comic Sans MS")))))
-
