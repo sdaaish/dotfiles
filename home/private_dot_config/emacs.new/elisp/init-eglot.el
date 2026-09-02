@@ -39,9 +39,7 @@
                           :matcher "CaseSensitive")))
 
   (add-to-list 'eglot-server-programs
-               '(python-mode . ("pylsp")))
-  ;;  (add-to-list 'eglot-server-programs
-  ;;               '(python-mode . ("ruff" "server")))
+               '((python-base-mode :language-id python) . ("ty" "server")))
   :hook
   (python-ts-mode . superword-mode)
   (python-ts-mode . hs-minor-mode)
