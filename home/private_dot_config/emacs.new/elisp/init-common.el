@@ -54,12 +54,29 @@
 (setq recentf-max-menu-items 25)
 (setq ad-redefinition-action 'accept)
 
-(customize-set-variable 'global-auto-revert-mode t)
-(customize-set-variable 'global-auto-revert-non-file-buffers t)
-(customize-set-variable 'auto-revert-interval 1)
+(use-package emacs
+  :custom
+  (global-auto-revert-mode t)
+  (global-auto-revert-non-file-buffers t)
+  (auto-revert-interval 1)
 
-(customize-set-variable 'bookmark-save-flag 1)
-(customize-set-variable 'bookmark-version-control t)
+  (bookmark-save-flag 1)
+  (bookmark-version-control t)
+
+  ;; No popup notifications
+  (use-dialog-box nil)
+  (use-file-dialog nil)
+
+  ;; Open manpage in existing buffer
+  (Man-notify-method 'thrifty)
+
+  :config
+  (defun set-man-language ()
+    "Use C as LANG for man-pages."
+    (set (make-local-variable 'process-environment)
+         (cons "LANG=C.UTF-8" process-environment)))
+
+  :hook (Man-mode . set-man-language))
 
 (require 'whitespace)
 
@@ -78,9 +95,6 @@
 (setq-default auto-save-default t)
 (setq-default default-directory my/auto-save-dir)
 
-;; No popup notifications
-(customize-set-variable 'use-dialog-box nil)
-(customize-set-variable 'use-file-dialog nil)
 
 (global-set-key
  (kbd "<f5>")
