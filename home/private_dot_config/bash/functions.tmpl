@@ -1021,8 +1021,8 @@ help() {
 ff() {
     if [[ "$1" != "" ]]
     then
-        firefox -P "$1" &
+        firefox -P "$1" &>/dev/null &
     else
-        firefox &
+        firefox &>/dev/null &
     fi
 }
