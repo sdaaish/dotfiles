@@ -130,6 +130,7 @@ alias pip=pip3
 
 # Code
 alias ci='code-insiders'
+alias yless="jless --yaml"
 
 # rclone GUI
 alias rcgui='rclone rcd --rc-web-gui'

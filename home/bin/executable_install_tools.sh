@@ -12,5 +12,5 @@ fi
 if [[ "${_OS@U}" == "OPENSUSE" ]]
 then
     zypper refresh
-    zypper install fzf zoxide ripgrep direnv eza fd age minisign bat jq yq uv pyenv
+    zypper install fzf zoxide ripgrep direnv eza fd age minisign bat jq yq jless uv pyenv
 fi
