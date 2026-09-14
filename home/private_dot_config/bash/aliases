@@ -35,12 +35,14 @@ fi
 if [[ $(command -v eza) ]]
 then
     alias ls='eza'
-    alias la='eza -la'
+    alias la='eza -laa'
     alias ll='eza -l'
-    alias llt='eza --long --sort=time'
-    alias lls='eza --long --sort=size'
+    alias llt='eza --long --sort=time --all'
+    alias lls='eza --long --sort=size --all'
     alias llg='eza --long --inode --header --git'
     alias lt='eza --long --tree --level=3'
+    alias l1='eza -aaF'
+    alias l2='eza -aaF -w 120'
 else
     alias la='ls -la'
     alias ll='ls -lAhG'
@@ -48,6 +50,8 @@ else
     alias llh='ls -lah'
     alias lls='ls -lAhSrG'
     alias lll='find-links'
+    alias l1='ls -1aF'
+    alias l2='ls -w 100 -aF'
 fi
 
 alias rehash='hash -r'
