@@ -923,6 +923,23 @@ dockerpwshhere(){
            -w "${curdir}" \
            mcr.microsoft.com/powershell:ubuntu-18.04 "$@"
 }
+
+# Run Tesseract OCR on an image, output to stdout
+run_tesseract(){
+    [ -f "$1" ] || return
+    local __infile=$(realpath "$1")
+    local __outfile=$(basename "$1")
+    local __cmd
+    [ $(command -v podman) ] && __cmd="podman" || __cmd="docker"
+    [ $(command -v "${__cmd}") ] || echo "${__cmd} not installed"
+    echo "Processing...."
+    [ -f "${__infile}" ] && \
+        "${__cmd}" run --rm \
+                   -v "${__infile}":"/tmp/${__outfile}" \
+                   ghcr.io/jitesoft/tesseract \
+                   "/tmp/${__outfile}" stdout
+}
+
 # Check GreyNoise
 gn(){
     curl -s "https://api.greynoise.io/v3/community/${1}" | python -m json.tool
