@@ -30,6 +30,7 @@ then
     _add_alias ps "list -c ns4beumDS @ARGS@ status=running"
     _add_alias fl "list -c ns4tPc @ARGS@ status=running"
     _add_alias ll "list -c ns4tPc @ARGS@"
+    _add_alias ls "list -c ns4Sm @ARGS@"
     _add_alias rl "remote list"
     _add_alias rsl "remote switch local"
     _add_alias rsr "remote switch @ARGS@"
