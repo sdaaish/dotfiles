@@ -21,6 +21,7 @@
 (use-package csv-mode)
 (use-package json-mode)
 (use-package toml-mode)
+(use-package hcl-mode)
 (use-package yaml-mode
   :hook ((yaml-mode yaml-ts-mode) . (lambda ()
                                       (my/line-number-relative)
