@@ -1043,3 +1043,35 @@ ff() {
         firefox &>/dev/null &
     fi
 }
+
+# Add .git directories to zoxide DB
+zox-add(){
+    OLDIFS="$IFS"
+    IFS=$'\n'
+    local dirs
+    [[ -d "$1" ]] && dirs=$(find "${1}" -type d -name .git)
+    for d in $dirs
+    do
+        echo "Adding ${d%.git} to zoxide DB"
+        zoxide add "${d%.git}"
+    done
+    IFS="${OLDIFS}"
+}
+# Remove all directory entries from zoxide
+zox-remove(){
+    OLDIFS="$IFS"
+    IFS=$'\n'
+    local dirs
+    [[ -d "$1" ]] && dirs=$(zoxide query --list --all|grep "$1")
+    for d in $dirs
+    do
+        echo "Removing ${d%} from zoxide DB"
+        zoxide remove "${d%}"
+    done
+    IFS="${OLDIFS}"
+}
+# List zoxide entries in a folder
+zox-list(){
+    local dirs
+    [[ -d "$1" ]] && zoxide query --list --all|grep "$1"
+}
