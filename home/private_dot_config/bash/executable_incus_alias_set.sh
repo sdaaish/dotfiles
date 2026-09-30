@@ -36,5 +36,8 @@ then
     _add_alias rsr "remote switch @ARGS@"
     _add_alias c "remote get-default"
     _add_alias a "alias list"
-    incus alias list
+    if [ -z "$PS1" ]
+    then
+        incus alias list
+    fi
 fi
