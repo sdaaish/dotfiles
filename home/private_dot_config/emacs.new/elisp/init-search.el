@@ -34,6 +34,10 @@
   ("C-c s" . rg-menu)
   (:map isearch-mode-map ("M-s r" . rg-isearch-menu)))
 
+;; Another ripgrep alternative
+(use-package deadgrep)
+
+
 (use-package macrostep
   :bind ("C-c e" . macrostep-mode))
 

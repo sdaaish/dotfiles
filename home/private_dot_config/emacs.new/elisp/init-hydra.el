@@ -125,6 +125,7 @@
 ;; Hydra for Ivy and Counsel
 (defhydra hydra-ivy (:color blue :columns 2)
   "Counsel search commands"
+  ("d" deadgrep "DeadGrep")
   ("e" elgrep "elGrep")
   ("f" counsel-fzf "FzF")
   ("g" counsel-grep "Grep")
