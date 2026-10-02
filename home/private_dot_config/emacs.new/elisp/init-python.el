@@ -91,9 +91,10 @@
   ;;  (add-hook 'python-base-mode-hook 'pet-mode -10))
 
   :hook
+  ;; Prefer a locally installed ipython for the project
   ((python-base-mode) .
    (lambda ()
-     (cond ((pet-executable-find "ipython") (setup-ipython-shell))
+     (cond ((pet-executable-find "ipython" nil) (setup-ipython-shell))
            (t (setup-python-shell))))))
 
 (provide 'init-python)
