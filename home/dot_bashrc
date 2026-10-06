@@ -186,4 +186,4 @@ fi
 [ -n "$EAT_SHELL_INTEGRATION_DIR" ] && source "$EAT_SHELL_INTEGRATION_DIR/bash" || true
 
 # Add Incus aliases
-[[ -f "${HOME}/.config/bash/incus_alias_set.sh" ]] && source "${HOME}/.config/bash/incus_alias_set.sh" || true
+[[ -f "${HOME}/.config/bash/incus_alias_set.sh" ]] && "${HOME}/.config/bash/incus_alias_set.sh" &> /dev/null || true
