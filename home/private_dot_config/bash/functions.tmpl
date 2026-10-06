@@ -1075,3 +1075,35 @@ zox-list(){
     local dirs
     [[ -d "$1" ]] && zoxide query --list --all|grep "$1"
 }
+# Update completions files
+update-local-completions(){
+    # This updates the local completions files with latest info
+    # Way faster to load files than running eval in the .bash_profile for every shell
+
+    # A shortcut path
+    local __comp_home="${HOME}/.config/bash/completions"
+
+    # Completion for pip
+    [[ -x $(command -v pip3) ]] && pip3 completion --bash > "${__comp_home}/pip"
+
+    # Completion for Chezmoi
+    [[ -x $(command -v chezmoi) ]] && chezmoi completion bash > "${__comp_home}/chezmoi"
+
+    # Use starship as prompt, https://starship.rs
+    [[ -x $(command -v starship) ]] && starship init bash >"${__comp_home}/starship"
+
+    # Use zoxide if it exists
+    [[ -x $(command -v zoxide) ]] && zoxide init bash> "${__comp_home}/zoxide"
+
+    # Use trigger sequence for FZF
+    [[ -x $(command -v fzf) ]] && fzf --bash > "${__comp_home}/fzf"
+
+    # Completions for GitHub CLI
+    [[ -x $(command -v gh) ]] && gh completion --shell bash> "${__comp_home}/gh"
+
+    # Load direnv in the shell
+    [[ -x $(command -v direnv) ]] && direnv hook bash > "${__comp_home}/direnv"
+
+    # Use marimo shell completion
+    [[ -x $(command -v marimo) ]] && _MARIMO_COMPLETE=bash_source marimo > "${__comp_home}/marimo"
+}

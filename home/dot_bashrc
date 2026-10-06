@@ -130,27 +130,30 @@ then
     fi
 fi
 
+# Load completions from file, faster than eval
+__comp_home="${HOME}/.config/bash/completions"
+
 # Completion for pip
-[[ -f compfile="${HOME}/.config/bash/completions/pip" ]] && source "${HOME}/.config/bash/completions/pip"
+[[ -f compfile="${__comp_home}/pip" ]] && source "${__comp_home}/pip" || true
 
 # Completion for Chezmoi
-[[ -x $(command -v chezmoi) ]] && eval "$(chezmoi completion bash)"
+[[ -f "${__comp_home}/chezmoi" ]] && source "${__comp_home}/chezmoi" || true
 
 # From https://github.com/chriskempson/base16-shell
 BASE16_SHELL="${HOME}/.config/base16-shell/"
 [ -n "$PS1" ] && [ -s "$BASE16_SHELL/profile_helper.sh" ] && eval "$("${BASE16_SHELL}/profile_helper.sh")"
 
 # Use starship as prompt, https://starship.rs
-[[ -x "$(command -v starship)" ]] && eval "$(starship init bash)"
+[[ -f "${__comp_home}/starship" ]] && source "${__comp_home}/starship" || true
 
 # Use zoxide if it exists
-[[ -x "$(command -v zoxide)" ]] && eval "$(zoxide init bash)"
+[[ -f "${__comp_home}/zoxide" ]] && source "${__comp_home}/zoxide" || true
 
 # Use trigger sequence for FZF
-[[ -x "$(command -v fzf)" ]] && eval "$(fzf --bash)"
+[[ -f "${__comp_home}/fzf" ]] && source "${__comp_home}/fzf" || true
 
 # Completions for GitHub CLI
-[[ -x "$(command -v gh)" ]] && eval "$(gh completion --shell bash)"
+[[ -f "${__comp_home}/gh" ]] && source "${__comp_home}/gh" || true
 
 # Attach to tmux if running (and is installed), start it otherwise as a new session
 # And don't start if inside Emacs using Eat
@@ -167,13 +170,16 @@ then
 fi
 
 # Load direnv in the shell
-[[ -x $(command -v direnv) ]] && eval "$(direnv hook bash)" || true
+[[ -f "${__comp_home}/direnv" ]] && source "${__comp_home}/direnv" || true
 
 # Use marimo shell completion
-[[ -x $(command -v marimo) ]] && eval "$(_MARIMO_COMPLETE=bash_source marimo)" || true
+[[ -f "${__comp_home}/marimo" ]] && source "${__comp_home}/marimo" || true
 
 # Integrate with Eat, an Emacs terminal emulator
 [ -n "$EAT_SHELL_INTEGRATION_DIR" ] && source "$EAT_SHELL_INTEGRATION_DIR/bash" || true
 
 # Add Incus aliases
 [[ -f "${HOME}/.config/bash/incus_alias_set.sh" ]] && "${HOME}/.config/bash/incus_alias_set.sh" &> /dev/null || true
+
+# Cleanup
+unset __comp_home
