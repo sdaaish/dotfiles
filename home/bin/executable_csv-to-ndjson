@@ -1,0 +1,56 @@
+#!/usr/bin/env -S uv run --script
+# -*- mode: python-ts; -*-
+
+# /// script
+# requires-python = ">=3.12"
+# dependencies = []
+# ///
+
+# Read a CSV file and write it to a newline delimited JSON file (NDJSON/JSONL)
+# This is a UV script file, run directly from the shell, or call with `python3 csv-to-ndjson`
+
+import argparse
+import csv
+import json
+import sys
+from pathlib import Path
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(
+        description="CSV to new-line delimited JSON converter",
+        epilog="Converts a CSV file to a NDJSON or JSONL formatted file,",
+    )
+    parser.add_argument(
+        "-i", "--in", dest="infile", type=Path, help="CSV infile", required=True
+    )
+    parser.add_argument(
+        "-o", "--out", dest="outfile", type=Path, help="NDJSON/JSONL outfile", required=True
+    )
+    parser.add_argument(
+        "-f", "--force", dest="force", help="Force overwrite", action="store_true"
+    )
+    args = parser.parse_args()
+
+    if not args.infile.resolve().exists():
+        print(f"No such infile, '{args.infile}'")
+        sys.exit(1)
+
+    if args.outfile.exists() and not args.force:
+        print(f"The file '{args.outfile}' already exists, use '--force' to overwrite")
+        sys.exit(1)
+
+    with args.infile.resolve().open(
+        mode="r", encoding="utf-8", newline="\n"
+    ) as csvfile:
+        with args.outfile.resolve().open(mode="w", encoding="utf-8") as jsonfile:
+            reader = csv.DictReader(
+                csvfile,
+            )
+            for row in reader:
+                json.dump(row, jsonfile)
+                jsonfile.write("\n")
+
+
+if __name__ == "__main__":
+    main()
