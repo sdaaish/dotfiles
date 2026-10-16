@@ -21,7 +21,9 @@
 ;; The extremely useful git interface
 (use-package magit
   :diminish magit-status
-  :bind ("C-x g" . magit-status)
+  :bind (("C-x g" . magit-status)
+         :map magit-status-mode-map
+         ("'" . magit-section-up))
   :config
   (setq magit-completing-read-function 'ivy-completing-read)
   (if (eq system-type 'windows-nt)
