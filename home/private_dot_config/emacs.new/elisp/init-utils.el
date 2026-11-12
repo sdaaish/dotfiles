@@ -121,6 +121,16 @@
   :mode ("\\.kql\\'" . kql-mode)
   :hook (kql-mode . hungry-delete-mode))
 
+;; Use age-tool for encryption
+(use-package age
+  :custom
+  (age-program "rage")
+  (age-default-identity "~/.ssh/age-tpm-identity.txt")
+  (age-default-recipient
+   '("~/.config/age/recipients"))
+  :config
+  (age-file-enable))
+
 (provide 'init-utils)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-utils.el ends here
