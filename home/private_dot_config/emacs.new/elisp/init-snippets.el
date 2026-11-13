@@ -77,6 +77,7 @@
   (auto-insert-query nil)
   (auto-insert-directory "~/.config/templates/")
   (auto-insert-alist '((("\\.sh\\'" . "Shell script") . ["template.sh" my/autoinsert-yas-expand])
+                       (("\\.envrc\\'" . "Direnv .envrc file") . ["template-envrc.sh" my/autoinsert-yas-expand])
                        (("\\.el\\'" . "Emacs Lisp") . ["template.el" my/autoinsert-yas-expand])
                        (("\\.go\\'" . "Go script") . ["template.go" my/autoinsert-yas-expand])
                        (("\\.py\\'" . "Python script") . ["template.py" my/autoinsert-yas-expand])
