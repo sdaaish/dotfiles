@@ -10,7 +10,7 @@ Uses the secret-tool to lookup a Title (Label) in the Freedesktop Secrets manage
 """
 
 import argparse
-import os
+import subprocess
 
 
 def main() -> None:
@@ -22,8 +22,7 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    passwd = f"secret-tool lookup Title {args.field}"
-    os.system(passwd)
+    result = subprocess.run(["/usr/bin/secret-tool", "lookup", "Title", args.field])
 
 
 if __name__ == "__main__":
