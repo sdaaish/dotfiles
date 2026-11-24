@@ -157,7 +157,6 @@
 
 ;; AI code
 (use-package ai-code
-  :disabled
   :bind ("C-c a" . ai-code-menu)
 
   :custom
