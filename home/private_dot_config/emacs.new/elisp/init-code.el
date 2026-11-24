@@ -79,7 +79,8 @@
   (emacs-lisp-mode . (lambda () (setq-local devdocs-current-docs '("elisp"))))
   ((python-mode python-ts-mode inferior-python-mode) . (lambda () (setq-local devdocs-current-docs '("python~3.12"))))
   ((zig-mode zig-ts-mode) . (lambda () (setq-local devdocs-current-docs '("zig"))))
-  ((go-mode go-ts-mode) . (lambda () (setq-local devdocs-current-docs '("go")))))
+  ((go-mode go-ts-mode) . (lambda () (setq-local devdocs-current-docs '("go"))))
+  ((nim-mode) . (lambda () (setq-local devdocs-current-docs '("nim")))))
 
 
 ;; Remember to copy the libraries to the correct folder and rename them.
@@ -174,6 +175,21 @@
     (ai-code-set-backend 'github-copilot-cli))
 
   :hook (magit . ai-code-magit-setup-transients))
+
+;; Nim lang
+(use-package nim-mode
+  :init
+  (defun my-nim-mode()
+    (auto-fill-mode 0)
+    (electric-indent-local-mode 0)
+    (aggressive-indent-mode 0)
+    (flymake-mode 1)
+    (nimsuggest-mode 0))
+
+  :mode ("\\.nim\\'" "\\.nims\\'")
+  :bind (:map nim-mode-map
+              ("C-c C-r" .  recompile))
+  :hook (nim-mode . my-nim-mode))
 
 (provide 'init-code)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
