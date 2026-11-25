@@ -9,6 +9,8 @@
 # ]
 # ///
 
+# shellcheck disable=all
+
 import argparse
 import os
 import sys

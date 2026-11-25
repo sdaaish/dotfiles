@@ -9,6 +9,8 @@
 # Read a CSV file and write it to a newline delimited JSON file (NDJSON/JSONL)
 # This is a UV script file, run directly from the shell, or call with `python3 csv-to-ndjson`
 
+# shellcheck disable=all
+
 import argparse
 import csv
 import json

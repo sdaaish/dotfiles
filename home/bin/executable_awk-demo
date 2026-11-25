@@ -1,3 +1,4 @@
+# shellcheck disable=all
 HANDY ONE-LINE SCRIPTS FOR AWK                               30 April 2008
 Compiled by Eric Pement - eric [at] pement.org               version 0.27
 
@@ -5,7 +6,7 @@ Latest version of this file (in English) is usually at:
    http://www.pement.org/awk/awk1line.txt
 
 This file will also be available in other languages:
-   Chinese  - http://ximix.org/translation/awk1line_zh-CN.txt   
+   Chinese  - http://ximix.org/translation/awk1line_zh-CN.txt
 
 USAGE:
 
@@ -118,7 +119,7 @@ ARRAY CREATION:
 
  # These next 2 entries are not one-line scripts, but the technique
  # is so handy that it merits inclusion here.
- 
+
  # create an array named "month", indexed by numbers, so that month[1]
  # is 'Jan', month[2] is 'Feb', month[3] is 'Mar' and so on.
  split("Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec", month, " ")

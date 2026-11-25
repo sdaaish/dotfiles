@@ -6,6 +6,8 @@
 # dependencies = ["requests","rich"]
 # ///
 
+# shellcheck disable=all
+
 from datetime import UTC, datetime
 
 import requests

@@ -8,5 +8,5 @@ sudo bash -c "echo s > /proc/sysrq-trigger"
 # This works if it's compiled into kernel
 sudo bash -c "echo b > /proc/sysrq-trigger"
 
-printf "You might want to run fsck on every reboot: "tune2fs -c 1 /dev/sdxxx\n"
+printf "You might want to run fsck on every reboot: tune2fs -c 1 /dev/sdxxx\n"
 printf "https://raymii.org/s/blog/Broken_Corrupted_Raspberry_Pi_SD_Card.html\n"

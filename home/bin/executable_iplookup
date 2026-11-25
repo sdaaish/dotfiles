@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# ## @(#) # 	$Id: iplookup,v 1.2 2005/06/07 13:10:57 sdaa Exp $	
+# ## @(#) # 	$Id: iplookup,v 1.2 2005/06/07 13:10:57 sdaa Exp $
 #
 # Kollar ett subnät
 #
@@ -33,7 +33,7 @@ while ((( $i <= 255 )));do
 	NAME=($(dig -x ${IP} ${SRV} +short PTR)) 2>/dev/null
 
 	if [[ ${NAME[*]} ]]; then
-		for name in ${NAME[@]}
+		for name in "${NAME[@]}"
 		do
 			ADDR=($(dig ${name} ${SRV} +short A)) 2>/dev/null
 		done

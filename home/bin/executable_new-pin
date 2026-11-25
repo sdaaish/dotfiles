@@ -9,6 +9,9 @@
 # This generates a random 4-12 digit PIN (default 6).
 # Usage:
 #  new-pin [length]
+
+# shellcheck disable=all
+
 import random
 import string
 import sys

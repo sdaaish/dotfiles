@@ -6,6 +6,7 @@
 # dependencies = []
 # ///
 
+# shellcheck disable=all
 
 import random
 import string

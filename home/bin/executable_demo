@@ -21,10 +21,11 @@ echo "#@ ${#@}"
 echo "myArray ${myArray[0]}"
 echo "\${0} ${0} \${1} ${1}"
 
-for i in ${myArray[@]};do
+for i in "${myArray[@]}"
+do
     echo "In the loop $i"
 done
-    
+
 for i in ${*};do
     echo "In the other loop $i"
 done
@@ -48,18 +49,18 @@ done
 tmpfile=$(mktemp tmp.XXXXX)
 printf "Line 1\nLine 2\nLine 3\n" > ${tmpfile}
 while IFS= read -r line
-    do
-            printf "${line}\n"
-    done < ${tmpfile}
+do
+    printf "${line}\n"
+done < ${tmpfile}
 
 #
 ## Test variable settings
 for i in 1 2 3 4;do
     config+=( "$i" )
     printf '%s\n' "Var ${config}"
-    printf '%s\n' "Num ${config[@]}"
+    printf '%s\n' "Num ${config[*]}"
 done
 
 
 #Cleanup
-#rm -f ${tmpfile}
+rm -f ${tmpfile}

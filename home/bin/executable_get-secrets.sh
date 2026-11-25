@@ -5,6 +5,8 @@
 # dependencies = []
 # ///
 
+# shellcheck disable=all
+
 """
 Uses the secret-tool to lookup a Title (Label) in the Freedesktop Secrets manager.
 """

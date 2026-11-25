@@ -25,7 +25,7 @@ f_lookup() {
 
     # Print the domainname, and loop trough all values in the array.
     printf "${domainname}"
-    for arg in ${dnsrecords[@]}
+    for arg in "${dnsrecords[@]}"
     do
         printf ",${arg%.}"     # Remove trailing dot from CNAMES
     done
