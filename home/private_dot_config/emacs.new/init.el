@@ -342,8 +342,7 @@ If FRAME is omitted or nil, use currently selected frame."
 
 ;; Move more easily
 (windmove-mode 1)
-(when (fboundp 'windmove-default-keybindings)
-  (windmove-default-keybindings))
+(windmove-default-keybindings)
 
 ;; Start Emacs as server
 (require 'server)

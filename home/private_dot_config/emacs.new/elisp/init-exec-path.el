@@ -19,7 +19,8 @@
 ;;; Code:
 
 
-(use-package exec-path-from-shell)
+(use-package exec-path-from-shell
+  :custom (exec-path-from-shell-arguments '("-l")))
 
 (when (or (memq window-system '(mac ns x pgtk))
           (unless (memq system-type '(ms-dos windows-nt))

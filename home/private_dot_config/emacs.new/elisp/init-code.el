@@ -152,7 +152,7 @@
     ;;    (setopt gptel-backend (gptel-make-gemini "Gemini")
     ;;            gptel-model 'gemini-3-flash-preview)
     (setopt gptel-backend (gptel-make-gh-copilot "Copilot")
-            gptel-model 'claude-haiku-4.5)))
+            gptel-model 'claude-haiku-5.5)))
 
 
 ;; AI code
