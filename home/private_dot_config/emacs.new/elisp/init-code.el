@@ -190,6 +190,25 @@
               ("C-c C-r" .  recompile))
   :hook (nim-mode . my-nim-mode))
 
+;; Typescript and Javascript
+(use-package tsx-mode
+  :straight '(tsx-mode
+              :type git
+              :host github
+              :repo "orzechowskid/tsx-mode.el"
+              :branch "emacs30")
+  :mode "\\.tsx\\'"
+  :custom
+  (tsx-mode-enable-css-in-js t))
+
+;; Flymake for TS and JS
+(use-package flymake-jsts
+  :straight '(flymake-jsts
+              :type git
+              :host github
+              :repo "orzechowskid/flymake-jsts"
+              :branch "main"))
+
 (provide 'init-code)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-code.el ends here
